@@ -1,0 +1,22 @@
+#' PQN normalization
+#' @param x metabolomics profile
+#' @param xref reference profile
+#' @value list of:
+#'    - y = normalized profile;
+#'    - se = size effects;
+#'    - se_med = average size effect.
+#' @author Ettore Mosca
+
+pqn <- function(x, xref){
+
+	#size effetcs:
+	#se$se: full size effect matrix
+	#se$med: #medians of size effects (calculated for positive elements)
+	se <- size_effect(x, xref)
+
+  #pqn
+  out <- x / se$med
+
+  return(list(y=out, se=se$se, se_med=se$med))
+
+}
