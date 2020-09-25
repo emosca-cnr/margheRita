@@ -15,8 +15,8 @@ pqn <- function(x, xref){
 	se <- size_effect(x, xref)
 
   #pqn
-  out <- x / se$med
+  out <- x / se$avg
 
-  return(list(y=out, se=se$se, se_med=se$med))
+  return(list(y=out, se=se$se, se_avg=se$avg))
 
 }
