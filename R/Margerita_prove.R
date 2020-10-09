@@ -1,11 +1,9 @@
-#########################     MargheRita    ################################
-############################################################################
-
-
-## 1) Set directory, where all your files are: xls/cvs and metadata
-#Session->Set Directory -> chose directory
-
-## 2) Libraries needed:
+#' MArgerita_prova
+#'
+#' @param
+#'
+#'
+#' @import readxl
 
 
 Margerita_prove <- function(){
@@ -25,7 +23,7 @@ Margerita_prove <- function(){
 
   #FARINA ---------------------------------------------------
 
-  farina_pre<-read_excel(path="Margerita Trial.xlsx",sheet=1)
+  farina_pre<- readxl::read_excel(path="Margerita Trial.xlsx",sheet=1)
 
   str(farina_pre)
   summary(farina_pre)
