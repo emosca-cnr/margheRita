@@ -1,53 +1,48 @@
-#' MArgerita_prova
+#' Loading of dataset from csv/xls and metadata from csv/xls + first visualization of data through PCA
 #'
-#' @param
-#'
+#' @param farina_00 data.frame with the following columns:
+#' @param acqua data.frame with metadata
+#' @value farina
 #'
 #' @import readxl
+#' @import ggplot2
+#' @import tidyverse
+#' @import FactoMineR
+#' @import kableExtra
+#' @import gridExtra
+#' @import knitr
+#' @import RColorBrewer
+#'
+#'
+
+Margerita_prove <- function(farina_00 {
 
 
-Margerita_prove <- function(){
-
-  library(readxl)
-  library(ggplot2)
-  library(tidyverse)
-  library(FactoMineR)
-  library(factoextra)
-  library(kableExtra)
-  library(gridExtra)
-  library(knitr)
-  library(RColorBrewer)
-  library("rjson")
-
-  ## 3) import data from xls or cvs, object with data is farina
+  ## 1) import mass spectrometry data from xls or cvs, object with data is farina
 
   #FARINA ---------------------------------------------------
 
-  farina_pre<- readxl::read_excel(path="Margerita Trial.xlsx",sheet=1)
+  farina_OO <- readxl::read_excel(path="Margherita-input data.xlsx",sheet=1)
 
-  str(farina_pre)
-  summary(farina_pre)
+  str(farina_00)
+  summary(farina_00)
 
   #Eliminate useless column, convert everything as numeric,
   #create column with feature identifiers
 
-  farina<-farina_pre %>%
-    dplyr::select(-1,-4) %>%
+  farina<-farina_00 %>%
+    dplyr::select(-1,-2) %>%
     mutate(feat=paste(round(Average_mz,4),round(Rt_min,2),sep="_")) %>%
     dplyr::select(-Average_mz,-Rt_min) %>%
     gather(sample,value,-feat) %>%
     spread(feat,value)
 
 
-  glimpse(farina)
-  head(farina)
-
-
   ## 4) Factors & Metadata definition select way 1 or 2 or 3----------------------
 
   #ACQUA    metadata call 1: from excel ##################################
 
-  acqua<-read_excel(path="metadata.xlsx",sheet=1)
+  acqua<-readxl::read_excel(path="Margherita-metadata.xlsx",sheet=1)
 
 
 
