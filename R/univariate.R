@@ -4,6 +4,7 @@
 #univariate on df_sample_mean only on biological replicates
 #@param df_samples_mean (dataframe of samples only biological replicates, technical replicates were collapsed before)
 
+
 conteggio = nlevels(as.factor(metadata_samples$Group))
 
 univariate_analysis <- function(df_samples_mean) {
@@ -51,11 +52,11 @@ univariate_analysis(df_samples_mean)
 
 #heatmap on samples (no QC) using mean matrix in whch column are samples and rows metabolites
 
-library("RColorBrewer")
-library(pheatmap)
+#@import library("RColorBrewer")
+#@ import library(pheatmap)
 
+heatmap<-function(metadata_samples,df_samples_mean){
 pdf("heatmap.pdf")
-
 col <- colorRampPalette(brewer.pal(10, "RdYlBu"))(256)
 annotation_column <- metadata_samples[, 1:ncol(metadata_samples)]
 mycolors_s <-
@@ -77,11 +78,12 @@ pheatmap(
 )
 
 dev.off()
-
+}
 
 
 #Boxplot only for p-values<0.05 Boxplot for each metabolite (row) or uni_corrected?
 
+boxplot<-function(df_samples_mean)
 pdf("Boxplot.pdf")
 for (i in 1:nrow(df_samples_mean)) {
   if (uni[i] < 0.05) {
@@ -94,3 +96,4 @@ for (i in 1:nrow(df_samples_mean)) {
   }
 }
 dev.off()
+}

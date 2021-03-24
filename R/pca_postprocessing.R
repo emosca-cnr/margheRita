@@ -6,10 +6,12 @@
 
 
 #PCA post processing directory
-dirout = paste(getwd(), "/PCA_Post", "/", sep = "")
-dir.create(dirout)
+#dirout = paste(getwd(), "/PCA_Post", "/", sep = "")
+#dir.create(dirout)
 
-pca_post <- function(df_post) {
+pca_postprocessing <- function(df_post,dirout) {
+  dirout = paste(getwd(), "/PCA_Post", "/", sep = "")
+  dir.create(dirout)
   pca.post <- prcomp(t(df_post[,4:ncol(df_post)]), scale = T, center = T)
   p.v.post = matrix(((pca.post$sdev ^ 2) / (sum(pca.post$sdev ^ 2))), ncol = 1) #varianza
   p.i.post = round(p.v.post * 100, 1) #percentuali di varianza spiegata dalle PC
@@ -78,5 +80,4 @@ pca_post <- function(df_post) {
 }
 
 
-#PCA post processing
-pca_post(df_post)
+

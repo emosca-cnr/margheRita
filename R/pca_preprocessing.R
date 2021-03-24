@@ -4,12 +4,14 @@
 
 
 #PCA preprocessing directory
-dirout = paste(getwd(), "/PCA_Pre/", sep = "")
-dir.create(dirout)
+#dirout = paste(getwd(), "/PCA_Pre/", sep = "")
+#dir.create(dirout)
 
 #PCA function before processing and plots
 
-pca_pre <- function(df) {
+pca_preprocessing <- function(df,dirout) {
+  dirout = paste(getwd(), "/PCA_Pre/", sep = "")
+  dir.create(dirout)
   pca.pre <- prcomp(t(df[, 4:ncol(df)]), scale = T, center = T)
   p.v.pre = matrix(((pca.pre$sdev ^ 2) / (sum(pca.pre$sdev ^ 2))), ncol = 1) #varianza
   p.i.pre = round(p.v.pre * 100, 1) #percentuali di varianza spiegata dalle PC
@@ -75,5 +77,4 @@ pca_pre <- function(df) {
   )
   dev.off()
 }
-#PCA before processing
-pca_pre(df)
+
