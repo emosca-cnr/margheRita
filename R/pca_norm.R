@@ -4,20 +4,20 @@
 #Scree plot, score and loading plot (PC1 vs PC2)
 
 #PCA after normalization directory
-dirout = paste(getwd(), "/PCA_Norm/", sep = "")
-dir.create(dirout)
+#dirout = paste(getwd(), "/PCA_Norm/", sep = "")
+#dir.create(dirout)
 
 #PCA function after norm and plots
 
-pca_norm <- function(df_norm) {
+pca_norm <- function(df_norm,dirout) {
+  dirout = paste(getwd(), "/PCA_Norm/", sep = "")
+  dir.create(dirout)
   pca.norm <- prcomp(t(df_norm[,4:ncol(df_norm)]), scale = T, center = T)
   p.v.norm = matrix(((pca.norm$sdev ^ 2) / (sum(pca.norm$sdev ^ 2))), ncol = 1) #varianza
   p.i.norm = round(p.v.norm * 100, 1) #percentuali di varianza spiegata dalle PC
-  pwd.score.norm = paste(getwd(), "/PCA_Norm/PCA_Norm_ScoreMatrix.csv", sep =
-                           "")
+  pwd.score.norm = paste(getwd(), "/PCA_Norm/PCA_Norm_ScoreMatrix.csv", sep ="")
   write.csv(pca.norm$x, pwd.score.norm)
-  pwd.load.norm = paste(getwd(), "/PCA_Norm/PCA_Norm_LoadingsMatrix.csv", sep =
-                          "")
+  pwd.load.norm = paste(getwd(), "/PCA_Norm/PCA_Norm_LoadingsMatrix.csv", sep= "")
   write.csv(pca.norm$rotation, pwd.load.norm)
   pwd.pvar.norm = paste(getwd(), "/PCA_Norm/PCA_Pre_Variance.csv", sep =
                           "")
@@ -75,8 +75,7 @@ pca_norm <- function(df_norm) {
     ylim = c(0, 100)
   )
   dev.off()
+  return(pca.norm)
 }
 
 
-#PCA after normalization
-pca_norm(df_norm)

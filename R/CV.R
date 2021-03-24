@@ -1,20 +1,20 @@
 #Select QC_samples and samples. "QC" and "m" that indicates quality control samples and biological replicates in the title were used to select, respectively
 #@param df_post split into df_QC (dataframe of quality control) and df_samples (df of samples)
-#CV for
-
-
-library(dplyr)
-df_QC <- select(df_post, contains("QC"))
-df_samples <- select(df_post, contains("m"))
+#@ import library (dplyr)
 
 #create directory CV QC and CV samples
-CVdir = paste(getwd(), "/CV/", sep = "")
-dir.create(CVdir)
+#CVdir = paste(getwd(), "/CV/", sep = "")
+#dir.create(CVdir)
 
 #apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites
 
 
-CV <- function(df_QC, df_samples, df_post) {
+CV <- function(df_post) {
+  #CVdir = paste(getwd(), "/CV/", sep = "")
+  #dirout(CVdir)
+  #create two matrices:one for QC and one for samples, in function?
+  df_QC <- select(df_post, contains("QC"))
+  df_samples <- select(df_post, contains("m"))
   CV_QC = c()
   for (i in 1:nrow(df_QC[,4:ncol(df_QC)])) {
     mean_QC <- mean(as.numeric(df_QC[i, ])) #mean(col(QC))
@@ -35,4 +35,4 @@ CV <- function(df_QC, df_samples, df_post) {
   return(dataframe_post)
 }
 
-CV(df_QC, df_samples, df_post)
+

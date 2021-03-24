@@ -2,9 +2,13 @@
 #@param metadata split in metadata for QC and metadata for samples
 #@param calculate mean, median and stdev for samples
 
-library(dplyr)
+#@import library(dplyr)
+
+
+mean_media_stdev_samples<-function(dataframe_post,metadata){
+
 df_QC <- select(dataframe_post, contains("QC"))
-df_samples <- select(dataframe_post, contains("m")) #
+df_samples <- select(dataframe_post, contains("m"))
 
 #collapse only samples, we need to subset metadata only for samples
 #subsetting using column "type" in metadata QC" and "metadata_samples"
@@ -43,3 +47,8 @@ colnames(df_samples_sd) = df_samples_sd[1, ]
 df_samples_sd <- df_samples_sd[-1, ]
 df_samples_sd = as.numeric(df_samples_sd)
 df_samples_sd = cbind(dataframe[, 1:3], df_samples_sd)
+
+return(df_samples_mean)
+return(df_samples_median)
+return(df_samples_sd)
+}
