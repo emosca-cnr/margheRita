@@ -1,4 +1,4 @@
-margheRita: an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles.
+# margheRita: an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles.
 
 Maria Ulaszewska1, Edoardo Bellini2, Denise Drago1, Valeria Mannella1, Marco Morelli2, Annapaola Andolfo1, Ettore Mosca3
 
