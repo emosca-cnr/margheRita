@@ -1,6 +1,11 @@
-#PCA function pre processing
-#Output score, loading plot (PC1 vs PC2) and scree plot
-#@param df: dataframe of data in which the first three column are MS DIAL ID, RT and m/z, sample in colum and features (metabolites) in rows
+#' PCA function pre processing
+#' Output score, loading plot (PC1 vs PC2) and scree plot
+#' @param df: dataframe of data in which the first three column are MS DIAL ID, RT and m/z, sample in colum and features (metabolites) in rows
+#' @importFrom graphics plot barplot
+#' @importFrom grDevices dev.off png
+#' @importFrom utils write.csv
+#' @importFrom stats prcomp
+#' @export
 
 
 #PCA preprocessing directory

@@ -1,7 +1,7 @@
 #' PQN normalization
 #' @param x metabolomics profile
 #' @param xref reference profile
-#' @value list of:
+#' @return list of:
 #'    - y = normalized profile;
 #'    - se = size effects;
 #'    - se_med = average size effect.

@@ -1,5 +1,6 @@
-#missing values imputation
-#@param dataframe of input contains intensity of all features according to samples
+#' missing values imputation
+#' @param dataframe of input contains intensity of all features according to samples
+#' @export
 
 imputation<- function(df) {
   for (i in 1:nrow(df[, 4:ncol(df)])) {

@@ -1,13 +1,15 @@
-#Select QC_samples and samples. "QC" and "m" that indicates quality control samples and biological replicates in the title were used to select, respectively
-#@param df_post split into df_QC (dataframe of quality control) and df_samples (df of samples)
-#@ import library (dplyr)
+#' Select QC_samples and samples.
+#' "QC" and "m" that indicates quality control samples and biological replicates in the title were used to select, respectively
+#' @param df_post split into df_QC (dataframe of quality control) and df_samples (df of samples)
+#' @import dplyr
+#' @export
+
 
 #create directory CV QC and CV samples
 #CVdir = paste(getwd(), "/CV/", sep = "")
 #dir.create(CVdir)
 
 #apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites
-
 
 CV <- function(df_post) {
   #CVdir = paste(getwd(), "/CV/", sep = "")

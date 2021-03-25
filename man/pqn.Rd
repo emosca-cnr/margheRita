@@ -11,6 +11,14 @@ pqn(x, xref)
 
 \item{xref}{reference profile}
 }
+\value{
+list of:
+\itemize{
+\item y = normalized profile;
+\item se = size effects;
+\item se_med = average size effect.
+}
+}
 \description{
 PQN normalization
 }

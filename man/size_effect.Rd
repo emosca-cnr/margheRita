@@ -13,9 +13,16 @@ size_effect(x, xref, robust = T)
 
 \item{robust}{TRUE/FALSE}
 }
+\value{
+list of:
+\itemize{
+\item se = size effects;
+\item avg = average size effect.
+}
+}
 \description{
 size effect for pqn
 }
 \author{
-Ettore Mosca
+Ettore Mosca (CNR-ITB)
 }

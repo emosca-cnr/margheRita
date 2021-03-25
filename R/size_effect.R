@@ -2,10 +2,13 @@
 #' @param x metabolomics profile
 #' @param xref reference profile
 #' @param robust TRUE/FALSE
-#' @value list of:
+#' @importFrom stats median
+#' @export
+
+#' @return list of:
 #'    - se = size effects;
 #'    - avg = average size effect.
-#' @author Ettore Mosca
+#' @author Ettore Mosca (CNR-ITB)
 
 size_effect <- function(x, xref, robust=T){
 

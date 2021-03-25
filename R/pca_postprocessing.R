@@ -1,9 +1,11 @@
-#PCA function post processing
-#Output score, loading plot (PC1 vs PC2) and scree plot
-#@param df_post: dataframe of data was processed:imputation of missing value, pareto scaled
-
-
-
+#' PCA function post processing
+#' Output score, loading plot (PC1 vs PC2) and scree plot
+#' @param df_post: dataframe of data was processed:imputation of missing value, pareto scaled
+#' @importFrom graphics plot barplot
+#' @importFrom grDevices dev.off png
+#' @importFrom utils write.csv
+#' @importFrom stats prcomp
+#' @export
 
 #PCA post processing directory
 #dirout = paste(getwd(), "/PCA_Post", "/", sep = "")
