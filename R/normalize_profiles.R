@@ -1,21 +1,20 @@
 #' Normalize profiles
 #' @param X features-by-samples matrix of metabolite levels
-#' @param method log log-normalization; reference: divide each sample by its reference; pqn probailistic quotient normalization #' @param pqn_reference reference profile for PQN
+#' @param method log log-normalization; reference: divide each sample by its reference; pqn probailistic quotient normalization #' @param reference reference profile
 #' @export
 
-normalize_profiles <- function(X, method=c("log", "reference", "pqn"), pqn_reference=NULL){
-
+normalize_profiles <- function(X, method=c("log", "reference", "pqn"), reference=NULL){
 
   if(method == "log"){
     ans <- log2(X)
   }
 
   if(method == "reference"){
-    ans <- t(t(X) / totproteins$TOT_PROTEINS)
+    ans <- t(t(X) / reference)
   }
 
   if(method == "pqn"){
-    ans <- apply(X, 2, function(x) pqn(x, xref = pqn_reference))
+    ans <- apply(X, 2, function(x) pqn(x, xref = reference))
   }
 
   return(ans)

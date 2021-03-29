@@ -4,16 +4,12 @@
 \alias{normalize_profiles}
 \title{Normalize profiles}
 \usage{
-normalize_profiles(
-  X,
-  method = c("log", "reference", "pqn"),
-  pqn_reference = NULL
-)
+normalize_profiles(X, method = c("log", "reference", "pqn"), reference = NULL)
 }
 \arguments{
 \item{X}{features-by-samples matrix of metabolite levels}
 
-\item{method}{log log-normalization; reference: divide each sample by its reference; pqn probailistic quotient normalization #' @param pqn_reference reference profile for PQN}
+\item{method}{log log-normalization; reference: divide each sample by its reference; pqn probailistic quotient normalization #' @param reference reference profile}
 }
 \description{
 Normalize profiles
