@@ -5,7 +5,7 @@
 \title{Select QC_samples and samples.
 "QC" and "m" that indicates quality control samples and biological replicates in the title were used to select, respectively}
 \usage{
-CV(df_post)
+CV(df_post, CVdir = "./")
 }
 \arguments{
 \item{df_post}{split into df_QC (dataframe of quality control) and df_samples (df of samples)}

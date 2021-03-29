@@ -11,7 +11,7 @@
 
 #apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites
 
-CV <- function(df_post) {
+CV <- function(df_post, CVdir="./") {
   #CVdir = paste(getwd(), "/CV/", sep = "")
   #dirout(CVdir)
   #create two matrices:one for QC and one for samples, in function?
@@ -32,7 +32,7 @@ CV <- function(df_post) {
 
   CV_all <- cbind(CV_QC, CV_Samples)
   colnames(CV_all) = c("CV_QC", "CV_Samples")
-  write.csv(CV_all, paste(CVdir, "CV_all.csv", sep = ""))
+  write.csv(CV_all, paste(CVdir, "/CV_all.csv", sep = ""))
   dataframe_post = dataframe_post[CV_QC < CV_Samples, ]
   return(dataframe_post)
 }

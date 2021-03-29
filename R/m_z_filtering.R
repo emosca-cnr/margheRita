@@ -1,4 +1,5 @@
-#' @import dplyr 
+#' exclude features with problematic m/z values
+#' @import dplyr
 #' @export
 
 m_z_filtering <- function(df, m_z_average){

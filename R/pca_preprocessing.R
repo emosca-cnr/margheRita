@@ -14,8 +14,8 @@
 
 #PCA function before processing and plots
 
-pca_preprocessing <- function(df,dirout) {
-  dirout = paste(getwd(), "/PCA_Pre/", sep = "")
+pca_preprocessing <- function(df,metadata, dirout) {
+  dirout = paste(dirout, "/PCA_Pre/", sep = "")
   dir.create(dirout)
   pca.pre <- prcomp(t(df[, 4:ncol(df)]), scale = T, center = T)
   p.v.pre = matrix(((pca.pre$sdev ^ 2) / (sum(pca.pre$sdev ^ 2))), ncol = 1) #varianza

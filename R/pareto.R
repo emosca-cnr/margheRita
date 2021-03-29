@@ -15,7 +15,7 @@ pareto <- function(df) {
   # Then we perform scaling on the mean-centered matrix
   x.sc <- apply(x.centered, 1, function(x) x/sqrt(sd(x)))
   x.sc <- cbind(sample_classes, x.sc)
-  utils::write.csv(x.sc, "paretoscaled.csv",sep=",")
+  utils::write.csv(x.sc, "paretoscaled.csv")
   return(x.sc)
 }
 

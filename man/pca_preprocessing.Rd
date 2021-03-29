@@ -5,7 +5,7 @@
 \title{PCA function pre processing
 Output score, loading plot (PC1 vs PC2) and scree plot}
 \usage{
-pca_preprocessing(df, dirout)
+pca_preprocessing(df, metadata, dirout)
 }
 \arguments{
 \item{df:}{dataframe of data in which the first three column are MS DIAL ID, RT and m/z, sample in colum and features (metabolites) in rows}
