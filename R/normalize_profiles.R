@@ -1,6 +1,7 @@
 #' Normalize profiles
-#' @param X features-by-samples matrix of metabolite levels
-#' @param method log log-normalization; reference: divide each sample by its reference; pqn probailistic quotient normalization #' @param reference reference profile
+#' @param X features-by-samples matrix of metabolite levels;
+#' @param method "log": log-normalization; "reference": divide each sample by its reference; "pqn": probailistic quotient normalization;
+#' @param reference reference profile;
 #' @export
 
 normalize_profiles <- function(X, method=c("log", "reference", "pqn"), reference=NULL){

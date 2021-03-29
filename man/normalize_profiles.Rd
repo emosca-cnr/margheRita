@@ -7,9 +7,11 @@
 normalize_profiles(X, method = c("log", "reference", "pqn"), reference = NULL)
 }
 \arguments{
-\item{X}{features-by-samples matrix of metabolite levels}
+\item{X}{features-by-samples matrix of metabolite levels;}
 
-\item{method}{log log-normalization; reference: divide each sample by its reference; pqn probailistic quotient normalization #' @param reference reference profile}
+\item{method}{"log": log-normalization; "reference": divide each sample by its reference; "pqn": probailistic quotient normalization;}
+
+\item{reference}{reference profile;}
 }
 \description{
 Normalize profiles
