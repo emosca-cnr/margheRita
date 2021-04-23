@@ -6,10 +6,19 @@
 
 read_input_file <- function(input, metadata){
 
-  df <- readxl::read_excel(input, col_names = T)
-  metadata <- readxl::read_excel(metadata)
+  df <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
+  m_list <- list(df=df[, -c(1:3)])
+  rownames(m_list$df) <- df[, 1]
 
-  return(list(df=df, metadata=metadata))
+  m_list$metab_ann <- df[, 1:3]
+  rownames(m_list$metab_ann) <- df[, 1]
+
+  m_list$sample_ann <- data.frame(readxl::read_excel(metadata), stringsAsFactors = F)
+  rownames(m_list$sample_ann) <- m_list$sample_ann[, 1]
+
+  #check the order!!!
+
+  return(m_list)
 }
 
 #import csv files MSdial ID as rownames(metabolite)

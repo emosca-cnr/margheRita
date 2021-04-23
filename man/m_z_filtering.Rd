@@ -2,10 +2,10 @@
 % Please edit documentation in R/m_z_filtering.R
 \name{m_z_filtering}
 \alias{m_z_filtering}
-\title{exclude features with problematic m/z values}
+\title{m_z_filtering}
 \usage{
-m_z_filtering(df, m_z_average)
+m_z_filtering(m_list)
 }
 \description{
-exclude features with problematic m/z values
+m_z_filtering
 }

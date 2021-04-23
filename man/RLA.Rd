@@ -4,10 +4,17 @@
 \alias{RLA}
 \title{Relative Log Abudance}
 \usage{
-RLA(x, robust = TRUE)
+RLA(
+  m_list,
+  logged = FALSE,
+  robust = TRUE,
+  do_plot = FALSE,
+  out_dir = "./",
+  ...
+)
 }
 \arguments{
-\item{x}{metabolites-by-samples matrix of metabolite levels}
+\item{m_list}{margheRita list}
 }
 \description{
 Relative Log Abudance

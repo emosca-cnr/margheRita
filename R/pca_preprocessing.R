@@ -17,6 +17,7 @@
 pca_preprocessing <- function(df,metadata, dirout) {
   dirout = paste(dirout, "/PCA_Pre/", sep = "")
   dir.create(dirout)
+
   pca.pre <- prcomp(t(df[, 4:ncol(df)]), scale = T, center = T)
   p.v.pre = matrix(((pca.pre$sdev ^ 2) / (sum(pca.pre$sdev ^ 2))), ncol = 1) #varianza
   p.i.pre = round(p.v.pre * 100, 1) #percentuali di varianza spiegata dalle PC
@@ -44,7 +45,7 @@ pca_preprocessing <- function(df,metadata, dirout) {
     xlab = paste("PC1 (", p.i.pre[1], "%)", sep = ""),
     ylab = paste("PC2 (", p.i.pre[2], "%)", sep = ""),
     main = "Score plot pre",
-    col = metadata$Group,
+#    col = metadata$Group, #commented by Ettore
     pch = 19
   )
   dev.off()
