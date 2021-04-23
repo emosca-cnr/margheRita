@@ -1,6 +1,6 @@
 Package: margheRita
 Title: Mass spectrometry-based metabolic data analysis
-Version: 0.1
+Version: 0.0.1
 Authors@R:
   person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: margheRita: an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles
