@@ -15,15 +15,15 @@ pca_gen <- function(m_list,dirout) {
   pca <- prcomp(t(m_list$df), scale = T, center = T)
   p.v.= matrix(((pca$sdev ^ 2) / (sum(pca$sdev ^ 2))), ncol = 1) #varianza
   p.i. = round(p.v.* 100, 1) #percentuali di varianza spiegata dalle PC
-  pwd.score= paste(dirout, "ScoreMatrix.csv", sep ="")
+  pwd.score= paste(dirout, "/ScoreMatrix.csv", sep ="")
   utils::write.csv(pca$x, pwd.score)
-  pwd.load. = paste(dirout ,"LoadingsMatrix.csv", sep= "")
+  pwd.load. = paste(dirout ,"/LoadingsMatrix.csv", sep= "")
   utils::write.csv(pca$rotation, pwd.load.)
-  pwd.pvar.= paste(dirout, "Variance.csv", sep = "")
+  pwd.pvar.= paste(dirout, "/Variance.csv", sep = "")
   utils::write.csv(p.i., pwd.pvar.)
   Pvar. = p.i.
   #ora faccio i grafici di score, loading and scree plot plotting PC1 vs PC2
-  scoreplot = paste(dirout, "scoreplot.png", sep = "")
+  scoreplot = paste(dirout, "/Scoreplot.png", sep = "")
   grDevices::png(
     scoreplot,
     width = 8,
@@ -42,7 +42,7 @@ pca_gen <- function(m_list,dirout) {
     pch = 19
   )
   grDevices::dev.off()
-  loadingplot = paste(dirout, "loadingplot_.png", sep = "")
+  loadingplot = paste(dirout, "/Loadingplot_.png", sep = "")
   grDevices::png(
     loadingplot,
     width = 8,
@@ -59,7 +59,7 @@ pca_gen <- function(m_list,dirout) {
     pch = 19
   )
   grDevices::dev.off()
-  scree = paste(dirout, "Screeplot.png", sep = "")
+  scree = paste(dirout, "/Screeplot.png", sep = "")
   grDevices::png(
     scree,
     width = 8,
