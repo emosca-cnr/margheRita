@@ -6,50 +6,50 @@
 #' @export
 
 
-mean_media_stdev_samples<-function(dataframe_post,metadata){
+mean_media_stdev_samples<-function(m_list,dirout){
+  dirout= paste(getwd(), "/mean_median/", sep = "")
+  dir.create(dirout)
 
-  df_QC <- select(dataframe_post, contains("QC"))
-  df_samples <- select(dataframe_post, contains("m"))
+  #subsetting metadata and df for QC and samples the same in CV funtion
 
   #collapse only samples, we need to subset metadata only for samples
   #subsetting using column "type" in metadata QC" and "metadata_samples"
   #mean, median and stdev is calculated for QC samples and for samples taking into account only biological replicates
   #technical replicates of each biological replicates were collapsed
 
-  metadata_QC <- metadata[metadata$type == "QC", ]
-  metadata_samples <- metadata[metadata$type == "sample", ]
-
-  #new column in metadata file
-  metadata$pasted<-as.factor(paste(metadata$subclass,metadata$biological_rep,sep="_"))
+   #new column in metadata file
+  m_list$samples_ann$pasted<-as.factor(paste(m_list$sample_ann$subclass,m_list$sample_ann$biological_rep,sep="_"))
 
   df_samples_mean <-
     (t(stats::aggregate(
-      t(df_samples[, 4:ncol(df_samples)]), list(metadata_samples$pasted), mean
+      t(m_list$samples), list(m_list$samples_ann$pasted), mean
     )))
   colnames(df_samples_mean) = df_samples_mean[1, ]
   df_samples_mean <- df_samples_mean[-1, ]
   df_samples_mean = as.numeric(df_samples_mean)
-  df_samples_mean = cbind(dataframe[, 1:3], df_samples_mean)
+  df_samples_mean = cbind(m_list$metabo_ann, df_samples_mean)
 
   df_samples_median <-
     (t(stats::aggregate(
-      t(df_samples[, 4:ncol(df_samples)]), list(metadata_samples$pasted), median
+      t(m_list$samples), list(m_list$samples_ann$pasted), median
     )))
   colnames(df_samples_median) = df_samples_median[1, ]
   df_samples_median <- df_samples_median[-1, ]
   df_samples_median = as.numeric(df_samples_median)
-  df_samples_median = cbind(dataframe[, 1:3], df_samples_median)
+  df_samples_median = cbind(m_list$samples_ann, df_samples_median)
 
   df_samples_sd <-
     (t(stats::aggregate(
-      t(df_samples[, 4:ncol(df_samples)]), list(metadata_samples$pasted), sd
+      t(m_list$samples), list(m_list$samples_ann$pasted), sd
     )))
   colnames(df_samples_sd) = df_samples_sd[1, ]
   df_samples_sd <- df_samples_sd[-1, ]
   df_samples_sd = as.numeric(df_samples_sd)
-  df_samples_sd = cbind(dataframe[, 1:3], df_samples_sd)
+  df_samples_sd = cbind(m_list$samples_ann, df_samples_sd)
 
-  return(df_samples_mean)
-  return(df_samples_median)
-  return(df_samples_sd)
-}
+
+  Mean_median_stdev<-cbind( df_samples_mean,df_samples_median,df_samples_sd)
+  media_median= paste(getwd(), "/mean_median/mean_median_stdev.csv", sep = "")
+  utils::write.csv(Mean_median_stdev,media_median)
+  return(list(m_list,df_samples_mean,df_samples_median,df_samples_sd))
+  }

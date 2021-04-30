@@ -16,9 +16,11 @@ read_input_file <- function(input, metadata){
   m_list$sample_ann <- data.frame(readxl::read_excel(metadata), stringsAsFactors = F)
   rownames(m_list$sample_ann) <- m_list$sample_ann[, 1]
 
-  #check the order!!!
+  #check the order!!! Check order done. Eventually add reorder? by match
 
-  return(m_list)
+  m_list$sample_ann$order <- m_list$sample_ann$description==colnames(m_list$df)
+
+   return(m_list)
 }
 
 #import csv files MSdial ID as rownames(metabolite)
