@@ -1,6 +1,6 @@
 #' PCA general
 #' Scree plot, score and loading plot (PC1 vs PC2)
-#' @param m_list
+#' @param m_list margheRita m_list
 #' @export
 #' @importFrom graphics plot barplot
 #' @importFrom grDevices dev.off png
@@ -9,7 +9,7 @@
 
 #PCA function general to use in different points
 
-pca_gen <- function(m_list,dirout) {
+pca_gen <- function(m_list, dirout, col_by="class") {
   dirout = paste(dirout, sep = "")
   dir.create(dirout)
   pca <- prcomp(t(m_list$df), scale = T, center = T)
@@ -31,16 +31,21 @@ pca_gen <- function(m_list,dirout) {
     units = "in",
     res = 300
   )
+  col_factor <- as.factor(m_list$sample_ann[, col_by])
+  col_pal <- rainbow(length(levels(col_factor)))
   graphics::plot(
     pca$x[, 1],
     pca$x[, 2],
     xlab = paste("PC1 (", p.i.[1], "%)", sep = ""),
     ylab = paste("PC2 (", p.i.[2], "%)", sep = ""),
     main = "Score plot",
-    col = as.factor(m_list$sample_ann$subclass),
+    #col = as.factor(m_list$sample_ann$subclass),
+    col = col_pal[as.numeric(col_factor)],
     #col=m_list$sample_ann$batch #if you want to color according to batch
     pch = 19
   )
+  legend("bottomright", legend = levels(col_factor), col = col_pal, pch=16, cex=0.5)
+
   grDevices::dev.off()
   loadingplot = paste(dirout, "/Loadingplot_.png", sep = "")
   grDevices::png(

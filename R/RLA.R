@@ -18,6 +18,8 @@ RLA <- function(m_list, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", 
 	}
 
 	if(do_plot){
+	  ## add col_by
+	  dir.create(out_dir)
 	  jpeg(paste0(out_dir, "/RLA.jpg"), width = 200, height = 100, res=300, units="mm")
 	  boxplot(ans, ...)
 	  dev.off()

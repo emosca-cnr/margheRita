@@ -18,7 +18,7 @@ read_input_file <- function(input, metadata){
 
   #check the order!!! Check order done. Eventually add reorder? by match
 
-  m_list$sample_ann$order <- m_list$sample_ann$description==colnames(m_list$df)
+  m_list$sample_ann$order <- m_list$sample_ann$description==colnames(m_list$df) #this add a vector of TRUE/FALSE; We should check for the order (as it is done) and, if necessary, re-order
 
    return(m_list)
 }

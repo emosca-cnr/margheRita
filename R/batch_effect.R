@@ -10,7 +10,7 @@
 batch_effect <- function(m_list){
 
   #box_pre <- boxplot(list$df[, -c(1:3)], main="Original")
-  m_list$df <- limma::removeBatchEffect(m_list$df[, -c(1:3)], m_list$metadata$batch)
+  m_list$df <- limma::removeBatchEffect(m_list$df, m_list$metadata$batch)
 
   #box_post <- boxplot(df[, -c(1:3)], main="Batch corrected")
   #box_plot <- box_pre +  box_post

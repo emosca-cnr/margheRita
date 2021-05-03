@@ -9,9 +9,11 @@
 #apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites
 
 CV <- function(m_list, dirout) {
-    dirout= paste(dirout, sep = "")
-    dir.create(dirout)
+  dirout= paste(dirout, sep = "")
+  dir.create(dirout)
+
   #subsetting metadata and df for QC and samples
+  # we should discuss and agree on the followng code...
   m_list$QC_ann<- subset(m_list$sample_ann, m_list$sample_ann$type=="QC")
   m_list$QC<-m_list$df[colnames(m_list$df) %in% m_list$QC_ann$description]
   m_list$samples_ann<-subset(m_list$sample_ann, m_list$sample_ann$type=="sample")

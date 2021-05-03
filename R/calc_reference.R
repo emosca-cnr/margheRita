@@ -5,7 +5,7 @@ calc_reference <- function(m_list, sample_col="type", sample_type="QC", approach
 
   approach <- approach[1]
 
-  idx_samples <- m_ist$sample_ann[, colnames(m_ist$sample_ann)==sample_col]
+  idx_samples <- m_list$sample_ann[, colnames(m_list$sample_ann)==sample_col]
   idx_samples <- idx_samples==sample_type
 
   if(approach == "median"){
