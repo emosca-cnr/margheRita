@@ -31,6 +31,7 @@ read_input_file <- function(input, metadata){
     cat("samples not order with metadata")
     m_list$data <- m_list$data[,m_list$sample_ann$description]
   }
+  return(m_list)
 }
 
 #import csv files MSdial ID as rownames(metabolite)
