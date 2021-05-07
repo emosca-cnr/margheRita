@@ -2,25 +2,35 @@
 
 #' import excel files input and metadata
 #' @import readxl
+#' @import dplyr
 #' @export
 
 read_input_file <- function(input, metadata){
 
-  df <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
-  m_list <- list(df=df[, -c(1:3)])
-  rownames(m_list$df) <- df[, 1]
+  data <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
+  m_list <- list(data=data[, -c(1:3)])
+  rownames(m_list$data) <- data[, 1]
 
-  m_list$metab_ann <- df[, 1:3]
-  rownames(m_list$metab_ann) <- df[, 1]
+  m_list$metab_ann <- data[, 1:3]
+  rownames(m_list$metab_ann) <- data[, 1]
 
   m_list$sample_ann <- data.frame(readxl::read_excel(metadata), stringsAsFactors = F)
   rownames(m_list$sample_ann) <- m_list$sample_ann[, 1]
 
-  #check the order!!! Check order done. Eventually add reorder? by match
+  if (any(colnames(m_list$sample_ann) == "class")){
+    if (any(is.na(m_list$sample_ann$type)) == "TRUE") {
+      stop()
+    }
+  }
 
-  m_list$sample_ann$order <- m_list$sample_ann$description==colnames(m_list$df) #this add a vector of TRUE/FALSE; We should check for the order (as it is done) and, if necessary, re-order
+  m_list$sample_ann$order <- m_list$sample_ann$description==colnames(m_list$data)
 
-   return(m_list)
+  if(any(m_list$sample_ann$order == "TRUE")){
+    cat("bella !!!")
+  } else {
+    cat("samples not order with metadata")
+    m_list$data <- m_list$data[,m_list$sample_ann$description]
+  }
 }
 
 #import csv files MSdial ID as rownames(metabolite)
