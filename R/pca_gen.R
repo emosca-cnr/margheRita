@@ -12,7 +12,7 @@
 pca_gen <- function(m_list, dirout, col_by="class") {
   dirout = paste(dirout, sep = "")
   dir.create(dirout)
-  pca <- prcomp(t(m_list$df), scale = T, center = T)
+  pca <- prcomp(t(m_list), scale = F, center = T)
   p.v.= matrix(((pca$sdev ^ 2) / (sum(pca$sdev ^ 2))), ncol = 1) #varianza
   p.i. = round(p.v.* 100, 1) #percentuali di varianza spiegata dalle PC
   pwd.score= paste(dirout, "/ScoreMatrix.csv", sep ="")
@@ -39,15 +39,13 @@ pca_gen <- function(m_list, dirout, col_by="class") {
     xlab = paste("PC1 (", p.i.[1], "%)", sep = ""),
     ylab = paste("PC2 (", p.i.[2], "%)", sep = ""),
     main = "Score plot",
-    #col = as.factor(m_list$sample_ann$subclass),
-    col = col_pal[as.numeric(col_factor)],
-    #col=m_list$sample_ann$batch #if you want to color according to batch
-    pch = 19
+        col = col_pal[as.numeric(col_factor)],
+        pch = 19
   )
   legend("bottomright", legend = levels(col_factor), col = col_pal, pch=16, cex=0.5)
 
   grDevices::dev.off()
-  loadingplot = paste(dirout, "/Loadingplot_.png", sep = "")
+  loadingplot = paste(dirout, "/Loadingplot.png", sep = "")
   grDevices::png(
     loadingplot,
     width = 8,
