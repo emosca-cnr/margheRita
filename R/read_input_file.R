@@ -8,6 +8,7 @@
 read_input_file <- function(input, metadata){
 
   data <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
+
   m_list <- list(data=data[, -c(1:3)])
   rownames(m_list$data) <- data[, 1]
 
@@ -17,20 +18,25 @@ read_input_file <- function(input, metadata){
   m_list$sample_ann <- data.frame(readxl::read_excel(metadata), stringsAsFactors = F)
   rownames(m_list$sample_ann) <- m_list$sample_ann[, 1]
 
-  if (any(colnames(m_list$sample_ann) == "class")){
-    if (any(is.na(m_list$sample_ann$type)) == "TRUE") {
-      stop()
-    }
+  if(!all(c("id", "injection_order", "batch", "class", "biological_rep", "technical_rep") %in% colnames(m_list$sample_ann))){
+    cat("sample annotation must contain 'id', 'injection_order', 'batch', 'class', 'biological_rep' and 'technical_rep'\n")
+    cat("found", colnames(m_list$sample_ann), "\n")
+    stop("ERROR: missing mandatory sample annotation columns\n")
   }
 
-  m_list$sample_ann$order <- m_list$sample_ann$description==colnames(m_list$data)
-
-  if(any(m_list$sample_ann$order == "TRUE")){
-    cat("bella !!!")
-  } else {
-    cat("samples not order with metadata")
-    m_list$data <- m_list$data[,m_list$sample_ann$description]
+  if(nrow(m_list$sample_ann) != ncol(m_list$data)){
+    cat("data ", nrow(m_list$sample_ann), "\n")
+    cat("data ", ncol(m_list$data), "\n")
+    stop("ERROR: different number of elements between data and annotation")
   }
+
+  idx <- match(colnames(m_list$data), m_list$sample_ann$id)
+  if(any(is.na(idx))){
+    stop("ERROR: not all samples found in annotation")
+  }
+
+  m_list$sample_ann <- m_list$sample_ann[idx,] #ettore
+
   return(m_list)
 }
 

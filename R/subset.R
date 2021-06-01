@@ -1,3 +1,4 @@
+#' Subset
 #' @param metadata split in metadata for QC and metadata for samples
 #' @param calculate mean for each biological replicates
 #' @importFrom stats aggregate

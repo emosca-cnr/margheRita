@@ -1,7 +1,7 @@
-
-#Subsetting metadata and data creating QC and samples data and metadata
-#Collapse technical replicates for samples.
-#'@param For each sample mean was calculated to collapse technical replicates
+#' Collapse
+#' Subsetting metadata and data creating QC and samples data and metadata
+#' Collapse technical replicates for samples.
+#' @param For each sample mean was calculated to collapse technical replicates
 #' @importFrom stats aggregate
 #' @export
 

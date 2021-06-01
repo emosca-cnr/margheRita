@@ -4,7 +4,7 @@
 \alias{imputation}
 \title{missing values imputation}
 \usage{
-imputation(m_list)
+imputation(m_list, seed = 1234)
 }
 \arguments{
 \item{dataframe}{of input contains intensity of all features according to samples}
