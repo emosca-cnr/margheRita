@@ -6,8 +6,8 @@
 \usage{
 calc_reference(
   m_list,
-  sample_col = "type",
-  sample_type = "QC",
+  sample_col = "class",
+  sample_class = "QC",
   approach = c("median", "mean")
 )
 }

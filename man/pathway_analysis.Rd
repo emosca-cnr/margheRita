@@ -3,8 +3,8 @@
 \name{pathway_analysis}
 \alias{pathway_analysis}
 \title{pathway analysis
-Run enricher or gsea from cluster profiler on BIOCYC data provided by
-NCBI Biosytems}
+Run enricher or gsea from clusterProfiler on pathways provided by NCBI
+Biosytems}
 \usage{
 pathway_analysis(
   in_list = NULL,
@@ -28,6 +28,6 @@ pathway_analysis(
 }
 \description{
 pathway analysis
-Run enricher or gsea from cluster profiler on BIOCYC data provided by
-NCBI Biosytems
+Run enricher or gsea from clusterProfiler on pathways provided by NCBI
+Biosytems
 }

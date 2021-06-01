@@ -1,6 +1,7 @@
 #' pathway analysis
-#' Run enricher or gsea from cluster profiler on BIOCYC data provided by
-#' NCBI Biosytems
+#' Run enricher or gsea from clusterProfiler on pathways provided by NCBI
+#' Biosytems
+#'
 #' @export
 #' @import clusterProfiler
 

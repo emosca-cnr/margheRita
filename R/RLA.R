@@ -6,9 +6,9 @@
 
 RLA <- function(m_list, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", ...){
 
-  ans <- m_list$df
+  ans <- m_list$data
   if(!logged){
-    ans <- log2(m_list$df + 1)
+    ans <- log2(m_list$data + 1)
   }
 
 	if(robust){
