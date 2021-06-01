@@ -16,4 +16,7 @@ Imports:
     readxl,
     grDevices,
     stats,
-    utils
+    utils,
+    clusterProfiler,
+    limma
+

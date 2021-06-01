@@ -9,7 +9,7 @@ normalize_profiles(m_list, method = c("log", "reference", "pqn"))
 \arguments{
 \item{method}{"log": log2(x+1); "reference": divide each sample by its reference; "pqn": probailistic quotient normalization;}
 
-\item{m_list$df}{features-by-samples matrix of metabolite levels;}
+\item{m_list$data}{features-by-samples matrix of metabolite levels;}
 
 \item{reference}{reference profile;}
 }
