@@ -14,7 +14,7 @@ m_z_filtering <- function(m_list){
 
   idx_keep <- m_list$metab_ann$quality < 0.4 | m_list$metab_ann$quality > 0.8
 
-  m_list$df <- m_list$df[idx_keep, ]
+  m_list$data <- m_list$data[idx_keep, ]
   m_list$metab_ann <- m_list$metab_ann[idx_keep, ]
 
   #m_list$df <- dplyr::filter(m_list$df, m_list$quality < 0.4 | m_list$quality > 0.8)

@@ -2,7 +2,7 @@
 #' @param metadata split in metadata for QC and metadata for samples
 #' @param calculate mean, median and stdev for samples
 
-#' @importFrom stats aggregate, sd, mean, median
+#' @import stats utils
 #' @export
 
 

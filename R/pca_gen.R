@@ -9,16 +9,17 @@
 
 #PCA function general to use in different points
 
-pca_gen <- function(m_list, dirout, col_by="class", scale=c("T","F"), include_QC=c("T","F")) {
+pca_gen <- function(m_list, dirout, col_by="class", scale=TRUE, include_QC=TRUE) {
   dirout = paste(dirout, sep = "")
   dir.create(dirout)
-  if (scale=="T") {
-    m_list$data<-apply(m_list$data,1,function(x) pareto(x))
+  if (scale) {
+    #m_list$data<-apply(m_list$data,1,function(x) pareto(x))
+    m_list <- pareto(m_list) #ettore: pareto requires m_list
   }
-  if (include_QC== "T"){
-    m_list$data<-cbind(m_list$data, m_list$QC)
+  if (include_QC){
+    data_ <- cbind(m_list$data, m_list$QC)
   }
-  pca <- prcomp(t(m_list$data), scale = F, center = F)
+  pca <- prcomp(t(data_), scale = F, center = F)
   p.v.= matrix(((pca$sdev ^ 2) / (sum(pca$sdev ^ 2))), ncol = 1) #varianza
   p.i. = round(p.v.* 100, 1) #percentuali di varianza spiegata dalle PC
   pwd.score= paste(dirout, "/ScoreMatrix.csv", sep ="")

@@ -2,9 +2,7 @@
 % Please edit documentation in R/collapse.R
 \name{collapse}
 \alias{collapse}
-\title{Collapse
-Subsetting metadata and data creating QC and samples data and metadata
-Collapse technical replicates for samples.}
+\title{Collapse technical replicates for samples.}
 \usage{
 collapse(m_list)
 }
@@ -12,7 +10,5 @@ collapse(m_list)
 \item{For}{each sample mean was calculated to collapse technical replicates}
 }
 \description{
-Collapse
-Subsetting metadata and data creating QC and samples data and metadata
 Collapse technical replicates for samples.
 }

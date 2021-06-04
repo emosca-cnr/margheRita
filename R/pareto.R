@@ -15,7 +15,8 @@ pareto <- function(m_list){
   # Then we perform scaling on the mean-centered matrix
   x.sc <- apply(x.centered, 1, function(x) x/sqrt(sd(x)))
   #x.sc <- cbind(m_list$metab_ann, x.sc)
-  m_list$paretoscaled <- x.sc
+  #m_list$paretoscaled <- x.sc
+  m_list$scaled <- x.sc#ettore
   #utils::write.csv(x.sc, "paretoscaled.csv")
   return(m_list)
 }

@@ -5,7 +5,7 @@
 #' @import dplyr
 #' @export
 
-read_input_file <- function(input, metadata){
+read_input_file <- function(input, metadata, split_QC=TRUE){
 
   data <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
 
@@ -34,8 +34,12 @@ read_input_file <- function(input, metadata){
   if(any(is.na(idx))){
     stop("ERROR: not all samples found in annotation")
   }
-
   m_list$sample_ann <- m_list$sample_ann[idx,] #ettore
+
+  #SPLIT QC
+  if(split_QC){
+    m_list <- splitQC(m_list)
+  }
 
   return(m_list)
 }
