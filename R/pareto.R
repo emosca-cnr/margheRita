@@ -9,7 +9,7 @@
 pareto <- function(m_list){
 
 
-  x <- m_list$data
+  x<- m_list$data
  # Here we perform centering
   x.centered <- apply(x, 1, function(x) x - mean(x))
   # Then we perform scaling on the mean-centered matrix
