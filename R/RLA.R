@@ -4,7 +4,14 @@
 #' @author Ettore Mosca (CNR-ITB)
 #' @importFrom stats median
 
-RLA <- function(m_list, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", ...){
+RLA <- function(m_list, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", ...){
+
+
+  if(include_QC){
+    m_list$data <- cbind(m_list$data, m_list$QC)
+    m_list$sample_ann<- rbind(m_list$sample_ann, m_list$QC_ann)
+  }
+
 
   ans <- m_list$data
   if(!logged){

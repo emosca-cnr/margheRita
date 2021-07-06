@@ -6,6 +6,7 @@
 \usage{
 RLA(
   m_list,
+  include_QC = FALSE,
   logged = FALSE,
   robust = TRUE,
   do_plot = FALSE,

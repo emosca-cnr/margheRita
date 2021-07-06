@@ -4,7 +4,7 @@
 \alias{m_z_filtering}
 \title{m_z_filtering}
 \usage{
-m_z_filtering(m_list)
+m_z_filtering(m_list, do_plot = TRUE)
 }
 \description{
 m_z_filtering

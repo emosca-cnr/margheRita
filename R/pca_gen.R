@@ -100,5 +100,5 @@ pca_gen <- function(m_list, dirout, col_by="class", scale=TRUE, include_QC=TRUE)
     ylim = c(0, 100)
   )
   grDevices::dev.off()
-  return(m_list)
+
 }

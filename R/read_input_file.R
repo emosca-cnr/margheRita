@@ -2,7 +2,6 @@
 
 #' import excel files input and metadata
 #' @import readxl
-#' @import dplyr
 #' @export
 
 read_input_file <- function(input, metadata, split_QC=TRUE){

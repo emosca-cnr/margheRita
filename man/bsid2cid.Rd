@@ -5,7 +5,7 @@
 \alias{bsid2cid}
 \title{Biosystems ID to CID map}
 \format{
-An object of class \code{data.frame} with 39903475 rows and 3 columns.
+An object of class \code{data.frame} with 8030771 rows and 3 columns.
 }
 \usage{
 bsid2cid

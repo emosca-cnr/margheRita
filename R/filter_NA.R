@@ -6,11 +6,13 @@
 filter_NA <- function(m_list, min_metab_in_sample=100, min_sample_with_metab=10){
 
   idx_keep <- colSums(!is.na(m_list$data)) >= min_metab_in_sample
+  cat("Samples with enough metabolites\n")
   print(table(idx_keep))
   m_list$data <- m_list$data[, idx_keep]
   m_list$sample_ann <- m_list$sample_ann[idx_keep, ]
 
   idx_keep <- rowSums(!is.na(m_list$data)) >= min_sample_with_metab
+  cat("Metabolites occurring in enough samples\n")
   print(table(idx_keep))
   m_list$data <- m_list$data[idx_keep, ]
   m_list$metab_ann <- m_list$metab_ann[idx_keep, ]

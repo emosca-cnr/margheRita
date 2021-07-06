@@ -6,7 +6,7 @@
 \title{metabolite_annotation
 map between metabolite name and various stantard identifiers}
 \format{
-An object of class \code{data.frame} with 795 rows and 15 columns.
+An object of class \code{data.frame} with 834 rows and 15 columns.
 }
 \usage{
 metabolite_annotation

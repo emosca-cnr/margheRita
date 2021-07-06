@@ -14,15 +14,15 @@ pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"),
     cat("loading pathway data...\n")
 
     data("bsid2cid", envir=environment())
-    data("bsid2pubchem", envir=environment())
+    data("bsid2info", envir=environment())
 
     cat("preprocessing pathway data...\n")
 
     #pathway definitions only from the given tax
     if(include_general_pathways){
-      TERM2NAME <- bsid2pubchem[which(bsid2pubchem$tax_id == tax_id | is.na(bsid2pubchem$tax_id)), ]
+      TERM2NAME <- bsid2info[which(bsid2info$tax_id == tax_id | is.na(bsid2info$tax_id)), ]
     }else{
-      TERM2NAME <- bsid2pubchem[which(bsid2pubchem$tax_id == tax_id), ]
+      TERM2NAME <- bsid2info[which(bsid2info$tax_id == tax_id), ]
     }
 
     #pathway to metab only from the considered pathways
