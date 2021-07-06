@@ -27,6 +27,7 @@ CV <- function(m_list, dirout) {
   utils::write.csv(CV_all, paste0(dirout, "/CV_all.csv"))
 
   idx_keep <- CV_QC < CV_Samples
+  cat("Metabolites with appropriate CV\n")
   print(table(idx_keep))
 
   m_list$data <- m_list$data[idx_keep, ] #m_list$data cleaned
