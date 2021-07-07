@@ -24,8 +24,10 @@ read_input_file <- function(input, metadata, split_QC=TRUE){
   }
 
   if(nrow(m_list$sample_ann) != ncol(m_list$data)){
-    cat("data ", nrow(m_list$sample_ann), "\n")
+    cat("sample annotation ", nrow(m_list$sample_ann), "\n")
     cat("data ", ncol(m_list$data), "\n")
+    cat(rownames(m_list$sample_ann)[!rownames(m_list$sample_ann) %in% colnames(m_list$data)])
+    cat(colnames(m_list$data)[!colnames(m_list$data) %in% rownames(m_list$sample_ann)])
     stop("ERROR: different number of elements between data and annotation")
   }
 

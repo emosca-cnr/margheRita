@@ -5,7 +5,16 @@
 \title{PCA general
 Scree plot, score and loading plot (PC1 vs PC2)}
 \usage{
-pca_gen(m_list, dirout, col_by = "class", scale = TRUE, include_QC = TRUE)
+pca_gen(
+  m_list,
+  dirout,
+  col_by = "class",
+  scaling = c("none", "Pareto", "uv"),
+  include_QC = TRUE,
+  type = c("component", "coordinate"),
+  dist.method = "euclidean",
+  top = Inf
+)
 }
 \arguments{
 \item{m_list}{margheRita m_list}

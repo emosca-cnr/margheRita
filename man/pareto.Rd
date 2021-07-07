@@ -4,7 +4,7 @@
 \alias{pareto}
 \title{pareto scaling of the dataframe after missing value correction}
 \usage{
-pareto(m_list)
+pareto(X, centering = TRUE)
 }
 \arguments{
 \item{df}{data.frame without the first three columns (MS DIAL, RT and m/z)}

@@ -6,19 +6,18 @@
 #' @importFrom stats sd
 
 
-pareto <- function(m_list){
+pareto <- function(X, centering=TRUE){
 
 
-  x<- m_list$data
- # Here we perform centering
-  x.centered <- apply(x, 1, function(x) x - mean(x))
+  # Here we perform centering
+  if(centering){
+    X <- apply(X, 1, function(x) x - mean(x))
+  }
+
   # Then we perform scaling on the mean-centered matrix
-  x.sc <- apply(x.centered, 1, function(x) x/sqrt(sd(x)))
-  #x.sc <- cbind(m_list$metab_ann, x.sc)
-  #m_list$paretoscaled <- x.sc
-  m_list$scaled <- x.sc#ettore
-  #utils::write.csv(x.sc, "paretoscaled.csv")
-  return(m_list)
+  X <- apply(X, 1, function(x) x/sqrt(sd(x)))
+
+  return(X)
 }
 
 
