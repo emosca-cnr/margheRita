@@ -1,8 +1,8 @@
-#' boxplot
-
+#' @importFrom graphics boxplot
 #' @param m_list margheRita m_list
 #' @export
 #' @importFrom grDevices dev.off png
+
 
 
 metab_boxplot<-function(m_list, dirout="./"){
@@ -13,13 +13,18 @@ metab_boxplot<-function(m_list, dirout="./"){
   col_factor <- as.factor(m_list$sample_ann$class)
   col_pal <- rainbow(length(levels(col_factor)))
 
-  pdf("Boxplot.pdf")
-    for (i in 1:nrow(m_list$data)) {
+  #if (uni_corrected<0.05){
+  data<-t(m_list$data)
+  group<-as.factor(m_list$sample_ann$class)
+  for (i in 1:ncol(data)) {
       boxplot(
-        m_list$data[i,] ~ as.factor(m_list$sample_ann$class) ,
-        names =levels(as.factor(m_list$sample_ann$class)),
-        #main = m_list$metabo_ann, #metabolites or Ms ID or annotation
-        ylab="Relative Abundance", col= col_pal)
-    }
-dev.off()
+     data[,i] ~ group , data=data,
+      names =levels(group),
+      #main = m_list$metabo_ann, #metabolites or Ms ID or annotation
+      ylab="Relative Abundance", col= col_pal)
+    png(file=paste(dirout,"metabolite",i,".png",sep=""), width = 480, height = 480, units = "px",
+        bg = "white")
+  }
+  dev.off()
+
 }
