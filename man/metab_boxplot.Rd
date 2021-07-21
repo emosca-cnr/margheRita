@@ -2,7 +2,7 @@
 % Please edit documentation in R/metab_boxplot.R
 \name{metab_boxplot}
 \alias{metab_boxplot}
-\title{boxplot}
+\title{Metabolite Boxplo}
 \usage{
 metab_boxplot(m_list, dirout = "./")
 }
@@ -10,5 +10,5 @@ metab_boxplot(m_list, dirout = "./")
 \item{m_list}{margheRita m_list}
 }
 \description{
-boxplot
+Metabolite Boxplo
 }

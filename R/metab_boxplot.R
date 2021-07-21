@@ -1,3 +1,4 @@
+#' Metabolite Boxplo
 #' @importFrom graphics boxplot
 #' @param m_list margheRita m_list
 #' @export
