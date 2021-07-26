@@ -34,6 +34,11 @@ margheRita_test <- function(wdir="./"){
   ### create MSnSet
   data <- MSnbase::MSnSet(exprs = as.matrix(cbind(m_list_init$data[1:100, ], m_list_init$QC[1:100, ])), pData = pheno_data)
 
+  #read mgf library
+  gmf_file <- "../../PROMEFA/margheRita/Marynka/GNPS-EMBL-MCF.mgf"
+  temp <- MSnbase::readMgfData(gmf_file)
+
+
   ### 2 ### PLOTS
   pca_gen(m_list_init, dirout = "pca_initial") #fix the group variable for coloring
 
