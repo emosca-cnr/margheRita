@@ -39,8 +39,8 @@ collapse_tech_rep <-function(m_list, remove.QC=FALSE){
   }
 
   #ensure correct order of metabolites
-  if(!identical(rownames(m_list$data), m_list$metab_ann$MS.Dial.ID)){
-    idx <- match(rownames(m_list$data), m_list$metab_ann$MS.Dial.ID)
+  if(!identical(rownames(m_list$data), m_list$metab_ann[, 1])){
+    idx <- match(rownames(m_list$data), m_list$metab_ann[, 1])
     if(any(is.na(idx))){
       stop("ERROR: not all metabolites found.")
     }

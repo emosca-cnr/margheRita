@@ -28,6 +28,8 @@ margheRita_test <- function(wdir="./"){
 
   mset <- notame::construct_metabosets(exprs = cbind(m_list_init$data[1:100, ], m_list_init$QC[1:100, ]), pheno_data = pheno_data, feature_data = feature_data, group_col = "class")
 
+  diff_res <- notame::perform_pairwise_t_test(mset)
+
   clustered <- cluster_features(mset$HILIC_pos, all_features = T)
   compressed <- compress_clusters(clustered)
 

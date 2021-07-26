@@ -8,7 +8,7 @@ m_z_filtering <- function(m_list, do_plot=TRUE){
   #  m_list$quality[i] <- (m_list$df$Average_mz[i] %% 1)
   #}
 
-  m_list$metab_ann$quality <- m_list$metab_ann$Average_mz %% 1
+  m_list$metab_ann$quality <- m_list$metab_ann$mz %% 1
   if(do_plot){
     plot(density(m_list$metab_ann$quality))
   }

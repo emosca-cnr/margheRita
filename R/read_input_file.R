@@ -4,14 +4,17 @@
 #' @import readxl
 #' @export
 
-read_input_file <- function(input, metadata, split_QC=TRUE){
+read_input_file <- function(input, metadata, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4){
 
   data <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
 
-  m_list <- list(data=data[, -c(1:3)])
+  m_list <- list(data=data[, -c(1:(data_start_col-1))])
   rownames(m_list$data) <- data[, 1]
 
-  m_list$metab_ann <- data[, 1:3]
+  m_list$metab_ann <- data[, 1:(data_start_col-1)]
+  colnames(m_list$metab_ann)[1] <- "Feature_ID"
+  colnames(m_list$metab_ann)[mz_col] <- "mz"
+  colnames(m_list$metab_ann)[rt_col] <- "rt"
   rownames(m_list$metab_ann) <- data[, 1]
 
   m_list$sample_ann <- data.frame(readxl::read_excel(metadata), stringsAsFactors = F)

@@ -5,7 +5,14 @@
 \title{Read files (input and metadata) both excel and .csv, default .csv
 import excel files input and metadata}
 \usage{
-read_input_file(input, metadata, split_QC = TRUE)
+read_input_file(
+  input,
+  metadata,
+  split_QC = TRUE,
+  mz_col = 3,
+  rt_col = 2,
+  data_start_col = 4
+)
 }
 \description{
 Read files (input and metadata) both excel and .csv, default .csv
