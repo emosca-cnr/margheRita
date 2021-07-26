@@ -1,4 +1,3 @@
-#' Metabolite Boxplo
 #' @importFrom graphics boxplot
 #' @param m_list margheRita m_list
 #' @export
@@ -14,7 +13,7 @@ metab_boxplot<-function(m_list, dirout="./"){
   col_factor <- as.factor(m_list$sample_ann$class)
   col_pal <- rainbow(length(levels(col_factor)))
 
-  #if (uni_corrected<0.05){
+  if (m_list$data$uni_corrected<0.05){
   data<-t(m_list$data)
   group<-as.factor(m_list$sample_ann$class)
   for (i in 1:ncol(data)) {
@@ -27,5 +26,5 @@ metab_boxplot<-function(m_list, dirout="./"){
         bg = "white")
   }
   dev.off()
-
+}
 }
