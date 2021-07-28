@@ -62,8 +62,8 @@ pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"),
 
   }
 
-  res <- res@result
-  colnames(res) <- gsub("[Gg]ene", "Compound", colnames(res))
+  res@result <- res@result
+  #colnames(res@result) <- gsub("[Gg]ene", "Compound", colnames(res@result))
 
   return(list(res=res, term_annotation=TERM2NAME_))
 
