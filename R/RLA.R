@@ -29,6 +29,7 @@ RLA <- function(m_list, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FAL
 	  dir.create(out_dir)
 	  jpeg(paste0(out_dir, "/RLA.jpg"), width = 200, height = 100, res=300, units="mm")
 	  boxplot(ans, ..., ylab="x - <x>")
+	  abline(h=0, lty=2)
 	  dev.off()
 	}
 

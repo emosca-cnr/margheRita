@@ -26,6 +26,10 @@ margheRita_test_compare_pqn_driftcorr <- function(wdir="./"){
   norm_data <- normalize_profiles(m_list, method = "pqn")
   rla_res <- RLA(norm_data, do_plot = T, outline=F, las=2, out_dir = "../../PROMEFA/margheRita/test/RLA_norm", pars=list(cex.axis=0.3))
 
+  norm_data_log <- normalize_profiles(m_list, method = "log")
+  rla_res <- RLA(norm_data_log, logged = T, do_plot = T, outline=F, las=2, out_dir = "../../PROMEFA/margheRita/test/RLA_norm_log", pars=list(cex.axis=0.3))
+
+
   ### 1.1 #### create a notame MetaboSet 0bject
   feature_data <- m_list_init$metab_ann
   colnames(feature_data)[3] <- "Average mz"
@@ -42,11 +46,10 @@ margheRita_test_compare_pqn_driftcorr <- function(wdir="./"){
   colnames(pheno_data)[4] <- "QC"
 
   mset <- notame::construct_metabosets(exprs = as.matrix(temp), pheno_data = pheno_data, feature_data = feature_data, group_col = "class")
-
-  detected <- flag_detection(object, qc_limit = 0.7, group_limit = 0.5)
   mset <- notame::correct_drift(mset$HILIC_pos)
 
   mlist_notame_drift <- list(data = exprs(mset))
+  mlist_notame_drift$data <- mlist_notame_drift$data [, !grepl("_QC_", colnames(mlist_notame_drift$data))]
   rla_notame <- RLA(mlist_notame_drift, do_plot = T, outline=F, las=2, out_dir = "../../PROMEFA/margheRita/test/RLA_drift_notame", pars=list(cex.axis=0.3))
 
 

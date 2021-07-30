@@ -13,28 +13,14 @@ margheRita_test <- function(wdir="./"){
   m_list_init <- read_input_file(input_data_file, metadata = input_metadata_file)
   lapply(m_list_init, head)
 
-  ### 1.1 #### create a notame MetaboSet 0bject
-  feature_data <- m_list_init$metab_ann
-  colnames(feature_data)[1] <- "Feature_ID"
-  colnames(feature_data)[2] <- "rt"
-  colnames(feature_data)[3] <- "Average mz"
-  feature_data <- cbind(feature_data[1:100, ], Split="HILIC_pos")
-  colnames(feature_data)[1] <- "Feature_ID"
-
-  pheno_data <- rbind(m_list_init$sample_ann, m_list_init$QC_ann)
-  colnames(pheno_data)[1] <- "Sample_ID"
-  colnames(pheno_data)[3] <- "Injection_order"
-  colnames(pheno_data)[5] <- "QC"
-
-  mset <- notame::construct_metabosets(exprs = cbind(m_list_init$data[1:100, ], m_list_init$QC[1:100, ]), pheno_data = pheno_data, feature_data = feature_data, group_col = "class")
-
+  mset <- as.metaboset.mRList(mRlist)
   diff_res <- notame::perform_pairwise_t_test(mset)
 
   clustered <- cluster_features(mset$HILIC_pos, all_features = T)
   compressed <- compress_clusters(clustered)
 
   ### create MSnSet
-  data <- MSnbase::MSnSet(exprs = as.matrix(cbind(m_list_init$data[1:100, ], m_list_init$QC[1:100, ])), pData = pheno_data)
+  msnset <- as.MSnSet.mRList(mRlist)
 
   #read mgf library
   gmf_file <- "../../PROMEFA/margheRita/Marynka/GNPS-EMBL-MCF.mgf"
@@ -61,7 +47,7 @@ margheRita_test <- function(wdir="./"){
   rla_res <- RLA(m_list, include_QC=TRUE, do_plot = T, outline=F, las=2, out_dir = "RLA_raw", pars=list(cex.axis=0.3))
 
   ### 9 ### NORMALIZATION
-  m_list <- calc_reference(m_list)
+  m_list <- calc_reference(m_list, sample_col = )
   norm_data <- normalize_profiles(m_list, method = "pqn")
   rla_res <- RLA(norm_data, do_plot = T, outline=F, las=2, out_dir = "RLA_norm", pars=list(cex.axis=0.3))
 
