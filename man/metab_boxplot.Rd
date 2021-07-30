@@ -2,13 +2,19 @@
 % Please edit documentation in R/metab_boxplot.R
 \name{metab_boxplot}
 \alias{metab_boxplot}
-\title{Metabolite Boxplo}
+\title{metab_boxplot}
 \usage{
-metab_boxplot(m_list, dirout = "./")
+metab_boxplot(
+  m_list,
+  dirout = "./",
+  features = NULL,
+  col_by = "class",
+  group = "class"
+)
 }
 \arguments{
 \item{m_list}{margheRita m_list}
 }
 \description{
-Metabolite Boxplo
+metab_boxplot
 }
