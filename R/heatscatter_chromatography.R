@@ -1,10 +1,21 @@
-#Quality control of chromatography plotting RT vs intensity to check the distribution of m/z
+#' heatscatter_chromatography
+#' @importFrom LSD heatscatter
+#' @importFrom grDevices dev.off pdf
+#' @export
 
-#library(LSD)
-#pdf("heatscatter_chromatography5.pdf")
-#for (i in 4:ncol(df)){
-#      heatscatter(x=df$Rt_min, y=df[[i]],
-#                  log="y", pch = 4, xlab="RT_Min",ylab="intensity",main=colnames(df[i]))
-#}
-#dev.off()
-
+heatscatter_chromatography <- function(m_list, mz_limits, rt_limits, stat, color_palette, title) {
+   if (mz_limits==NULL | rt_limits==NULL) {
+      rt <- m_list$metab_ann$rt
+      mz <- m_list$metab_ann$mz
+   } else {
+       rt <- m_list$metab_ann$rt[m_list$metab_ann$rt > rt_limits[1]  & m_list$metab_ann$rt < rt_limits[2]]
+       mz <- m_list$metab_ann$mz[m_list$metab_ann$mz > mz_limits[1]  & m_list$metab_ann$mz < mz_limits[2]]
+   }
+   heatscatter(m_list$metab_ann$rt, m_list$metab_ann$mz, 
+      xlab="Retenction Time",
+      ylab="m/z feature",
+      simulate=ifelse(color_palette==1, F, T),
+      main=ifelse(title==NULL, NULL, title),
+      add.contour=ifelse(stat==F, F, T))
+return(m_list)
+}
