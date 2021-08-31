@@ -57,6 +57,7 @@ margheRita_test <- function(wdir="./"){
 
   ## COLLASSO
   norm_data_biorep <- collapse_tech_rep(norm_data, remove.QC = FALSE)
+  norm_data_biorep_ <- mean_media_stdev_samples(norm_data_biorep, dirout = "")
 
   ### 7 ### FILTER BY CV
   norm_data_biorep <- CV(norm_data_biorep, dirout = "CV") #this is too slow

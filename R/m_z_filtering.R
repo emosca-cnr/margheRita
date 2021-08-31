@@ -1,7 +1,7 @@
 #' m_z_filtering
 #' @export
 
-m_z_filtering <- function(m_list, do_plot=TRUE, lower_quality_mass_acc, upper_quality_mass_acc){
+m_z_filtering <- function(m_list, do_plot=TRUE, lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8){
 
   m_list$metab_ann$quality <- m_list$metab_ann$mz %% 1
 

@@ -6,11 +6,10 @@
 #' @export
 
 
-mean_media_stdev_samples<-function(m_list,dirout){
+mean_media_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
 
   cat("According to dataset size, this might take a few minutes.\n")
-  dirout = paste(dirout, sep = "")
-  dir.create(dirout)
+
 
   mean_sample<-stats::aggregate.data.frame(t(m_list$data), list(m_list$sample_ann$class), mean)
   rownames(mean_sample)<-mean_sample$Group.1
@@ -18,7 +17,7 @@ mean_media_stdev_samples<-function(m_list,dirout){
   mean_sample<-t(mean_sample)
   mean_sample<-as.data.frame(mean_sample)
   for (i in 1:length(names(mean_sample))) {
-     names(mean_sample)[i] <- paste(names(mean_sample)[i],"mean", sep = "_") 
+    names(mean_sample)[i] <- paste(names(mean_sample)[i],"mean", sep = "_")
   }
 
   median_sample<-stats::aggregate.data.frame(t(m_list$data), list(m_list$sample_ann$class), median)
@@ -27,7 +26,7 @@ mean_media_stdev_samples<-function(m_list,dirout){
   median_sample<-t(median_sample)
   median_sample<-as.data.frame(median_sample)
   for (i in 1:length(names(median_sample))) {
-     names(median_sample)[i] <- paste(names(median_sample)[i],"median", sep = "_") 
+    names(median_sample)[i] <- paste(names(median_sample)[i],"median", sep = "_")
   }
 
 
@@ -37,7 +36,7 @@ mean_media_stdev_samples<-function(m_list,dirout){
   sd_sample<-t(sd_sample)
   sd_sample<-as.data.frame(sd_sample)
   for (i in 1:length(names(sd_sample))) {
-     names(sd_sample)[i] <- paste(names(sd_sample)[i],"sd", sep = "_") 
+    names(sd_sample)[i] <- paste(names(sd_sample)[i],"sd", sep = "_")
   }
 
 
@@ -49,14 +48,16 @@ mean_media_stdev_samples<-function(m_list,dirout){
   names(m_list$metab_ann) <- gsub("2", "median", names(m_list$metab_ann))
 
 
-  All= paste(dirout, "/mean_median_stdev.csv", sep ="")
-  utils::write.csv(Mean_median_stdev, All)
-  media= paste(dirout, "/mean.csv", sep ="")
-  utils::write.csv(mean_sample, media)
-  mediana= paste(dirout, "/median.csv", sep ="")
-  utils::write.csv(median_sample, mediana)
-  stdev= paste(dirout, "/stdev.csv", sep ="")
-  utils::write.csv(sd_sample, stdev)
-
+  if(write_output){
+    dir.create(dirout)
+    All= paste(dirout, "/mean_median_stdev.csv", sep ="")
+    utils::write.csv(Mean_median_stdev, All)
+    media= paste(dirout, "/mean.csv", sep ="")
+    utils::write.csv(mean_sample, media)
+    mediana= paste(dirout, "/median.csv", sep ="")
+    utils::write.csv(median_sample, mediana)
+    stdev= paste(dirout, "/stdev.csv", sep ="")
+    utils::write.csv(sd_sample, stdev)
+  }
   return(m_list)
 }
