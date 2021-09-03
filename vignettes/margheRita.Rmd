@@ -36,8 +36,11 @@ MargheRita is intended for any kind of mass spectrometer raw data, including bot
 
 The package can be dowloaded **[here](https://github.com/emosca-cnr/margheRita)** and the loading can be done by using the function `load_all()`, of the package `devtools`
 ```{r, eval=FALSE}
-install_github("emosca-cnr/margheRita")
-library(devtools)
+if (!requireNamespace("devtools", quietly = TRUE)) {
+  install.packages("devtools")
+}
+devtools::install_github("emosca-cnr/margheRita", dependencies = T)
+install_dependencies("marghRita")
 load_all("margheRita")
 ```
 
@@ -57,7 +60,7 @@ The function `read_input_file()` allows you to inport the dataset and his relati
 m_list <- read_input_file(input = "inst/extdata/example1.xlsx", metadata = "inst/extdata/example1_meta.xlsx", split_QC = TRUE, rt_col = 2, mz_col =3 , data_start_col = 4)
 ```
 m_list object created by `read_input_file()` function is this:
-![Data structure of margherita](images/m_list_str.png)
+![Data structure of margheRita](images/m_list_str.png)
 
 Object in m_list  | Description
 ------------- | -------------
@@ -72,7 +75,7 @@ QC_ann | annotation of metabolites basic $m/z$ and rt only of QC met
 Once created the margheRita object `m_list`, can be applied on the function `m_z_filtering()` that is able to filter lower quality $m/z$ mass accuracy features
 
 ```{r, eval=FALSE}
-m_list <- m_z_filtering(m_list = m_list, lower_quality_mass_acc = 0.4, upper_quality_mass_acc = 0.8, do_plot = T)
+m_list <- m_z_filtering(m_list = m_list, lower_quality_mass_acc = 0.4, upper_quality_mass_acc = 0.8, do_plot = T, color="black")
 ```
 
 + `m_list`: m_list object.
@@ -82,6 +85,8 @@ m_list <- m_z_filtering(m_list = m_list, lower_quality_mass_acc = 0.4, upper_qua
 + `upper_quality_mass_acc`: floating parameter, it specifies the upper number associated to the firt $m/z$ feature decimal number that will be cutt off.
 
 + `do_plot`: bulean parameter that specifies if a distribution plot of $m/z$ feature has to be displayed
+
++ `color`: character spcecifyng the color of the curve. 
 
 the command also generate a report of the filtering
 
@@ -95,6 +100,26 @@ function output produce in metab_ann a column called quality:
 ```{r, eval=FALSE}
 head(m_list$metab_ann, 5)
 ```
+
+## Data exploration
+margheRita provides two types of functions that are able to explore data:
+
+### Heatscatter_Cromatography
+this function provide an overview of all the $m/z$ features in all experiments during all the chromatogram, by generating a Heatscatter plot using `LSD::heatscatter()` function exploiting **[LSD package](https://cran.r-project.org/web/packages/LSD/index.html)**
+```{r, eval=FALSE}
+heatscatter_chromatography(m_list = m_list, mz_limits = NULL, rt_limits = NULL, sample = c("BAL_STAND"))
+```
++ `sample`: character parameter, default value is `NULL`, if specified in the plot will be provided only $m/z$ feature present in that specific sample.
+
++ `mz_limits`: vector parameter, default value is `NULL`, that specifies the minimum and maximum value of the $m/z$ features window that have to be displayed.
+
++ `rt_limits`: vector parameter, default value is `NULL`, that specifies the minimum and maximum value of the retenction time window that have to be displayed.
+
+![](images/hetascatter.png)
+
+
+### exp_mz_rt
+
 
 ## Calculate Reference
 Description here by Ettore :
@@ -117,7 +142,7 @@ m_list <- mean_media_stdev_samples(m_list, write_output = F)
 
 
 
-## Differential analisys
+## Differential analysis
 margheRita implements the of differential abundance analisys by using the fold change index: $log_2(\frac{\bar{B}}{\bar{A}})$ where $\bar{B}$ and $\bar{A}$ are respectably the second and the first term of the specified contrast. Within margheRita regarding this context were implemented two functions:
 ```{r, eval=FALSE}
 m_list <- calculate_lfc_all(m_list = m_list, lfc_theshold = 0.25)
@@ -130,6 +155,9 @@ m_list <- calculate_lfc(m_list = m_list, lfc_theshold = 0.25, contrast_samples =
 
 ```
 + `contrast_samples`: is a character vector of samples specified in the metadata.
+
+
+
 
 
 
