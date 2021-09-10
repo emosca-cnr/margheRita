@@ -4,7 +4,7 @@
 \alias{mean_media_stdev_samples}
 \title{mean, median, and stdev for technical replicates of each biological sample}
 \usage{
-mean_media_stdev_samples(m_list, dirout)
+mean_media_stdev_samples(m_list, dirout = "./", write_output = FALSE)
 }
 \arguments{
 \item{metadata}{split in metadata for QC and metadata for samples}

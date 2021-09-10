@@ -4,7 +4,14 @@
 \alias{m_z_filtering}
 \title{m_z_filtering}
 \usage{
-m_z_filtering(m_list, do_plot = TRUE)
+m_z_filtering(
+  m_list,
+  do_plot = TRUE,
+  lower_quality_mass_acc = 0.4,
+  upper_quality_mass_acc = 0.8,
+  color = "black",
+  ...
+)
 }
 \description{
 m_z_filtering
