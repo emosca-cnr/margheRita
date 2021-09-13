@@ -9,7 +9,7 @@
 
 #PCA function general to use in different points
 
-pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, type=c("component", "coordinate"), dist.method="euclidean", top=Inf) {
+pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, type=c("component", "coordinate"), dist.method="euclidean", top=Inf, write_output=FALSE) {
 
 
   type <- match.arg(type)
@@ -54,17 +54,21 @@ pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", 
 
     p.v.= matrix(((pca$sdev ^ 2) / (sum(pca$sdev ^ 2))), ncol = 1) #varianza
     p.i. = round(p.v.* 100, 1) #percentuali di varianza spiegata dalle PC
+    Pvar. = p.i.
+
+    if (write_output){
     pwd.score= paste(dirout, "/ScoreMatrix.csv", sep ="")
     utils::write.csv(pca$x, pwd.score)
     pwd.load. = paste(dirout ,"/LoadingsMatrix.csv", sep= "")
     utils::write.csv(pca$rotation, pwd.load.)
     pwd.pvar.= paste(dirout, "/Variance.csv", sep = "")
     utils::write.csv(p.i., pwd.pvar.)
-    Pvar. = p.i.
 
+}
 
     #ora faccio i grafici di score, loading and scree plot plotting PC1 vs PC2
-    scoreplot = paste(dirout, "/Scoreplot.png", sep = "")
+
+   scoreplot = paste(dirout, "/Scoreplot.png", sep = "")
     grDevices::png(
       scoreplot,
       width = 8,
@@ -121,15 +125,14 @@ pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", 
     )
     grDevices::dev.off()
 
+    }
 
-
-  }
 
   if(type=="coordinate"){
 
     pca <- cmdscale(dist(t(X), method = dist.method))
 
-    scoreplot <- paste(dirout, "/Scoreplot.png", sep = "")
+       scoreplot <- paste(dirout, "/Scoreplot.png", sep = "")
     grDevices::png(
       scoreplot,
       width = 8,
@@ -150,9 +153,6 @@ pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", 
     )
     legend("bottomright", legend = levels(col_factor), col = col_pal, pch=16, cex=0.5)
     dev.off()
-
   }
-
-
 
 }
