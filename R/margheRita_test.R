@@ -23,7 +23,7 @@ margheRita_test <- function(wdir="./"){
   msnset <- as.MSnSet.mRList(mRlist)
 
   #read mgf library
-  gmf_file <- system.file("extdata", "GNPS-EMBL-MCF.mgf", package = "margheRita")
+  gmf_file <- system.file("extdata", "PSU-MSMLS.mgf", package = "margheRita")
   temp <- MSnbase::readMgfData(gmf_file)
 
 
