@@ -13,7 +13,8 @@ pca_gen(
   include_QC = TRUE,
   type = c("component", "coordinate"),
   dist.method = "euclidean",
-  top = Inf
+  top = Inf,
+  write_output = FALSE
 )
 }
 \arguments{

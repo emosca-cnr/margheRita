@@ -1,6 +1,5 @@
 #' calculate_lfc_all
 #' @importFrom utils combn
-#' @importFrom margheRita calculate_lfc
 #' @export
 
 
