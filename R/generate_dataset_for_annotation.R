@@ -42,13 +42,14 @@ generate_dataset_for_annotation <- function(wdir="./"){
   ref_lib_spectra <- lapply(ref_lib_spectra, function(x) lapply(strsplit(x, ":"), as.numeric))
   ref_lib_spectra <- lapply(ref_lib_spectra, function(x) do.call(rbind, x))
   names(ref_lib_spectra) <- ref_lib$`Metabolite name`
-
   ref_lib$`MS/MS spectrum` <- NULL
 
-  sample_data <- fData(metabs_with_rt)[, c(1,2, 5)]
-  colnames(sample_data)[1] <- "ID"
+  #Sample data
+  sample_data <- data.frame(ID=MSnbase::featureNames(metabs_with_rt), fData(metabs_with_rt)[, c("PEPMASS", "RTINMINUTES")], stringsAsFactors = F)
 
+  sample_data_spectra <- lapply(MSnbase::spectra(metabs_with_rt), as.data.frame)
+  sample_data_spectra <- sample_data_spectra[match(sample_data$ID, names(sample_data_spectra))]
 
-  return(list(sample_data=sample_data, lib_data=ref_lib, lib_spectra=ref_lib_spectra))
+  return(list(sample_data=sample_data, sample_data_spectra=sample_data_spectra, lib_data=ref_lib, lib_spectra=ref_lib_spectra))
 
 }
