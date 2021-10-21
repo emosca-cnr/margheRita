@@ -1,7 +1,8 @@
-#' Select QC_samples and samples.
-#' "QC" and "m" that indicates quality control samples and biological replicates in the title were used to select, respectively
-#' @param df_post split into df_QC (dataframe of quality control) and df_samples (df of samples)
+#' Calculate Coefficient of variance (CV) for samples and QC (quality control) to assess the repeatibility of the experiment.
+#' Mean, standard deviation and, then, CV as =(stdev-mean)*100, for each metabolite is calculated for QC and samples. If CV QC>CV sample metabolite is deleted.
+#' @param m_list split into df_QC (dataframe of quality control) and df_samples (df of samples)
 #' @export
+#' @return m_list with only reliable metabolites
 
 
 

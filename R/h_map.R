@@ -3,7 +3,7 @@
 #' @export
 #' @import ComplexHeatmap
 #' @importFrom grDevices dev.off png
-#' @importFrom graphics plot
+#' @importFrom graphics plot png
 
 
 h_map<-function(m_list, dirout="./"){
