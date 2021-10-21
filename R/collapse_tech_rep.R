@@ -1,7 +1,8 @@
-#' Collapse technical replicates for samples.
-#' @param For each sample mean was calculated to collapse technical replicates
+#' Collapse technical replicates of each biological replicate of samples, calculating the mean.
+#' @param m_list
 #' @importFrom stats aggregate
 #' @export
+#' @return m_list with only biological replicates
 
 
 collapse_tech_rep <-function(m_list, remove.QC=FALSE){

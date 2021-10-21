@@ -1,6 +1,6 @@
 #' metab_boxplot
 #' @importFrom graphics boxplot
-#' @param m_list margheRita m_list
+#' @param m_list m_list
 #' @export
 #' @importFrom grDevices dev.off png
 
