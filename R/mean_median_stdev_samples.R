@@ -1,12 +1,12 @@
-#' mean, median, and stdev for technical replicates of each biological sample
-#' @param metadata split in metadata for QC and metadata for samples
-#' @param calculate mean, median and stdev for samples
+#' Calculate mean, median and standard deviation (stdev) for each group under study.
+#' write_output =FALSE default, if TRUE table, as .csv format, are written
+#' @param m_list
 #' @importFrom stats aggregate
 #' @importFrom utils write.csv
 #' @export
 
 
-mean_media_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
+mean_median_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
 
   cat("According to dataset size, this might take a few minutes.\n")
 
