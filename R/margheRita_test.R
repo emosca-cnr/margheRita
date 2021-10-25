@@ -13,18 +13,18 @@ margheRita_test <- function(wdir="./"){
   m_list_init <- read_input_file(input_data_file, metadata = input_metadata_file)
   lapply(m_list_init, head)
 
-  mset <- as.metaboset.mRList(mRlist)
-  diff_res <- notame::perform_pairwise_t_test(mset)
+  #mset <- as.metaboset.mRList(mRlist)
+  #diff_res <- notame::perform_pairwise_t_test(mset)
 
-  clustered <- cluster_features(mset$HILIC_pos, all_features = T)
-  compressed <- compress_clusters(clustered)
+  #clustered <- cluster_features(mset$HILIC_pos, all_features = T)
+  #compressed <- compress_clusters(clustered)
 
   ### create MSnSet
-  msnset <- as.MSnSet.mRList(mRlist)
+  #msnset <- as.MSnSet.mRList(mRlist)
 
   #read mgf library
-  gmf_file <- system.file("extdata", "PSU-MSMLS.mgf", package = "margheRita")
-  temp <- MSnbase::readMgfData(gmf_file)
+  #gmf_file <- system.file("extdata", "PSU-MSMLS.mgf", package = "margheRita")
+  #temp <- MSnbase::readMgfData(gmf_file)
 
 
   ### 2 ### PLOTS
@@ -42,6 +42,7 @@ margheRita_test <- function(wdir="./"){
   ### 6 ### IMPUTATION
   m_list <- imputation(m_list) #this is too slow...
 
+
   ### 8 ### PLOTS
   pca_gen(m_list, dirout = "pca_imp") #fix the group variable for coloring
   rla_res <- RLA(m_list, include_QC=TRUE, do_plot = T, outline=F, las=2, out_dir = "RLA_raw", pars=list(cex.axis=0.3))
@@ -58,6 +59,8 @@ margheRita_test <- function(wdir="./"){
   ## COLLASSO
   norm_data_biorep <- collapse_tech_rep(norm_data, remove.QC = FALSE)
   norm_data_biorep_ <- mean_media_stdev_samples(norm_data_biorep, dirout = "")
+
+  h_map(norm_data_biorep)
 
   ### 7 ### FILTER BY CV
   norm_data_biorep <- CV(norm_data_biorep, dirout = "CV") #this is too slow

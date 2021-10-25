@@ -18,10 +18,9 @@ h_map<-function(m_list, dirout="./"){
   col_biorep <- as.factor(m_list$sample_ann$biological_rep)
   col_bio <- rainbow(length(levels(col_biorep)))
   data_scaled<-t(scale(t(m_list$data)))
-  Heatmap(as.matrix(data_scaled[1:5, ]), top_annotation = column_ha,col=col_pal)
   #pdf(paste(dirout,"Heatmap.pdf", sep = ""))
 
-  Heatmap= paste(dirout, "./Heatmap.png",sep="")
+  out_file <- paste0(dirout, "./Heatmap.png")
   grDevices::png(
     Heatmap,
     width= 8,
@@ -29,6 +28,8 @@ h_map<-function(m_list, dirout="./"){
     units = "in",
     res = 300
     )
+
+  Heatmap(as.matrix(data_scaled[1:5, ]), top_annotation = column_ha,col=col_pal)
 
   grDevices::dev.off()
 
