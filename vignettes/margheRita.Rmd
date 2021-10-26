@@ -49,7 +49,7 @@ load_all("margheRita")
 
 The function `read_input_file()` allows you to import the dataset and its relative metadata creating margheRita object called m_list, other parameters that can be specified are:
 
-+ `split_QC`: Boolean parameter that split QC samples from the others.
++ `split_QC`: Boolean, whether to split QC samples from the others or not (default: FALSE).
 
 + `rt_col`: integer parameter, it specifies the number of the column that corresponds to retention time.
 
@@ -62,13 +62,13 @@ m_list <- read_input_file(input = "inst/extdata/example1.xlsx", metadata = "inst
 m_list object created by `read_input_file()` function is this:
 ![Data structure of margheRita](images/m_list_str.png)
 
-Object in m_list  | Description
+Objects in mRList  | Description
 ------------- | -------------
-data  | matrix containing all metabolite counts
-metab_ann  | annotation of metabolites basic $m/z$ and rt
-sample_ann | metadata of samples
-QC | matrix containing QC metabolite counts
-QC_ann | annotation of metabolites basic $m/z$ and rt only of QC met
+data  | matrix containing metabolite intesity
+metab_ann  | metabolite annotation
+sample_ann | sample annotation
+QC | matrix containing metabolite intesity for QC
+QC_ann | QC annotation
 
 ## Filtering $m/z$ feature 
 

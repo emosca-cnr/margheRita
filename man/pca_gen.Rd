@@ -19,6 +19,13 @@ pca_gen(
 }
 \arguments{
 \item{m_list}{margheRita m_list}
+
+\item{include_QC}{(default TRUE); scaling: Pareto, none,UV;col_by (default class)}
+
+\item{write_output}{(default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved}
+}
+\value{
+Graphs of screeplot, scoreplot and loading plot; table as .csv if write_output turns TRUE
 }
 \description{
 PCA general

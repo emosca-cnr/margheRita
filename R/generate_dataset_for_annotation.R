@@ -1,7 +1,7 @@
 #' margherRita - main function to run the full pipeline
 #'
 #'
-#' @import notame MSnbase
+#' @import MSnbase
 
 generate_dataset_for_annotation <- function(wdir="./"){
 

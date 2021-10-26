@@ -2,15 +2,16 @@
 % Please edit documentation in R/splitQC.R
 \name{splitQC}
 \alias{splitQC}
-\title{Split the QC samples}
+\title{Split dataframe and metadata in two: one for samples and one for QC}
 \usage{
 splitQC(m_list)
 }
 \arguments{
-\item{metadata}{split in metadata for QC and metadata for samples}
+\item{m_list}{split metadata and dataframe for QC and for samples}
+}
+\value{
 
-\item{calculate}{mean for each biological replicates}
 }
 \description{
-Split the QC samples
+Split dataframe and metadata in two: one for samples and one for QC
 }

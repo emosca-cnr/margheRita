@@ -13,7 +13,7 @@ metab_boxplot(
 )
 }
 \arguments{
-\item{m_list}{margheRita m_list}
+\item{m_list}{m_list}
 }
 \description{
 metab_boxplot

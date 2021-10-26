@@ -3,12 +3,11 @@
 #' @param m_list margheRita m_list
 #' @param include_QC (default TRUE); scaling: Pareto, none,UV;col_by (default class)
 #' @param write_output (default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved
-#' @output Graphs of screeplot, scoreplot and loading plot; table as .csv if write_output turns TRUE
+#' @return Graphs of screeplot, scoreplot and loading plot; table as .csv if write_output turns TRUE
 #' @export
 #' @importFrom graphics plot barplot
 #' @importFrom grDevices dev.off png
 #' @importFrom utils write.csv
-#' @return
 
 
 #PCA function general to use in different points

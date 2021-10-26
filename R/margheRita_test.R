@@ -48,7 +48,7 @@ margheRita_test <- function(wdir="./"){
   rla_res <- RLA(m_list, include_QC=TRUE, do_plot = T, outline=F, las=2, out_dir = "RLA_raw", pars=list(cex.axis=0.3))
 
   ### 9 ### NORMALIZATION
-  m_list <- calc_reference(m_list, sample_col = )
+  m_list <- calc_reference(m_list)
   norm_data <- normalize_profiles(m_list, method = "pqn")
   rla_res <- RLA(norm_data, do_plot = T, outline=F, las=2, out_dir = "RLA_norm", pars=list(cex.axis=0.3))
 

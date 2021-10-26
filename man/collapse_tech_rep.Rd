@@ -2,13 +2,13 @@
 % Please edit documentation in R/collapse_tech_rep.R
 \name{collapse_tech_rep}
 \alias{collapse_tech_rep}
-\title{Collapse technical replicates for samples.}
+\title{Collapse technical replicates of each biological replicate of samples, calculating the mean.}
 \usage{
 collapse_tech_rep(m_list, remove.QC = FALSE)
 }
-\arguments{
-\item{For}{each sample mean was calculated to collapse technical replicates}
+\value{
+m_list with only biological replicates
 }
 \description{
-Collapse technical replicates for samples.
+Collapse technical replicates of each biological replicate of samples, calculating the mean.
 }

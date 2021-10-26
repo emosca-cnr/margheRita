@@ -1,7 +1,8 @@
 #' Shapiro-Wilk's test is used for testing the normal distribution of metabolites
 #' Calculate p-value, if p-value>0.05 metabolite is normally distributed, p-value<0.05 metabolite is not normally distributed
 #' @param m_list
-#' @export m_list Shapiro with p-value calculated usign Shapiro-Wilk's test
+#' @return  m_list Shapiro with p-value calculated usign Shapiro-Wilk's test
+#' @export
 
 
 
