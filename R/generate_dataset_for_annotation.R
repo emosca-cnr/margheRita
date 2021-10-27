@@ -36,16 +36,17 @@ generate_dataset_for_annotation <- function(wdir="./"){
   ## REF LIBRARY "small library"
   ref_lib <- read_xlsx(system.file("extdata", "small_library.xlsx", package = "margheRita"))
   ref_lib <- ref_lib[, c(2, 3, 4, 9, 32)]
-  ref_lib <- ref_lib[ref_lib$`Metabolite name` != "Unknown", ]
-  ref_lib <- as.data.frame(ref_lib[!is.na(ref_lib$`MS/MS spectrum`), ])
-  ref_lib_spectra <- sapply(ref_lib$`MS/MS spectrum`, function(x) strsplit(x, " "))
+  colnames(ref_lib) <- c("rt", "mz", "Name", "rt_ref", "MS_MS")
+  ref_lib <- ref_lib[ref_lib$Name != "Unknown", ]
+  ref_lib <- as.data.frame(ref_lib[!is.na(ref_lib$MS_MS), ])
+  ref_lib_spectra <- sapply(ref_lib$MS_MS, function(x) strsplit(x, " "))
   ref_lib_spectra <- lapply(ref_lib_spectra, function(x) lapply(strsplit(x, ":"), as.numeric))
   ref_lib_spectra <- lapply(ref_lib_spectra, function(x) do.call(rbind, x))
-  names(ref_lib_spectra) <- ref_lib$`Metabolite name`
-  ref_lib$`MS/MS spectrum` <- NULL
+  names(ref_lib_spectra) <- ref_lib$Name
+  ref_lib$MS_MS <- NULL
 
   #Sample data
-  sample_data <- data.frame(ID=MSnbase::featureNames(metabs_with_rt), fData(metabs_with_rt)[, c("PEPMASS", "RTINMINUTES")], stringsAsFactors = F)
+  sample_data <- data.frame(Feature_ID=MSnbase::featureNames(metabs_with_rt), mz=as.numeric(fData(metabs_with_rt)[, "PEPMASS"]), rt=as.numeric(fData(metabs_with_rt)[, "RTINMINUTES"]), stringsAsFactors = F)
 
   sample_data_spectra <- lapply(MSnbase::spectra(metabs_with_rt), as.data.frame)
   sample_data_spectra <- sample_data_spectra[match(sample_data$ID, names(sample_data_spectra))]

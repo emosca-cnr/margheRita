@@ -4,7 +4,7 @@
 #' @export
 
 
-univariate <- function(m_list, dirout="./", test_method=c("ttest","anova","Utest","kruskal"),paired=c("FALSE","TRUE"), group_factor="class"){
+univariate <- function(m_list, dirout="./", test_method=c("ttest", "anova", "Utest", "kruskal"), paired=c("FALSE", "TRUE"), group_factor="class"){
 
   paired<- match.arg(paired)
   test_method <- match.arg(test_method)
@@ -37,12 +37,12 @@ univariate <- function(m_list, dirout="./", test_method=c("ttest","anova","Utest
       uni <- c(uni,kruskal.test(m_list$data[i, ] ~ group_factor,data=m_list$data, paired=paired))
       test <- c(test, "kruskal")
     }
-    uni_corrected=c()
     uni_corrected <- p.adjust(uni, method ="BH")
     m_list$uni <- cbind(m_list$data$ID, uni, uni_corrected)
     #m_list$data<-cbind(mlist$data, uni_corrected)
-    return(m_list)
-    return(uni_corrected)
-    #write.csv(uni_corrected, "univariate_corrected.csv")
+     #write.csv(uni_corrected, "univariate_corrected.csv")
   }
+
+  return(m_list)
+
 }

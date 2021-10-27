@@ -30,6 +30,8 @@ margheRita_test <- function(wdir="./"){
   ### 2 ### PLOTS
   pca_gen(m_list_init, dirout = "pca_initial") #fix the group variable for coloring
 
+  res <- metab_boxplot(m_list_init, features = c("M13167", "M25188"))
+
   ### 3 ### FILTER BY m/z
   m_list <- m_z_filtering(m_list_init) ### issue with m_z_average
 
@@ -58,7 +60,7 @@ margheRita_test <- function(wdir="./"){
 
   ## COLLASSO
   norm_data_biorep <- collapse_tech_rep(norm_data, remove.QC = FALSE)
-  norm_data_biorep_ <- mean_media_stdev_samples(norm_data_biorep, dirout = "")
+  norm_data_biorep_ <- mean_median_stdev_samples(norm_data_biorep, dirout = "")
 
   h_map(norm_data_biorep)
 
@@ -71,6 +73,13 @@ margheRita_test <- function(wdir="./"){
   temp <- batch_effect(norm_data)
   pca_gen(temp, dirout = "pca_batch") #fix the group variable for coloring
   RLA(temp, do_plot = T, outline=F, las=2, out_dir = "RLA_batch", pars=list(cex.axis=0.3))
+
+
+
+  ### ANNOTATION
+  data4annot <- generate_dataset_for_annotation()
+  rt_res <- check_RT(data4annot$sample_data, data4annot$lib_data)
+  ppm_res <- check_mass(data4annot$sample_data, data4annot$lib_data)
 
   #### PATHWAY ANALYSIS ####
   #toy metab list and ranked list to test pathway analysis
