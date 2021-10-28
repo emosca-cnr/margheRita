@@ -49,7 +49,7 @@ generate_dataset_for_annotation <- function(wdir="./"){
   sample_data <- data.frame(Feature_ID=MSnbase::featureNames(metabs_with_rt), mz=as.numeric(fData(metabs_with_rt)[, "PEPMASS"]), rt=as.numeric(fData(metabs_with_rt)[, "RTINMINUTES"]), stringsAsFactors = F)
 
   sample_data_spectra <- lapply(MSnbase::spectra(metabs_with_rt), as.data.frame)
-  sample_data_spectra <- sample_data_spectra[match(sample_data$ID, names(sample_data_spectra))]
+  sample_data_spectra <- sample_data_spectra[match(sample_data$Feature_ID, names(sample_data_spectra))]
 
   return(list(sample_data=sample_data, sample_data_spectra=sample_data_spectra, lib_data=ref_lib, lib_spectra=ref_lib_spectra))
 
