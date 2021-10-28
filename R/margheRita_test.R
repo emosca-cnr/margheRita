@@ -10,8 +10,8 @@ margheRita_test <- function(wdir="./"){
 
   ### 1 ### READ INPUT
   cat("reading:\n", input_data_file, "\n", input_metadata_file, "\n")
-  m_list_init <- read_input_file(input_data_file, metadata = input_metadata_file)
-  lapply(m_list_init, head)
+  mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file)
+  lapply(mRList_raw, head)
 
   #mset <- as.metaboset.mRList(mRlist)
   #diff_res <- notame::perform_pairwise_t_test(mset)
@@ -28,56 +28,60 @@ margheRita_test <- function(wdir="./"){
 
 
   ### 2 ### PLOTS
-  pca_gen(m_list_init, dirout = "pca_initial") #fix the group variable for coloring
+  pca_gen(mRList_raw, dirout = "pca_initial") #fix the group variable for coloring
 
-  res <- metab_boxplot(m_list_init, features = c("M13167", "M25188"))
+  res <- metab_boxplot(mRList_raw, features = c("M13167", "M25188"))
 
   ### 3 ### FILTER BY m/z
-  m_list <- m_z_filtering(m_list_init) ### issue with m_z_average
+  mRList_filt <- m_z_filtering(mRList_raw) ### issue with m_z_average
 
   ### 4 ### FILTER BY MISSING VALUES
-  m_list <- filter_NA(m_list)
+  mRList_filt <- filter_NA(mRList_filt)
 
   ### 5 ### PLOTS
-  pca_gen(m_list, dirout = "pca_filtered") #fix the group variable for coloring
+  pca_gen(mRList_filt, dirout = "pca_filtered") #fix the group variable for coloring
 
   ### 6 ### IMPUTATION
-  m_list <- imputation(m_list) #this is too slow...
+  mRList_filt <- imputation(mRList_filt) #this is too slow...
 
 
   ### 8 ### PLOTS
-  pca_gen(m_list, dirout = "pca_imp") #fix the group variable for coloring
-  rla_res <- RLA(m_list, include_QC=TRUE, do_plot = T, outline=F, las=2, out_dir = "RLA_raw", pars=list(cex.axis=0.3))
+  pca_gen(mRList_filt, dirout = "pca_imp") #fix the group variable for coloring
+  rla_res <- RLA(mRList_filt, include_QC=TRUE, do_plot = T, outline=F, las=2, out_dir = "RLA_raw", pars=list(cex.axis=0.3))
 
   ### 9 ### NORMALIZATION
-  m_list <- calc_reference(m_list)
-  norm_data <- normalize_profiles(m_list, method = "pqn")
-  rla_res <- RLA(norm_data, do_plot = T, outline=F, las=2, out_dir = "RLA_norm", pars=list(cex.axis=0.3))
+  mRList_filt <- calc_reference(mRList_filt)
+  mRList_norm <- normalize_profiles(mRList_filt, method = "pqn")
+  rla_res <- RLA(mRList_norm, do_plot = T, outline=F, las=2, out_dir = "RLA_norm", pars=list(cex.axis=0.3))
 
   ### 10 ### PLOTS
-  pca_gen(norm_data, dirout = "pca_norm") #fix the group variable for coloring
-  pca_gen(norm_data, dirout = "pca_norm_batch", col_by = "batch") #fix the group variable for coloring
+  pca_gen(mRList_norm, dirout = "pca_norm") #fix the group variable for coloring
+  pca_gen(mRList_norm, dirout = "pca_norm_batch", col_by = "batch") #fix the group variable for coloring
 
   ## COLLASSO
-  norm_data_biorep <- collapse_tech_rep(norm_data, remove.QC = FALSE)
-  norm_data_biorep_ <- mean_median_stdev_samples(norm_data_biorep, dirout = "")
+  mRList_norm_biorep <- collapse_tech_rep(mRList_norm, remove.QC = FALSE)
+  mRList_norm_biorep_ <- mean_median_stdev_samples(mRList_norm_biorep, dirout = "")
 
-  h_map(norm_data_biorep)
+  h_map(mRList_norm_biorep)
 
   ### 7 ### FILTER BY CV
-  norm_data_biorep <- CV(norm_data_biorep, dirout = "CV") #this is too slow
+  mRList_norm_biorep <- CV(mRList_norm_biorep, dirout = "CV")
 
   # ## 11 ### CHECK for BATCH EFFECT
 
   ### 12 ### BATCH EFFECT removal
-  temp <- batch_effect(norm_data)
+  temp <- batch_effect(mRList_norm)
   pca_gen(temp, dirout = "pca_batch") #fix the group variable for coloring
   RLA(temp, do_plot = T, outline=F, las=2, out_dir = "RLA_batch", pars=list(cex.axis=0.3))
 
 
+  ### UNIVARIATE
+
+  mRList_norm_biorep_ <- univariate(mRList_norm_biorep)
 
   ### ANNOTATION
   data4annot <- generate_dataset_for_annotation()
+
   rt_res <- check_RT(data4annot$sample_data, data4annot$lib_data)
   ppm_res <- check_mass(data4annot$sample_data, data4annot$lib_data)
 

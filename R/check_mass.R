@@ -7,7 +7,7 @@
 check_mass <- function(feature_data, reference){
 
    mass = vector("list", nrow(reference))
-  names(mass) = reference$name
+  names(mass) = reference$Name
 
   for (j in 1:dim(reference)[1]) {
 
