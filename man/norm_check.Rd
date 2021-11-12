@@ -7,6 +7,9 @@ Calculate p-value, if p-value>0.05 metabolite is normally distributed, p-value<0
 \usage{
 norm_check(m_list)
 }
+\arguments{
+\item{m_list}{mRList}
+}
 \value{
 m_list Shapiro with p-value calculated usign Shapiro-Wilk's test
 }

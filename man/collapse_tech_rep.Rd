@@ -6,6 +6,9 @@
 \usage{
 collapse_tech_rep(m_list, remove.QC = FALSE)
 }
+\arguments{
+\item{m_list}{mRList}
+}
 \value{
 m_list with only biological replicates
 }

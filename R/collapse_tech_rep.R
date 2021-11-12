@@ -1,5 +1,5 @@
 #' Collapse technical replicates of each biological replicate of samples, calculating the mean.
-#' @param m_list
+#' @param m_list mRList
 #' @importFrom stats aggregate
 #' @export
 #' @return m_list with only biological replicates

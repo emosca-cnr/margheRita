@@ -7,6 +7,9 @@ write_output =FALSE default, if TRUE table, as .csv format, are written}
 \usage{
 mean_median_stdev_samples(m_list, dirout = "./", write_output = FALSE)
 }
+\arguments{
+\item{m_list}{mRList}
+}
 \description{
 Calculate mean, median and standard deviation (stdev) for each group under study.
 write_output =FALSE default, if TRUE table, as .csv format, are written
