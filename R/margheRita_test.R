@@ -5,12 +5,18 @@
 
 margheRita_test <- function(wdir="./"){
 
+  #
   input_data_file <- system.file("extdata", "example1.xlsx", package = "margheRita")
   input_metadata_file <- system.file("extdata", "example1_meta.xlsx", package = "margheRita")
+  mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file)
+
+  #### another dataset
+  #input_data_file <- system.file("extdata", "dataset_drift.xlsx", package = "margheRita")
+  #input_metadata_file <- system.file("extdata", "dataset_drift_metadata.xlsx", package = "margheRita")
+  #mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file, data_start_col = 8, rt_col = 2, mz_col = 3)
 
   ### 1 ### READ INPUT
-  cat("reading:\n", input_data_file, "\n", input_metadata_file, "\n")
-  mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file)
+
   lapply(mRList_raw, head)
 
   #mset <- as.metaboset.mRList(mRlist)
@@ -26,6 +32,8 @@ margheRita_test <- function(wdir="./"){
   #gmf_file <- system.file("extdata", "PSU-MSMLS.mgf", package = "margheRita")
   #temp <- MSnbase::readMgfData(gmf_file)
 
+
+  heatscatter_chromatography(m_list = mRList_raw, mz_limits = NULL, rt_limits = NULL)
 
   ### 2 ### PLOTS
   pca_gen(mRList_raw, dirout = "pca_initial") #fix the group variable for coloring
