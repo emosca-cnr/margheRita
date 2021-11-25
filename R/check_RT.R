@@ -6,18 +6,17 @@
 
 check_RT <- function(feature_data, reference){
 
-  
-  res <- vector("list", nrow(reference))
-  names(res) <- reference$Name
+  RT <- vector("list", nrow(reference))
+  names(RT) <- reference$Name
 
   for (k in 1:dim(reference)[1]){
 
-    idx_ok <- which((feature_data$rt > (reference$rt[k] - 1)) & (feature_data$rt < (reference$rt[k] +1)))
+    idx_ok <- which((feature_data$rt > (reference$rt[k] - 2)) & (feature_data$rt < (reference$rt[k] +2)))
 
-    res[[k]] <- data.frame(Feature_ID=feature_data$Feature_ID, RT_err=abs(reference$rt[k]-feature_data$rt), stringsAsFactors = F)
-    res[[k]]$RT_flag <- res[[k]]$RT_err < 1
-    res[[k]] <- res[[k]][res[[k]]$RT_flag, ]
+    RT[[k]] <- data.frame(Feature_ID=feature_data$Feature_ID, RT_err=abs(reference$rt[k]-feature_data$rt), stringsAsFactors = F)
+    RT[[k]]$RT_flag <- RT[[k]]$RT_err < 2
+    RT[[k]] <- RT[[k]][RT[[k]]$RT_flag, ]
   }
 
-  return(res)
+  return(RT)
 }
