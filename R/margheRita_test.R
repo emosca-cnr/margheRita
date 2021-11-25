@@ -11,9 +11,9 @@ margheRita_test <- function(wdir="./"){
   mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file)
 
   #### another dataset
-  #input_data_file <- system.file("extdata", "dataset_drift.xlsx", package = "margheRita")
-  #input_metadata_file <- system.file("extdata", "dataset_drift_metadata.xlsx", package = "margheRita")
-  #mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file, data_start_col = 8, rt_col = 2, mz_col = 3)
+  input_data_file <- system.file("extdata", "dataset_drift.xlsx", package = "margheRita")
+  input_metadata_file <- system.file("extdata", "dataset_drift_metadata.xlsx", package = "margheRita")
+  mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file, data_start_col = 8, rt_col = 2, mz_col = 3)
 
   ### 1 ### READ INPUT
 

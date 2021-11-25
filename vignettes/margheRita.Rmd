@@ -1,9 +1,23 @@
 ---
 title: "margheRita - an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles"
-author: Maria Ulaszewska$^1$, Edoardo Bellini$^2$, Denise Drago$^1$, Valeria Mannella$^2$, Zahrasadat Alavikakhki$^3$, Marco Morelli$^2$, Annapaola Andolfo$^1$, Ettore Mosca$^4$
+author:
+- name: Maria Ulaszewska
+  affiliation: ProMeFa
+- name: Edoardo Bellini
+  affiliation: ProMeFa
+- name: Denise Drago
+  affiliation: ProMeFa
+- name: Valeria Mannella
+- name: Zahrasadat Alavikakhki
+- name: Marco Morelli
+- name: Annapaola Andolfo
+  affiliation: ProMeFa
+- name: Ettore Mosca
+  affiliation: CNR-ITB
+
 date: "`r Sys.Date()`"
 output:
-  rmarkdown::html_vignette:
+  BiocStyle::html_document:
     toc: true
     toc_depth: 3
 vignette: >

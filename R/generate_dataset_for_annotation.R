@@ -34,7 +34,7 @@ generate_dataset_for_annotation <- function(wdir="./"){
   #intensity(ref_lib_level2@assayData$X1)
 
   ## REF LIBRARY "small library"
-  ref_lib <- read_xlsx(system.file("extdata", "small_library.xlsx", package = "margheRita"))
+  ref_lib <- as.data.frame(read_xlsx(system.file("extdata", "small_library.xlsx", package = "margheRita")))
   ref_lib <- ref_lib[, c(2, 3, 4, 9, 32)]
   colnames(ref_lib) <- c("rt", "mz", "Name", "rt_ref", "MS_MS")
   ref_lib <- ref_lib[ref_lib$Name != "Unknown", ]
