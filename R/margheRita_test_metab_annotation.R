@@ -8,7 +8,7 @@ margheRita_test_metab_annotation <- function(wdir="./"){
   ### ANNOTATION
   data4annot <- generate_dataset_for_annotation()
 
-  ### inmput dataset
+  ### input data set
   input_data_file <- system.file("extdata", "dataset_drift.xlsx", package = "margheRita")
   input_metadata_file <- system.file("extdata", "dataset_drift_metadata.xlsx", package = "margheRita")
   mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file, data_start_col = 8, rt_col = 2, mz_col = 3)
@@ -23,7 +23,5 @@ margheRita_test_metab_annotation <- function(wdir="./"){
 
 
   ann_list <- metabolite_annotation(mRList = mRList_raw, reference = ref_lib)
-
-
 
 }

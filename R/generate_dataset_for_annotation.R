@@ -5,7 +5,7 @@
 
 generate_dataset_for_annotation <- function(wdir="./"){
 
-  metabs_with_rt <- system.file("extdata", "serum_drift_GnpsMgf_0_2021371052.mgf", package = "margheRita")
+  metabs_with_rt <- system.file("extdata", "sample.mgf", package = "margheRita")
   ref_lib_level2 <- system.file("extdata", "PSU-MSMLS.mgf", package = "margheRita")
 
   metabs_with_rt <- MSnbase::readMgfData(metabs_with_rt)

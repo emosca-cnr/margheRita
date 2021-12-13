@@ -3,10 +3,10 @@
 #'
 #' @export
 
-RI_lib_data = function(reference_spectra , RT_mass) {
+RI_lib_data = function(reference_spectra , RT_mass, acceptable_RI = 10) {
 
   #calculating relative intensity of ions for mass-mass
-  # selected Relative intensity > 15 with correlated mass in lib
+  # selected Relative intensity > 10 with correlated mass in lib
   RI_lib1 = lapply ( 1:length(reference_spectra) ,function(x) {reference_spectra[[x]][,2]/ max(reference_spectra[[x]][,2])* 100 })
   names(RI_lib1)= names(reference_spectra)
   RI_lib = reference_spectra
@@ -14,7 +14,7 @@ RI_lib_data = function(reference_spectra , RT_mass) {
     RI_lib[[x]][,2] = RI_lib1[[x]]
   }
   for(e in 1:length(RI_lib)) {
-    RI_lib[[e]] = RI_lib[[e]][RI_lib[[e]][,2] >= 15, , drop=FALSE]
+    RI_lib[[e]] = RI_lib[[e]][RI_lib[[e]][,2] >= acceptable_RI, , drop=FALSE]
   }
 
 

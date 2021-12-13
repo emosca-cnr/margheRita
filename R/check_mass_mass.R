@@ -8,7 +8,7 @@ check_mass_mass = function(RT_mass, RI_lib , RI_sample) {
 
   for(z in 1: length(RT_mass)){
 
-    RT_mass[[z]]$peaks_found_ppm_RI <- 0
+    RT_mass[[z]]$peaks_found_ppm_RI <- NA
     RT_mass[[z]]$peaks_found_flag <- "red"
 
 
@@ -19,6 +19,16 @@ check_mass_mass = function(RT_mass, RI_lib , RI_sample) {
     for(zi in 1:nrow(RT_mass[[z]])){
       zi_peaks <- as.data.frame(RI_sample[names(RI_sample) == RT_mass[[z]]$Feature_ID[zi]])
       #if (length(RI_lib[[z]]) <= 2) { zi_peaks = t(zi_peaks)}
+
+      cat("processing zi", zi, "\n")
+
+      #we must have good ppm error when the compound and candidate are at highest relative intensity.
+      a = z_peaks[z_peaks[,2] >= 100,  ]
+      b = zi_peaks[zi_peaks[,2] >= 100,  ]
+
+      PPM_err = abs(a[, 1] - b[, 1]) / a[, 1] * 100 < 10
+
+      if(PPM_err == T) {
 
       #calculate ppm error between the peaks of z and the peaks of z_i
       pmm_error_matrix <- matrix(0, nrow(z_peaks), nrow(zi_peaks))
@@ -55,11 +65,15 @@ check_mass_mass = function(RT_mass, RI_lib , RI_sample) {
     RT_mass[[z]]$peaks_found_flag[RT_mass[[z]]$peaks_found_ppm_RI > 1] <- "yellow"
     RT_mass[[z]]$peaks_found_flag[RT_mass[[z]]$peaks_found_ppm_RI > 2] <- "green"
 }
+  }
 
     #filtering RT_mass by deleting the candidates with bad ppm error and RI
     for (k in 1:length(RT_mass)) {
       RT_mass[[k]] = RT_mass[[k]][RT_mass[[k]]$peaks_found_flag != "red", ]
     }
+
+  #filter the RT_mass by deleting the empty data.frame;
+  RT_mass = RT_mass[sapply(RT_mass, function(x) dim(x)[1]) > 0]
 
 
   return(RT_mass)

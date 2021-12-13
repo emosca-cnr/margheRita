@@ -4,25 +4,34 @@
 #' @export
 
 
-check_mass <- function(feature_data, reference){
+check_mass <- function(feature_data, reference, unaccept_flag= 15, accept_flag= 5 , suffer_flag= 10 ){
 
    mass = vector("list", nrow(reference))
   names(mass) = reference$Name
 
   for (j in 1:dim(reference)[1]) {
 
-    ppm_error = abs((reference$mz[j] - feature_data$mz)) / reference$mz[j] * 100
-
+    ppm_error = abs((reference$mz[j] - feature_data$mz)) / reference$mz[j] * 1000000
 
     mass[[j]] = data.frame( Feature_ID = feature_data$Feature_ID , ppm_error= ppm_error,  stringsAsFactors = F)
 
-    mass[[j]]$mass_flag = mass[[j]]$ppm_error< 15
-    mass[[j]] = mass[[j]][mass[[j]]$mass_flag,]
-    mass[[j]]$mass_status = "super"
-    mass[[j]]$mass_status[mass[[j]]$ppm_error >= 5] = "acceptable"
-    mass[[j]]$mass_status[mass[[j]]$ppm_error >= 10] = "suffer"
+    if(nrow(mass[[j]]) > 0){   #issue with empty data.frame
 
+    mass[[j]]$mass_status = "super"  #comes here because it can not add column to empty data.frame
+
+    mass[[j]]$mass_flag = mass[[j]]$ppm_error < unaccept_flag
+    mass[[j]] = mass[[j]][mass[[j]]$mass_flag,]
+
+
+    mass[[j]]$mass_status[mass[[j]]$ppm_error >= accept_flag] = "acceptable"
+    mass[[j]]$mass_status[mass[[j]]$ppm_error >= suffer_flag] = "suffer"
+
+    }
   }
+
+  #filter the mass by deleting the empty data.frame;
+  #mass = mass[sapply(mass, function(x) dim(x)[1]) > 0]
+
 
   return(mass)
 }
