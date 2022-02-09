@@ -24,4 +24,7 @@ Imports:
     igraph,
     notame,
     plotly
-
+Suggests: 
+    rmarkdown,
+    knitr
+VignetteBuilder: knitr

@@ -2,13 +2,13 @@
 #'
 #'
 #' @export
-check_intense_peak = function(RT_mass, RI_lib , RI_sample, n_peaks=2, acceptable_PPM_err = 100) {
+check_intense_peak = function(RT_mass, RI_lib , RI_sample, n_peaks=1, acceptable_PPM_err = 10) {
 
   for(z in 1:length(RT_mass)){
 
-    RT_mass[[z]]$intense_peaks <- F
-    RT_mass[[z]]$intense_peaks2 <- NA
-    #RT_mass[[z]]$intense_peaks3 <- NA
+    RT_mass[[z]]$intense_peak <- F
+    RT_mass[[z]]$intense_peak2 <- NA
+    RT_mass[[z]]$intense_peak3 <- NA
 
 
     z_peaks <- as.data.frame(RI_lib[names(RI_lib) == names(RT_mass)[z]])
@@ -42,7 +42,7 @@ check_intense_peak = function(RT_mass, RI_lib , RI_sample, n_peaks=2, acceptable
 
     }
 
-    RT_mass[[z]] = RT_mass[[z]][apply(RT_mass[[z]][, c("intense_peaks", "intense_peaks2")], 1, all, na.rm=TRUE), ]
+    RT_mass[[z]] = RT_mass[[z]][apply(RT_mass[[z]][, c("intense_peak", "intense_peak2", "intense_peak3")], 1, all, na.rm=TRUE), ]
   }
 
   #filter the RT_mass by deleting the empty data.frame;
