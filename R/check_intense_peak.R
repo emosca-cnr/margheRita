@@ -2,7 +2,7 @@
 #'
 #'
 #' @export
-check_intense_peak = function(RT_mass, RI_lib , RI_sample, n_peaks=1, acceptable_PPM_err = 10) {
+check_intense_peak = function(RT_mass, RI_lib , RI_sample, n_peaks=n_peaks, acceptable_PPM_err = acceptable_PPM_err) {
 
   for(z in 1:length(RT_mass)){
 

@@ -4,7 +4,7 @@
 #' @export
 #'
 
-RI_sample_data = function(feature_spectra, acceptable_RI = 10) {
+RI_sample_data = function(feature_spectra, acceptable_RI = acceptable_RI) {
 
 #calculating relative intensity
 RI_sample1 = lapply(1 :length(feature_spectra), function(x) feature_spectra[[x]][,2] / max(feature_spectra[[x]][,2]) * 100 )

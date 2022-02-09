@@ -4,7 +4,7 @@
 #' @export
 
 
-check_mass <- function(feature_data, reference, unaccept_flag= 15, accept_flag= 5 , suffer_flag= 10 ){
+check_mass <- function(feature_data, reference, unaccept_flag= unaccept_flag, accept_flag= accept_flag , suffer_flag= suffer_flag ){
 
    mass = vector("list", nrow(reference))
   names(mass) = reference$Name

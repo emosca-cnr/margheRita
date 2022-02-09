@@ -4,14 +4,14 @@
 #' @export
 #'
 metabolite_annotation = function(feature_data = NULL , reference = NULL , feature_spectra = NULL, reference_spectra= NULL,
-                                 rt_window=rt_window, rt_err_thr=rt_err_thr,
+                                 rt_err_thr=rt_err_thr,
                                  unaccept_flag=unaccept_flag, accept_flag=accept_flag, suffer_flag=suffer_flag,
                                  acceptable_RI = acceptable_RI,
                                  n_peaks=n_peaks, acceptable_PPM_err = acceptable_PPM_err ){
 
 
   #check Retention Time similarity
-  RT = check_RT(feature_data = feature_data , reference = reference, rt_window=rt_window, rt_err_thr=rt_err_thr)
+  RT = check_RT(feature_data = feature_data , reference = reference, rt_err_thr=rt_err_thr)
 
   #Calculating PPM error
   mass = check_mass(feature_data = feature_data , reference = reference, unaccept_flag=unaccept_flag, accept_flag=accept_flag, suffer_flag=suffer_flag)
