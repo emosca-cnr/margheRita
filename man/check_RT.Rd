@@ -4,7 +4,7 @@
 \alias{check_RT}
 \title{check_RT}
 \usage{
-check_RT(feature_data, reference)
+check_RT(feature_data, reference, rt_err_thr = 1)
 }
 \description{
 check_RT

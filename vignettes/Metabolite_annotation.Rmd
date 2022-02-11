@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r , eval=FALSE}
 library(margheRita)
 ```
 
@@ -28,7 +28,7 @@ c) ion mass similarity by calculating PPM error for intensive peaks for MS/MS sp
 #retention time similarity
 If the retention time for the metabolite i in reference library be t_i and the retention time for the compound j in the sample be t_j then the retention time error between a sample feature j and metabolite i in the reference library is the absolute difference between the two retention times
 
-```{r}
+```{r, eval=FALSE}
 RT = check_RT(feature_data =  , reference = , rt_window= , rt_err_thr= )
 ```
 
@@ -42,14 +42,14 @@ Ppm error < c – may happen when machine suffer a bit.
 Ppm error > d – not good
 
 
-```{r}
+```{r, eval=FALSE}
 mass = check_mass(feature_data =  , reference = , unaccept_flag= d, accept_flag= a, suffer_flag= b)
 ```
 
 
 #Merging ideal candidate in term of Retention Time and PPM error
 
-```{r}
+```{r, eval=FALSE}
 RT_mass = check_RT_mass (RT , mass, reference=  )
 ```
 
@@ -57,12 +57,12 @@ RT_mass = check_RT_mass (RT , mass, reference=  )
 convert intensity to relative intensity and deleting the negligible relative intensity, both in library and sample spectra.
 relative intensity is calculated by dividing ion intensity to the maximum ion intensity in spectra.
 
-```{r}
+```{r, eval=FALSE}
 RI_lib = RI_lib_data ( reference =  , RT_mass, acceptable_RI = r)
 ```
 
 
-```{r}
+```{r, eval=FALSE}
 RI_sample = RI_sample_data (feature_spectra= , acceptable_RI = r )
 ```
 
@@ -71,7 +71,7 @@ RI_sample = RI_sample_data (feature_spectra= , acceptable_RI = r )
 
 Those peaks candidate that distinguishing as metabolite i among compound j in the sample have two main criteria at the same time: strong relative intensity and good PPM error. 
 the most important peaks are the most intense ones. So, we are calculating the PPM error pick by pick for the most intense ones the number of the peaks that we are considering depends on the accuracy that we want. 
-```{r}
+```{r, eval=FALSE}
 intense_peak = check_intense_peak(RT_mass, RI_lib , RI_sample, n_peaks= , acceptable_PPM_err = )
 ```
 

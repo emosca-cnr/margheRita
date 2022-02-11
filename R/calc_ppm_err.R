@@ -4,7 +4,7 @@
 #' @export
 
 
-calc_ppm_err <- function(a, b){
+calc_ppm_err <- function(a=NULL, b=NULL){
   
   PPM_err <- matrix(0, nrow(a), nrow(b))
   

@@ -3,7 +3,7 @@
 #'
 #' @export
 #'
-check_mass_mass = function(RT_mass, RI_lib , RI_sample) {
+check_mass_mass = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL) {
 
 
   for(z in 1: length(RT_mass)){

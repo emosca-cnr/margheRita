@@ -2,10 +2,10 @@
 % Please edit documentation in R/margheRita_test_metab_annotation.R
 \name{margheRita_test_metab_annotation}
 \alias{margheRita_test_metab_annotation}
-\title{margherRita - main function to run the full pipeline}
+\title{a fake function to test pieces of code}
 \usage{
 margheRita_test_metab_annotation(wdir = "./")
 }
 \description{
-margherRita - main function to run the full pipeline
+a fake function to test pieces of code
 }

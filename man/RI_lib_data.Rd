@@ -4,7 +4,7 @@
 \alias{RI_lib_data}
 \title{establishing new library data by calculating relative intensity}
 \usage{
-RI_lib_data(reference_spectra, RT_mass)
+RI_lib_data(reference_spectra, RT_mass, acceptable_RI = 10)
 }
 \description{
 establishing new library data by calculating relative intensity

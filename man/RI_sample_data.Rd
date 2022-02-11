@@ -4,7 +4,7 @@
 \alias{RI_sample_data}
 \title{establishing new sample data by calculating relative intensity}
 \usage{
-RI_sample_data(feature_data_spectra)
+RI_sample_data(feature_spectra, acceptable_RI = acceptable_RI)
 }
 \description{
 establishing new sample data by calculating relative intensity

@@ -4,7 +4,13 @@
 \alias{check_mass}
 \title{check_mass}
 \usage{
-check_mass(feature_data, reference)
+check_mass(
+  feature_data,
+  reference,
+  unaccept_flag = unaccept_flag,
+  accept_flag = accept_flag,
+  suffer_flag = suffer_flag
+)
 }
 \description{
 check_mass

@@ -4,7 +4,7 @@
 \alias{check_mass_mass}
 \title{calculating and selecting proper PPM error and RI for mass mass}
 \usage{
-check_mass_mass(RT_mass, RI_lib, RI_sample)
+check_mass_mass(RT_mass = NULL, RI_lib = NULL, RI_sample = NULL)
 }
 \description{
 calculating and selecting proper PPM error and RI for mass mass

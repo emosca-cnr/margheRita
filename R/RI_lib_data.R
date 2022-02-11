@@ -3,7 +3,7 @@
 #'
 #' @export
 
-RI_lib_data = function(reference_spectra , RT_mass, acceptable_RI = acceptable_RI) {
+RI_lib_data = function(reference_spectra , RT_mass, acceptable_RI = 10) {
 
   #calculating relative intensity of ions for mass-mass
   # selected Relative intensity > 10 with correlated mass in lib
