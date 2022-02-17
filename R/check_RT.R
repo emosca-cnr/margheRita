@@ -4,7 +4,7 @@
 #' @export
 
 
-check_RT <- function(feature_data, reference, rt_err_thr = 1){
+check_RT <- function(feature_data, reference, rt_err_thr = rt_err_thr){
 
   RT <- vector("list", nrow(reference))
   names(RT) <- reference$Name
