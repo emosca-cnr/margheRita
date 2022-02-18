@@ -164,7 +164,7 @@ mRList_norm <- normalize_profiles(mRList, method = "pqn")
 ### Descriptive stastistics
 mean_median_stdev_samples function allows to retrieve principal descriptive statistics indexes for all $m/z$ features, in particular function retrieves for all features across all different group the intensities mean, median and standard deviation.
 ```{r, eval=FALSE}
-m_list <- mean_media_stdev_samples(m_list, write_output = F)
+m_list <- mean_median_stdev_samples(m_list, write_output = F)
 ```
 The collapse_tech_rep function calculates the mean of the technical replicates for each biological replicate. The outputs are data and metadata without technical replicates but with biological replicates only.
 
