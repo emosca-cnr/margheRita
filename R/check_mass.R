@@ -4,10 +4,11 @@
 #' @export
 
 
-check_mass <- function(feature_data, reference, unaccept_flag= unaccept_flag, accept_flag= accept_flag , suffer_flag= suffer_flag ){
+check_mass <- function(feature_data=NULL, reference=NULL, unaccept_flag=15, accept_flag=5, suffer_flag=10){
 
    mass = vector("list", nrow(reference))
-  names(mass) = reference$Name
+  #names(mass) = reference$Name
+   names(mass) = reference$ID
 
   for (j in 1:dim(reference)[1]) {
 

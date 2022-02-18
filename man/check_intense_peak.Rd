@@ -8,8 +8,11 @@ check_intense_peak(
   RT_mass = NULL,
   RI_lib = NULL,
   RI_sample = NULL,
+  reference = NULL,
+  lib_peaks_cas = NULL,
   n_peaks = 1,
-  acceptable_PPM_err = 10
+  acceptable_PPM_err = 10,
+  mode = c("POS", "NEG")
 )
 }
 \description{

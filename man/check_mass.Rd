@@ -5,11 +5,11 @@
 \title{check_mass}
 \usage{
 check_mass(
-  feature_data,
-  reference,
-  unaccept_flag = unaccept_flag,
-  accept_flag = accept_flag,
-  suffer_flag = suffer_flag
+  feature_data = NULL,
+  reference = NULL,
+  unaccept_flag = 15,
+  accept_flag = 5,
+  suffer_flag = 10
 )
 }
 \description{

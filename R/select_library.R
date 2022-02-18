@@ -1,0 +1,23 @@
+#' Library selection
+#' @export
+#' 
+select_library <- function(column=c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"), mode=c("POS", "NEG"), RI_min=10){
+
+  data("mRlib_peaks_df", envir=environment())
+  data("mRlib_peaks_list", envir=environment())
+  data("mRlib_peaks_df", envir=environment())
+  data("mRlib_precursors", envir=environment())
+ 
+  lib_precursor <- unique(mRlib_precursors[mRlib_precursors$COL==column, c("ID", "CAS", "Name", "rt", mode)])
+  rownames(lib_precursor) <- lib_precursor$ID
+  colnames(lib_precursor)[5] <- "mz"
+
+  #we need to use ID, because we have duplicated names with different peaks
+  lib_peaks <- lapply(mRlib_peaks_list, function(x) x$peaks[x$peaks[, 3] > RI_min, c(1, 3), drop=FALSE])
+  lib_peaks_cas <- unique(mRlib_peaks_df[, c("ID", "CAS", "Collision_energy", "Name")])
+  lib_peaks_cas$Collision_energy[lib_peaks_cas$Collision_energy < 0] <- "NEG"
+  lib_peaks_cas$Collision_energy[lib_peaks_cas$Collision_energy != "NEG"] <- "POS"
+  
+  return(list(lib_precursor=lib_precursor, lib_peaks=lib_peaks, lib_peaks_cas=lib_peaks_cas))
+  
+}

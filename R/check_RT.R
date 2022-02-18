@@ -4,10 +4,11 @@
 #' @export
 
 
-check_RT <- function(feature_data, reference, rt_err_thr = 1){
+check_RT <- function(feature_data=NULL, reference=NULL, rt_err_thr = 1){
 
   RT <- vector("list", nrow(reference))
-  names(RT) <- reference$Name
+  #names(RT) <- reference$Name
+  names(RT) <- reference$ID
 
   for (k in 1:dim(reference)[1]){
 

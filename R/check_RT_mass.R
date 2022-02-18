@@ -3,10 +3,11 @@
 #'
 #' @export
 #'
-check_RT_mass = function( RT=NULL , mass=NULL, reference=NULL ){
+check_RT_mass = function(RT=NULL, mass=NULL, reference=NULL ){
 
   RT_mass = vector("list", nrow(reference))
-  names(RT_mass) = reference$Name
+  #names(RT_mass) = reference$Name
+  names(RT_mass) = reference$ID
 
   for (z in 1:dim(reference)[1]) {
 

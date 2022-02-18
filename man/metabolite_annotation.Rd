@@ -7,7 +7,7 @@
 map between metabolite name and various stantard identifiers}
 \usage{
 metabolite_annotation(
-  mR_list = NULL,
+  mRList = NULL,
   reference = NULL,
   feature_spectra = NULL,
   reference_spectra = NULL,
@@ -21,7 +21,7 @@ metabolite_annotation(
 )
 
 metabolite_annotation(
-  mR_list = NULL,
+  mRList = NULL,
   reference = NULL,
   feature_spectra = NULL,
   reference_spectra = NULL,
@@ -35,9 +35,9 @@ metabolite_annotation(
 )
 }
 \arguments{
-\item{reference}{data.frame with columns "rt", "mz", "Name", "MS_MS_spectrum"}
-
 \item{mRList}{mRList object}
+
+\item{reference}{data.frame with columns "rt", "mz", "Name", "MS_MS_spectrum"}
 }
 \value{
 the annotation list, which has three elements... 1) named list of data.frames; each element of the list corresponds to an element of reference and each data.frame containes the candidates
