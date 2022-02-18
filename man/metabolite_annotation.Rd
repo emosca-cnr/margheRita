@@ -8,30 +8,30 @@ map between metabolite name and various stantard identifiers}
 \usage{
 metabolite_annotation(
   mRList = NULL,
-  reference = NULL,
+  library_list = NULL,
   feature_spectra = NULL,
-  reference_spectra = NULL,
   rt_err_thr = 1,
   unaccept_flag = 15,
   accept_flag = 5,
   suffer_flag = 10,
   acceptable_RI = 10,
   n_peaks = 1,
-  acceptable_PPM_err = 10
+  acceptable_PPM_err = 10,
+  mode = NULL
 )
 
 metabolite_annotation(
   mRList = NULL,
-  reference = NULL,
+  library_list = NULL,
   feature_spectra = NULL,
-  reference_spectra = NULL,
   rt_err_thr = 1,
   unaccept_flag = 15,
   accept_flag = 5,
   suffer_flag = 10,
   acceptable_RI = 10,
   n_peaks = 1,
-  acceptable_PPM_err = 10
+  acceptable_PPM_err = 10,
+  mode = NULL
 )
 }
 \arguments{
