@@ -99,17 +99,18 @@ To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8 and
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Here is presented a possible main workflow:   
+Here is presented a possible main workflow:
+## 1) Read input files and creation of margheRita object 
 ```r
-# 1) Read input files and creation of margheRita object
 mRlist <- read_input_file(input = "inst/extdata/example1.xlsx", 
   metadata = "inst/extdata/example1_meta.xlsx", 
   split_QC = TRUE, rt_col = 2, mz_col = 3, 
   data_start_col = 4)
 
 mRlist
-
-# 2) Filtering m/z features and NA values 
+``` 
+## 2) Filtering m/z features and NA values
+```r 
 mRlist <- m_z_filtering(mRlist = mRlist, 
   lower_quality_mass_acc = 0.4, 
   upper_quality_mass_acc = 0.8, 
@@ -117,11 +118,14 @@ mRlist <- m_z_filtering(mRlist = mRlist,
   color = "black")
 
 mRlist <- filter_NA(mRlist)
+```
 
-# 3) Normalization step with probabilistic quotient normalization
+## 3) Normalization step with probabilistic quotient normalization
+```r
 mRlist <- normalize_profiles(mRlist = mRlist, method = "pqn")
-
-# 4) Principal component analysis
+``` 
+## 4) Principal component analysis
+```r
 mRlist <- pca_gen(mRlist, dirout,
   col_by = "class",
   scaling = c("none", "Pareto", "uv"),
@@ -129,18 +133,19 @@ mRlist <- pca_gen(mRlist, dirout,
   type = c("component", "coordinate"),
   dist.method = "euclidean",
   top=Inf)
-
-# 5) Calculation of mean median average and standard deviation of all the samples and FC for all comparisons 
+```
+## 5) Calculation of mean median average and standard deviation of all the samples and FC for all comparisons
+```r 
 mRlist <- mean_media_stdev_samples(mRlist, write_output = F)
 
 mRlist <- calculate_lfc_all(mRlist = mRlist, lfc_theshold = 0.25)
-
-# Annotation of compound
+```
+## Annotation of compound
+```r
 mRlist <- metabolite_annotation(feature_data = mRlist, reference = NULL,
   feature_spectra = NULL, reference_spectra = NULL, rt_err_thr = 1,
   unaccept_flag = 15, accept_flag = 5, suffer_flag = 10, acceptable_RI = 10,
   n_peaks = 1, acceptable_PPM_err = 10)
-
 ```                                                                                               
 _For more examples, please refer to the [Vignette](https://github.com/emosca-cnr/margheRita.git)_
 
