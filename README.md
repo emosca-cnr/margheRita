@@ -169,7 +169,11 @@ Maria Ulaszewska - [@Maria Ulaszewska](https://www.researchgate.net/profile/Mari
 
 Ettore Mosca - [@Ettore Mosca](https://www.researchgate.net/profile/Ettore-Mosca) - ettoremosca@itb.cnr.it
 
- Marco J. Morelli - [@Marco J. Morelli](https://www.researchgate.net/profile/Marco-Morelli) - morelli.marco@hsr.it
+Marco J. Morelli - [@Marco J. Morelli](https://www.researchgate.net/profile/Marco-Morelli) - morelli.marco@hsr.it
+
+Annapaola Andolfo - [@Annapaola Andolfo](https://www.researchgate.net/profile/Annapaola-Andolfo) - andolfo.annapaola@hsr.it
+
+Denise Drago - [@Annapaola Andolfo](https://www.researchgate.net/profile/Annapaola-Andolfo) - drago.denise@hsr.it
 
 Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
