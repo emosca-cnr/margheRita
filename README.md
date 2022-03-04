@@ -80,6 +80,16 @@ To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8 and
 
    ```r
     load_all("margheRita")
+    i Loading margheRita
+
+         ##############################################
+         #                                            #
+         #          Welcome to margheRita             #
+         #                 from                       #
+         #              all our team                  #
+         #     we hope you to enjoy our tool          #
+         #                                            #
+         ##############################################
    ```
 
 ### Git Installation
@@ -92,6 +102,16 @@ To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8 and
 2. In R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html) installed
    ```r
     load_all("margheRita")
+    i Loading margheRita
+
+         ##############################################
+         #                                            #
+         #          Welcome to margheRita             #
+         #                 from                       #
+         #              all our team                  #
+         #     we hope you to enjoy our tool          #
+         #                                            #
+         ##############################################
    ```
 
 
