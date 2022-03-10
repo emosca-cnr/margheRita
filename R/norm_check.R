@@ -6,11 +6,11 @@
 
 
 
-norm_check <- function(m_list) {
+norm_check <- function(mRList) {
 
-  Shapirotest <- apply(m_list$data,1,function(x) shapiro.test(as.numeric(x)))
-  m_list$shapirotest<-Shapirotest
+  Shapirotest <- apply(mRList$data,1,function(x) shapiro.test(as.numeric(x)))
+  mRList$shapirotest<-Shapirotest
 
-  return(m_list)
+  return(mRList)
 }
 

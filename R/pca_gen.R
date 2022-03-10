@@ -1,6 +1,6 @@
 #' PCA general
 #' Scree plot, score and loading plot (PC1 vs PC2)
-#' @param m_list margheRita m_list
+#' @param m_list margheRita mRList
 #' @param include_QC (default TRUE); scaling: Pareto, none,UV;col_by (default class)
 #' @param write_output (default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved
 #' @return Graphs of screeplot, scoreplot and loading plot; table as .csv if write_output turns TRUE
@@ -12,7 +12,7 @@
 
 #PCA function general to use in different points
 
-pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, type=c("component", "coordinate"), dist.method="euclidean", top=Inf, write_output=FALSE) {
+pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, type=c("component", "coordinate"), dist.method="euclidean", top=Inf, write_output=FALSE) {
 
 
   type <- match.arg(type)

@@ -9,7 +9,7 @@
 
 #apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites
 
-CV <- function(m_list, dirout) {
+CV <- function(mRList, dirout) {
 
   dir.create(dirout)
 
