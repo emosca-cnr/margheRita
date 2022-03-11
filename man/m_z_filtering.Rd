@@ -5,13 +5,17 @@
 \title{m_z_filtering}
 \usage{
 m_z_filtering(
-  m_list,
+  mRList,
   do_plot = TRUE,
+  out_file = "mz_quality.png",
   lower_quality_mass_acc = 0.4,
   upper_quality_mass_acc = 0.8,
   color = "black",
   ...
 )
+}
+\arguments{
+\item{mRList}{mRList}
 }
 \description{
 m_z_filtering

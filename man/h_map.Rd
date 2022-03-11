@@ -4,10 +4,19 @@
 \alias{h_map}
 \title{heatmap}
 \usage{
-h_map(m_list, dirout = "./")
+h_map(
+  mRList,
+  dirout = "./",
+  col_ann = NULL,
+  col = NULL,
+  scale_features = TRUE,
+  features = NULL,
+  top = 500,
+  ...
+)
 }
 \arguments{
-\item{m_list}{margheRita m_list}
+\item{mRList}{mRList}
 }
 \description{
 heatmap

@@ -4,7 +4,7 @@
 \alias{calculate_lfc}
 \title{calculate_lfc}
 \usage{
-calculate_lfc(m_list, lfc_theshold = 0.25, contrast_samples)
+calculate_lfc(mRList, lfc_theshold = 0.25, contrast_samples)
 }
 \description{
 calculate_lfc

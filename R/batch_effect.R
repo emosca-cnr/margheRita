@@ -1,6 +1,5 @@
 #' Remove batch effect
-#' @import limma
-#' @import mRList
+#' @importFrom limma removeBatchEffect
 #' @export
 
 

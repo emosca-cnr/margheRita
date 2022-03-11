@@ -5,7 +5,7 @@
 \title{metab_boxplot}
 \usage{
 metab_boxplot(
-  m_list,
+  mRList = NULL,
   dirout = "./",
   features = NULL,
   col_by = "class",
@@ -13,7 +13,7 @@ metab_boxplot(
 )
 }
 \arguments{
-\item{m_list}{m_list}
+\item{mRList}{mRList}
 }
 \description{
 metab_boxplot

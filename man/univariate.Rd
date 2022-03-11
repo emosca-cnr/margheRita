@@ -5,7 +5,7 @@
 \title{user has to Choose between T-test, U-test, Anova or Kruskal}
 \usage{
 univariate(
-  m_list,
+  mRList,
   dirout = "./",
   test_method = c("ttest", "anova", "Utest", "kruskal"),
   paired = c("FALSE", "TRUE"),
@@ -13,7 +13,7 @@ univariate(
 )
 }
 \arguments{
-\item{m_list$data}{(dataframe of samples only biological replicates, technical replicates were collapsed before)}
+\item{mRList}{(dataframe of samples only biological replicates, technical replicates were collapsed before)}
 }
 \description{
 user has to Choose between T-test, U-test, Anova or Kruskal

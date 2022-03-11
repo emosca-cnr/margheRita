@@ -4,10 +4,12 @@
 \alias{imputation}
 \title{missing values imputation}
 \usage{
-imputation(m_list, seed = NULL, a = 0.1, b = 0.25, n = 100)
+imputation(mRList, seed = NULL, a = 0.1, b = 0.25, n = 100)
 }
 \arguments{
 \item{dataframe}{of input contains intensity of all features according to samples}
+
+\item{m_list}{margheRita mRList}
 }
 \description{
 missing values imputation

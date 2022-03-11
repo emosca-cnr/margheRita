@@ -1,21 +1,21 @@
 #' Relative Log Abudance
-#' @param m_list margheRita list
+#' @param mRList margheRita list
 #' @export
 #' @author Ettore Mosca (CNR-ITB)
 #' @importFrom stats median
 
-RLA <- function(m_list, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", ...){
+RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", ...){
 
 
   if(include_QC){
-    m_list$data <- cbind(m_list$data, m_list$QC)
-    m_list$sample_ann<- rbind(m_list$sample_ann, m_list$QC_ann)
+    mRList$data <- cbind(mRList$data, mRList$QC)
+    mRList$sample_ann<- rbind(mRList$sample_ann, mRList$QC_ann)
   }
 
 
-  ans <- m_list$data
+  ans <- mRList$data
   if(!logged){
-    ans <- log2(m_list$data + 1)
+    ans <- log2(mRList$data + 1)
   }
 
 	if(robust){

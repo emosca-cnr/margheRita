@@ -57,7 +57,6 @@ margheRita is intended for any kind of mass spectrometer raw data, including bot
 <!-- GETTING STARTED -->
 ## Getting Started
 
-
 ### Prerequisites
 
 To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8 and [Bioconductor](https://www.bioconductor.org/install/) 3.13 
@@ -92,86 +91,9 @@ To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8 and
          ##############################################
   ```
 
-### Git Installation
-1. From bash
+### Documentation
 
-  ```sh
-    cd path/to/R/library
-    git clone https://github.com/emosca-cnr/margheRita.git
-   ```
-2. In R with [devtools](https://cran.r-project.org/web/packages/devtools/index.html) installed
-```r
-    load_all("margheRita")
-    i Loading margheRita
-
-         ##############################################
-         #                                            #
-         #          Welcome to margheRita             #
-         #                 from                       #
-         #              all our team                  #
-         #     we hope you to enjoy our tool          #
-         #                                            #
-         ##############################################
-  ```
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Here is presented a possible main workflow:
-## 1) Read input files and creation of margheRita object 
-```r
-mRlist <- read_input_file(input = "inst/extdata/example1.xlsx", 
-  metadata = "inst/extdata/example1_meta.xlsx", 
-  split_QC = TRUE, rt_col = 2, mz_col = 3, 
-  data_start_col = 4)
-
-mRlist
-``` 
-## 2) Filtering m/z features and NA values
-```r 
-mRlist <- m_z_filtering(mRlist = mRlist, 
-  lower_quality_mass_acc = 0.4, 
-  upper_quality_mass_acc = 0.8, 
-  do_plot = F, 
-  color = "black")
-
-mRlist <- filter_NA(mRlist)
-```
-
-## 3) Normalization step with probabilistic quotient normalization
-```r
-mRlist <- normalize_profiles(mRlist = mRlist, method = "pqn")
-``` 
-## 4) Principal component analysis
-```r
-mRlist <- pca_gen(mRlist, dirout,
-  col_by = "class",
-  scaling = c("none", "Pareto", "uv"),
-  include_QC = TRUE,
-  type = c("component", "coordinate"),
-  dist.method = "euclidean",
-  top=Inf)
-```
-## 5) Calculation of mean median average and standard deviation of all the samples and FC for all comparisons
-```r 
-mRlist <- mean_media_stdev_samples(mRlist, write_output = F)
-
-mRlist <- calculate_lfc_all(mRlist = mRlist, lfc_theshold = 0.25)
-```
-## 6) Annotation of compound
-```r
-mRlist <- metabolite_annotation(feature_data = mRlist, reference = NULL,
-  feature_spectra = NULL, reference_spectra = NULL, rt_err_thr = 1,
-  unaccept_flag = 15, accept_flag = 5, suffer_flag = 10, acceptable_RI = 10,
-  n_peaks = 1, acceptable_PPM_err = 10)
-```                                                                                               
-_For more examples, please refer to the [Vignette](https://github.com/emosca-cnr/margheRita.git)_
-
-
-
-
+For more examples, please refer to the [Vignette](https://github.com/emosca-cnr/margheRita.git)_
 
 
 <!-- LICENSE -->
@@ -180,25 +102,14 @@ _For more examples, please refer to the [Vignette](https://github.com/emosca-cnr
 Distributed under the GPL License.
 
 
-
 <!-- CONTACT -->
-## Contact
+## Contacts
 
-Edoardo Bellini - [@Edoardo Bellini](https://www.researchgate.net/profile/Edordo-Bellini) - bellini.edoardo@hsr.it
+Ettore Mosca - CNR-ITB, Bioinformatics Lab  [@Ettore Mosca](https://www.researchgate.net/profile/Ettore-Mosca) - ettore.mosca@itb.cnr.it
 
-Valeria Mannella - [@Valeria Mannella](https://www.researchgate.net/profile/Valeria-Mannella) - mannella.valeria@hsr.it
+Annapaola Andolfo - HSR, Proteomics And Metabolomcis Facility [@Annapaola Andolfo](https://www.researchgate.net/profile/Annapaola-Andolfo) - andolfo.annapaola@hsr.it
 
-Maria Ulaszewska - [@Maria Ulaszewska](https://www.researchgate.net/profile/Maria-Ulaszewska) - ulaszewska.maria@hsr.it
-
-Ettore Mosca - [@Ettore Mosca](https://www.researchgate.net/profile/Ettore-Mosca) - ettoremosca@itb.cnr.it
-
-Marco J. Morelli - [@Marco J. Morelli](https://www.researchgate.net/profile/Marco-Morelli) - morelli.marco@hsr.it
-
-Annapaola Andolfo - [@Annapaola Andolfo](https://www.researchgate.net/profile/Annapaola-Andolfo) - andolfo.annapaola@hsr.it
-
-Denise Drago - [@Annapaola Andolfo](https://www.researchgate.net/profile/Annapaola-Andolfo) - drago.denise@hsr.it
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/emosca-cnr/margheRita](https://github.com/emosca-cnr/margheRita)
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

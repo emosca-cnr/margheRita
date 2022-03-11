@@ -1,6 +1,6 @@
 #' Calculate mean, median and standard deviation (stdev) for each group under study.
 #' write_output =FALSE default, if TRUE table, as .csv format, are written
-#' @param mRList
+#' @param mRList mRList
 #' @importFrom stats aggregate
 #' @importFrom utils write.csv
 #' @export

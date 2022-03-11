@@ -5,7 +5,7 @@
 #' @return mRList with only biological replicates
 
 
-collapse_tech_rep <-function(mRlist, remove.QC=FALSE){
+collapse_tech_rep <-function(mRList, remove.QC=FALSE){
 
   cat("According to dataset size, this might take a few minutes.\n")
   mRList$sample_ann$class_biorep <- as.factor(paste(mRList$sample_ann$class, mRList$sample_ann$biological_rep, sep="_"))

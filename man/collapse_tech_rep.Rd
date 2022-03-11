@@ -4,13 +4,13 @@
 \alias{collapse_tech_rep}
 \title{Collapse technical replicates of each biological replicate of samples, calculating the mean.}
 \usage{
-collapse_tech_rep(m_list, remove.QC = FALSE)
+collapse_tech_rep(mRList, remove.QC = FALSE)
 }
 \arguments{
-\item{m_list}{mRList}
+\item{mRList}{mRList}
 }
 \value{
-m_list with only biological replicates
+mRList with only biological replicates
 }
 \description{
 Collapse technical replicates of each biological replicate of samples, calculating the mean.

@@ -5,7 +5,7 @@
 \title{calculate reference}
 \usage{
 calc_reference(
-  m_list,
+  mRList,
   sample_col = "class",
   sample_class = "QC",
   approach = c("median", "mean")

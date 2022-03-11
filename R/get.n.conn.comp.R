@@ -1,5 +1,5 @@
 #' Get connexted comnponents of size at least n
-#' @import igraph
+#' @importFrom igraph induced.subgraph clusters
 #' @export
 #'
 get.n.conn.comp <- function(x, n){

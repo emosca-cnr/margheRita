@@ -1,5 +1,6 @@
 #' correlation network
 #' @export
+#' @importFrom igraph graph.adjacency fastgreedy.community
 correlation_network <- function(m_list, top=0.05, query_metab=NULL){
 
   #under construction...
