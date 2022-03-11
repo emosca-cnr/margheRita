@@ -36,10 +36,8 @@
       <ul>
         <li><a href="#Prerequisites">Prerequisites</a></li>
         <li><a href="#R installation">R Installation</a></li>
-        <li><a href="#installation">Git Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
