@@ -104,8 +104,9 @@ Distributed under the GPL License.
 <!-- CONTACT -->
 ## Contacts
 
-Ettore Mosca - CNR-ITB, Bioinformatics Lab - ettore.mosca@itb.cnr.it
-Annapaola Andolfo - HSR, Proteomics And Metabolomcis Facility - andolfo.annapaola@hsr.it
+Ettore Mosca - CNR-ITB, Bioinformatics Lab
+
+Annapaola Andolfo - HSR, Proteomics And Metabolomcis Facility
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
