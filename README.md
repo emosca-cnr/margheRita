@@ -37,7 +37,6 @@
         <li><a href="#Prerequisites">Prerequisites</a></li>
         <li><a href="#Installation">Installation</a></li>
         <li><a href="#Installation">Documentation</a></li>
-
       </ul>
     </li>
     <li><a href="#license">License</a></li>
