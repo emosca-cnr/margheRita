@@ -35,7 +35,9 @@
       <a href="#Getting Started">Getting Started</a>
       <ul>
         <li><a href="#Prerequisites">Prerequisites</a></li>
-        <li><a href="#R installation">R Installation</a></li>
+        <li><a href="#Installation">Installation</a></li>
+        <li><a href="#Installation">Documentation</a></li>
+
       </ul>
     </li>
     <li><a href="#license">License</a></li>
@@ -57,9 +59,9 @@ margheRita is intended for any kind of mass spectrometer raw data, including bot
 
 ### Prerequisites
 
-To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8 and [Bioconductor](https://www.bioconductor.org/install/) 3.13 
+To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8
 
-### R Installation
+### Installation
 
 1. You have first to install [devtools](https://cran.r-project.org/web/packages/devtools/index.html)
 
@@ -73,7 +75,7 @@ To run margheRita you need [R](https://www.r-project.org/) version $\ge$ 3.8 and
     devtools::install_github("emosca-cnr/margheRita", dependencies = T)
     install_dependencies("margheRita")
   ```
-3. load the package
+3. Load the package
 
   ```r
     load_all("margheRita")
