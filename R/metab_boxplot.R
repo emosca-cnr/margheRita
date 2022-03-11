@@ -1,19 +1,19 @@
 #' metab_boxplot
 #' @importFrom graphics boxplot
-#' @param m_list m_list
+#' @param mRList
 #' @export
 #' @importFrom grDevices dev.off png
 
-metab_boxplot<-function(m_list, dirout="./",features=NULL, col_by="class",group="class"){
+metab_boxplot<-function(mRList, dirout="./",features=NULL, col_by="class",group="class"){
 
   dirout = paste(dirout, sep = "")
   dir.create(dirout)
 
-  X_ann <- m_list$sample_ann
+  X_ann <- mRList$sample_ann
   col_factor <- as.factor(X_ann[, col_by])
   col_pal <- rainbow(length(levels(col_factor)))
 
-  data <- m_list$data[rownames(m_list$data) %in% features, ] #select the metabolites (features), according to list from users
+  data <- mRList$data[rownames(mRList$data) %in% features, ] #select the metabolites (features), according to list from users
   #data<-t(data)
   groups<-as.factor(X_ann[,group])
 
