@@ -104,12 +104,8 @@ Distributed under the GPL License.
 <!-- CONTACT -->
 ## Contacts
 
-Ettore Mosca - CNR-ITB, Bioinformatics Lab  [@Ettore Mosca](https://www.researchgate.net/profile/Ettore-Mosca) - ettore.mosca@itb.cnr.it
-
-Annapaola Andolfo - HSR, Proteomics And Metabolomcis Facility [@Annapaola Andolfo](https://www.researchgate.net/profile/Annapaola-Andolfo) - andolfo.annapaola@hsr.it
-
-Project Link: [https://github.com/emosca-cnr/margheRita](https://github.com/emosca-cnr/margheRita)
-
+Ettore Mosca - CNR-ITB, Bioinformatics Lab - ettore.mosca@itb.cnr.it
+Annapaola Andolfo - HSR, Proteomics And Metabolomcis Facility - andolfo.annapaola@hsr.it
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
