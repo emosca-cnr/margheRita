@@ -1,10 +1,20 @@
-#' check_mass
+#' calculating PPM error
 #'
+#'`check_mass` it is making a list of all library metabolites and assigning proper sample ID to each based on desired PPM error.
 #'
 #' @export
+#'
+#' @param reference A list of library contain mz(mass-to-charge ratio) with specific ID.
+#' @param feature_data A list of sample data contain mz(mass-to-charge ratio) with specific ID.
+#' @param accept_flag A number with default value of 5. PPM errors < accept_flag will be tagged as "super", while those > accept_flag and < suffer_flag will be tagged as "acceptable"
+#' @param suffer_flag A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"
+#' @param unaccept_flag A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.
+
+#' @return mass, A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
+#' @examples
 
 
-check_mass <- function(feature_data=NULL, reference=NULL, unaccept_flag=15, accept_flag=5, suffer_flag=10){
+check_mass <- function(reference=NULL, feature_data=NULL, unaccept_flag=15, accept_flag=5, suffer_flag=10){
 
    mass = vector("list", nrow(reference))
   #names(mass) = reference$Name
@@ -29,10 +39,6 @@ check_mass <- function(feature_data=NULL, reference=NULL, unaccept_flag=15, acce
 
     }
   }
-
-  #filter the mass by deleting the empty data.frame;
-  #mass = mass[sapply(mass, function(x) dim(x)[1]) > 0]
-
 
   return(mass)
 }

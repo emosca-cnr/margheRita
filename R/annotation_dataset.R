@@ -1,22 +1,13 @@
-#' generate the data set for annotation 
+#' generate the data set for annotation
 #'
 #'
-#' 
-annotation_dataset <- function(wdir="./"){
-
+#'
+annotation_dataset <- function(column=c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"), mode=c("POS", "NEG"), accept_RI = 10){
 
 ## library
-library_data <- as.data.frame(read_xlsx(system.file("extdata", "small_library.xlsx", package = "margheRita")))
-library_data <- library_data[, c(2, 3, 4, 32)]
-colnames(library_data) <- c("rt", "mz", "Name", "MS_MS")
-library_data <- library_data[library_data$Name != "Unknown", ]
-library_data <- as.data.frame(library_data[!is.na(library_data$MS_MS), ])
 
-library_spectra <- sapply(library_data$MS_MS, function(x) strsplit(x, " "))
-library_spectra <- lapply(library_spectra, function(x) lapply(strsplit(x, ":"), as.numeric))
-library_spectra <- lapply(library_spectra, function(x) do.call(rbind, x))
-names(library_spectra) <- library_data$Name
-library_data$MS_MS <- NULL
+  lib_data <- margheRita_library(column = "HILIC", mode = "POS", accept_RI = 10)
+
 
 ## sample
 sample_data <- as.data.frame(read_xlsx(system.file("extdata", "sample.xlsx", package = "margheRita")))
@@ -31,6 +22,6 @@ names(sample_spectra) <- sample_data$Feature_ID
 sample_data$MS_MS <- NULL
 
 
-return(list(lib_data=library_data, lib_spectra= library_spectra, sample_data=sample_data, sample_spectra = sample_spectra))
+return(list(lib_precursors =lib_data$lib_precursors, lib_peaks=lib_data$lib_peaks, lib_peaks_data=lib_data$lib_peaks_data, sample_data=sample_data, sample_spectra = sample_spectra))
 
 }
