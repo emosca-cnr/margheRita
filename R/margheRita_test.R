@@ -1,11 +1,12 @@
 #' margherRita - main function to run the full pipeline
 #'
 #'
-#' @import notame MSnbase
+#' @import notame
+#' @importFrom MSnbase readMgfData
 
 margheRita_test <- function(wdir="./"){
 
-  #
+  #This Example can not be used for annotation, because it does not have the MS_MS_column
   input_data_file <- system.file("extdata", "example1.xlsx", package = "margheRita")
   input_metadata_file <- system.file("extdata", "example1_meta.xlsx", package = "margheRita")
   mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file)
@@ -14,9 +15,12 @@ margheRita_test <- function(wdir="./"){
   input_data_file <- system.file("extdata", "dataset_drift.xlsx", package = "margheRita")
   input_metadata_file <- system.file("extdata", "dataset_drift_metadata.xlsx", package = "margheRita")
   mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file, data_start_col = 8, rt_col = 2, mz_col = 3)
+  
+  input_data_file <- system.file("extdata", "example1.txt", package = "margheRita")
+  input_metadata_file <- system.file("extdata", "example1_metadata.txt", package = "margheRita")
+  mRList_raw <- read_input_file(input_data_file, metadata = input_metadata_file, type = "txt", sep="\t")
 
   ### 1 ### READ INPUT
-
   lapply(mRList_raw, head)
 
   #mset <- as.metaboset.mRList(mRlist)
@@ -32,26 +36,24 @@ margheRita_test <- function(wdir="./"){
   #gmf_file <- system.file("extdata", "PSU-MSMLS.mgf", package = "margheRita")
   #temp <- MSnbase::readMgfData(gmf_file)
 
-
-  heatscatter_chromatography(m_list = mRList_raw, mz_limits = NULL, rt_limits = NULL)
+  heatscatter_chromatography(mRList = mRList_raw, mz_limits = NULL, rt_limits = NULL)
 
   ### 2 ### PLOTS
-  pca_gen(mRList_raw, dirout = "pca_initial") #fix the group variable for coloring
+  pca_gen(mRList = mRList_raw, dirout = "pca_initial") #fix the group variable for coloring
 
-  res <- metab_boxplot(mRList_raw, features = c("M13167", "M25188"))
+  res <- metab_boxplot(mRList = mRList_raw, features = c("13167", "25188")) #this features work with Example1
 
   ### 3 ### FILTER BY m/z
-  mRList_filt <- m_z_filtering(mRList_raw) ### issue with m_z_average
+  mRList_filt <- m_z_filtering(mRList = mRList_raw) ### issue with m_z_average
 
   ### 4 ### FILTER BY MISSING VALUES
-  mRList_filt <- filter_NA(mRList_filt)
+  mRList_filt <- filter_NA(mRList = mRList_filt)
 
   ### 5 ### PLOTS
-  pca_gen(mRList_filt, dirout = "pca_filtered") #fix the group variable for coloring
+  pca_gen(mRList = mRList_filt, dirout = "pca_filtered") #fix the group variable for coloring
 
   ### 6 ### IMPUTATION
-  mRList_filt <- imputation(mRList_filt) #this is too slow...
-
+  mRList_filt <- imputation(mRList = mRList_filt) #this is too slow...
 
   ### 8 ### PLOTS
   pca_gen(mRList_filt, dirout = "pca_imp") #fix the group variable for coloring
@@ -70,7 +72,7 @@ margheRita_test <- function(wdir="./"){
   mRList_norm_biorep <- collapse_tech_rep(mRList_norm, remove.QC = FALSE)
   mRList_norm_biorep_ <- mean_median_stdev_samples(mRList_norm_biorep, dirout = "")
 
-  h_map(mRList_norm_biorep)
+  h_map(mRList_norm_biorep, show_row_names=FALSE)
 
   ### 7 ### FILTER BY CV
   mRList_norm_biorep <- CV(mRList_norm_biorep, dirout = "CV")
@@ -88,11 +90,11 @@ margheRita_test <- function(wdir="./"){
   mRList_norm_biorep_ <- univariate(mRList_norm_biorep)
 
   ### ANNOTATION
-  data4annot <- generate_dataset_for_annotation()
-
-  rt_res <- check_RT(data4annot$sample_data, data4annot$lib_data)
-  ppm_res <- check_mass(data4annot$sample_data, data4annot$lib_data)
-
+  lib_data <- select_library(column = "HILIC", mode = "POS", RI_min = 10)
+  
+  feature_spectra <- get_spectra_list_from_vector(spectra = setNames(mRList_$metab_ann$MS_MS_spectrum, mRList$metab_ann$Feature_ID))
+  features_annotated <- metabolite_annotation(mRList = mRList_norm_biorep_, feature_spectra = feature_spectra, library_list = lib_data, n_peaks = 1)
+  
   #### PATHWAY ANALYSIS ####
   #toy metab list and ranked list to test pathway analysis
   bsid2cid <- bsid2cid[bsid2cid$CID %in% metabolite_annotation$PubChem.CID, ]

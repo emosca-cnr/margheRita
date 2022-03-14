@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_input_file.R
 \name{read_input_file}
 \alias{read_input_file}
-\title{Read files (input and metadata) both excel and .csv, default .csv
+\title{Read files (input and metadata) both excel and .csv
 import excel files input and metadata}
 \usage{
 read_input_file(
@@ -11,10 +11,13 @@ read_input_file(
   split_QC = TRUE,
   mz_col = 3,
   rt_col = 2,
-  data_start_col = 4
+  data_start_col = 4,
+  MS_MS_column = NULL,
+  type = c("excel", "txt"),
+  ...
 )
 }
 \description{
-Read files (input and metadata) both excel and .csv, default .csv
+Read files (input and metadata) both excel and .csv
 import excel files input and metadata
 }

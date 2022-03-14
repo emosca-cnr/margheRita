@@ -4,7 +4,7 @@
 \alias{as.MSnSet.mRList}
 \title{as.MSnSet.mRList}
 \usage{
-as.MSnSet.mRList(mRlist)
+as.MSnSet.mRList(mRList)
 }
 \description{
 as.MSnSet.mRList

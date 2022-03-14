@@ -5,7 +5,7 @@
 \title{Shapiro-Wilk's test is used for testing the normal distribution of metabolites
 Calculate p-value, if p-value>0.05 metabolite is normally distributed, p-value<0.05 metabolite is not normally distributed}
 \usage{
-norm_check(m_list)
+norm_check(mRList)
 }
 \arguments{
 \item{m_list}{mRList}

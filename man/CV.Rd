@@ -5,13 +5,15 @@
 \title{Calculate Coefficient of variance (CV) for samples and QC (quality control) to assess the repeatibility of the experiment.
 Mean, standard deviation and, then, CV as =(stdev-mean)*100, for each metabolite is calculated for QC and samples. If CV QC>CV sample metabolite is deleted.}
 \usage{
-CV(m_list, dirout)
+CV(mRList, dirout)
 }
 \arguments{
-\item{m_list}{split into df_QC (dataframe of quality control) and df_samples (df of samples)}
+\item{mRList}{split into df_QC (dataframe of quality control) and df_samples (df of samples)}
+
+\item{m_list}{margheRita mRList}
 }
 \value{
-m_list with only reliable metabolites
+mRList with only reliable metabolites
 }
 \description{
 Calculate Coefficient of variance (CV) for samples and QC (quality control) to assess the repeatibility of the experiment.

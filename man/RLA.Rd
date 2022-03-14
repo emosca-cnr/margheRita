@@ -5,7 +5,7 @@
 \title{Relative Log Abudance}
 \usage{
 RLA(
-  m_list,
+  mRList,
   include_QC = FALSE,
   logged = FALSE,
   robust = TRUE,
@@ -15,7 +15,7 @@ RLA(
 )
 }
 \arguments{
-\item{m_list}{margheRita list}
+\item{mRList}{margheRita list}
 }
 \description{
 Relative Log Abudance

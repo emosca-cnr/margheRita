@@ -1,7 +1,6 @@
 #' margherRita - main function to run the full pipeline
 #'
 #'
-#' @import notame MSnbase
 
 margheRita_test_pa <- function(wdir="./"){
 

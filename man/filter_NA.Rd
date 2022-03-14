@@ -4,10 +4,10 @@
 \alias{filter_NA}
 \title{filter NA}
 \usage{
-filter_NA(m_list, min_metab_in_sample = 100, min_sample_with_metab = 10)
+filter_NA(mRList, min_metab_in_sample = 100, min_sample_with_metab = 10)
 }
 \arguments{
-\item{m_list}{margheRita list}
+\item{mRList}{margheRita list}
 
 \item{min_metab_in_sample}{min number of metabolites in a sample}
 

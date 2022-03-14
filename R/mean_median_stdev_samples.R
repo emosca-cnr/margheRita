@@ -1,17 +1,17 @@
 #' Calculate mean, median and standard deviation (stdev) for each group under study.
 #' write_output =FALSE default, if TRUE table, as .csv format, are written
-#' @param m_list mRList
+#' @param mRList mRList
 #' @importFrom stats aggregate
 #' @importFrom utils write.csv
 #' @export
 
 
-mean_median_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
+mean_median_stdev_samples<-function(mRList, dirout="./", write_output=FALSE){
 
   cat("According to dataset size, this might take a few minutes.\n")
 
 
-  mean_sample<-stats::aggregate.data.frame(t(m_list$data), list(m_list$sample_ann$class), mean)
+  mean_sample<-stats::aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class), mean)
   rownames(mean_sample)<-mean_sample$Group.1
   mean_sample<-mean_sample[,-1]
   mean_sample<-t(mean_sample)
@@ -20,7 +20,7 @@ mean_median_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
     names(mean_sample)[i] <- paste(names(mean_sample)[i],"mean", sep = "_")
   }
 
-  median_sample<-stats::aggregate.data.frame(t(m_list$data), list(m_list$sample_ann$class), median)
+  median_sample<-stats::aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class), median)
   rownames(median_sample)<-median_sample$Group.1
   median_sample<-median_sample[,-1]
   median_sample<-t(median_sample)
@@ -30,7 +30,7 @@ mean_median_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
   }
 
 
-  sd_sample<-stats::aggregate.data.frame(t(m_list$data), list(m_list$sample_ann$class), sd)
+  sd_sample<-stats::aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class), sd)
   rownames(sd_sample)<-sd_sample$Group
   sd_sample<-sd_sample[,-1]
   sd_sample<-t(sd_sample)
@@ -42,10 +42,10 @@ mean_median_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
 
 
   Mean_median_stdev<-cbind(mean_sample,median_sample, sd_sample)
-  m_list$metab_ann <- cbind(m_list$metab_ann, Mean_median_stdev)
+  mRList$metab_ann <- cbind(mRList$metab_ann, Mean_median_stdev)
 
-  names(m_list$metab_ann) <- gsub("1", "mean", names(m_list$metab_ann))
-  names(m_list$metab_ann) <- gsub("2", "median", names(m_list$metab_ann))
+  names(mRList$metab_ann) <- gsub("1", "mean", names(mRList$metab_ann))
+  names(mRList$metab_ann) <- gsub("2", "median", names(mRList$metab_ann))
 
 
   if(write_output){
@@ -59,5 +59,5 @@ mean_median_stdev_samples<-function(m_list, dirout="./", write_output=FALSE){
     stdev= paste(dirout, "/stdev.csv", sep ="")
     utils::write.csv(sd_sample, stdev)
   }
-  return(m_list)
+  return(mRList)
 }

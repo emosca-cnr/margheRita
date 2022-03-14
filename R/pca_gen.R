@@ -1,6 +1,6 @@
 #' PCA general
 #' Scree plot, score and loading plot (PC1 vs PC2)
-#' @param m_list margheRita m_list
+#' @param mRList margheRita mRList
 #' @param include_QC (default TRUE); scaling: Pareto, none,UV;col_by (default class)
 #' @param write_output (default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved
 #' @return Graphs of screeplot, scoreplot and loading plot; table as .csv if write_output turns TRUE
@@ -12,7 +12,7 @@
 
 #PCA function general to use in different points
 
-pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, type=c("component", "coordinate"), dist.method="euclidean", top=Inf, write_output=FALSE) {
+pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, type=c("component", "coordinate"), dist.method="euclidean", top=Inf, write_output=FALSE) {
 
 
   type <- match.arg(type)
@@ -20,14 +20,14 @@ pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", 
 
   dir.create(dirout)
 
-  X <- m_list$data
-  X_ann <- m_list$sample_ann
+  X <- mRList$data
+  X_ann <- mRList$sample_ann
 
   #include QC
   if(include_QC){
     cat("Including QC\n")
-    X <- cbind(X, m_list$QC)
-    X_ann<- rbind(X_ann, m_list$QC_ann)
+    X <- cbind(X, mRList$QC)
+    X_ann<- rbind(X_ann, mRList$QC_ann)
   }
 
   if(nrow(X) > top){
@@ -42,7 +42,7 @@ pca_gen <- function(m_list, dirout, col_by="class", scaling=c("none", "Pareto", 
   #pareto scaling
   if (scaling=="Pareto") {
     cat("Pareto scaling\n")
-    X <- pareto(X) #ettore: pareto requires m_list
+    X <- pareto(X) #ettore: pareto requires mRList
   }
   if(scaling=="uv"){
     cat("UV scaling\n")

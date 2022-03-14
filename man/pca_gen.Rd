@@ -6,7 +6,7 @@
 Scree plot, score and loading plot (PC1 vs PC2)}
 \usage{
 pca_gen(
-  m_list,
+  mRList,
   dirout,
   col_by = "class",
   scaling = c("none", "Pareto", "uv"),
@@ -18,7 +18,7 @@ pca_gen(
 )
 }
 \arguments{
-\item{m_list}{margheRita m_list}
+\item{mRList}{margheRita mRList}
 
 \item{include_QC}{(default TRUE); scaling: Pareto, none,UV;col_by (default class)}
 

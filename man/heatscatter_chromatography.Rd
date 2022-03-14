@@ -5,10 +5,11 @@
 \title{heatscatter_chromatography}
 \usage{
 heatscatter_chromatography(
-  m_list,
+  mRList,
   mz_limits = NULL,
   rt_limits = NULL,
   sample = NULL,
+  outfile = "heatscatter.png",
   ...
 )
 }

@@ -4,7 +4,7 @@
 \alias{batch_effect}
 \title{Remove batch effect}
 \usage{
-batch_effect(m_list)
+batch_effect(mRList)
 }
 \description{
 Remove batch effect

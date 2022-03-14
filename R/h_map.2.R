@@ -1,36 +1,43 @@
 #' heatmap
-#' @param m_list margheRita m_list
+#' @param mRList mRList
 #' @export
 #' @import ComplexHeatmap
 #' @importFrom grDevices dev.off png
 #' @importFrom graphics plot
+#' @import viridis
 
 
-h_map<-function(m_list, dirout="./"){
+h_map <- function(mRList, dirout="./", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, top=500, ...){
 
   #dirout = paste(dirout, sep = "")
-  dir.create(dirout)
+  dir.create(dirout, showWarnings = F)
 
-  column_ha <- HeatmapAnnotation(class= m_list$sample_ann$class, biorep= m_list$sample_ann$biological_rep,which="column")
+  if(is.null(col_ann)){
+    class_levels <- levels(as.factor(mRList$sample_ann$class))
+    col_ann <- setNames(viridis::turbo(length(class_levels)), class_levels)
+    
+  }
+  
+  column_ha <- HeatmapAnnotation(class=mRList$sample_ann$class, col = list(class=col_ann))
 
-  col_class <- as.factor(m_list$sample_ann$class)
-  col_pal <- rainbow(length(levels(col_class)))
-  col_biorep <- as.factor(m_list$sample_ann$biological_rep)
-  col_bio <- rainbow(length(levels(col_biorep)))
-  data_scaled<-t(scale(t(m_list$data)))
-  #pdf(paste(dirout,"Heatmap.pdf", sep = ""))
 
-  out_file <- paste0(dirout, "./Heatmap.png")
-  grDevices::png(
-    Heatmap,
-    width= 8,
-    height = 8,
-    units = "in",
-    res = 300
-    )
+  if(scale_features){
+    data_scaled<-t(scale(t(mRList$data)))
+  }
+  
 
-  Heatmap(as.matrix(data_scaled[1:5, ]), top_annotation = column_ha,col=col_pal)
-
-  grDevices::dev.off()
+  if(is.null(features)){
+    top_var <- apply(mRList$data, 1, var)
+    top_var <- order(top_var, decreasing = T)[1:top]
+  }
+  
+  if(is.null(col)){
+    col <- viridis::viridis(7)
+  }
+  
+  grDevices::png(paste0(dirout, "/Heatmap.png"), width= 180, height = 180, units = "mm", res = 300)
+  hm <- ComplexHeatmap::Heatmap(as.matrix(data_scaled[top_var, ]), top_annotation = column_ha, col=col, ...)
+  draw(hm)
+  dev.off()
 
 }

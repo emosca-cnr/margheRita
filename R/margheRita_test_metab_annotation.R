@@ -1,7 +1,6 @@
 #' a fake function to test pieces of code
 #'
 #'
-#' @import notame MSnbase
 
 margheRita_test_metab_annotation <- function(wdir="./"){
 
