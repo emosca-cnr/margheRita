@@ -17,7 +17,6 @@
 check_mass <- function(reference=NULL, feature_data=NULL, unaccept_flag=15, accept_flag=5, suffer_flag=10){
 
    mass = vector("list", nrow(reference))
-  #names(mass) = reference$Name
    names(mass) = reference$ID
 
   for (j in 1:dim(reference)[1]) {

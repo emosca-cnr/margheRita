@@ -21,7 +21,7 @@ margheRita_test_metab_annotation <- function(wdir="./"){
   #ref_lib <- as.data.frame(ref_lib[!is.na(ref_lib$MS_MS_spectrum), ])
 
   ###LOAD the library
-  lib_data <- select_library(column = "RPLong", mode = "POS", RI_min = 10)
+  lib_data <- select_library(column = "RPLong", mode = "POS", accept_RI=10)
 
   ###
   #ann_list <- metabolite_annotation(mRList = mRList_raw, reference = ref_lib)
@@ -39,7 +39,7 @@ margheRita_test_metab_annotation <- function(wdir="./"){
   RI_sample <- RI_sample_data (feature_spectra=feature_spectra_list, acceptable_RI = 10 )
   #RI_lib <- RI_lib_data (reference = ref_spectra_list, RT_mass = RT_mass, acceptable_RI = 10)
 
-  intense_peak <- check_intense_peak(RT_mass = RT_mass, RI_lib = lib_data$lib_peaks, reference = lib_data$lib_precursor, lib_peaks_cas=lib_data$lib_peaks_cas, mode = "POS", RI_sample = RI_sample, n_peaks=1, acceptable_PPM_err = 10)
+  intense_peak <- check_intense_peak(RT_mass = RT_mass, RI_lib = lib_data$lib_peaks, reference = lib_data$lib_precursor, lib_peaks_data=lib_data$lib_peaks_data, mode = "POS", RI_sample = RI_sample, n_peaks=1, acceptable_PPM_err = 10)
 
   print(head(intense_peak))
 

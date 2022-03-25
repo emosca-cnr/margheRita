@@ -7,18 +7,18 @@
 #' @param RI_lib
 #' @param RI_sample
 #' @param reference
-#' @param lib_peaks_cas
+#' @param lib_peaks_data
 #' @param n_peaks
 #' @param acceptable_PPM_err
 #' @param mode
 #'
-check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, reference=NULL, lib_peaks_cas=NULL, n_peaks=1, acceptable_PPM_err = 10, mode=c("POS", "NEG")) {
+check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, reference=NULL, lib_peaks_data=NULL, n_peaks=1, acceptable_PPM_err = 10, mode=c("POS", "NEG")) {
 
   ans <- vector("list", length(RT_mass)) #a novel data to not touch the input
   names(ans) <- names(RT_mass)
 
   #ensure the same order
-  lib_peaks_cas <- lib_peaks_cas[match(names(RI_lib), lib_peaks_cas$ID), ]
+  lib_peaks_data <- lib_peaks_data[match(names(RI_lib), lib_peaks_data$ID), ]
 
   #z cycles trhough the precursor library entries
   for(z in 1:length(RT_mass)){
@@ -30,7 +30,7 @@ check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refere
     #clean the library to keep only metabolites that appear in the sample
     #z_peaks <- as.data.frame(RI_lib[names(RI_lib) == names(RT_mass)[z]])
     CAS_z <- reference$CAS[reference$ID == names(RT_mass)[z]]
-    z_peaks_all <- RI_lib[lib_peaks_cas$CAS == CAS_z & lib_peaks_cas$Collision_energy == mode ]
+    z_peaks_all <- RI_lib[lib_peaks_data$CAS == CAS_z & lib_peaks_data$Collision_energy == mode ]
 
     if(length(z_peaks_all)>0){
       #cycle thourgh the peaks that are available for the given CAS at precursor level
@@ -115,7 +115,7 @@ check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refere
 
   if(length(ans)>0){
     ans <- do.call(rbind, ans)
-    ans <- merge(ans, lib_peaks_cas, by.x="ID_peaks", by.y="ID", all.x=T, suffi)
+    ans <- merge(ans, lib_peaks_data, by.x="ID_peaks", by.y="ID", all.x=T, suffi)
     colnames(ans)[colnames(ans) == "Name"] <- "Name_peaks"
     ans <- merge(reference, ans, by=c("ID", "CAS"), all.y=T)
     ans <- ans[, c("Feature_ID", "ID", "CAS", "Name", "rt", "RT_err", "RT_flag", "mz", "ppm_error", "mass_status", "mass_flag", "ID_peaks", "Name_peaks", "intense_peaks", "Collision_energy")]
