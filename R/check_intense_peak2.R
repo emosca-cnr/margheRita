@@ -12,35 +12,27 @@
 #' @param acceptable_PPM_err
 #' @param mode
 #'
-check_intense_peak2 = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, reference=NULL, lib_peaks_data=NULL, n_peaks=1, acceptable_PPM_err = 10, mode=c("POS", "NEG")) {
-
-  ans <- vector("list", length(RT_mass)) #a novel data to not touch the input
-  names(ans) <- names(RT_mass)
+check_intense_peak2 <- function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, reference=NULL, lib_peaks_data=NULL, n_peaks=1, acceptable_PPM_err = 10, mode=c("POS", "NEG")) {
 
   #ensure the same order
   lib_peaks_data <- lib_peaks_data[match(names(RI_lib), lib_peaks_data$ID), ]
 
-  #z cycles trhough the precursor library entries
   for(z in 1:length(RT_mass)){
-
-
-    #clean the library to keep only metabolites that appear in the sample
 
     CAS_z <- reference$CAS[reference$ID == names(RT_mass)[z]]
     z_peaks_all <- RI_lib[lib_peaks_data$CAS == CAS_z & lib_peaks_data$Collision_energy == mode ]
-    z_peaks_all = z_peaks_all[sapply(z_peaks_all, function(x) length (x)[1]) > 0]
 
     if(length(z_peaks_all)>0){
-      #cycle thourgh the peaks that are available for the given CAS at precursor level
-      for(zzzz in 1:length(z_peaks_all)){
 
+      for(zzzz in 1:length(z_peaks_all)){
         z_peaks <- as.data.frame(z_peaks_all[[zzzz]])
 
-        #cycle thourgh the candidates
-        for(zi in 1:nrow(RT_mass[[z]])){
+        RT_mass[[z]]$ID_peaks <- names(z_peaks_all)[zzzz]
 
+        for(zi in 1:nrow(RT_mass[[z]])){
           zi_peaks <- as.data.frame(RI_sample[names(RI_sample) == RT_mass[[z]]$Feature_ID[zi]])
 
+          cat("processing zi", zi, "\n")
 
           #the first
           table_values_a <- sort(unique(z_peaks[, 2]), decreasing = T) #library peaks
@@ -57,66 +49,30 @@ check_intense_peak2 = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refer
 
             PPM_err <- calc_ppm_err(a, b)
 
-
             temp_flag_peaks[ii] <- any(PPM_err < acceptable_PPM_err)
 
             if(!temp_flag_peaks[ii]){ #if FALSE avoid the comparison for the next peaks
               break
             }
 
+            RT_mass[[z]]$intense_peaks <- all(temp_flag_peaks)
+            RT_mass[[z]]$ID <- names(RT_mass)[z]
           }
-
-          #add information about the peak to the precursor
-          if(is.null(ans[[z]])){
-            ans[[z]] <- data.frame(Feature_ID=RT_mass[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], intense_peaks=all(temp_flag_peaks), stringsAsFactors = F)
-          }else{
-            ans[[z]] <- rbind(ans[[z]], data.frame(Feature_ID=RT_mass[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], intense_peaks=all(temp_flag_peaks), stringsAsFactors = F))
-
-          }
-
-        } #end cycle through candidates
-
-      } #end cycle through the peaks for that CAS
-
+        }
+      }
     }
-
-    if(!is.null(ans[[z]])){
-      #keep only peaks with TRUE flags
-      ans[[z]] <- merge(RT_mass[[z]], ans[[z]], by="Feature_ID", sort=F)
-      ans[[z]] <- data.frame(ID=names(ans)[z], ans[[z]], stringsAsFactors=F)
-    }
-
   }
 
-  #filter the RT_mass by deleting the empty data.frame;
-  ans <- ans[sapply(ans, function(x) !is.null(x))]
+  #filtering RT_mass by deleting the candidates with bad ppm error
+  RT_mass <- RT_mass[sapply(RT_mass, function(x) dim(x)[2] > 8)]
 
-  if(length(ans)>0){
-    ans <- lapply(ans, function(x) x[x$intense_peaks, ])
-  }else{
-    message("none of the candidates matches the library peaks with current parameters\n")
-    return()
-  }
+  abc <- do.call(rbind, RT_mass)
 
-  if(length(ans)>0){
-    ans <- ans[sapply(ans, function(x) nrow(x)>0)]
 
-  }else{
-    message("none of the candidates matches the library peaks with current parameters\n")
-    return()
-  }
+  abc <- merge(x= as.data.frame(abc), y= as.data.frame(lib_peaks_data), by.x="ID_peaks", by.y="ID",all.x=T, suffi)
+  colnames(abc)[colnames(abc) == "Name"] <- "Name_peaks"
+  #abc <- merge(x= as.data.frame(abc), y= as.data.frame(reference), by="ID")
 
-  if(length(ans)>0){
-    ans <- do.call(rbind, ans)
-    ans <- merge(ans, lib_peaks_data, by.x="ID_peaks", by.y="ID", all.x=T, suffi)
-    colnames(ans)[colnames(ans) == "Name"] <- "Name_peaks"
-    ans <- merge(reference, ans, by=c("ID", "CAS"), all.y=T)
-    ans <- ans[, c("Feature_ID", "ID", "CAS", "Name", "rt", "RT_err", "RT_flag", "mz", "ppm_error", "mass_status","mass_flag", "ID_peaks", "Name_peaks", "intense_peaks", "Collision_energy")]
-  }else{
-    message("none of the candidates matches the library peaks with current parameters\n")
-    return()
-  }
-
-  return(ans)
+  return(abc)
 
 }

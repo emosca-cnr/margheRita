@@ -2,10 +2,8 @@
 #'
 #' @export
 #'
-metabolite_family = function(feature_data = NULL , reference = NULL,rt_err_thr = 2,
-                             unaccept_flag= 1000,
-
-  RT_mass=NULL, RI_lib=NULL , RI_sample=NULL,  lib_peaks_data=NULL, n_peaks=1, acceptable_PPM_err = 10, mode=c("POS", "NEG")) {
+metabolite_family = function(feature_data = NULL, reference = NULL, rt_err_thr = 2, unaccept_flag= 1000,
+RT_mass=NULL, RI_lib=NULL , RI_sample=NULL,  lib_peaks_data=NULL, mode=c("POS", "NEG")) {
 
 
   ###RT
