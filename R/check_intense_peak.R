@@ -3,14 +3,14 @@
 #'
 #' @export
 #'
-#' @param RT_mass
-#' @param RI_lib
-#' @param RI_sample
-#' @param reference
-#' @param lib_peaks_data
-#' @param n_peaks
-#' @param acceptable_PPM_err
-#' @param mode
+#' @param RT_mass RT_mass
+#' @param RI_lib RI_lib
+#' @param RI_sample RI_sample
+#' @param reference reference
+#' @param lib_peaks_data lib_peaks_data
+#' @param n_peaks n_peaks
+#' @param acceptable_PPM_err acceptable_PPM_err
+#' @param mode mode
 #'
 check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, reference=NULL, lib_peaks_data=NULL, n_peaks=1, acceptable_PPM_err = 10, mode=c("POS", "NEG")) {
 
@@ -115,7 +115,7 @@ check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refere
 
   if(length(ans)>0){
     ans <- do.call(rbind, ans)
-    ans <- merge(ans, lib_peaks_data, by.x="ID_peaks", by.y="ID", all.x=T, suffi)
+    ans <- merge(ans, lib_peaks_data, by.x="ID_peaks", by.y="ID", all.x=T)
     colnames(ans)[colnames(ans) == "Name"] <- "Name_peaks"
     ans <- merge(reference, ans, by=c("ID", "CAS"), all.y=T)
     ans <- ans[, c("Feature_ID", "ID", "CAS", "Name", "rt", "RT_err", "RT_flag", "mz", "ppm_error", "mass_status", "mass_flag", "ID_peaks", "Name_peaks", "intense_peaks", "Collision_energy")]

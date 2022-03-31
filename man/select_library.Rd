@@ -7,7 +7,7 @@
 select_library(
   column = c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"),
   mode = c("POS", "NEG"),
-  RI_min = 10
+  accept_RI = 10
 )
 }
 \description{

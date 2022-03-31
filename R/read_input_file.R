@@ -25,7 +25,7 @@ read_input_file <- function(input, metadata, split_QC=TRUE, mz_col=3, rt_col=2, 
   colnames(mRList$metab_ann)[rt_col] <- "rt"
   rownames(mRList$metab_ann) <- data[, 1]
   if(!is.null(MS_MS_column)){
-    colnames(mRList$metab_ann)[rt_col] <- "MS_MS_spectrum"
+    colnames(mRList$metab_ann)[MS_MS_column] <- "MS_MS_spectrum"
   }
   
   if (type=="excel"){
@@ -53,6 +53,7 @@ read_input_file <- function(input, metadata, split_QC=TRUE, mz_col=3, rt_col=2, 
   
   idx <- match(colnames(mRList$data), mRList$sample_ann$id)
   if(any(is.na(idx))){
+    print(colnames(mRList$data)[is.na(idx)])
     stop("ERROR: not all samples found in annotation")
   }
   mRList$sample_ann <- mRList$sample_ann[idx,] #ettore

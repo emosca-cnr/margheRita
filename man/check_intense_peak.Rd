@@ -9,11 +9,28 @@ check_intense_peak(
   RI_lib = NULL,
   RI_sample = NULL,
   reference = NULL,
-  lib_peaks_cas = NULL,
+  lib_peaks_data = NULL,
   n_peaks = 1,
   acceptable_PPM_err = 10,
   mode = c("POS", "NEG")
 )
+}
+\arguments{
+\item{RT_mass}{RT_mass}
+
+\item{RI_lib}{RI_lib}
+
+\item{RI_sample}{RI_sample}
+
+\item{reference}{reference}
+
+\item{lib_peaks_data}{lib_peaks_data}
+
+\item{n_peaks}{n_peaks}
+
+\item{acceptable_PPM_err}{acceptable_PPM_err}
+
+\item{mode}{mode}
 }
 \description{
 check the ppm error for the intense peaks

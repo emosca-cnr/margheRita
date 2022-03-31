@@ -4,7 +4,11 @@
 \alias{annotation_dataset}
 \title{generate the data set for annotation}
 \usage{
-annotation_dataset(wdir = "./")
+annotation_dataset(
+  column = c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"),
+  mode = c("POS", "NEG"),
+  accept_RI = 10
+)
 }
 \description{
 generate the data set for annotation

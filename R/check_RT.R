@@ -1,6 +1,6 @@
 #' Checking Retention Time
 #'
-#'`check_RT` it is making a list of all library metabolites and assigning proper sample ID to each based on desired retention time error.
+#' @description `check_RT` it is making a list of all library metabolites and assigning proper sample ID to each based on desired retention time error.
 #'
 #' @param reference A list of library contain retention time with specific ID.
 #' @param feature_data A list of sample data contain retention time with specific ID.
@@ -9,7 +9,6 @@
 #' @return RT, A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
 #' @export
 #'
-#' @examples
 
 
 check_RT <- function(reference=NULL, feature_data=NULL, rt_err_thr = 2){

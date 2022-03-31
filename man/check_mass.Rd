@@ -2,16 +2,30 @@
 % Please edit documentation in R/check_mass.R
 \name{check_mass}
 \alias{check_mass}
-\title{check_mass}
+\title{calculating PPM error}
 \usage{
 check_mass(
-  feature_data = NULL,
   reference = NULL,
+  feature_data = NULL,
   unaccept_flag = 15,
   accept_flag = 5,
   suffer_flag = 10
 )
 }
+\arguments{
+\item{reference}{A list of library contain mz(mass-to-charge ratio) with specific ID.}
+
+\item{feature_data}{A list of sample data contain mz(mass-to-charge ratio) with specific ID.}
+
+\item{unaccept_flag}{A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
+
+\item{accept_flag}{A number with default value of 5. PPM errors < accept_flag will be tagged as "super", while those > accept_flag and < suffer_flag will be tagged as "acceptable"}
+
+\item{suffer_flag}{A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"}
+}
+\value{
+mass, A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
+}
 \description{
-check_mass
+it is making a list of all library metabolites and assigning proper sample ID to each based on desired PPM error.
 }
