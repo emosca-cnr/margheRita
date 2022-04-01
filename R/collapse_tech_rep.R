@@ -26,6 +26,11 @@ collapse_tech_rep <-function(mRList, remove.QC=FALSE){
     mRList$QC <- mRList$QC_ann <- NULL
   }
 
+
+  mRList$QC_ann$class_biorep <- as.factor(paste(mRList$QC_ann$class, mRList$QC_ann$biological_rep, sep="_"))
+  mRList$QC_ann<-cbind(mRList$QC_ann$class_biorep, mRList$QC_ann$class,mRList$QC_ann$biological_rep)
+  colnames(mRList$QC_ann)<-c("class_biorep", "class","biological_rep")
+
   #ensure correct order of samples
   idx <- match(colnames(mRList$data), mRList$sample_ann$class_biorep)
   if(any(is.na(idx))){
