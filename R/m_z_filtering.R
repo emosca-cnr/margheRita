@@ -8,11 +8,8 @@ m_z_filtering <- function(mRList, do_plot=TRUE, out_file="mz_quality.png", lower
   all <- length(mRList$metab_ann$quality)
   idx_keep <- mRList$metab_ann$quality < lower_quality_mass_acc | mRList$metab_ann$quality > upper_quality_mass_acc
   
-  cat("Metabolites with appropriate m/z values\n")
-  cat(as.data.frame(table(idx_keep))[1, 2])
-  cat("\n")
-  cat("Metabolites witout appropriate m/z values\n")
-  cat(all-(as.data.frame(table(idx_keep)))[1, 2])
+  cat("# Metabolites with appropriate m/z values:", sum(idx_keep), "\n")
+  cat("# Metabolites witout appropriate m/z values:", all-sum(idx_keep), "\n")
   
   mRList$data <- mRList$data[idx_keep, ]
   mRList$metab_ann <- mRList$metab_ann[idx_keep, ]

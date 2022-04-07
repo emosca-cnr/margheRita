@@ -7,7 +7,7 @@ select_library <- function(column=c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort
   data("mRlib_peaks_df", envir=environment())
   data("mRlib_precursors", envir=environment())
 
-  lib_precursor <- unique(mRlib_precursors[mRlib_precursors$COL==column, c("ID", "CAS", "Name", "rt", mode)])
+  lib_precursor <- unique(mRlib_precursors[mRlib_precursors$COL==column, c("ID", "CAS", "Name", "rt", mode, "PubChemCID")])
   rownames(lib_precursor) <- lib_precursor$ID
   colnames(lib_precursor)[5] <- "mz"
 

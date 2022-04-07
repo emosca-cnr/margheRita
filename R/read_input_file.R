@@ -58,10 +58,20 @@ read_input_file <- function(input, metadata, split_QC=TRUE, mz_col=3, rt_col=2, 
   }
   mRList$sample_ann <- mRList$sample_ann[idx,] #ettore
   
+  
+  ###
+  cat("# Samples:", nrow(mRList$sample_ann), "\n")
+  
   #SPLIT QC
   if(split_QC){
     mRList <- splitQC(mRList)
+    cat("# QC Samples:", nrow(mRList$QC_ann), "\n")
   }
+  
+  #class by biological replicates
+  cat("Class by biological replicates\n")
+  print(table(mRList$sample_ann$class, mRList$sample_ann$biological_rep))
+  
   
   return(mRList)
 }
