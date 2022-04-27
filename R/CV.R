@@ -29,9 +29,8 @@ CV <- function(mRList, dirout) {
   utils::write.csv(CV_all, paste0(dirout, "/CV_all.csv"))
 
   idx_keep <- CV_QC < CV_Samples
-  cat("Metabolites with appropriate CV\n")
-  print(table(idx_keep))
-
+  cat("# Metabolites with appropriate CV", sum(idx_keep), "\n")
+  
   mRList$data <- mRList$data[idx_keep, ] #mRList$data cleaned
   mRList$metab_ann <- mRList$metab_ann[idx_keep, ] #mRList$data cleaned
 

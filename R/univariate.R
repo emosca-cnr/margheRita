@@ -22,13 +22,14 @@ univariate <- function(mRList, dirout="./", test_method=c("ttest", "anova", "Ute
   test = c()
   for (i in 1:nrow(mRList$data)){
     if (test_method=="ttest"){
-      uni <- c(uni,t.test(mRList$data[i, ] ~ group_factor, data=mRList$data, paired=paired))
+      uni <- c(uni,t.test(as.numeric(mRList$data[i, ]) ~ group_factor, data=mRList$data, paired=paired))
       test <- c(test, "ttest")
     }
-    if (test_method=="anova"){
-      uni <- c(uni, anova(mRList$data[i, ] ~ group_factor))
-      test <- c(test, "anova")
-    }
+    #if (test_method=="anova"){
+    #  uni <- c(uni, aov(as.numeric(mRList$data[i, ]) ~ group_factor))
+    #  uni <- anova(uni)
+    #  test <- c(test, "anova")
+    #}
     if (test_method=="Utest"){
       uni <-c(uni, data=mRList$data,wilcox.test(mRList$data[i, ] ~ group_factor, paired=paired))
       test <- c(test, "wilcoxon")

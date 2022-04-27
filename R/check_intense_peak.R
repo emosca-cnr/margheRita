@@ -118,7 +118,7 @@ check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refere
     ans <- merge(ans, lib_peaks_data, by.x="ID_peaks", by.y="ID", all.x=T)
     colnames(ans)[colnames(ans) == "Name"] <- "Name_peaks"
     ans <- merge(reference, ans, by=c("ID", "CAS"), all.y=T)
-    ans <- ans[, c("Feature_ID", "ID", "CAS", "Name", "rt", "RT_err", "RT_flag", "mz", "ppm_error", "mass_status", "mass_flag", "ID_peaks", "Name_peaks", "intense_peaks", "Collision_energy")]
+    ans <- ans[, c("Feature_ID", "ID", "CAS", "PubChemCID", "Name", "rt", "RT_err", "RT_flag", "mz", "ppm_error", "mass_status", "mass_flag", "ID_peaks", "Name_peaks", "intense_peaks", "Collision_energy")]
   }else{
     message("none of the candidates matches the library peaks with current parameters\n")
     return()

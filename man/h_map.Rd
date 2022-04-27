@@ -11,6 +11,7 @@ h_map(
   col = NULL,
   scale_features = TRUE,
   features = NULL,
+  samples = NULL,
   top = 500,
   ...
 )
