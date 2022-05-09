@@ -4,7 +4,7 @@
 #' @export
 
 
-univariate <- function(mRList, dirout="./", test_method=c("ttest", "anova", "Utest", "kruskal"), paired=c("FALSE", "TRUE"), group_factor="class"){
+univariate<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), paired=c("FALSE", "TRUE"), group_factor="class"){
 
   paired<- match.arg(paired)
   test_method <- match.arg(test_method)
@@ -13,37 +13,100 @@ univariate <- function(mRList, dirout="./", test_method=c("ttest", "anova", "Ute
   dir.create(dirout)
 
   X_ann <- mRList$sample_ann
+  X_ann <- na.omit(X_ann)
   group_factor <- as.factor(X_ann[, group_factor])
 
-  data<-t(mRList$data)
+  X_data <- mRList$data[, colnames(mRList$data) %in% rownames(X_ann)]
 
+  if(test_method == "ttest"){
 
-  uni = c()
-  test = c()
-  for (i in 1:nrow(mRList$data)){
-    if (test_method=="ttest"){
-      uni <- c(uni,t.test(as.numeric(mRList$data[i, ]) ~ group_factor, data=mRList$data, paired=paired))
-      test <- c(test, "ttest")
+    if(length(levels(group_factor))>2){
+      cat("groups:", levels(group_factor), "\n")
+      stop("can not apply t test for more than 2 groups")
     }
-    #if (test_method=="anova"){
-    #  uni <- c(uni, aov(as.numeric(mRList$data[i, ]) ~ group_factor))
-    #  uni <- anova(uni)
-    #  test <- c(test, "anova")
-    #}
-    if (test_method=="Utest"){
-      uni <-c(uni, data=mRList$data,wilcox.test(mRList$data[i, ] ~ group_factor, paired=paired))
-      test <- c(test, "wilcoxon")
-    }
-    if(test_method=="kruskal"){
-      uni <- c(uni,kruskal.test(mRList$data[i, ] ~ group_factor,data=mRList$data, paired=paired))
-      test <- c(test, "kruskal")
-    }
-    uni_corrected <- p.adjust(uni, method ="BH")
-    mRList$uni <- cbind(mRList$data$ID, uni, uni_corrected)
-    #mRList$data<-cbind(mlist$data, uni_corrected)
-     #write.csv(uni_corrected, "univariate_corrected.csv")
+
+    cat("t tests between", levels(group_factor), "\n")
+
+    ans <- apply(X_data, 1, function(x) t.test(x ~ group_factor))
+    ans <- lapply(ans, function(x) data.frame(t=x$statistic, p=x$p.value))
+    ans <- do.call(rbind, ans)
+    ans$q <- p.adjust(ans$p, method ="BH")
+    colnames(ans)<-c("t-statistics","p-value","q-value")
+    mRList$ttest <- ans
+    rownames(mRList$ttest)<-rownames(mRList$data)
+    uni_t= paste(dirout, "/ttest.csv", sep ="")
+    utils::write.csv(mRList$ttest, uni_t)
   }
 
-  return(mRList)
+  if(test_method == "Utest"){
+
+    if(length(levels(group_factor))>2){
+      cat("groups:", levels(group_factor), "\n")
+      stop("can not apply Utest for more than 2 groups")
+    }
+
+    cat("U tests between", levels(group_factor), "\n")
+
+    ans <- apply(X_data, 1, function(x)  wilcox.test(x ~ group_factor))
+    ans <- lapply(ans, function(x) data.frame(t=x$statistic, p=x$p.value))
+    ans <- do.call(rbind, ans)
+    ans$q <- p.adjust(ans$p, method ="BH")
+    colnames(ans)<-c("t-statistics","p-value","q-value")
+    mRList$Utest <- ans
+    rownames(mRList$Utest)<-rownames(mRList$data)
+    uni_u= paste(dirout, "/Utest.csv", sep ="")
+    utils::write.csv(mRList$Utest, uni_u)
+
+  }
+
+
+
+  if(test_method == "anova"){
+
+    if(length(levels(group_factor))<3){
+      cat("groups:", levels(group_factor), "\n")
+      stop("can not apply anova test for less than 3 groups")
+    }
+
+    ans_t <- apply(X_data, 1, function(x)  anova(aov(x ~ group_factor))$"F value"[1])
+    ans_p<- apply(X_data, 1, function(x)  anova(aov(x ~ group_factor)) $"Pr(>F)"[1])
+     ans_t<-as.data.frame(ans_t)
+     ans_p<-as.data.frame(ans_p)
+     anova_res<-cbind(ans_t,ans_p)
+    colnames(anova_res)<-c("t","p")
+    anova_res$q <- p.adjust(anova_res$p, method ="fdr")
+    anova_res<-cbind(anova_res$t,anova_res$p,anova_res$q)
+    colnames(anova_res)<-c("t-statistic","p-value","q-value")
+    anova_res<-as.data.frame(anova_res)
+    mRList$anova <- anova_res
+    rownames(mRList$anova)<-rownames(mRList$data)
+
+    uni_anova= paste(dirout, "/anova.csv", sep ="")
+    utils::write.csv(mRList$anova, uni_anova)
+  }
+
+  if(test_method == "kruskal"){
+
+    if(length(levels(group_factor))<3){
+      cat("groups:", levels(group_factor), "\n")
+      stop("can not apply kruskal test for less than 3 groups")
+    }
+
+    #cat("U tests between", levels(group_factor), "\n")
+
+    ans <- apply(X_data, 1, function(x)  kruskal.test(x ~ group_factor))
+    ans <- lapply(ans, function(x) data.frame(t=x$statistic, p=x$p.value))
+    ans <- do.call(rbind, ans)
+    ans$q <- p.adjust(ans$p, method ="fdr")
+    colnames(ans)<-c("t-statistics","p-value","q-value")
+    mRList$kruskal <- ans
+    rownames(mRList$kruskal)<-rownames(mRList$data)
+    uni_kru= paste(dirout, "/kruskal_test.csv", sep ="")
+    utils::write.csv(mRList$kruskal, uni_kru)
+  }
+
+   return(mRList)
 
 }
+
+
