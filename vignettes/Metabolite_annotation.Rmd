@@ -20,8 +20,8 @@ library(margheRita)
 ```
 
 #library within the margheRita
-margheRita provides a library contains about 600 compounds in five possible column of HILIC, LipC8, pZIC, RPLong, RPShort and positive or negative mode for metabolite identification of unknown metabolite. to generate the library two datasets are provided, one related to precursor contain 16 types of information. Name, Elemental composition, CAS, COL, Unique.Name_lib, rt, mz in NEU, POS and NEG mode, SMILES, KEGG.ID or CHEMSPIDER.ID, HMDB/YMDBID, METLIN.ID, PubChemCID, CHEBI and ID. 
-the other one contains 9 features of ID, Name, MW, CAS, Formula, Precursor MZ, Collision energy, Number of the peaks and peaks.
+margheRita provides a library contains about 600 compounds in five possible column of HILIC, LipC8, pZIC, RPLong, RPShort in positive and negative mode for metabolite identification of unknown metabolite. to generate the library two datasets are provided, one related to precursor contain 16 types of information. Name, Elemental composition, CAS, COL, Unique.Name_lib, rt, mz in NEU, POS and NEG mode, SMILES, KEGG.ID or CHEMSPIDER.ID, HMDB/YMDBID, METLIN.ID, PubChemCID, CHEBI and ID. 
+the other one relate to fragments contains 9 features of ID, Name, MW, CAS, Formula, Precursor MZ, Collision energy, Number of the peaks and peaks.
 the information that are required for metabolite identification from the first dataset are "ID", "CAS", "Name", "rt", "mz" and "ID", "CAS", "Collision_energy", "Name" and "Peaks" form the second dataset. 
 
 `margheRita_library` function extract these information and stored them in three lists.
@@ -30,7 +30,7 @@ the information that are required for metabolite identification from the first d
 -library peaks: it is a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mass to charge ratio and relative intensity. 
 
 ```{r, eval=FALSE}
-margheRita_library(column = "HILIC", mode = "POS", accept_RI = 10)
+select_library(column=c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"), mode=c("POS", "NEG"), accept_RI=10)
 ```
 
 *`column`: it is specify the type of the column which could be; HILIC, LipC8, pZIC, RPLong or RPShort. based on the type of the column, the retention time of same metabolite could be different. 
@@ -39,8 +39,16 @@ margheRita_library(column = "HILIC", mode = "POS", accept_RI = 10)
 
 *`accept_RI`: it is a numeric parameter. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, it is filtering the library by deleting the relative intensity lower then `accept_RI`.
 
-# generate dataset for metabolite identification 
-mass spectroscopy provides us variety of information but for metabolite identification we need only Retention time and m/z and spectra of the known metabolite library and unknown sample to compare them together. 
+# sample dataset selection 
+sample data set can be in Excel or ... format. while mass spectroscopy provides variety of information, the requirements for metabolite identifications are Retention time and m/z and spectra of the fragments. 
+
+```{r, eval=FALSE}
+select_sample(mRList = NULL, n_column = c(1, 2, 3, 5), accept_RI = 10)
+```
+
+
+# generate sample for metabolite identification 
+mass spectroscopy provides variety of information but for metabolite identification its only require Retention time and m/z and spectra of the known metabolite library and unknown sample to compare them together. 
 `annotation_dataset()` function generate required data.
 
 ```{r, eval=FALSE}

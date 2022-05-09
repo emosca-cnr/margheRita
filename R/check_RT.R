@@ -11,14 +11,14 @@
 #'
 
 
-check_RT <- function(reference=NULL, feature_data=NULL, rt_err_thr = 2){
+check_RT <- function(reference=NULL, feature_data=NULL, rt_err_thr = 1){
 
   RT <- vector("list", nrow(reference))
   names(RT) <- reference$ID
 
   for (k in 1:dim(reference)[1]){
 
-    RT[[k]] <- data.frame(Feature_ID= feature_data$Feature_ID, RT_err=as.numeric(abs(reference$rt[k]- feature_data$rt)), stringsAsFactors = F)
+    RT[[k]] <- data.frame(Feature_ID= feature_data$Feature_ID, RT_err=abs(reference$rt[k]- feature_data$rt), stringsAsFactors = F)
     RT[[k]]$RT_flag <- RT[[k]]$RT_err < rt_err_thr
     RT[[k]] <- RT[[k]][RT[[k]]$RT_flag, ]
   }

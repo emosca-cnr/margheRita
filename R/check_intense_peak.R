@@ -14,7 +14,8 @@
 #'
 check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, reference=NULL, lib_peaks_data=NULL, n_peaks=1, acceptable_PPM_err = 10, mode=c("POS", "NEG")) {
 
-  ans <- vector("list", length(RT_mass)) #a novel data to not touch the input
+  #a novel data to not touch the input
+  ans <- vector("list", length(RT_mass))
   names(ans) <- names(RT_mass)
 
   #ensure the same order
@@ -22,29 +23,20 @@ check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refere
 
   #z cycles trhough the precursor library entries
   for(z in 1:length(RT_mass)){
-    #cat(z)
-    #ans[[z]]$intense_peak <- F
-    #ans[[z]]$intense_peak2 <- NA
-    #ans[[z]]$intense_peak3 <- NA
 
     #clean the library to keep only metabolites that appear in the sample
-    #z_peaks <- as.data.frame(RI_lib[names(RI_lib) == names(RT_mass)[z]])
     CAS_z <- reference$CAS[reference$ID == names(RT_mass)[z]]
     z_peaks_all <- RI_lib[lib_peaks_data$CAS == CAS_z & lib_peaks_data$Collision_energy == mode ]
 
     if(length(z_peaks_all)>0){
       #cycle thourgh the peaks that are available for the given CAS at precursor level
       for(zzzz in 1:length(z_peaks_all)){
-
         z_peaks <- z_peaks_all[[zzzz]]
 
         #cycle thourgh the candidates
         for(zi in 1:nrow(RT_mass[[z]])){
-
           zi_peaks <- as.data.frame(RI_sample[names(RI_sample) == RT_mass[[z]]$Feature_ID[zi]])
 
-
-          #the first
           table_values_a <- sort(unique(z_peaks[, 2]), decreasing = T) #library peaks
           table_values_b <- sort(unique(zi_peaks[, 2]), decreasing = T) #sample peaks
 
@@ -58,13 +50,7 @@ check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refere
             b = zi_peaks[zi_peaks[,2] == table_values_b[ii], , drop=FALSE]
 
             PPM_err <- calc_ppm_err(a, b)
-
-            #RT_mass[[z]][zi, 6+ii] <- any(PPM_err < acceptable_PPM_err)
-            temp_flag_peaks[ii] <- any(PPM_err < acceptable_PPM_err) #
-
-            #if(!RT_mass[[z]][zi, 6+ii]){
-            #  break
-            #}
+            temp_flag_peaks[ii] <- any(PPM_err < acceptable_PPM_err)
 
             if(!temp_flag_peaks[ii]){ #if FALSE avoid the comparison for the next peaks
               break
@@ -84,7 +70,6 @@ check_intense_peak = function(RT_mass=NULL, RI_lib=NULL , RI_sample=NULL, refere
 
       } #end cycle through the peaks for that CAS
 
-      #RT_mass[[z]] = RT_mass[[z]][apply(RT_mass[[z]][, c("intense_peak", "intense_peak2", "intense_peak3")], 1, all, na.rm=TRUE), ]
     }
 
     if(!is.null(ans[[z]])){
