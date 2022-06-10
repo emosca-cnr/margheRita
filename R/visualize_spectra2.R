@@ -10,9 +10,13 @@ visualize_spectra2 <- function(x=NULL, RI_sample=NULL, RI_lib=NULL){
 
     jpeg(file=paste0(dir_out, "/", ".jpg"))
 
-if(nrow(x[[a]])>1){
-    par(mfrow = c(round(nrow(x[[a]])/2), round(nrow(x[[a]])/2)+1))
-}else{par(mfrow = c(round(nrow(x[[a]])/2)+1, round(nrow(x[[a]])/2)+1))}
+    #if(nrow(x[[a]])>1){
+    #par(mfrow = c(round(nrow(x[[a]])/2), round(nrow(x[[a]])/2)+1))
+    #}else{par(mfrow = c(round(nrow(x[[a]])/2)+1, round(nrow(x[[a]])/2)+1))}
+
+    if(nrow(x[[a]])<7){
+      par(mfrow = c(2,3))
+      }else{par(mfrow = c(3,3))}
 
     for(b in 1:nrow(x[[a]])){ #cycle through candidates
       sample_plot <- as.data.frame(RI_sample[names(RI_sample) == x[[a]]$Feature_ID[b]])
