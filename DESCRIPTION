@@ -1,31 +1,20 @@
 Package: margheRita
 Title: Mass spectrometry-based metabolic data analysis
 Version: 0.1.1
-Authors@R:
+Authors@R: 
   person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: margheRita: an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles
-License: `use_gpl3_license()` 
+License: `use_gpl3_license()`
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
-Depends: 
-    R (>= 3.5.0)
-Imports:
-    readxl,
-    grDevices,
-    stats,
-    utils,
-    clusterProfiler,
-    limma,
-    ComplexHeatmap,
-    LSD,
-    notame,
-    MSnbase,
-    igraph,
-    viridis,
-    plotly
-Suggests: 
-    rmarkdown,
-    knitr,
+Depends: R (>= 3.5.0)
+Imports: readxl, grDevices, stats, utils, clusterProfiler, limma,
+        ComplexHeatmap, LSD, notame, MSnbase, igraph, viridis, plotly
+Suggests: rmarkdown, knitr,
 VignetteBuilder: knitr
+NeedsCompilation: no
+Packaged: 2022-04-07 14:46:27 UTC; emosca
+Author: Ettore Mosca [aut, cre] (YOUR-ORCID-ID)
+Maintainer: Ettore Mosca <ettore.mosca@itb.cnr.it>
