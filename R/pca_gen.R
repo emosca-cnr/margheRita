@@ -1,10 +1,13 @@
-#' PCA general
-#' Scree plot, pairs of the first 10 components
-#' Score and loading plot choosing pcx and pcy with function Plot2DPCA after pca_gen
+#'PCA analysis
+#'@description  Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted
+#'@description Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function
 #' @param mRList margheRita mRList
-#' @param include_QC (default TRUE); scaling: Pareto, none,UV;col_by (default class)
+#' @param col_by (default class)
+#' @param scaling choose the scaling method "none","pareto" or "uv"
+#' @param include_QC (default TRUE)
 #' @param write_output (default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved
-#' @return Graphs of screeplot, pairs, scoreplot and loading plot; table as .csv if write_output turns TRUE
+#' @return Graphs of screeplot and pairs; table as .csv if write_output turns TRUE
+#' @return scoreplot and loading plot after plot2DPCA function has to be launch. User has to choose the PCs to plot graphs
 #' @export
 #' @importFrom graphics plot barplot
 #' @importFrom grDevices dev.off png
@@ -126,7 +129,8 @@
 
 
 
-#'Create 2D PCA score plot
+#'Create 2D PCA score and loading plots
+#'@description Create 2D PCA score and loading plots choosing the principal components.
 #'@param mRList Input name of the created object
 #'@param scoreplot input a name for the score plot
 #'@param loadingplot input for the loading plot

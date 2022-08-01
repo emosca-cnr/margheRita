@@ -1,6 +1,8 @@
-#' Calculate mean, median and standard deviation (stdev) for each group under study.
-#' write_output =FALSE default, if TRUE table, as .csv format, are written
-#' @param mRList mRList
+#' Calculate mean and median for each biological group.
+#' @description Calculate mean, median and standard deviation for each biological group under study.
+#' @description This function works after collapse_tech_rep.
+#' @description write_output (default FALSE), if TRUE table, as .csv format, is written and saved.
+#' @param mRList mRList contains only biological replicates
 #' @importFrom stats aggregate
 #' @importFrom utils write.csv
 #' @export

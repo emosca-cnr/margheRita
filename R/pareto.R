@@ -1,6 +1,6 @@
-#' pareto scaling of the dataframe after missing value correction
-# dataframe only with samples and intensity of each m/z and RT
-#' @param df data.frame without the first three columns (MS DIAL, RT and m/z)
+#' pareto scaling
+#' @description Function performs pareto scaling of dataframe after missing values correction
+#' @param X is dataframe that contains only data, without the columns that contain ID metabolite, m/z, RT, MS and MS/MS information
 #' @importFrom utils write.csv
 #' @export
 #' @importFrom stats sd
