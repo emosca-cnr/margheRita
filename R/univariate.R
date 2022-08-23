@@ -1,5 +1,9 @@
-#' user has to Choose between T-test, U-test, Anova or Kruskal
-#' @param mRList (dataframe of samples only biological replicates, technical replicates were collapsed before)
+#' Univariate analysis
+#' @description User can choose between T-test, U-test, Anova test  or Kruskal-Wallis test.
+#' @param mRList dataframe with data of samples that contains only biological replicates. Technical replicates have to be collapsed before using collapse_tech_rep function
+#' @param test_method choice of the test to apply
+#' @param paired TRUE if data are paired, FALSE for unpaired data
+#' @param group_factor specify the groups to compare
 #' @importFrom utils write.csv
 #' @export
 
