@@ -1,5 +1,13 @@
-#' heatmap
-#' @param mRList mRList
+#' Draw an heatmap
+#' @param mRList mRList object
+#' @param dirout output directory
+#' @param col_ann set of colors for sample annotation
+#' @param col set of color for data values 
+#' @param scale_features whether to scale features or not
+#' @param features names of features to plot (optiooal)
+#' @param samples samples to consider (optional)
+#' @param top only the top most variable features are plotted (if features is NULL)
+#' @param ... further arguments for ComplexHeatmap::Heatmap
 #' @export
 #' @import ComplexHeatmap
 #' @importFrom grDevices dev.off png

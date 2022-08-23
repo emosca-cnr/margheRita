@@ -2,7 +2,7 @@
 % Please edit documentation in R/m_z_filtering.R
 \name{m_z_filtering}
 \alias{m_z_filtering}
-\title{m_z_filtering}
+\title{Filter m/z of metabolites}
 \usage{
 m_z_filtering(
   mRList,
@@ -15,8 +15,21 @@ m_z_filtering(
 )
 }
 \arguments{
-\item{mRList}{mRList}
+\item{mRList}{mRList object}
+
+\item{do_plot}{whether to plot or not}
+
+\item{lower_quality_mass_acc}{lower quality value}
+
+\item{upper_quality_mass_acc}{upper quality value}
+
+\item{color}{point color}
+
+\item{outfile}{output file name}
+}
+\value{
+filtered mRList
 }
 \description{
-m_z_filtering
+Filter m/z of metabolites
 }

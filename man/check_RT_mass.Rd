@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_RT_mass.R
 \name{check_RT_mass}
 \alias{check_RT_mass}
-\title{Merging ideal candidate in term of Retention Time and PPM error}
+\title{Merge candidates with appropriate retention time and PPM error}
 \usage{
 check_RT_mass(RT = NULL, mass = NULL, reference = NULL)
 }
@@ -13,6 +13,9 @@ check_RT_mass(RT = NULL, mass = NULL, reference = NULL)
 
 \item{reference}{A list of library contain retention time and mz (mass-to-charge ratio) with specific ID.}
 }
+\value{
+data.frame with candidates
+}
 \description{
-Merging ideal candidate in term of Retention Time and PPM error
+Merge candidates with appropriate retention time and PPM error
 }

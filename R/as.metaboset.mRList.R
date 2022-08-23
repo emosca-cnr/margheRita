@@ -1,7 +1,8 @@
-#' mRList2MetaboSet
-#'
+#' Transforms mRList into mSet object
+#' @param mRList mRList object
 #' @importFrom notame construct_metabosets
 #' @export
+#' @return mset object
 
 as.metaboset.mRList <- function(mRList){
 

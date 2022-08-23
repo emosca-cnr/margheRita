@@ -1,10 +1,12 @@
-#' Calculation of coefficient of variance for each metabolite
-#' @description Function Calculates coefficient of variance (CV) for samples and QC (quality control) to assess the reliability of the experiment.
-#' @description CV as =(stdev-mean)*100, is calculated for each metabolite for QC and samples. If CV QC>CV sample metabolite is deleted.
-#' @description The resulting dataframe and metadata contain only reliable metabolites.
-#' @param mRList mRList has to be split into df_QC (dataframe of quality control) and df_samples (dataframe of samples)
+#' Calculate of coefficient of variation for each metabolite
+#' 
+#' Calculate the coefficient of variance (CV) for samples and QC (quality control) to assess the reliability of the experiment, as:
+#' CV = (SD - mean) * 100.
+#' Only metabolites with sample CV < QC CV are kept.
+#' 
+#' @param mRList mRList object
 #' @export
-#' @return mRList cleaned with only reliable metabolites
+#' @return filtered mRList object
 
 
 
@@ -21,7 +23,7 @@ CV <- function(mRList, dirout) {
 
 
   mean_Samples <- apply(mRList$data, MARGIN=1, mean)
-  sd_Samples <- apply(mRList$data,MARGIN = 1,sd)
+  sd_Samples <- apply(mRList$data, MARGIN = 1, sd)
   CV_Samples <- (sd_Samples / mean_Samples) * 100
   utils::write.csv(CV_Samples, file = paste0(dirout,"/CV_Sample.csv"))
 

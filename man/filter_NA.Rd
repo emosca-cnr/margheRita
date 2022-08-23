@@ -7,11 +7,14 @@
 filter_NA(mRList, min_metab_in_sample = 100, min_sample_with_metab = 10)
 }
 \arguments{
-\item{mRList}{margheRita list}
+\item{mRList}{mRList object}
 
 \item{min_metab_in_sample}{min number of metabolites in a sample}
 
 \item{min_sample_with_metab}{min number of samples in which a metabolite must appear}
+}
+\value{
+filtered mRList object
 }
 \description{
 filter NA

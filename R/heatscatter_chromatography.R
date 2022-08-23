@@ -1,9 +1,17 @@
-#' heatscatter_chromatography
+#' Draw the "heatscatter chromatography"
 #' @importFrom LSD heatscatter
 #' @importFrom grDevices png
 #' @export
+#' @param mRList mRList object
+#' @param mz_limits numeric vector with minimum and maximum rt values
+#' @param rt_limits numeric vector with minimum and maximum rt values
+#' @param sample ???
+#' @param outfile out file name
+#' @param ... further arguments to LSD::heatscatter
+#' 
 
 heatscatter_chromatography <- function(mRList, mz_limits=NULL, rt_limits=NULL, sample=NULL, outfile="heatscatter.png" , ...) {
+   
    if (!is.null(sample)) {
       df <- mRList$metab_ann[, c("rt", "mz", paste(sample[1], "_mean", sep = ""))]
       df <- df[df[,3]> 0,]

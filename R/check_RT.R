@@ -1,4 +1,4 @@
-#' Checking Retention Time
+#' Check the retention time
 #'
 #' @description `check_RT` it is making a list of all library metabolites and assigning proper sample ID to each based on desired retention time error.
 #'
@@ -6,7 +6,7 @@
 #' @param feature_data A list of sample data contain retention time with specific ID.
 #' @param rt_err_thr A number that specify the desired absolute difference of retention time between sample and library metabolite.
 #'
-#' @return RT, A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
+#' @return A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
 #' @export
 #'
 

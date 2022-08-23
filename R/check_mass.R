@@ -1,4 +1,7 @@
-#' calculating PPM error
+#' Calculate the PPM error of precursors
+#' 
+#' Calculate the PPM error of precursors and assign a flag according to its value.
+#' 
 #' @description it is making a list of all library metabolites and assigning proper sample ID to each based on desired PPM error.
 #'
 #' @export
@@ -9,7 +12,7 @@
 #' @param suffer_flag A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"
 #' @param unaccept_flag A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 
-#' @return mass, A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
+#' @return A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
 
 
 check_mass <- function(reference=NULL, feature_data=NULL, unaccept_flag=15, accept_flag=5, suffer_flag=10){

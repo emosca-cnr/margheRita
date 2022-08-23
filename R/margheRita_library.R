@@ -1,20 +1,18 @@
-#' Library of margheRita
+#' Retrieve margheRita metabolite level 2 annotation library
 #' 
-#' Library of margheRita contains three list: 
-#' - precursors library: it is a list of metabolites which each contains information of retention time and mz with their specific IDs, CAS numbers and names.
-#' - lib_peaks_data:it is a list of metabolites which each contains information of collision energy with their specific IDs, CAS numbers and names.
-#' - lib_peaks: it is a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mz and relative intensity. 
+#' @return a list with three elements: 
+#' - precursors library: a list of metabolites which each contains information of retention time and mz with their specific IDs, CAS numbers and names.
+#' - lib_peaks_data: a list of metabolites which each contains information of collision energy with their specific IDs, CAS numbers and names.
+#' - lib_peaks: a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mz and relative intensity. 
 #'
 #'
-#'@param column it is specify the type of the column which could be; HILIC, LipC8, pZIC, RPLong, RPShort. based on the type of the column, the retention time of same metabolite could be different.
-#'@param mode mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.
-#'@param accept_RI numeric parameter. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, it is filtering the library by deleting the relative intensity lower then accept_RI.
+#' @param column it is specify the type of the column which could be; HILIC, LipC8, pZIC, RPLong, RPShort. based on the type of the column, the retention time of same metabolite could be different.
+#' @param mode mode could be set in positive (POS) or negative (NEG). positive mode select positive collision energy and mz in positive mod.
+#' @param accept_RI numeric. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, the library is filtered and only peaks with relative intesity > accept_RI are kept.
 #'
-#'@return
-#'@export
+#' @export
 #'
-#'@examples
-#'
+
 margheRita_library <- function(column=c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"), mode=c("POS", "NEG"), accept_RI = 10){
   
   ## library

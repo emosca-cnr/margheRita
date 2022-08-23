@@ -2,7 +2,7 @@
 % Please edit documentation in R/metab_boxplot.R
 \name{metab_boxplot}
 \alias{metab_boxplot}
-\title{metab_boxplot}
+\title{Boxplots}
 \usage{
 metab_boxplot(
   mRList = NULL,
@@ -14,7 +14,13 @@ metab_boxplot(
 }
 \arguments{
 \item{mRList}{mRList}
+
+\item{features}{vector with a list of metabolites to graph}
+
+\item{col_by}{define how to color the boxplot, default=class}
+
+\item{group}{define what you want to compare}
 }
 \description{
-metab_boxplot
+Plot boxplot of metabolites, and save them as .png.
 }

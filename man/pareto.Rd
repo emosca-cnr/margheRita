@@ -2,13 +2,13 @@
 % Please edit documentation in R/pareto.R
 \name{pareto}
 \alias{pareto}
-\title{pareto scaling of the dataframe after missing value correction}
+\title{pareto scaling}
 \usage{
 pareto(X, centering = TRUE)
 }
 \arguments{
-\item{df}{data.frame without the first three columns (MS DIAL, RT and m/z)}
+\item{X}{is dataframe that contains only data, without the columns that contain ID metabolite, m/z, RT, MS and MS/MS information}
 }
 \description{
-pareto scaling of the dataframe after missing value correction
+Function performs pareto scaling of dataframe after missing values correction
 }

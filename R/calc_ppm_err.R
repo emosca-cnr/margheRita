@@ -1,8 +1,10 @@
-#' equation to calculate the PPM error
+#' Calculate PPM error
+#' 
+#' PPM_error = abs(x - y) / x * 1000000
 #'
-#'
-#' @export
-
+#' @param a data.frame of 1 row and PPM in column 1
+#' @param b data.frame of 1 row and PPM in column 1
+#' @return PPM error
 
 calc_ppm_err <- function(a=NULL, b=NULL){
   

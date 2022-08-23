@@ -1,5 +1,11 @@
-#' m_z_filtering
-#' @param mRList mRList
+#' Filter m/z of metabolites
+#' @param mRList mRList object
+#' @param do_plot whether to plot or not
+#' @param outfile output file name
+#' @param lower_quality_mass_acc lower quality value
+#' @param upper_quality_mass_acc upper quality value
+#' @param color point color
+#' @return filtered mRList
 #' @export
 
 m_z_filtering <- function(mRList, do_plot=TRUE, out_file="mz_quality.png", lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black" ,...){

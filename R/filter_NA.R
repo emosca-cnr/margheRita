@@ -1,8 +1,11 @@
 #' filter NA
-#' @param mRList margheRita list
+#' @param mRList mRList object
 #' @param min_metab_in_sample min number of metabolites in a sample
 #' @param min_sample_with_metab min number of samples in which a metabolite must appear
 #' @export
+#' @return filtered mRList object
+
+
 filter_NA <- function(mRList, min_metab_in_sample=100, min_sample_with_metab=10){
 
   idx_keep <- colSums(!is.na(mRList$data)) >= min_metab_in_sample

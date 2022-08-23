@@ -2,8 +2,7 @@
 % Please edit documentation in R/pca_gen.R
 \name{pca_gen}
 \alias{pca_gen}
-\title{PCA general
-Scree plot, score and loading plot (PC1 vs PC2)}
+\title{PCA analysis}
 \usage{
 pca_gen(
   mRList,
@@ -20,14 +19,21 @@ pca_gen(
 \arguments{
 \item{mRList}{margheRita mRList}
 
-\item{include_QC}{(default TRUE); scaling: Pareto, none,UV;col_by (default class)}
+\item{col_by}{(default class)}
+
+\item{scaling}{choose the scaling method "none","pareto" or "uv"}
+
+\item{include_QC}{(default TRUE)}
 
 \item{write_output}{(default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved}
 }
 \value{
-Graphs of screeplot, scoreplot and loading plot; table as .csv if write_output turns TRUE
+Graphs of screeplot and pairs; table as .csv if write_output turns TRUE
+
+scoreplot and loading plot after plot2DPCA function has to be launch. User has to choose the PCs to plot graphs
 }
 \description{
-PCA general
-Scree plot, score and loading plot (PC1 vs PC2)
+Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted
+
+Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function
 }

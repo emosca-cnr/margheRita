@@ -1,6 +1,10 @@
-#' Remove batch effect
+#' Removes batch effects
+#' 
+#' This function applies the procedure implemented in "removeBatchEffect" from limma package.
+#' @param mRList mRList object
 #' @importFrom limma removeBatchEffect
 #' @export
+#' @return mRList object with updated mRList$data.
 
 
 batch_effect <- function(mRList){

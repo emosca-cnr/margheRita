@@ -2,10 +2,16 @@
 % Please edit documentation in R/calculate_lfc_all.R
 \name{calculate_lfc_all}
 \alias{calculate_lfc_all}
-\title{calculate_lfc_all}
+\title{Calculate the log fold change between all pairs of sample classes}
 \usage{
-calculate_lfc_all(mRList, lfc_theshold = 0.25)
+calculate_lfc_all(mRList)
+}
+\arguments{
+\item{mRList}{mRList object}
+}
+\value{
+mRList object with fold changes in mRList$metab_ann
 }
 \description{
-calculate_lfc_all
+Calculate the log fold change between all pairs of sample classes
 }

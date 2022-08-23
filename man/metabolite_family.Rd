@@ -2,20 +2,21 @@
 % Please edit documentation in R/metabolite_family.R
 \name{metabolite_family}
 \alias{metabolite_family}
-\title{Metabolite Family}
+\title{family of metabolites}
 \usage{
 metabolite_family(
-  feature_data = NULL,
   reference = NULL,
-  rt_err_thr = 2,
-  unaccept_flag = 1000,
-  RT_mass = NULL,
+  feature_data = NULL,
   RI_lib = NULL,
   RI_sample = NULL,
   lib_peaks_data = NULL,
-  mode = c("POS", "NEG")
+  rt_err_thr = 1,
+  unaccept_flag = 10,
+  mode = c("NEG", "POS"),
+  ppm_err = 10,
+  intensity = 30
 )
 }
 \description{
-Metabolite Family
+family of metabolites
 }

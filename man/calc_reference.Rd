@@ -2,7 +2,7 @@
 % Please edit documentation in R/calc_reference.R
 \name{calc_reference}
 \alias{calc_reference}
-\title{calculate reference}
+\title{Calculate a reference profile}
 \usage{
 calc_reference(
   mRList,
@@ -11,6 +11,18 @@ calc_reference(
   approach = c("median", "mean")
 )
 }
+\arguments{
+\item{mRList}{mRList object}
+
+\item{sample_col}{the column of mRList$sample_ann where the "sample_class" value is found}
+
+\item{sample_class}{label to identify the samples to be used for the reference profile calculation}
+
+\item{approach.}{The type of average: "median" or "mean".}
+}
+\value{
+mRList object with mRList$reference
+}
 \description{
-calculate reference
+The reference profile is calculated using the samples annotated as "sample_class" in the sample annotation column "sample_col".
 }

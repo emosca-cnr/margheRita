@@ -2,10 +2,16 @@
 % Please edit documentation in R/batch_effect.R
 \name{batch_effect}
 \alias{batch_effect}
-\title{Remove batch effect}
+\title{Removes batch effects}
 \usage{
 batch_effect(mRList)
 }
+\arguments{
+\item{mRList}{mRList object}
+}
+\value{
+mRList object with updated mRList$data.
+}
 \description{
-Remove batch effect
+This function applies the procedure implemented in "removeBatchEffect" from limma package.
 }

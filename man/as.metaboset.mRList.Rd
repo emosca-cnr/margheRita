@@ -2,10 +2,16 @@
 % Please edit documentation in R/as.metaboset.mRList.R
 \name{as.metaboset.mRList}
 \alias{as.metaboset.mRList}
-\title{mRList2MetaboSet}
+\title{Transforms mRList into mSet object}
 \usage{
 as.metaboset.mRList(mRList)
 }
+\arguments{
+\item{mRList}{mRList object}
+}
+\value{
+mset object
+}
 \description{
-mRList2MetaboSet
+Transforms mRList into mSet object
 }
