@@ -4,7 +4,7 @@
 #' @param mRList mRList object
 #' @param sample_col the column of mRList$sample_ann where the "sample_class" value is found
 #' @param sample_class label to identify the samples to be used for the reference profile calculation
-#' @param approach. The type of average: "median" or "mean".
+#' @param approach The type of average: "median" or "mean".
 #' @export
 #' @return mRList object with mRList$reference
 #'

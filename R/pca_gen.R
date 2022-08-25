@@ -11,6 +11,7 @@
 #' @importFrom grDevices dev.off png
 #' @importFrom utils write.csv
 #' @param top only the top most varying features will be used
+#' @param dirout output directory
 
 pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", "uv"),include_QC=TRUE, top=Inf, write_output=FALSE) {
   

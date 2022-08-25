@@ -1,8 +1,7 @@
 #' Transforms mRList into mSet object
 #' @param mRList mRList object
-#' @importFrom notame construct_metabosets
 #' @export
-#' @return mset object
+#' @return a list that cotains the arguments for notame::construct_metabosets function
 
 as.metaboset.mRList <- function(mRList){
 
@@ -16,8 +15,12 @@ as.metaboset.mRList <- function(mRList){
   colnames(pheno_data)[colnames(pheno_data) == "injection_order"] <- "Injection_order"
   pheno_data <- cbind(pheno_data, QC=pheno_data$class)
 
-  mset <- notame::construct_metabosets(exprs = as.matrix(cbind(mRList$data, mRList$QC)), pheno_data = pheno_data, feature_data = feature_data, group_col = "class")
-
+  #mset <- notame::construct_metabosets(exprs = as.matrix(cbind(mRList$data, mRList$QC)), pheno_data = pheno_data, feature_data = feature_data, group_col = "class")
+  mset <- list(
+    exprs=as.matrix(cbind(mRList$data, mRList$QC)),
+    pheno_data=pheno_data,
+    feature_data=feature_data,
+    group_col="class"
+  )
   return(mset)
-
 }

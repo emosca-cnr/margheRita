@@ -8,6 +8,7 @@
 #' @importFrom utils write.csv
 #' @export
 #' @return mRList object with mean, median and sd in mRList$metab_ann element
+#' @param dirout output directory
 
 
 mean_median_stdev_samples<-function(mRList, dirout="./", write_output=FALSE){

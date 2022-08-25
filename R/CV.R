@@ -7,7 +7,7 @@
 #' @param mRList mRList object
 #' @export
 #' @return filtered mRList object
-
+#' @param dirout output directory
 
 
 #apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites

@@ -48,7 +48,7 @@ metabolite_annotation = function(mRList = NULL, library_list = NULL, feature_spe
   
   cat("Calculating RIs...\n")
   #establishing new sample data by calculating relative intensity
-  RI_sample = RI_sample_data (feature_spectra= feature_spectra, acceptable_RI = acceptable_RI )
+  RI_sample = RI_sample_data (feature_spectra= feature_spectra, accept_RI = acceptable_RI )
   
   #establishing new library data by calculating relative intensity
   #RI_lib = RI_lib_data ( reference = reference_spectra , RT_mass, acceptable_RI = acceptable_RI)
