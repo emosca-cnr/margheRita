@@ -2,7 +2,8 @@
 % Please edit documentation in R/pareto.R
 \name{pareto}
 \alias{pareto}
-\title{pareto scaling}
+\title{Pareto scaling
+Perform data scaling with Pareto approach.}
 \usage{
 pareto(X, centering = TRUE)
 }
@@ -10,5 +11,6 @@ pareto(X, centering = TRUE)
 \item{X}{is dataframe that contains only data, without the columns that contain ID metabolite, m/z, RT, MS and MS/MS information}
 }
 \description{
-Function performs pareto scaling of dataframe after missing values correction
+Pareto scaling
+Perform data scaling with Pareto approach.
 }

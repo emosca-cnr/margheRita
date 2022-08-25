@@ -15,7 +15,19 @@ RLA(
 )
 }
 \arguments{
-\item{mRList}{margheRita list}
+\item{mRList}{mRList object}
+
+\item{include_QC}{whether to include or not the QC samples}
+
+\item{logged}{are the input data on log-scale or not?}
+
+\item{robust}{whether to use the median or not}
+
+\item{do_plot}{whether to plot or not}
+
+\item{out_dir}{output directory}
+
+\item{...}{further arguments to boxplot function}
 }
 \description{
 Relative Log Abudance

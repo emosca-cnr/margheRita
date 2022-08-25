@@ -1,7 +1,22 @@
-#' pathway analysis
-#' Run enricher or gsea from clusterProfiler on pathways provided by NCBI
-#' Biosytems
-#'
+#' Pathway analysis
+#' Run enricher or gsea from clusterProfiler on pathways provided by NCBI Biosytems
+#' @param in_list metabolite set
+#' @param universe universe
+#' @param type "ora" or "gsea"
+#' @param tax_id tax id
+#' @param include_general_pathways whether to include general pathways or not
+#' @param pvalueCutoff p-value cutoff
+#' @param pAdjustMethod p-value adjustment method
+#' @param minGSSize minimum metabolite set size
+#' @param maxGSSize maximum metabolite set size
+#' @param qvalueCutoff q-value cutoff
+#' @param TERM2METAB 2-columns data.frame of pathways and metabolites
+#' @param TERM2NAME 2-columns data.frame of pathways and pathway names
+#' @param nPerm number of permutations
+#' @param verbose verbose mode
+#' @param gsea_by gsea type
+#' @param seed set the seed
+#' @param exponent exponent in the gsea approach
 #' @export
 #' @importFrom  clusterProfiler GSEA enricher
 

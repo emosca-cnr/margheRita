@@ -25,7 +25,11 @@ read_input_file(
 
 \item{data_start_col}{column from which data starts}
 
+\item{MS_MS_column}{column that contains the MS/MS spectrum}
+
 \item{type}{type of imported files excel or .csv or .txt}
+
+\item{...}{further arguments to read.table}
 }
 \description{
 Import data and metadata as excel or .csv or .txt format

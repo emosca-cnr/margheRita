@@ -2,17 +2,18 @@
 % Please edit documentation in R/mean_median_stdev_samples.R
 \name{mean_median_stdev_samples}
 \alias{mean_median_stdev_samples}
-\title{Calculate mean and median for each biological group.}
+\title{Calculate mean, median and standard deviation for each biological group.}
 \usage{
 mean_median_stdev_samples(mRList, dirout = "./", write_output = FALSE)
 }
 \arguments{
-\item{mRList}{mRList contains only biological replicates}
+\item{mRList}{mRList object}
+
+\item{write_output}{(default FALSE), if TRUE table, as .csv format, is written and saved.}
+}
+\value{
+mRList object with mean, median and sd in mRList$metab_ann element
 }
 \description{
-Calculate mean, median and standard deviation for each biological group under study.
-
-This function works after collapse_tech_rep.
-
-write_output (default FALSE), if TRUE table, as .csv format, is written and saved.
+Calculate mean, median and standard deviation for each biological group under study. This function works after collapse_tech_rep.
 }

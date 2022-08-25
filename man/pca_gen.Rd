@@ -2,7 +2,8 @@
 % Please edit documentation in R/pca_gen.R
 \name{pca_gen}
 \alias{pca_gen}
-\title{PCA analysis}
+\title{PCA
+Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted. Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function.}
 \usage{
 pca_gen(
   mRList,
@@ -10,14 +11,12 @@ pca_gen(
   col_by = "class",
   scaling = c("none", "Pareto", "uv"),
   include_QC = TRUE,
-  type = c("component", "coordinate"),
-  dist.method = "euclidean",
   top = Inf,
   write_output = FALSE
 )
 }
 \arguments{
-\item{mRList}{margheRita mRList}
+\item{mRList}{mRList object}
 
 \item{col_by}{(default class)}
 
@@ -25,15 +24,14 @@ pca_gen(
 
 \item{include_QC}{(default TRUE)}
 
+\item{top}{only the top most varying features will be used}
+
 \item{write_output}{(default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved}
 }
 \value{
-Graphs of screeplot and pairs; table as .csv if write_output turns TRUE
-
-scoreplot and loading plot after plot2DPCA function has to be launch. User has to choose the PCs to plot graphs
+mRList object with "pca" element
 }
 \description{
-Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted
-
-Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function
+PCA
+Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted. Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function.
 }

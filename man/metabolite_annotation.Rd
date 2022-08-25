@@ -2,7 +2,8 @@
 % Please edit documentation in R/metabolite_annotation.R
 \name{metabolite_annotation}
 \alias{metabolite_annotation}
-\title{Metabolite Annotation}
+\title{Metabolite Annotation
+Run the metabolite identification pipeline}
 \usage{
 metabolite_annotation(
   mRList = NULL,
@@ -18,6 +19,34 @@ metabolite_annotation(
   mode = NULL
 )
 }
+\arguments{
+\item{mRList}{mRList object}
+
+\item{library_list}{library data obtained from margherita_library() function}
+
+\item{feature_spectra}{MS_MS spectra (optional). By default spectra are taken from mRList object}
+
+\item{rt_err_thr}{threshold over the retention time error}
+
+\item{unaccept_flag}{A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
+
+\item{accept_flag}{A number with default value of 5. PPM errors < accept_flag will be tagged as "super", while those > accept_flag and < suffer_flag will be tagged as "acceptable"}
+
+\item{suffer_flag}{A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"}
+
+\item{acceptable_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense
+peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
+
+\item{n_peaks}{A number with default value of 1. check_intense_peak() function calculate the PPM error peak by peak starting from the most intense one. n_peaks is the number of the peaks which will be calculated for each metabolite and candidate.}
+
+\item{acceptable_PPM_err}{A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
+
+\item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}
+}
+\value{
+data.frame with matches between features and library metabolites
+}
 \description{
 Metabolite Annotation
+Run the metabolite identification pipeline
 }

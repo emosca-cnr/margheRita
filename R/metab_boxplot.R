@@ -1,10 +1,13 @@
-#' Boxplots
-#' @description Plot boxplot of metabolites, and save them as .png.
+#' Boxplot of metabolie levels across classes
+#' 
+#' Plot boxplot of metabolites, and save them as .png.
+#'
 #' @importFrom graphics boxplot
-#' @param mRList mRList
+#' @param mRList mRList object
 #' @param features vector with a list of metabolites to graph
 #' @param col_by define how to color the boxplot, default=class
 #' @param group define what you want to compare
+#' @param dirout output directory
 #' @export
 #' @importFrom grDevices dev.off png
 

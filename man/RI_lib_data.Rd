@@ -2,10 +2,15 @@
 % Please edit documentation in R/RI_lib_data.R
 \name{RI_lib_data}
 \alias{RI_lib_data}
-\title{establishing new library data by calculating relative intensity}
+\title{Calculate relative intensities and filter}
 \usage{
-RI_lib_data(reference_spectra, RT_mass, acceptable_RI = 10)
+RI_lib_data(reference_spectra, acceptable_RI = 10)
+}
+\arguments{
+\item{reference_spectra}{list of data.frames with spectra}
+
+\item{acceptable_RI}{maximum admitted relative intensity}
 }
 \description{
-establishing new library data by calculating relative intensity
+Calculate relative intensities and filter
 }

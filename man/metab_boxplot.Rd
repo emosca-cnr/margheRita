@@ -2,7 +2,7 @@
 % Please edit documentation in R/metab_boxplot.R
 \name{metab_boxplot}
 \alias{metab_boxplot}
-\title{Boxplots}
+\title{Boxplot of metabolie levels across classes}
 \usage{
 metab_boxplot(
   mRList = NULL,
@@ -13,7 +13,9 @@ metab_boxplot(
 )
 }
 \arguments{
-\item{mRList}{mRList}
+\item{mRList}{mRList object}
+
+\item{dirout}{output directory}
 
 \item{features}{vector with a list of metabolites to graph}
 

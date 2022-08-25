@@ -8,6 +8,8 @@
 #' @importFrom readxl read_excel
 #' @importFrom utils read.table
 #' @export
+#' @param MS_MS_column column that contains the MS/MS spectrum
+#' @param ... further arguments to read.table
 
 read_input_file <- function(input, metadata, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type=c("excel", "txt"), ...){
 

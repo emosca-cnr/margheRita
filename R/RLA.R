@@ -1,5 +1,11 @@
 #' Relative Log Abudance
-#' @param mRList margheRita list
+#' @param mRList mRList object
+#' @param include_QC whether to include or not the QC samples
+#' @param logged are the input data on log-scale or not?
+#' @param robust whether to use the median or not
+#' @param do_plot whether to plot or not
+#' @param out_dir output directory
+#' @param ... further arguments to boxplot function
 #' @export
 #' @author Ettore Mosca (CNR-ITB)
 #' @importFrom stats median

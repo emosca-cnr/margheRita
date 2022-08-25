@@ -4,10 +4,10 @@
 \alias{splitQC}
 \title{Split dataframe and metadata in two: one for samples and one for QC}
 \usage{
-splitQC(m_list)
+splitQC(mRList)
 }
 \arguments{
-\item{m_list}{split metadata and dataframe for QC and for samples}
+\item{mRList}{mRList object}
 }
 \value{
 

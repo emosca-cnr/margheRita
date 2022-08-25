@@ -2,7 +2,7 @@
 % Please edit documentation in R/RI_sample_data.R
 \name{RI_sample_data}
 \alias{RI_sample_data}
-\title{converting intensity to relative intensity}
+\title{Convert sample intensity to relative intensity and filter}
 \usage{
 RI_sample_data(feature_spectra, accept_RI = 10)
 }
@@ -12,5 +12,5 @@ RI_sample_data(feature_spectra, accept_RI = 10)
 \item{accept_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
 }
 \description{
-converting intensity to relative intensity
+Convert sample intensity to relative intensity and filter
 }

@@ -7,11 +7,12 @@
 normalize_profiles(mRList, method = c("log", "reference", "pqn"))
 }
 \arguments{
+\item{mRList}{mRList object}
+
 \item{method}{"log": log2(x+1); "reference": divide each sample by its reference; "pqn": probailistic quotient normalization;}
-
-\item{mRList$data}{features-by-samples matrix of metabolite levels;}
-
-\item{reference}{reference profile;}
+}
+\value{
+mRList object with normalized data
 }
 \description{
 Normalize profiles
