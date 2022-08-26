@@ -2,7 +2,7 @@
 #' Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted. Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function.
 #' @param mRList mRList object
 #' @param col_by (default class)
-#' @param scaling choose the scaling method "none","pareto" or "uv"
+#' @param scaling choose the scaling method "none","Pareto" or "uv"
 #' @param include_QC (default TRUE)
 #' @param write_output (default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved
 #' @return  mRList object with "pca" element
@@ -14,7 +14,7 @@
 #' @param top only the top most varying features will be used
 #' @param dirout output directory
 
-pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", "uv"),include_QC=TRUE, top=Inf, write_output=FALSE) {
+pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, top=Inf, write_output=FALSE, rank=10) {
   
   
   scaling <- match.arg(scaling)
@@ -54,13 +54,11 @@ pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", 
   
   #it is the same as PCA for euclidean distance
   
-  pca <- prcomp(t(X), scale = scale, center = center)
-  p.v.= matrix(((pca$sdev ^ 2) / (sum(pca$sdev ^ 2))), ncol = 1) #varianza
-  p.i. = round(p.v.* 100, 1) #percentuali di varianza spiegata dalle PC
-  Pvar. = p.i.
-  mRList$pca <- append(pca, list (variance=Pvar.))
-  
-  
+  pca <- prcomp(X, scale = scale, center = center, rank=rank)
+  p.v. <- matrix(((pca$sdev ^ 2) / (sum(pca$sdev ^ 2))), ncol = 1) #varianza
+  p.i. <- round(p.v.* 100, 1) #percentuali di varianza spiegata dalle PC
+  Pvar. <- p.i.
+  #mRList$pca <- append(pca, list (variance=Pvar.))
   
   if (write_output){
     pwd.score= paste(dirout, "/ScoreMatrix.csv", sep ="")
@@ -107,7 +105,7 @@ pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", 
     res = 300
   )
   graphics::barplot(
-    Pvar.[, 1],
+    Pvar.[1:rank, 1],
     xlab = "Principal Components",
     ylab = "Proportion of Variance explained",
     main = "Screeplot",

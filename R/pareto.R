@@ -12,12 +12,14 @@ pareto <- function(X, centering=TRUE){
 
   # Here we perform centering
   if(centering){
-    X <- apply(X, 1, function(x) x - mean(x))
+    X <- t(apply(X, 1, function(x) x - mean(x))) #ettore: t is necessary to keep a features-by-samples 
   }
 
   # Then we perform scaling on the mean-centered matrix
-  X <- apply(X, 1, function(x) x/sqrt(sd(x)))
+  X <- t(apply(X, 1, function(x) x/sqrt(sd(x)))) #ettore: t is necessary to keep a features-by-samples 
 
+  
+  
   return(X)
 }
 
