@@ -1,8 +1,6 @@
 #' Split dataframe and metadata in two: one for samples and one for QC
-
 #' @param mRList mRList object
 #' @export
-#' @return
 
 
 splitQC<-function(mRList){

@@ -17,6 +17,10 @@ read_input_file(
 )
 }
 \arguments{
+\item{input}{data file name}
+
+\item{metadata}{metadata file name}
+
 \item{split_QC}{(default=TRUE) split input and metadata in two one for QC and the other for data}
 
 \item{mz_col}{column that contains m/z value}

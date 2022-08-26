@@ -11,11 +11,11 @@ imputation(mRList, seed = NULL, a = 0.1, b = 0.25)
 
 \item{seed}{set this seed with set.seed}
 
-\item{a}{maxmimum increase factor
-#' @export}
+\item{a}{minimum increase factor}
 
-\item{dataframe}{of input contains intensity of all features according to samples}
+\item{b}{maxmimum increase factor
+#' @export}
 }
 \description{
-the NA values are replaced with a fraction of the minimum value of that row (min_r), sampled in the interval \link{min_r * a, min_r * b}
+the NA values are replaced with a fraction of the minimum value of that row (min_r), sampled in the interval $\link[=min_r \\* a, min_r \\* b]{min_r \* a, min_r \* b}$
 }

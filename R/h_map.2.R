@@ -12,6 +12,7 @@
 #' @import ComplexHeatmap
 #' @importFrom grDevices dev.off png
 #' @importFrom graphics plot
+#' @importFrom stats var setNames
 #' @import viridis
 
 

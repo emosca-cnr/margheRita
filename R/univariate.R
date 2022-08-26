@@ -4,7 +4,9 @@
 #' @param test_method choice of the test to apply
 #' @param paired TRUE if data are paired, FALSE for unpaired data
 #' @param group_factor specify the groups to compare
+#' @param dirout output directory
 #' @importFrom utils write.csv
+#' @importFrom stats na.omit t.test p.adjust wilcox.test anova aov kruskal.test
 #' @export
 
 

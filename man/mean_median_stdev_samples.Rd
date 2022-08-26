@@ -9,6 +9,8 @@ mean_median_stdev_samples(mRList, dirout = "./", write_output = FALSE)
 \arguments{
 \item{mRList}{mRList object}
 
+\item{dirout}{output directory}
+
 \item{write_output}{(default FALSE), if TRUE table, as .csv format, is written and saved.}
 }
 \value{

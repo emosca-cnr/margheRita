@@ -19,9 +19,12 @@
 #' @param exponent exponent in the gsea approach
 #' @export
 #' @importFrom  clusterProfiler GSEA enricher
+#' @importFrom utils data
 
 pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"), tax_id=9606, include_general_pathways=FALSE, pvalueCutoff = 0.05, pAdjustMethod = "BH", minGSSize = 10, maxGSSize = 500, qvalueCutoff = 0.2, TERM2METAB=NULL, TERM2NAME = NULL, nPerm=1000, verbose=TRUE, gsea_by="fgsea", seed=FALSE, exponent=1){
 
+  bsid2cid <- bsid2info <- NULL #to please the check
+  
   type <- match.arg(type, c("ora", "gsea"))
 
   if(is.null(TERM2METAB)){

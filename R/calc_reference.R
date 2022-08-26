@@ -29,7 +29,7 @@ calc_reference <- function(mRList, sample_col="class", sample_class="QC", approa
     mRList$metab_ann$reference <- apply(X, 1, median)
   }
   if(approach == "mean"){
-    mRList$metab_ann$reference <- RowMeans(X)
+    mRList$metab_ann$reference <- rowMeans(X)
   }
 
   return(mRList)

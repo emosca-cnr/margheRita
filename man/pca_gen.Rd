@@ -18,6 +18,8 @@ pca_gen(
 \arguments{
 \item{mRList}{mRList object}
 
+\item{dirout}{output directory}
+
 \item{col_by}{(default class)}
 
 \item{scaling}{choose the scaling method "none","pareto" or "uv"}

@@ -7,9 +7,11 @@
 visualize_spectra(annotation_list, x = NULL, out_dir = "./")
 }
 \arguments{
+\item{annotation_list}{annotation_list}
+
 \item{x}{one or more metabolites to visualize}
 
-\item{candidate_list}{annotation_list}
+\item{out_dir}{output directory}
 }
 \description{
 Visualize the spectra of good candidates

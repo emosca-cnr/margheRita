@@ -9,9 +9,6 @@ splitQC(mRList)
 \arguments{
 \item{mRList}{mRList object}
 }
-\value{
-
-}
 \description{
 Split dataframe and metadata in two: one for samples and one for QC
 }

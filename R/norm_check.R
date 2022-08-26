@@ -4,6 +4,7 @@
 #' @param mRList mRList object
 #' @return mRList object with mRist$Shapiro elment that reports p-value calculated using Shapiro-Wilk's test
 #' @export
+#' @importFrom stats shapiro.test
 
 
 

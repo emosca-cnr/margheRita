@@ -2,14 +2,14 @@
 #' 
 #' Plot boxplot of metabolites, and save them as .png.
 #'
-#' @importFrom graphics boxplot
+#' @importFrom graphics boxplot points
 #' @param mRList mRList object
 #' @param features vector with a list of metabolites to graph
 #' @param col_by define how to color the boxplot, default=class
 #' @param group define what you want to compare
 #' @param dirout output directory
 #' @export
-#' @importFrom grDevices dev.off png
+#' @importFrom grDevices dev.off png rainbow
 
 metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class", group="class"){
 
@@ -32,7 +32,7 @@ metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class",
 
   for (i in 1:nrow(data)) {
 
-    png(file=paste0(dirout, "metabolite", rownames(data)[i], ".png"), width = 200, height = 200, units = "mm", res=300)
+    png(filename = paste0(dirout, "metabolite", rownames(data)[i], ".png"), width = 200, height = 200, units = "mm", res=300)
 
     i_min <- min(data[i, ])
     i_max <- max(data[i, ])

@@ -7,9 +7,10 @@
 #' @param write_output (default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved
 #' @return  mRList object with "pca" element
 #' @export
-#' @importFrom graphics plot barplot
-#' @importFrom grDevices dev.off png
+#' @importFrom graphics plot barplot pairs
+#' @importFrom grDevices dev.off png rainbow
 #' @importFrom utils write.csv
+#' @importFrom stats var prcomp
 #' @param top only the top most varying features will be used
 #' @param dirout output directory
 

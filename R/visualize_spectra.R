@@ -1,9 +1,12 @@
 #' Visualize the spectra of good candidates
 #'
-#' @param candidate_list annotation_list
+#' @param annotation_list annotation_list
 #' @param x one or more metabolites to visualize
+#' @param out_dir output directory
 #' @export
-#'
+#' @importFrom graphics par lines
+#' @importFrom grDevices jpeg
+
 visualize_spectra <- function(annotation_list, x=NULL, out_dir="./"){
   
   for(z in 1:length(x)){ # cycle thought library metabolites
@@ -11,7 +14,7 @@ visualize_spectra <- function(annotation_list, x=NULL, out_dir="./"){
     candidates <- annotation_list$candidate_list[names(annotation_list$candidate_list) == x[z]][[1]]
     reference_peaks <- annotation_list$RI_reference[names(annotation_list$RI_reference) == x[z]][[1]]
     
-    jpeg(file=paste0(out_dir, "/", x[z], ".jpg"), width = 200, height = 200, res=300, units = "mm")
+    jpeg(filename = paste0(out_dir, "/", x[z], ".jpg"), width = 200, height = 200, res=300, units = "mm")
     par(mfrow = c(round(nrow(candidates) / 2 + 1), round(nrow(candidates) / 2)))
     
     for(zi in 1:nrow(reference_peaks)){ #cycle through candidates

@@ -15,6 +15,8 @@ univariate(
 \arguments{
 \item{mRList}{dataframe with data of samples that contains only biological replicates. Technical replicates have to be collapsed before using collapse_tech_rep function}
 
+\item{dirout}{output directory}
+
 \item{test_method}{choice of the test to apply}
 
 \item{paired}{TRUE if data are paired, FALSE for unpaired data}

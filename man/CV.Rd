@@ -8,6 +8,8 @@ CV(mRList, dirout)
 }
 \arguments{
 \item{mRList}{mRList object}
+
+\item{dirout}{output directory}
 }
 \value{
 filtered mRList object

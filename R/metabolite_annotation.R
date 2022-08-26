@@ -16,7 +16,7 @@
 #' @return data.frame with matches between features and library metabolites
 
 #' @export
-#'
+#' @importFrom stats setNames
 
 metabolite_annotation = function(mRList = NULL, library_list = NULL, feature_spectra = NULL, rt_err_thr=1, unaccept_flag=15, accept_flag=5, suffer_flag=10, acceptable_RI = 10, n_peaks=1, acceptable_PPM_err = 10, mode=NULL){
   

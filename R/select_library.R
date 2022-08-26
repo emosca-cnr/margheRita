@@ -10,9 +10,11 @@
 #' @param accept_RI numeric parameter. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, it is filtering the library by deleting the relative intensity lower then accept_RI.
 #'
 #' @export
-
+#' @importFrom utils data
 select_library <- function(column=c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"), mode=c("POS", "NEG"), accept_RI=10){
 
+  mRlib_peaks_list <- mRlib_peaks_df <- mRlib_precursors <- NULL #to please the check
+  
   data("mRlib_peaks_list", envir=environment())
   data("mRlib_peaks_df", envir=environment())
   data("mRlib_precursors", envir=environment())

@@ -9,6 +9,8 @@
 #' @export
 #' @author Ettore Mosca (CNR-ITB)
 #' @importFrom stats median
+#' @importFrom grDevices jpeg
+#' @importFrom graphics par abline
 
 RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", ...){
 

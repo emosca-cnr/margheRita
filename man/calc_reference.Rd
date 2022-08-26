@@ -18,7 +18,7 @@ calc_reference(
 
 \item{sample_class}{label to identify the samples to be used for the reference profile calculation}
 
-\item{approach.}{The type of average: "median" or "mean".}
+\item{approach}{The type of average: "median" or "mean".}
 }
 \value{
 mRList object with mRList$reference

@@ -19,13 +19,15 @@ m_z_filtering(
 
 \item{do_plot}{whether to plot or not}
 
+\item{out_file}{output file name}
+
 \item{lower_quality_mass_acc}{lower quality value}
 
 \item{upper_quality_mass_acc}{upper quality value}
 
 \item{color}{point color}
 
-\item{outfile}{output file name}
+\item{...}{further arguments to plot function}
 }
 \value{
 filtered mRList

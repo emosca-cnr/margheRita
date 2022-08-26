@@ -10,7 +10,7 @@ as.metaboset.mRList(mRList)
 \item{mRList}{mRList object}
 }
 \value{
-mset object
+a list that cotains the arguments for notame::construct_metabosets function
 }
 \description{
 Transforms mRList into mSet object

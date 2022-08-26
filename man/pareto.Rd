@@ -9,6 +9,8 @@ pareto(X, centering = TRUE)
 }
 \arguments{
 \item{X}{is dataframe that contains only data, without the columns that contain ID metabolite, m/z, RT, MS and MS/MS information}
+
+\item{centering}{whether to center the data or not. Defaults to TRUE.}
 }
 \description{
 Pareto scaling

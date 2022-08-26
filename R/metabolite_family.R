@@ -15,7 +15,9 @@ metabolite_family <- function(reference=NULL, feature_data=NULL, RI_lib=NULL, RI
 
 RT <- check_RT(reference=reference, feature_data=feature_data, rt_err_thr=rt_err_thr)
 
-mass <- check_mass2(reference=reference, feature_data=feature_data ,unaccept_flag=unaccept_flag)
+#mass <- check_mass2(reference=reference, feature_data=feature_data ,unaccept_flag=unaccept_flag)
+
+mass <- check_mass(reference=reference, feature_data=feature_data ,unaccept_flag=unaccept_flag)
 
 RT_mass <- check_RT_mass(RT=RT , mass=mass , reference=reference)
 
