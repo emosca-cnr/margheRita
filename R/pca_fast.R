@@ -2,7 +2,9 @@
 #' Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted. Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function.
 #' @param mRList mRList object
 #' @param col_by (default class)
-#' @param scaling choose the scaling method "none","Pareto" or "uv"
+#' @param method see pcaMethods::pca()
+#' @param center whether to center the data or not
+#' @param scaling see pcaMethods::prep()
 #' @param include_QC (default TRUE)
 #' @return  mRList object with "pca" element
 #' @export
@@ -13,6 +15,7 @@
 #' @importFrom pcaMethods pca
 #' @param top only the top most varying features will be used
 #' @param dirout output directory
+#' @param nPcs number of principal components
 
 pca_fast <- function(mRList, dirout, col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=5, ...) {
   
@@ -56,8 +59,7 @@ pca_fast <- function(mRList, dirout, col_by="class", method="svd", scaling=c("no
     mRList$pca@R2,
     xlab = "Principal Components",
     ylab = "Proportion of Variance explained",
-    main = "Screeplot",
-    ylim = c(0, 1)
+    main = "Screeplot"
   )
   grDevices::dev.off()
   

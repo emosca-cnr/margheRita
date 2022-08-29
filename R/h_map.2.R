@@ -37,6 +37,8 @@ h_map <- function(mRList, dirout="./", col_ann=NULL, col=NULL, scale_features=TR
   
   if(!is.null(samples)){
     data <- data[, colnames(data) %in% samples]
+  }else{
+    samples <- colnames(data)
   }
 
   
