@@ -2,12 +2,18 @@
 #' @param mRList mRList object
 #' @param min_metab_in_sample min number of metabolites in a sample
 #' @param min_sample_with_metab min number of samples in which a metabolite must appear
+#' @param na_value value that indicate missing values
 #' @export
 #' @return filtered mRList object
 
 
-filter_NA <- function(mRList, min_metab_in_sample=100, min_sample_with_metab=10){
+filter_NA <- function(mRList, min_metab_in_sample=100, min_sample_with_metab=10, na_value="NA"){
 
+  if(na_value != "NA"){
+    cat("setting", na_value, "to NA\n")
+    mRList$data[mRList$data == na_value] <- NA
+  }
+  
   idx_keep <- colSums(!is.na(mRList$data)) >= min_metab_in_sample
   cat("# Samples with enough metabolites", sum(idx_keep), "/", ncol(mRList$data), "\n")
   mRList$data <- mRList$data[, idx_keep]
