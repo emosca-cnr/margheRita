@@ -7,7 +7,7 @@
 #' @param col_by (default class)
 #' @param include_QC (default TRUE)
 #' @export
-#' @importFrom graphics plot
+#' @importFrom graphics plot legend
 #' @importFrom grDevices png rainbow
 
 Plot2DPCA <- function(mRList, pcx, pcy, dirout = "./", col_by="class", include_QC=TRUE){

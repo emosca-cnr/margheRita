@@ -30,6 +30,8 @@ pca_gen(
 \item{top}{only the top most varying features will be used}
 
 \item{write_output}{(default =FALSE) if it turns on TRUE tables as .csv of score and loading will be saved}
+
+\item{rank}{number of PCs}
 }
 \value{
 mRList object with "pca" element

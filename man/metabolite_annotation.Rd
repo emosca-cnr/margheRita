@@ -14,9 +14,9 @@ metabolite_annotation(
   accept_flag = 5,
   suffer_flag = 10,
   acceptable_RI = 10,
-  n_peaks = 1,
   acceptable_PPM_err = 10,
-  mode = NULL
+  mode = NULL,
+  max_RI_diff = 30
 )
 }
 \arguments{
@@ -37,11 +37,11 @@ metabolite_annotation(
 \item{acceptable_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense
 peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
 
-\item{n_peaks}{A number with default value of 1. check_intense_peak() function calculate the PPM error peak by peak starting from the most intense one. n_peaks is the number of the peaks which will be calculated for each metabolite and candidate.}
-
 \item{acceptable_PPM_err}{A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
 
 \item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}
+
+\item{max_RI_diff}{maximum absolute RI difference between MS/MS peaks of sample and library}
 }
 \value{
 data.frame with matches between features and library metabolites

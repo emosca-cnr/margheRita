@@ -5,7 +5,6 @@
 \title{Peak matching for metabolite families}
 \usage{
 peak_matching(
-  feature_data = NULL,
   reference = NULL,
   RT_mass = NULL,
   RI_lib = NULL,
@@ -17,8 +16,6 @@ peak_matching(
 )
 }
 \arguments{
-\item{feature_data}{an object structured as the elment "metab_ann" of the mRList object}
-
 \item{reference}{an object structured as the element "lib_precursor" of the list returned by margherita_library()}
 
 \item{RT_mass}{a list of data frame, obtained by check_RT_mass() function. it is contains a list of metabolite with desired retention time and PPM error. each metabolite is a data frame of potential candidates with specific features; Feature_ID, RT_err, RT_flag, ppm_error, mass_status and mass_flag.}

@@ -8,7 +8,7 @@
 #' @param include_QC (default TRUE)
 #' @export
 #' @importFrom pcaMethods scores
-#' @importFrom graphics plot
+#' @importFrom graphics plot legend
 #' @importFrom grDevices png rainbow dev.off
 
 Plot2DPCA_fast <- function(mRList, pcx=1, pcy=2, dirout = "./", col_by="class", include_QC=TRUE){

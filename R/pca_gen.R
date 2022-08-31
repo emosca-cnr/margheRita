@@ -13,6 +13,7 @@
 #' @importFrom stats var prcomp
 #' @param top only the top most varying features will be used
 #' @param dirout output directory
+#' @param rank number of PCs
 
 pca_gen <- function(mRList, dirout, col_by="class", scaling=c("none", "Pareto", "uv"), include_QC=TRUE, top=Inf, write_output=FALSE, rank=10) {
   

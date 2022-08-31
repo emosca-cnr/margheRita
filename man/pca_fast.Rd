@@ -25,11 +25,19 @@ pca_fast(
 
 \item{col_by}{(default class)}
 
-\item{scaling}{choose the scaling method "none","Pareto" or "uv"}
+\item{method}{see pcaMethods::pca()}
+
+\item{scaling}{see pcaMethods::prep()}
+
+\item{center}{whether to center the data or not}
 
 \item{include_QC}{(default TRUE)}
 
 \item{top}{only the top most varying features will be used}
+
+\item{nPcs}{number of principal components}
+
+\item{...}{further argments to pcaMethods::pca}
 }
 \value{
 mRList object with "pca" element

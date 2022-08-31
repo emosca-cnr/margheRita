@@ -9,7 +9,6 @@
 #' @param unaccept_flag A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 #' @param acceptable_RI numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense 
 #' peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.
-#' @param n_peaks A number with default value of 1. check_intense_peak() function calculate the PPM error peak by peak starting from the most intense one. n_peaks is the number of the peaks which will be calculated for each metabolite and candidate.
 #' @param acceptable_PPM_err A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 #' @param mode mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.
 #' @param max_RI_diff maximum absolute RI difference between MS/MS peaks of sample and library
@@ -28,8 +27,9 @@ metabolite_annotation = function(mRList = NULL, library_list = NULL, feature_spe
     message("Checking for the presence of MS_MS_spectrum in metadata\n")
     if(any(colnames(mRList$metab_ann) == "MS_MS_spectrum")){
       message("found\n")
-      features_with_MSMS <- mRList_norm_biorep$metab_ann[!is.na(mRList_norm_biorep$metab_ann$MS_MS_spectrum), ]
+      features_with_MSMS <- mRList$metab_ann[!is.na(mRList$metab_ann$MS_MS_spectrum), ]
       feature_spectra <- get_spectra_list_from_vector(spectra = setNames(features_with_MSMS$MS_MS_spectrum, features_with_MSMS$Feature_ID))
+      cat("MS/MS spectra available for", nrow(feature_spectra), "features.\n")
     }else{
       message("not found\n")
       stop("Impossible to proceed without feature spectra information")

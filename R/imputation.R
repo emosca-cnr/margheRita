@@ -1,6 +1,6 @@
 #' Missing values imputation
 #' 
-#' the NA values are replaced with a fraction of the minimum value of that row (min_r), sampled in the interval $[min_r * a, min_r * b]$
+#' the NA values are replaced with a fraction of the minimum value of that row (min_r), sampled in the interval \eqn{[min_r * a, min_r * b]}
 #' 
 #' @param mRList mRList object
 #' @param seed set this seed with set.seed

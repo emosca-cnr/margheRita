@@ -21,9 +21,7 @@ mass <- check_mass(reference=reference, feature_data=feature_data ,unaccept_flag
 
 RT_mass <- check_RT_mass(RT=RT , mass=mass , reference=reference)
 
-match_peaks <- peak_matching(feature_data=feature_data ,reference=reference ,RT_mass=RT_mass,
-                             RI_lib=RI_lib ,RI_sample=RI_sample ,lib_peaks_data=lib_peaks_data,
-                             mode=mode, ppm_err=ppm_err, intensity=intensity)
+match_peaks <- peak_matching(reference=reference ,RT_mass=RT_mass, RI_lib=RI_lib ,RI_sample=RI_sample ,lib_peaks_data=lib_peaks_data, mode=mode, ppm_err=ppm_err, intensity=intensity)
 
 return(match_peaks)
 

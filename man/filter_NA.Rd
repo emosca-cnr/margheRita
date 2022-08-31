@@ -4,7 +4,12 @@
 \alias{filter_NA}
 \title{filter NA}
 \usage{
-filter_NA(mRList, min_metab_in_sample = 100, min_sample_with_metab = 10)
+filter_NA(
+  mRList,
+  min_metab_in_sample = 100,
+  min_sample_with_metab = 10,
+  na_value = "NA"
+)
 }
 \arguments{
 \item{mRList}{mRList object}
@@ -12,6 +17,8 @@ filter_NA(mRList, min_metab_in_sample = 100, min_sample_with_metab = 10)
 \item{min_metab_in_sample}{min number of metabolites in a sample}
 
 \item{min_sample_with_metab}{min number of samples in which a metabolite must appear}
+
+\item{na_value}{value that indicate missing values}
 }
 \value{
 filtered mRList object

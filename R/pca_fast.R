@@ -16,6 +16,7 @@
 #' @param top only the top most varying features will be used
 #' @param dirout output directory
 #' @param nPcs number of principal components
+#' @param ... further argments to pcaMethods::pca
 
 pca_fast <- function(mRList, dirout, col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=5, ...) {
   
