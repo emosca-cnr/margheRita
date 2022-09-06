@@ -61,10 +61,10 @@ metabolite_annotation = function(mRList = NULL, library_list = NULL, feature_spe
   
   intense_peak <- peak_matching(RT_mass = RT_mass, RI_lib = library_list$lib_peaks, reference = library_list$lib_precursor, lib_peaks_data=library_list$lib_peaks_data, mode = mode, RI_sample = RI_sample, ppm_err = acceptable_PPM_err, intensity = max_RI_diff)
   
-  intense_peak <- do.call(rbind, intense_peak)
+  #intense_peak_df <- do.call(rbind, intense_peak$matched_peaks)
   
-  cat("# annotated features:", length(unique(intense_peak$Feature_ID)), "\n")
-  cat("# metabolites:", length(unique(intense_peak$ID)), "\n")
+  cat("# annotated features:", length(unique(intense_peak$matched_peaks$Feature_ID)), "\n")
+  cat("# metabolites:", length(unique(intense_peak$matched_peaks$ID)), "\n")
   
   return(intense_peak)
 }

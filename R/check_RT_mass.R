@@ -21,7 +21,9 @@ check_RT_mass <- function(RT=NULL, mass=NULL, reference=NULL ){
   }
 
   #filter the RT_mass by deleting the empty data.frame;
-  RT_mass = RT_mass[sapply(RT_mass, function(x) dim(x)[1]) > 0]
+  RT_mass <- RT_mass[sapply(RT_mass, function(x) dim(x)[1]) > 0]
+  
+  RT_mass <- lapply(RT_mass, function(x) x[order(x$RT_err*x$ppm_error), ])
 
   return(RT_mass)
 }
