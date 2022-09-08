@@ -33,6 +33,9 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
     ### CAS number of the library element
     CAS_z <- reference$CAS[reference$ID == names(RT_mass)[z]]
     
+    ### mz of the library element (precursor)
+    mz_precursor <- reference$mz[reference$ID == names(RT_mass)[z]]
+    
     ##the list of the MS/MS spectra for the library element (it can be not unique)
     z_peaks_all <- RI_lib[lib_peaks_data$CAS == CAS_z & lib_peaks_data$Collision_energy == mode ]
 
@@ -56,6 +59,10 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
           #the MS/MS spectra of the feature
           zi_peaks <- as.data.frame(RI_sample[names(RI_sample) == RT_mass[[z]]$Feature_ID[zi]])
 
+          #presence of the precursor in the MS/MS specra
+          precursor_feature_peaks_ppmerror <- abs(mz_precursor - zi_peaks[, 1]) / mz_precursor * 1000000
+          precursor_feature_peaks_ppmerror <- any(precursor_feature_peaks_ppmerror < ppm_err)
+          
           ###pmm error matrix and flags: library_peaks-by-feature_peaks
           pmm_error_matrix <- matrix(0, nrow(z_peaks), nrow(zi_peaks))
           pmm_error_matrix_flags <- pmm_error_matrix
@@ -100,9 +107,9 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
           
           #save current result for library element z, feature zi, library MS/MS spectra zzzz
           if(is.null(ans[[z]])){
-            ans[[z]] <- data.frame(Feature_ID=RT_mass[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, stringsAsFactors = F)
+            ans[[z]] <- data.frame(Feature_ID=RT_mass[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, precursor_in_MSMS=precursor_feature_peaks_ppmerror, stringsAsFactors = F)
           }else{
-            ans[[z]] <- rbind(ans[[z]], data.frame(Feature_ID=RT_mass[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, stringsAsFactors = F))
+            ans[[z]] <- rbind(ans[[z]], data.frame(Feature_ID=RT_mass[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, precursor_in_MSMS=precursor_feature_peaks_ppmerror, stringsAsFactors = F))
           }
 
         } #END cycle through the features assigned to the library element
