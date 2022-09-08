@@ -24,7 +24,7 @@ visualize_1spectra <- function(feature_id=NULL, peak_id=NULL, RI_sample=NULL, RI
   
   dir.create(out_dir, recursive = T)
   
-  jpeg(filename = paste0(out_dir, "/", feature_id, "_",  peak_id, ".jpg"), width = 200, height = 200, res=300, units = "mm")
+  jpeg(filename = paste0(out_dir, "/", feature_id, "_",  peak_id, "_", type, ".jpg"), width = 200, height = 200, res=300, units = "mm")
   
   if(type=="mirrored"){
     ylim <- c(-100, 100)
@@ -50,7 +50,7 @@ visualize_1spectra <- function(feature_id=NULL, peak_id=NULL, RI_sample=NULL, RI
   ### feature
   if(type=="mirrored"){
     
-    lines(feature_spectra[, 1], -feature_spectra[,2], type = "h" , col=adjustcolor("blue", 0.6))
+    lines(feature_spectra[, 1], -feature_spectra[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
     points(feature_spectra[, 1], -feature_spectra[,2], col=adjustcolor("blue", 0.6), pch=16)
     if(peak_number){
       plotrix::thigmophobe.labels(feature_spectra[, 1], -feature_spectra[, 2], 1:nrow(feature_spectra))

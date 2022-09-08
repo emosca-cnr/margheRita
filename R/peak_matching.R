@@ -9,14 +9,22 @@
 #' @param ppm_err A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 #' @param intensity maximum relative intensity
 #' @param RT_mass a list of data frame, obtained by check_RT_mass() function. it is contains a list of metabolite with desired retention time and PPM error. each metabolite is a data frame of potential candidates with specific features; Feature_ID, RT_err, RT_flag, ppm_error, mass_status and mass_flag.
+#' @param RI_diff_type type of relative intensity difference: absolute or relative
 
 
-peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NULL,  lib_peaks_data=NULL, mode=c("POS", "NEG"), ppm_err=10, intensity=30) {
+peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NULL,  lib_peaks_data=NULL, mode=c("POS", "NEG"), ppm_err=10, intensity=30, RI_diff_type=c("abs", "rel")) {
 
   #a novel data to not touch the input
   ans <- vector("list", length(RT_mass))
   names(ans) <- names(RT_mass)
 
+  RI_diff_type <- match.arg(RI_diff_type)
+  if(RI_diff_type=="rel"){
+    RI_diff_type <- 1
+  }else{
+    RI_diff_type <- 0
+  }
+  
   #store the matrices of peak-peak comparison
   ans2 <- ans
     
@@ -79,13 +87,17 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
               pmm_error_matrix[i, j] = abs(z_peaks[i, 1] - zi_peaks[j, 1]) / z_peaks[i, 1] * 1000000
               
               ###RI diff of the peak pair i,j
-              RI[i, j] = abs(z_peaks[i, 2] - zi_peaks[j, 2])
+              #abs difference, RI_diff_type==0: RI_den -> RI_perc -> 1
+              #relative difference, RI_diff_type==1: RI_den -> z_peaks[i, 2] and RI_perc -> 100
+              RI_den <- 1 - RI_diff_type + z_peaks[i, 2] * RI_diff_type
+              RI_perc <- 1 - RI_diff_type + 100 * RI_diff_type
+              RI[i, j] = abs(z_peaks[i, 2] - zi_peaks[j, 2]) / RI_den * RI_perc
             }
           }
 
           #count the peaks that are found
-          pmm_error_matrix_flags[pmm_error_matrix < ppm_err] <- 1 ##peaks matching
-          RI_flags[RI < intensity] <- 2 ##RI matching
+          pmm_error_matrix_flags[pmm_error_matrix <= ppm_err] <- 1 ##peaks matching
+          RI_flags[RI <= intensity] <- 2 ##RI matching
 
           #peaks and RI
           flags_matrix <- pmm_error_matrix_flags + RI_flags
