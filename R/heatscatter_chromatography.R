@@ -12,6 +12,7 @@
 
 heatscatter_chromatography <- function(mRList, mz_limits=NULL, rt_limits=NULL, sample=NULL, outfile="heatscatter.png" , ...) {
    
+   ### change sample into colnames or index
    if (!is.null(sample)) {
       df <- mRList$metab_ann[, c("rt", "mz", paste(sample[1], "_mean", sep = ""))]
       df <- df[df[,3]> 0,]

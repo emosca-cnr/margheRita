@@ -27,7 +27,7 @@ h_map_MSMS_comparison <- function(matrices_list=NULL, out_prefix="MSMS_compariso
   X[X > ppm_error] <- ppm_error+1
   
   jpeg(filename = paste0(out_prefix, "_ppm_error.jpg"), width = 200, height = 200, res=300, units = "mm")
-  hm <- Heatmap(X, cluster_rows = F, cluster_columns = F, row_labels = 1:nrow(X), column_labels = 1:ncol(X), name = "ppm\nerror", col=col, cell_fun = cell_ppm, rect_gp = gpar(col = "white", lwd = 1, lty=2), row_names_side = "left", row_title = "library", column_title = "sample", column_title_side = "bottom")
+  hm <- Heatmap(X, cluster_rows = F, cluster_columns = F, row_labels = 1:nrow(X), column_labels = 1:ncol(X), name = paste0("ppm\nerror\n<", ppm_error), col=col, cell_fun = cell_ppm, rect_gp = gpar(col = "white", lwd = 1, lty=2), row_names_side = "left", row_title = "library", column_title = "sample", column_title_side = "bottom")
   draw(hm)
   dev.off()
   
@@ -47,7 +47,7 @@ h_map_MSMS_comparison <- function(matrices_list=NULL, out_prefix="MSMS_compariso
   X[X > RI_difference] <- RI_difference+1
   
   jpeg(filename = paste0(out_prefix, "_RI_diff.jpg"), width = 200, height = 200, res=300, units = "mm")
-  hm <- Heatmap(X, cluster_rows = F, cluster_columns = F, row_labels = 1:nrow(X), column_labels = 1:ncol(X), name = "RI\ndiff", col=col, cell_fun = cell_RI, rect_gp = gpar(col = "white", lwd = 1, lty=2), row_names_side = "left", row_title = "library", column_title = "sample", column_title_side = "bottom")
+  hm <- Heatmap(X, cluster_rows = F, cluster_columns = F, row_labels = 1:nrow(X), column_labels = 1:ncol(X), name = paste0("RI\ndiff\n<", RI_difference), col=col, cell_fun = cell_RI, rect_gp = gpar(col = "white", lwd = 1, lty=2), row_names_side = "left", row_title = "library", column_title = "sample", column_title_side = "bottom")
   draw(hm)
   dev.off()
   
