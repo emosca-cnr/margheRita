@@ -16,7 +16,8 @@ metabolite_annotation(
   acceptable_RI = 10,
   acceptable_PPM_err = 10,
   mode = NULL,
-  max_RI_diff = 30
+  max_RI_diff = 30,
+  RI_diff_type = "rel"
 )
 }
 \arguments{

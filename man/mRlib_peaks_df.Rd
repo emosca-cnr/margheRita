@@ -5,7 +5,7 @@
 \alias{mRlib_peaks_df}
 \title{LIBRARY - List of peaks as data.frame}
 \format{
-An object of class \code{data.frame} with 2131 rows and 9 columns.
+An object of class \code{data.frame} with 2132 rows and 9 columns.
 }
 \usage{
 mRlib_peaks_df

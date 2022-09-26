@@ -1,7 +1,7 @@
 #' Vh_map_MSMS_comparison
 #' @param matrices_list list of matrices with ppm error, RI difference and flags
 #' @param out_prefix prefix for output files
-#' @importFrom ComplexHeatmap
+#' @import ComplexHeatmap
 #' @import viridis
 
 h_map_MSMS_comparison <- function(matrices_list=NULL, out_prefix="MSMS_comparison", col=NULL, ppm_error=10, RI_difference=10){

@@ -5,7 +5,7 @@
 \alias{mRlib_peaks_list}
 \title{LIBRARY - List of peaks}
 \format{
-An object of class \code{list} of length 2131.
+An object of class \code{list} of length 2132.
 }
 \usage{
 mRlib_peaks_list

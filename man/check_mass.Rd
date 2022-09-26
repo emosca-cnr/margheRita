@@ -22,6 +22,8 @@ check_mass(
 \item{accept_flag}{A number with default value of 5. PPM errors < accept_flag will be tagged as "super", while those > accept_flag and < suffer_flag will be tagged as "acceptable"}
 
 \item{suffer_flag}{A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"}
+
+\item{keep_all}{keep all the features}
 }
 \value{
 A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag

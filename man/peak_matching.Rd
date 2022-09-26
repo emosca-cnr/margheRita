@@ -12,7 +12,8 @@ peak_matching(
   lib_peaks_data = NULL,
   mode = c("POS", "NEG"),
   ppm_err = 10,
-  intensity = 30
+  intensity = 30,
+  RI_diff_type = c("rel", "abs")
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ peak_matching(
 \item{ppm_err}{A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
 
 \item{intensity}{maximum relative intensity}
+
+\item{RI_diff_type}{type of relative intensity difference: absolute or relative}
 }
 \description{
 Peak matching for metabolite families

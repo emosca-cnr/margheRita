@@ -12,7 +12,7 @@
 #' @param RI_diff_type type of relative intensity difference: absolute or relative
 
 
-peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NULL,  lib_peaks_data=NULL, mode=c("POS", "NEG"), ppm_err=10, intensity=30, RI_diff_type=c("abs", "rel")) {
+peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NULL,  lib_peaks_data=NULL, mode=c("POS", "NEG"), ppm_err=10, intensity=30, RI_diff_type=c("rel", "abs")) {
 
   #a novel data to not touch the input
   ans <- vector("list", length(RT_mass))

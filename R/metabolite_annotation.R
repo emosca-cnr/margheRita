@@ -18,7 +18,7 @@
 #' @export
 #' @importFrom stats setNames
 
-metabolite_annotation = function(mRList = NULL, library_list = NULL, feature_spectra = NULL, rt_err_thr=1, unaccept_flag=15, accept_flag=5, suffer_flag=10, acceptable_RI = 10, acceptable_PPM_err = 10, mode=NULL, max_RI_diff=30){
+metabolite_annotation = function(mRList = NULL, library_list = NULL, feature_spectra = NULL, rt_err_thr=1, unaccept_flag=15, accept_flag=5, suffer_flag=10, acceptable_RI = 10, acceptable_PPM_err = 10, mode=NULL, max_RI_diff=30, RI_diff_type="rel"){
   
   
   ###provide support to mRList
@@ -59,7 +59,7 @@ metabolite_annotation = function(mRList = NULL, library_list = NULL, feature_spe
   cat("Checking MS/MS peaks...\n")
   #intense_peak <- check_intense_peak(RT_mass = RT_mass, RI_lib = library_list$lib_peaks, reference = library_list$lib_precursor, RI_sample = RI_sample, n_peaks=n_peaks, acceptable_PPM_err = acceptable_PPM_err, mode = mode)
   
-  intense_peak <- peak_matching(RT_mass = RT_mass, RI_lib = library_list$lib_peaks, reference = library_list$lib_precursor, lib_peaks_data=library_list$lib_peaks_data, mode = mode, RI_sample = RI_sample, ppm_err = acceptable_PPM_err, intensity = max_RI_diff)
+  intense_peak <- peak_matching(RT_mass = RT_mass, RI_lib = library_list$lib_peaks, reference = library_list$lib_precursor, lib_peaks_data=library_list$lib_peaks_data, mode = mode, RI_sample = RI_sample, ppm_err = acceptable_PPM_err, intensity = max_RI_diff, RI_diff_type = RI_diff_type)
   
   #intense_peak_df <- do.call(rbind, intense_peak$matched_peaks)
   

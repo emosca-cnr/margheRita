@@ -12,6 +12,8 @@ check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 1)
 \item{feature_data}{A list of sample data contain retention time with specific ID.}
 
 \item{rt_err_thr}{A number that specify the desired absolute difference of retention time between sample and library metabolite.}
+
+\item{keep_all}{keep all the features}
 }
 \value{
 A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
