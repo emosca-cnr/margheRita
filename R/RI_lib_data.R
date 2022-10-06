@@ -1,9 +1,9 @@
-#' establishing new library data by calculating relative intensity
-#'
-#'
+#' Calculate relative intensities and filter 
+#' @param reference_spectra list of data.frames with spectra
+#' @param acceptable_RI maximum admitted relative intensity
 #' @export
 
-RI_lib_data = function(reference_spectra , RT_mass, acceptable_RI = 10) {
+RI_lib_data <- function(reference_spectra, acceptable_RI = 10) {
 
   #calculating relative intensity of ions for mass-mass
   # selected Relative intensity > 10 with correlated mass in lib
@@ -19,8 +19,8 @@ RI_lib_data = function(reference_spectra , RT_mass, acceptable_RI = 10) {
 
 
   #establishing new library with the same length of RT_mass
-  RI_lib = RI_lib[match(names(RT_mass) ,names(RI_lib))]
-  all(names(RI_lib) == names(RT_mass))
+  #RI_lib = RI_lib[match(names(RT_mass) ,names(RI_lib))]
+  #all(names(RI_lib) == names(RT_mass))
 
 
 

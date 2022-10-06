@@ -1,4 +1,4 @@
-#' converting intensity to relative intensity
+#' Convert sample intensity to relative intensity and filter
 #'
 #' @export
 #' @param feature_spectra it is a list of sample ID which each contains list of its m/z and Intensity.

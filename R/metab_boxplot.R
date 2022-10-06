@@ -1,8 +1,15 @@
-#' metab_boxplot
-#' @importFrom graphics boxplot
-#' @param mRList mRList
+#' Boxplot of metabolie levels across classes
+#' 
+#' Plot boxplot of metabolites, and save them as .png.
+#'
+#' @importFrom graphics boxplot points
+#' @param mRList mRList object
+#' @param features vector with a list of metabolites to graph
+#' @param col_by define how to color the boxplot, default=class
+#' @param group define what you want to compare
+#' @param dirout output directory
 #' @export
-#' @importFrom grDevices dev.off png
+#' @importFrom grDevices dev.off png rainbow
 
 metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class", group="class"){
 
@@ -14,18 +21,18 @@ metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class",
   col_pal <- rainbow(length(levels(col_factor)))
 
   data <- mRList$data[rownames(mRList$data) %in% features, ] #select the metabolites (features), according to list from users
-  
+
   if(nrow(data)<1){
     message("None of the features was found in the dataset.\n")
   }
-  
+
   #data<-t(data)
   groups<-as.factor(X_ann[,group])
 
 
   for (i in 1:nrow(data)) {
-    
-    png(file=paste0(dirout, "metabolite", rownames(data)[i], ".png"), width = 200, height = 200, units = "mm", res=300)
+
+    png(filename = paste0(dirout, "metabolite", rownames(data)[i], ".png"), width = 200, height = 200, units = "mm", res=300)
 
     i_min <- min(data[i, ])
     i_max <- max(data[i, ])

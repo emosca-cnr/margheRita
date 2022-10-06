@@ -2,10 +2,18 @@
 % Please edit documentation in R/calculate_lfc.R
 \name{calculate_lfc}
 \alias{calculate_lfc}
-\title{calculate_lfc}
+\title{Calculate the log fold change between two classes of samples}
 \usage{
-calculate_lfc(mRList, lfc_theshold = 0.25, contrast_samples)
+calculate_lfc(mRList, contrast_samples)
+}
+\arguments{
+\item{mRList}{mRList object}
+
+\item{contrast_samples}{character vector with two elements that indicate the two classes of samples}
+}
+\value{
+mRList object with fold changes in mRList$metab_ann
 }
 \description{
-calculate_lfc
+The log2 fold changes are calculated using the mean values of the two classes
 }

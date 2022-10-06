@@ -5,7 +5,7 @@
 \alias{mRlib_precursors}
 \title{LIBRARY - data.frame wirh information at precursor level}
 \format{
-An object of class \code{data.frame} with 1871 rows and 16 columns.
+An object of class \code{data.frame} with 1841 rows and 16 columns.
 }
 \usage{
 mRlib_precursors

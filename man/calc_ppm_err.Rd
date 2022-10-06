@@ -2,10 +2,18 @@
 % Please edit documentation in R/calc_ppm_err.R
 \name{calc_ppm_err}
 \alias{calc_ppm_err}
-\title{equation to calculate the PPM error}
+\title{Calculate PPM error}
 \usage{
 calc_ppm_err(a = NULL, b = NULL)
 }
+\arguments{
+\item{a}{data.frame of 1 row and PPM in column 1}
+
+\item{b}{data.frame of 1 row and PPM in column 1}
+}
+\value{
+PPM error
+}
 \description{
-equation to calculate the PPM error
+PPM_error = abs(x - y) / x * 1000000
 }

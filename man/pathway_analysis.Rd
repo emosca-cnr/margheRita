@@ -2,9 +2,8 @@
 % Please edit documentation in R/pathway_analysis.R
 \name{pathway_analysis}
 \alias{pathway_analysis}
-\title{pathway analysis
-Run enricher or gsea from clusterProfiler on pathways provided by NCBI
-Biosytems}
+\title{Pathway analysis
+Run enricher or gsea from clusterProfiler on pathways provided by NCBI Biosytems}
 \usage{
 pathway_analysis(
   in_list = NULL,
@@ -26,8 +25,42 @@ pathway_analysis(
   exponent = 1
 )
 }
+\arguments{
+\item{in_list}{metabolite set}
+
+\item{universe}{universe}
+
+\item{type}{"ora" or "gsea"}
+
+\item{tax_id}{tax id}
+
+\item{include_general_pathways}{whether to include general pathways or not}
+
+\item{pvalueCutoff}{p-value cutoff}
+
+\item{pAdjustMethod}{p-value adjustment method}
+
+\item{minGSSize}{minimum metabolite set size}
+
+\item{maxGSSize}{maximum metabolite set size}
+
+\item{qvalueCutoff}{q-value cutoff}
+
+\item{TERM2METAB}{2-columns data.frame of pathways and metabolites}
+
+\item{TERM2NAME}{2-columns data.frame of pathways and pathway names}
+
+\item{nPerm}{number of permutations}
+
+\item{verbose}{verbose mode}
+
+\item{gsea_by}{gsea type}
+
+\item{seed}{set the seed}
+
+\item{exponent}{exponent in the gsea approach}
+}
 \description{
-pathway analysis
-Run enricher or gsea from clusterProfiler on pathways provided by NCBI
-Biosytems
+Pathway analysis
+Run enricher or gsea from clusterProfiler on pathways provided by NCBI Biosytems
 }

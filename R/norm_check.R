@@ -1,15 +1,17 @@
-#' Shapiro-Wilk's test is used for testing the normal distribution of metabolites
-#' Calculate p-value, if p-value>0.05 metabolite is normally distributed, p-value<0.05 metabolite is not normally distributed
-#' @param m_list mRList
-#' @return  m_list Shapiro with p-value calculated usign Shapiro-Wilk's test
+#' Test the normality of each metabolite by Shapiro-Wilk's test
+#' 
+#' Function calculates p-values for each metabolites by Shapiro-Wilk's test to test normal distribution. If p-value>0.05 metabolite is normally distributed, p-value<0.05 metabolite is not normally distributed
+#' @param mRList mRList object
+#' @return mRList object with mRist$Shapiro elment that reports p-value calculated using Shapiro-Wilk's test
 #' @export
+#' @importFrom stats shapiro.test
 
 
 
 norm_check <- function(mRList) {
 
   Shapirotest <- apply(mRList$data,1,function(x) shapiro.test(as.numeric(x)))
-  mRList$shapirotest<-Shapirotest
+  mRList$shapirotest <- Shapirotest
 
   return(mRList)
 }

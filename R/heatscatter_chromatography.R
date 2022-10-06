@@ -1,9 +1,18 @@
-#' heatscatter_chromatography
+#' Draw the "heatscatter chromatography"
 #' @importFrom LSD heatscatter
 #' @importFrom grDevices png
 #' @export
+#' @param mRList mRList object
+#' @param mz_limits numeric vector with minimum and maximum rt values
+#' @param rt_limits numeric vector with minimum and maximum rt values
+#' @param sample ???
+#' @param outfile out file name
+#' @param ... further arguments to LSD::heatscatter
+#' 
 
 heatscatter_chromatography <- function(mRList, mz_limits=NULL, rt_limits=NULL, sample=NULL, outfile="heatscatter.png" , ...) {
+   
+   ### change sample into colnames or index
    if (!is.null(sample)) {
       col_index <- grep(sample, names(mRList$metab_ann))
       col_names <- append(c("rt", "mz"), names(mRList$metab_ann)[col_index])

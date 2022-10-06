@@ -2,16 +2,18 @@
 % Please edit documentation in R/collapse_tech_rep.R
 \name{collapse_tech_rep}
 \alias{collapse_tech_rep}
-\title{Collapse technical replicates of each biological replicate of samples, calculating the mean.}
+\title{Collapse technical replicates}
 \usage{
 collapse_tech_rep(mRList, remove.QC = FALSE)
 }
 \arguments{
-\item{mRList}{mRList}
+\item{mRList}{mRList object}
+
+\item{remove.QC}{(default FALSE), set TRUE if you want to remove QC from the dataframe}
 }
 \value{
 mRList with only biological replicates
 }
 \description{
-Collapse technical replicates of each biological replicate of samples, calculating the mean.
+Collapse technical replicates of each biological replicate calculating the mean. The resulting dataframe and metadata contain only biological replicates.
 }

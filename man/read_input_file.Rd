@@ -2,8 +2,7 @@
 % Please edit documentation in R/read_input_file.R
 \name{read_input_file}
 \alias{read_input_file}
-\title{Read files (input and metadata) both excel and .csv
-import excel files input and metadata}
+\title{Import data and metadata}
 \usage{
 read_input_file(
   input,
@@ -17,7 +16,25 @@ read_input_file(
   ...
 )
 }
+\arguments{
+\item{input}{data file name}
+
+\item{metadata}{metadata file name}
+
+\item{split_QC}{(default=TRUE) split input and metadata in two one for QC and the other for data}
+
+\item{mz_col}{column that contains m/z value}
+
+\item{rt_col}{column that contains rt value}
+
+\item{data_start_col}{column from which data starts}
+
+\item{MS_MS_column}{column that contains the MS/MS spectrum}
+
+\item{type}{type of imported files excel or .csv or .txt}
+
+\item{...}{further arguments to read.table}
+}
 \description{
-Read files (input and metadata) both excel and .csv
-import excel files input and metadata
+Import data and metadata as excel or .csv or .txt format
 }

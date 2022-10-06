@@ -1,5 +1,9 @@
-#' Collapse technical replicates of each biological replicate of samples, calculating the mean.
-#' @param mRList mRList
+#' Collapse technical replicates
+#' 
+#' Collapse technical replicates of each biological replicate calculating the mean. The resulting dataframe and metadata contain only biological replicates.
+#' 
+#' @param mRList mRList object
+#' @param remove.QC (default FALSE), set TRUE if you want to remove QC from the dataframe
 #' @importFrom stats aggregate
 #' @export
 #' @return mRList with only biological replicates

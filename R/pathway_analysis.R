@@ -1,12 +1,30 @@
-#' pathway analysis
-#' Run enricher or gsea from clusterProfiler on pathways provided by NCBI
-#' Biosytems
-#'
+#' Pathway analysis
+#' Run enricher or gsea from clusterProfiler on pathways provided by NCBI Biosytems
+#' @param in_list metabolite set
+#' @param universe universe
+#' @param type "ora" or "gsea"
+#' @param tax_id tax id
+#' @param include_general_pathways whether to include general pathways or not
+#' @param pvalueCutoff p-value cutoff
+#' @param pAdjustMethod p-value adjustment method
+#' @param minGSSize minimum metabolite set size
+#' @param maxGSSize maximum metabolite set size
+#' @param qvalueCutoff q-value cutoff
+#' @param TERM2METAB 2-columns data.frame of pathways and metabolites
+#' @param TERM2NAME 2-columns data.frame of pathways and pathway names
+#' @param nPerm number of permutations
+#' @param verbose verbose mode
+#' @param gsea_by gsea type
+#' @param seed set the seed
+#' @param exponent exponent in the gsea approach
 #' @export
 #' @importFrom  clusterProfiler GSEA enricher
+#' @importFrom utils data
 
 pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"), tax_id=9606, include_general_pathways=FALSE, pvalueCutoff = 0.05, pAdjustMethod = "BH", minGSSize = 10, maxGSSize = 500, qvalueCutoff = 0.2, TERM2METAB=NULL, TERM2NAME = NULL, nPerm=1000, verbose=TRUE, gsea_by="fgsea", seed=FALSE, exponent=1){
 
+  bsid2cid <- bsid2info <- NULL #to please the check
+  
   type <- match.arg(type, c("ora", "gsea"))
 
   if(is.null(TERM2METAB)){

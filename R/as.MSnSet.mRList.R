@@ -1,8 +1,8 @@
-#' as.MSnSet.mRList
-#'
-#'
+#' Transforms mRList into MSnSet object
+#' @param mRList mRList object
 #' @importFrom MSnbase MSnSet
 #' @export
+#' @return MSnSet object
 
 as.MSnSet.mRList <- function(mRList){
 

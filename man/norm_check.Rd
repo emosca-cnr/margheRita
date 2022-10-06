@@ -2,18 +2,16 @@
 % Please edit documentation in R/norm_check.R
 \name{norm_check}
 \alias{norm_check}
-\title{Shapiro-Wilk's test is used for testing the normal distribution of metabolites
-Calculate p-value, if p-value>0.05 metabolite is normally distributed, p-value<0.05 metabolite is not normally distributed}
+\title{Test the normality of each metabolite by Shapiro-Wilk's test}
 \usage{
 norm_check(mRList)
 }
 \arguments{
-\item{m_list}{mRList}
+\item{mRList}{mRList object}
 }
 \value{
-m_list Shapiro with p-value calculated usign Shapiro-Wilk's test
+mRList object with mRist$Shapiro elment that reports p-value calculated using Shapiro-Wilk's test
 }
 \description{
-Shapiro-Wilk's test is used for testing the normal distribution of metabolites
-Calculate p-value, if p-value>0.05 metabolite is normally distributed, p-value<0.05 metabolite is not normally distributed
+Function calculates p-values for each metabolites by Shapiro-Wilk's test to test normal distribution. If p-value>0.05 metabolite is normally distributed, p-value<0.05 metabolite is not normally distributed
 }

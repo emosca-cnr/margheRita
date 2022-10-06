@@ -1,8 +1,8 @@
 #' Normalize profiles
-#' @param mRList$data features-by-samples matrix of metabolite levels;
+#' @param mRList mRList object
 #' @param method "log": log2(x+1); "reference": divide each sample by its reference; "pqn": probailistic quotient normalization;
-#' @param reference reference profile;
 #' @export
+#' @return mRList object with normalized data
 
 normalize_profiles <- function(mRList, method=c("log", "reference", "pqn")){
 

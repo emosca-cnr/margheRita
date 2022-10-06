@@ -2,10 +2,15 @@
 % Please edit documentation in R/RI_sample_data.R
 \name{RI_sample_data}
 \alias{RI_sample_data}
-\title{establishing new sample data by calculating relative intensity}
+\title{Convert sample intensity to relative intensity and filter}
 \usage{
-RI_sample_data(feature_spectra, acceptable_RI = acceptable_RI)
+RI_sample_data(feature_spectra, accept_RI = 10)
+}
+\arguments{
+\item{feature_spectra}{it is a list of sample ID which each contains list of its m/z and Intensity.}
+
+\item{accept_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
 }
 \description{
-establishing new sample data by calculating relative intensity
+Convert sample intensity to relative intensity and filter
 }

@@ -1,9 +1,14 @@
-#' Calculate mean, median and standard deviation (stdev) for each group under study.
-#' write_output =FALSE default, if TRUE table, as .csv format, are written
-#' @param mRList mRList
+#' Calculate mean, median and standard deviation for each biological group.
+#' 
+#' Calculate mean, median and standard deviation for each biological group under study. This function works after collapse_tech_rep.
+#' 
+#' @param write_output (default FALSE), if TRUE table, as .csv format, is written and saved.
+#' @param mRList mRList object
 #' @importFrom stats aggregate
 #' @importFrom utils write.csv
 #' @export
+#' @return mRList object with mean, median and sd in mRList$metab_ann element
+#' @param dirout output directory
 
 
 mean_median_stdev_samples<-function(mRList, dirout="./", write_output=FALSE){

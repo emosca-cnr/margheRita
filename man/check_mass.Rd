@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_mass.R
 \name{check_mass}
 \alias{check_mass}
-\title{calculating PPM error}
+\title{Calculate the PPM error of precursors}
 \usage{
 check_mass(
   reference = NULL,
@@ -22,10 +22,15 @@ check_mass(
 \item{accept_flag}{A number with default value of 5. PPM errors < accept_flag will be tagged as "super", while those > accept_flag and < suffer_flag will be tagged as "acceptable"}
 
 \item{suffer_flag}{A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"}
+
+\item{keep_all}{keep all the features}
 }
 \value{
-mass, A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
+A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
 }
 \description{
 it is making a list of all library metabolites and assigning proper sample ID to each based on desired PPM error.
+}
+\details{
+Calculate the PPM error of precursors and assign a flag according to its value.
 }

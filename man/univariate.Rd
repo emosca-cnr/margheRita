@@ -2,19 +2,27 @@
 % Please edit documentation in R/univariate.R
 \name{univariate}
 \alias{univariate}
-\title{user has to Choose between T-test, U-test, Anova or Kruskal}
+\title{Univariate analysis}
 \usage{
 univariate(
   mRList,
   dirout = "./",
-  test_method = c("ttest", "anova", "Utest", "kruskal"),
+  test_method = c("ttest", "Utest", "anova", "kruskal"),
   paired = c("FALSE", "TRUE"),
   group_factor = "class"
 )
 }
 \arguments{
-\item{mRList}{(dataframe of samples only biological replicates, technical replicates were collapsed before)}
+\item{mRList}{dataframe with data of samples that contains only biological replicates. Technical replicates have to be collapsed before using collapse_tech_rep function}
+
+\item{dirout}{output directory}
+
+\item{test_method}{choice of the test to apply}
+
+\item{paired}{TRUE if data are paired, FALSE for unpaired data}
+
+\item{group_factor}{specify the groups to compare}
 }
 \description{
-user has to Choose between T-test, U-test, Anova or Kruskal
+User can choose between T-test, U-test, Anova test  or Kruskal-Wallis test.
 }

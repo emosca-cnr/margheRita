@@ -2,9 +2,9 @@
 % Please edit documentation in R/check_RT.R
 \name{check_RT}
 \alias{check_RT}
-\title{Checking Retention Time}
+\title{Check the retention time}
 \usage{
-check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 2)
+check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 1)
 }
 \arguments{
 \item{reference}{A list of library contain retention time with specific ID.}
@@ -12,9 +12,11 @@ check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 2)
 \item{feature_data}{A list of sample data contain retention time with specific ID.}
 
 \item{rt_err_thr}{A number that specify the desired absolute difference of retention time between sample and library metabolite.}
+
+\item{keep_all}{keep all the features}
 }
 \value{
-RT, A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
+A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
 }
 \description{
 \code{check_RT} it is making a list of all library metabolites and assigning proper sample ID to each based on desired retention time error.

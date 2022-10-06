@@ -2,7 +2,7 @@
 % Please edit documentation in R/h_map.2.R
 \name{h_map}
 \alias{h_map}
-\title{heatmap}
+\title{Draw an heatmap}
 \usage{
 h_map(
   mRList,
@@ -17,8 +17,24 @@ h_map(
 )
 }
 \arguments{
-\item{mRList}{mRList}
+\item{mRList}{mRList object}
+
+\item{dirout}{output directory}
+
+\item{col_ann}{set of colors for sample annotation}
+
+\item{col}{set of color for data values}
+
+\item{scale_features}{whether to scale features or not}
+
+\item{features}{names of features to plot (optiooal)}
+
+\item{samples}{samples to consider (optional)}
+
+\item{top}{only the top most variable features are plotted (if features is NULL)}
+
+\item{...}{further arguments for ComplexHeatmap::Heatmap}
 }
 \description{
-heatmap
+Draw an heatmap
 }

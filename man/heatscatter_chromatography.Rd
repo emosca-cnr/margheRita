@@ -2,7 +2,7 @@
 % Please edit documentation in R/heatscatter_chromatography.R
 \name{heatscatter_chromatography}
 \alias{heatscatter_chromatography}
-\title{heatscatter_chromatography}
+\title{Draw the "heatscatter chromatography"}
 \usage{
 heatscatter_chromatography(
   mRList,
@@ -13,6 +13,19 @@ heatscatter_chromatography(
   ...
 )
 }
+\arguments{
+\item{mRList}{mRList object}
+
+\item{mz_limits}{numeric vector with minimum and maximum rt values}
+
+\item{rt_limits}{numeric vector with minimum and maximum rt values}
+
+\item{sample}{???}
+
+\item{outfile}{out file name}
+
+\item{...}{further arguments to LSD::heatscatter}
+}
 \description{
-heatscatter_chromatography
+Draw the "heatscatter chromatography"
 }

@@ -2,7 +2,13 @@
 % Please edit documentation in R/select_library.R
 \name{select_library}
 \alias{select_library}
-\title{Library selection}
+\title{Library selection
+Library of margheRita contains three list:
+\itemize{
+\item precursors library: it is a list of metabolites which each contains information of retention time and mz with their specific IDs, CAS numbers and names.
+\item lib_peaks_data:it is a list of metabolites which each contains information of collision energy with their specific IDs, CAS numbers and names.
+\item lib_peaks: it is a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mz and relative intensity.
+}}
 \usage{
 select_library(
   column = c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"),
@@ -10,6 +16,19 @@ select_library(
   accept_RI = 10
 )
 }
+\arguments{
+\item{column}{it is specify the type of the column which could be; HILIC, LipC8, pZIC, RPLong, RPShort. based on the type of the column, the retention time of same metabolite could be different.}
+
+\item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}
+
+\item{accept_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, it is filtering the library by deleting the relative intensity lower then accept_RI.}
+}
 \description{
 Library selection
+Library of margheRita contains three list:
+\itemize{
+\item precursors library: it is a list of metabolites which each contains information of retention time and mz with their specific IDs, CAS numbers and names.
+\item lib_peaks_data:it is a list of metabolites which each contains information of collision energy with their specific IDs, CAS numbers and names.
+\item lib_peaks: it is a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mz and relative intensity.
+}
 }

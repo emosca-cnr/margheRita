@@ -2,15 +2,20 @@
 % Please edit documentation in R/imputation.R
 \name{imputation}
 \alias{imputation}
-\title{missing values imputation}
+\title{Missing values imputation}
 \usage{
-imputation(mRList, seed = NULL, a = 0.1, b = 0.25, n = 100)
+imputation(mRList, seed = NULL, a = 0.1, b = 0.25)
 }
 \arguments{
-\item{dataframe}{of input contains intensity of all features according to samples}
+\item{mRList}{mRList object}
 
-\item{m_list}{margheRita mRList}
+\item{seed}{set this seed with set.seed}
+
+\item{a}{minimum increase factor}
+
+\item{b}{maxmimum increase factor
+#' @export}
 }
 \description{
-missing values imputation
+the NA values are replaced with a fraction of the minimum value of that row (min_r), sampled in the interval \eqn{[min_r * a, min_r * b]}
 }

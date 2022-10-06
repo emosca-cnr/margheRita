@@ -2,10 +2,16 @@
 % Please edit documentation in R/as.MSnSet.mRList.R
 \name{as.MSnSet.mRList}
 \alias{as.MSnSet.mRList}
-\title{as.MSnSet.mRList}
+\title{Transforms mRList into MSnSet object}
 \usage{
 as.MSnSet.mRList(mRList)
 }
+\arguments{
+\item{mRList}{mRList object}
+}
+\value{
+MSnSet object
+}
 \description{
-as.MSnSet.mRList
+Transforms mRList into MSnSet object
 }
