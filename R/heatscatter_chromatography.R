@@ -5,8 +5,11 @@
 
 heatscatter_chromatography <- function(mRList, mz_limits=NULL, rt_limits=NULL, sample=NULL, outfile="heatscatter.png" , ...) {
    if (!is.null(sample)) {
-      df <- mRList$metab_ann[, c("rt", "mz", paste(sample[1], "_mean", sep = ""))]
-      df <- df[df[,3]> 0,]
+      col_index <- grep(sample, names(mRList$metab_ann))
+      col_names <- append(c("rt", "mz"), names(mRList$metab_ann)[col_index])
+      df <- mRList$metab_ann[col_names]
+      df$sum <- rowSums(df[3:ncol(df)])
+      df <- df[df[,ncol(df)]> 0,]
       df <- df[1:2]
    }
 
