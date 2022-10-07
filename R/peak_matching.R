@@ -133,8 +133,8 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
     if(!is.null(ans[[z]])){
       #keep only peaks with TRUE flags
       #ans[[z]] <- merge(RT_mass[[z]], ans[[z]], by="Feature_ID", sort=F, no.dups = TRUE, all.y=FALSE) ###all.y is false by default
-      ans[[z]] <- merge(RT_mass[[z]], ans[[z]], by="Feature_ID", sort=F, no.dups = TRUE)
-      ans[[z]] <- merge(ans[[z]], reference, by="ID")
+      ans[[z]] <- merge(RT_mass[[z]], ans[[z]], by="Feature_ID", sort=F)
+      ans[[z]] <- merge(ans[[z]], reference, by="ID", suffixes=c("", "_lib"), all.x=TRUE, sort=F)
     }
 
   }
