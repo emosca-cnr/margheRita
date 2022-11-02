@@ -1,18 +1,23 @@
 #' Calculate of coefficient of variation for each metabolite
-#' 
-#' Calculate the coefficient of variance (CV) for samples and QC (quality control) to assess the reliability of the experiment, as:
+#'
+#' @description Calculate the coefficient of variance (CV) for samples and QC (quality control) to assess the reliability of the experiment, as:
 #' CV = (SD - mean) * 100.
 #' Only metabolites with sample CV < QC CV are kept.
-#' 
+#'
 #' @param mRList mRList object
 #' @export
 #' @return filtered mRList object
 #' @param dirout output directory
+#' @examples
+#' ##library(dataset.margheRita)
+#' ##dataset(norm_pos)
+#' mRList<-CV(mRList)
+#'
 
 
 #apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites
 
-CV <- function(mRList, dirout) {
+CV <- function(mRList, dirout="./") {
 
   dir.create(dirout)
 

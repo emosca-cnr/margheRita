@@ -12,6 +12,11 @@
 #' @param ... further arguments to read.table
 #' @param input data file name
 #' @param metadata metadata file name
+#' @return mRList S4 object that contain data and metadata.
+#' @examples
+#' ##library(dataset.margheRita)
+#' ##dataset(norm_pos)
+#' mRList<-(norm_pos.xlsx, norm_pos_meta.xlsx, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type="excel")
 
 read_input_file <- function(input, metadata, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type=c("excel", "txt"), ...){
 

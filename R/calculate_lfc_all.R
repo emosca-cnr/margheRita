@@ -2,7 +2,11 @@
 #' @importFrom utils combn
 #' @param  mRList mRList object
 #' @export
-#' @return mRList object with fold changes in mRList$metab_ann 
+#' @return mRList object with fold changes in mRList$metab_ann
+#' @examples
+#' ##library(dataset.margheRita)
+#' ##dataset(norm_pos)
+#' mRList<-calculate_lfc_all(mRList)
 
 
 calculate_lfc_all <- function(mRList) {

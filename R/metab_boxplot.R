@@ -1,5 +1,5 @@
-#' Boxplot of metabolie levels across classes
-#' 
+#' Boxplot of metabolites
+#'
 #' Plot boxplot of metabolites, and save them as .png.
 #'
 #' @importFrom graphics boxplot points
@@ -10,6 +10,11 @@
 #' @param dirout output directory
 #' @export
 #' @importFrom grDevices dev.off png rainbow
+#' @return .png of boxplot
+#' @examples
+#' ##library(dataset.margheRita)
+#' ##dataset(norm_pos)
+#' metab_boxplot(mRList,features=mRLIst$data[1:10,],col_by="class",group="class")
 
 metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class", group="class"){
 
