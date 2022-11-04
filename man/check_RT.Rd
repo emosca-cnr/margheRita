@@ -4,7 +4,7 @@
 \alias{check_RT}
 \title{Check the retention time}
 \usage{
-check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 1)
+check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 1, filter = TRUE)
 }
 \arguments{
 \item{reference}{A list of library contain retention time with specific ID.}

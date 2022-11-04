@@ -15,3 +15,8 @@ mRList object with fold changes in mRList$metab_ann
 \description{
 Calculate the log fold change between all pairs of sample classes
 }
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+mRList<-calculate_lfc_all(mRList)
+}

@@ -12,8 +12,14 @@ collapse_tech_rep(mRList, remove.QC = FALSE)
 \item{remove.QC}{(default FALSE), set TRUE if you want to remove QC from the dataframe}
 }
 \value{
-mRList with only biological replicates
+mRList object with only biological replicates
 }
 \description{
-Collapse technical replicates of each biological replicate calculating the mean. The resulting dataframe and metadata contain only biological replicates.
+Collapse technical replicates of each biological replicate calculating the mean.
+The resulting dataframe and metadata contain only biological replicates.
+}
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+mRList<-collapse_tech_rep(mRList, remove.QC=FALSE)
 }

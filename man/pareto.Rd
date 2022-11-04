@@ -2,8 +2,7 @@
 % Please edit documentation in R/pareto.R
 \name{pareto}
 \alias{pareto}
-\title{Pareto scaling
-Perform data scaling with Pareto approach.}
+\title{Pareto scaling}
 \usage{
 pareto(X, centering = TRUE)
 }
@@ -13,6 +12,5 @@ pareto(X, centering = TRUE)
 \item{centering}{whether to center the data or not. Defaults to TRUE.}
 }
 \description{
-Pareto scaling
-Perform data scaling with Pareto approach.
+Perform data scaling by pareto.
 }

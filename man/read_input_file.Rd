@@ -35,6 +35,14 @@ read_input_file(
 
 \item{...}{further arguments to read.table}
 }
+\value{
+mRList S4 object that contain data and metadata.
+}
 \description{
 Import data and metadata as excel or .csv or .txt format
+}
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+mRList<-(norm_pos.xlsx, norm_pos_meta.xlsx, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type="excel")
 }

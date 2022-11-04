@@ -31,7 +31,15 @@ m_z_filtering(
 }
 \value{
 filtered mRList
+
+mRList object filtered by m/z not accurate
 }
 \description{
-Filter m/z of metabolites
+Function filters metabolites with 0.4>m/z<0.8 as it is not accurate.
+}
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+mRList<-m_z_filtering(mRList,do_plot=TRUE, out_file="mz_quality.png", lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black")
+
 }

@@ -4,7 +4,7 @@
 \alias{CV}
 \title{Calculate of coefficient of variation for each metabolite}
 \usage{
-CV(mRList, dirout)
+CV(mRList, dirout = "./")
 }
 \arguments{
 \item{mRList}{mRList object}
@@ -18,4 +18,10 @@ filtered mRList object
 Calculate the coefficient of variance (CV) for samples and QC (quality control) to assess the reliability of the experiment, as:
 CV = (SD - mean) * 100.
 Only metabolites with sample CV < QC CV are kept.
+}
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+mRList<-CV(mRList)
+
 }

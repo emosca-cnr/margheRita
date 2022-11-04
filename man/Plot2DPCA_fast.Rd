@@ -2,8 +2,7 @@
 % Please edit documentation in R/Plot2DPCA_fast.R
 \name{Plot2DPCA_fast}
 \alias{Plot2DPCA_fast}
-\title{Create 2D PCA score and loading plots
-Create 2D PCA score and loading plots choosing the principal components.}
+\title{Plot score and loading plot}
 \usage{
 Plot2DPCA_fast(
   mRList,
@@ -28,6 +27,5 @@ Plot2DPCA_fast(
 \item{include_QC}{(default TRUE)}
 }
 \description{
-Create 2D PCA score and loading plots
-Create 2D PCA score and loading plots choosing the principal components.
+Plot 2D PCA score and loading plots choosing the principal components.
 }

@@ -9,7 +9,8 @@ check_mass(
   feature_data = NULL,
   unaccept_flag = 15,
   accept_flag = 5,
-  suffer_flag = 10
+  suffer_flag = 10,
+  filter = TRUE
 )
 }
 \arguments{

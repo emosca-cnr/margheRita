@@ -23,6 +23,14 @@ univariate(
 
 \item{group_factor}{specify the groups to compare}
 }
+\value{
+mRList object with mRList$"testchosen" with univariate analysis
+}
 \description{
 User can choose between T-test, U-test, Anova test  or Kruskal-Wallis test.
+}
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+mRList<-univariate(mRList, test_method="anova",paired=FALSE,group_factor="class")
 }

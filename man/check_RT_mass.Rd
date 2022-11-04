@@ -4,14 +4,12 @@
 \alias{check_RT_mass}
 \title{Merge candidates with appropriate retention time and PPM error}
 \usage{
-check_RT_mass(RT = NULL, mass = NULL, reference = NULL)
+check_RT_mass(RT = NULL, mass = NULL)
 }
 \arguments{
 \item{RT}{A list of library ID each contain a data frame of sample ID with ideal retention time. it is obtained from previous function.}
 
 \item{mass}{A list of library ID each contain a data frame of sample ID with ideal PPM error. it is obtained from previous function.}
-
-\item{reference}{A list of library contain retention time and mz (mass-to-charge ratio) with specific ID.}
 }
 \value{
 data.frame with candidates

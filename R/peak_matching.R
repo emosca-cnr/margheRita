@@ -96,7 +96,7 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
           }
 
           #count the peaks that are found
-          pmm_error_matrix_flags[pmm_error_matrix <= ppm_err] <- 1 ##peaks matching
+          pmm_error_matrix_flags[pmm_error_matrix < ppm_err] <- 1 ##peaks matching
           RI_flags[RI <= intensity] <- 2 ##RI matching
 
           #peaks and RI

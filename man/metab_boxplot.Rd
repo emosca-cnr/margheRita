@@ -2,7 +2,7 @@
 % Please edit documentation in R/metab_boxplot.R
 \name{metab_boxplot}
 \alias{metab_boxplot}
-\title{Boxplot of metabolie levels across classes}
+\title{Boxplot of metabolites}
 \usage{
 metab_boxplot(
   mRList = NULL,
@@ -23,6 +23,14 @@ metab_boxplot(
 
 \item{group}{define what you want to compare}
 }
+\value{
+.png of boxplot
+}
 \description{
 Plot boxplot of metabolites, and save them as .png.
+}
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+metab_boxplot(mRList,features=mRLIst$data[1:10,],col_by="class",group="class")
 }
