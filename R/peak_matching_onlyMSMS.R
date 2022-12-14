@@ -12,12 +12,25 @@
 #' @param RI_diff_type type of relative intensity difference: absolute or relative
 
 
-peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NULL,  lib_peaks_data=NULL, mode=c("POS", "NEG"), ppm_err=10, intensity=30, RI_diff_type=c("rel", "abs")) {
-
+peak_matching_onlyMSMS <- function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NULL,  lib_peaks_data=NULL, mode=c("POS", "NEG"), ppm_err=10, intensity=30, RI_diff_type=c("rel", "abs")) {
+  
   #a novel data to not touch the input
+  if(is.null(RT_mass)){
+    cat("No RT_mass, checking all MS/MS from RI_lib againts all RI_sample\n")
+    
+    #create an RT_mass with all Feature_ID for all library elment
+    RT_mass <- setNames(vector("list", nrow(reference)), reference$ID)
+    RT_mass <- lapply(RT_mass, function(i_element) data.frame(Feature_ID=names(RI_sample), stringsAsFactors = F))
+    
+  }
+  
   ans <- vector("list", length(RT_mass))
   names(ans) <- names(RT_mass)
-
+  
+  #store the matrices of peak-peak comparison
+  ans2 <- ans
+  
+  
   RI_diff_type <- match.arg(RI_diff_type)
   if(RI_diff_type=="rel"){
     RI_diff_type <- 1
@@ -25,19 +38,18 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
     RI_diff_type <- 0
   }
   
-  #store the matrices of peak-peak comparison
-  ans2 <- ans
-    
+  
   #ensure the same order
   lib_peaks_data <- lib_peaks_data[match(names(RI_lib), lib_peaks_data$ID), ]
-
+  
   #cycle through every library element of RT_mass 
   for(z in 1:length(RT_mass)){
     
+    cat(z, "/", length(RT_mass), "\n")
     ### add columns with library Name of the current ID
     #RT_mass[[z]]$peaks_found_ppm_RI <- 0 #removed... see below
     RT_mass[[z]]$ID <- names(RT_mass)[z]
-
+    
     ### CAS number of the library element
     CAS_z <- reference$CAS[reference$ID == names(RT_mass)[z]]
     
@@ -46,9 +58,9 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
     
     ##the list of the MS/MS spectra for the library element (it can be not unique)
     z_peaks_all <- RI_lib[lib_peaks_data$CAS == CAS_z & lib_peaks_data$Collision_energy == mode ]
-
+    
     if(length(z_peaks_all)>0){
-
+      
       ans2[[z]] <- z_peaks_all
       
       #cycle through the MS/MS spectra
@@ -56,17 +68,18 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
         
         #one of the MS/MS spectra
         z_peaks <- as.data.frame(z_peaks_all[[zzzz]])
-
+        
         #RT_mass[[z]]$ID_peaks <- names(z_peaks_all)[zzzz]
-
+        
         ans2[[z]][[zzzz]] <- vector("list", nrow(RT_mass[[z]]))
         names(ans2[[z]][[zzzz]]) <- RT_mass[[z]]$Feature_ID
+        
         #cycle through the features assigned to the library element
         for(zi in 1:nrow(RT_mass[[z]])){
           
           #the MS/MS spectra of the feature
           zi_peaks <- as.data.frame(RI_sample[names(RI_sample) == RT_mass[[z]]$Feature_ID[zi]])
-
+          
           #presence of the precursor in the MS/MS specra
           precursor_feature_peaks_ppmerror <- abs(mz_precursor - zi_peaks[, 1]) / mz_precursor * 1000000
           precursor_feature_peaks_ppmerror <- any(precursor_feature_peaks_ppmerror < ppm_err)
@@ -74,11 +87,11 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
           ###pmm error matrix and flags: library_peaks-by-feature_peaks
           pmm_error_matrix <- matrix(0, nrow(z_peaks), nrow(zi_peaks))
           pmm_error_matrix_flags <- pmm_error_matrix
-
+          
           ###RI error matrix and flags: library_peaks-by-feature_peaks
           RI <- pmm_error_matrix
           RI_flags <- pmm_error_matrix
-
+          
           ### cycle throug all pairs of peaks
           for(i in 1:nrow(pmm_error_matrix)){
             for(j in 1:ncol(pmm_error_matrix)){
@@ -94,20 +107,20 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
               RI[i, j] = abs(z_peaks[i, 2] - zi_peaks[j, 2]) / RI_den * RI_perc
             }
           }
-
+          
           #count the peaks that are found
           pmm_error_matrix_flags[pmm_error_matrix < ppm_err] <- 1 ##peaks matching
           RI_flags[RI <= intensity] <- 2 ##RI matching
-
+          
           #peaks and RI
           flags_matrix <- pmm_error_matrix_flags + RI_flags
-
+          
           #store the number of peaks matching, this will be over written in case a different number of matches is found for z,zi but different zzzz;
           #UPDATE save peaks_found_ppm_RI in ans
           #RT_mass[[z]]$peaks_found_ppm_RI[zi] <- sum(sign(rowSums(flags_matrix==3))) 
           n_matched_peaks <- sum(sign(rowSums(flags_matrix==3))) 
-
-
+          
+          
           ans2[[z]][[zzzz]][[zi]] <- list(
             ppm_error = pmm_error_matrix,
             ppm_error_flags = pmm_error_matrix_flags,
@@ -123,9 +136,9 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
           }else{
             ans[[z]] <- rbind(ans[[z]], data.frame(Feature_ID=RT_mass[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, precursor_in_MSMS=precursor_feature_peaks_ppmerror, stringsAsFactors = F))
           }
-
+          
         } #END cycle through the features assigned to the library element
-
+        
       } #END cycle through the MS/MS spectra of library
     }
     
@@ -136,21 +149,21 @@ peak_matching = function(reference=NULL, RT_mass=NULL, RI_lib=NULL, RI_sample=NU
       ans[[z]] <- merge(RT_mass[[z]], ans[[z]], by="Feature_ID", sort=F)
       ans[[z]] <- merge(ans[[z]], reference, by="ID", suffixes=c("", "_lib"), all.x=TRUE, sort=F)
     }
-
+    
   }
-
+  
   #filter the ans by deleting the empty data.frame;
   ans <- ans[sapply(ans, function(x) !is.null(x))]
-
+  
   #filter the ans by deleting the candidates without matches
   for (k in 1:length(ans)) {
     ans[[k]] <- ans[[k]][ans[[k]]$peaks_found_ppm_RI != 0, ]
   }
-
+  
   #filter the ans by deleting the empty data.frame
   ans <- ans[sapply(ans, function(x) dim(x)[1]) > 0]
   ans <- do.call(rbind, ans)
-
+  
   return(list(matched_peaks=ans, matrices=ans2))
-
+  
 }
