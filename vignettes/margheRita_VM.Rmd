@@ -61,24 +61,17 @@ Currently margheRita includes two datasets (decidere il dataset di esempio). To 
 ```{r, eval=FALSE}
 input_data_file <- system.file("extdata", "example1.xlsx", package = "margheRita")
 input_metadata_file <- system.file("extdata", "example1_meta.xlsx", package = "margheRita")
-mRList <- read_input_file(input = input_data_file, metadata = input_metadata_file, split_QC = TRUE, rt_col = 2, mz_col =3 , data_start_col = 4)
+mRList<-read_input_file("margheRita/example/Norm NEG/Urine_RP_NEG_norm_2batches_data.xlsx","margheRita/example/Norm NEG/Urine_RP_NEG_norm_2batches_metadata.xlsx",split_QC=T,data_start_col=6,rt_col=2, mz_col=3)
 ```
-To load the second, a dataset where metabolite intensities show a drift related to injection order, run:
-```{r, eval=FALSE}
-input_data_file <- system.file("extdata", "dataset_drift.xlsx", package = "margheRita")
-input_metadata_file <- system.file("extdata", "dataset_drift_metadata.xlsx", package = "margheRita")
-mRList <- read_input_file(input_data_file, metadata = input_metadata_file, data_start_col = 8, rt_col = 2, mz_col = 3)
-```
- 
 
 The mRList object has this structure:
 
 Objects in mRList  | Description
 ------------- | -------------
-data  | matrix containing metabolite intesity
+data  | matrix containing metabolite intensity
 metab_ann  | metabolite annotation
 sample_ann | sample annotation
-QC | matrix containing metabolite intesity for QC
+QC | matrix containing metabolite intensity for QC
 QC_ann | QC annotation
 
 Importantly, the mRList can be translated into `metaboset` or `MSnSet` classes:
@@ -87,19 +80,18 @@ mset <- as.metaboset.mRList(mRlist)
 msnset <- as.MSnSet.mRList(mRlist)
 ```
 
-# Preprocessing: m/z filtering, missing values imputation
+# Preprocessing step
 
-The step of preprocessing data is crucial in order to filter values that are not accurated and missing values using m_z_filtering function.
-If missing values are > 80% of the measured values, feature is trashed, otherwise missing values have to be imputed.
-Missing values have to be imputed using imputation functions.
+The step of preprocessing data is crucial in order to filter missing and not accurate values. margheRita has three function for preprocessing data.
 
-# m/z filtering
-m/z function filters features with m/z value not measured in accurate manner. Values with the first decimal place comprises between 4 and 8 are excluded.
+## filter_NA
+
+filter_NA function checks missing values in the experimental data.
+If missing values are > 80% of the measured values, feature is trashed, otherwise missing values have to be imputed with imputation function.
+
 
 ```{r, eval=FALSE}
-mRList_filt <- m_z_filtering(m_list = mRlist, lower_quality_mass_acc = 0.4, upper_quality_mass_acc = 0.8, do_plot = T, color="black")
-mRList_filt <- filter_NA(mRList_filt)
-
+mRList_filt <- filter_NA(mRList = mRList_filt, min_metab_in_sample = 100, min_sample_with_metab = 10)
 ```
 
 ## Imputation missing value
@@ -111,9 +103,21 @@ mRList_imp<-imputation(mRList, seed=NULL, a=0.1, b=0.25)
 
 ```
 
+## m/z filtering
+m/z function filters features with m/z value not accurate. Values with the first decimal place comprises between 4 and 8 are excluded as they are not accurate.
+
+```{r, eval=FALSE}
+mRList_filt <- m_z_filtering(mRList = mRList, lower_quality_mass_acc = 0.4, upper_quality_mass_acc = 0.8, do_plot = T, color="black")
+mRList_filt <- filter_NA(mRList_filt)
+
+```
+
 ## Heatscatter Cromatography
 
-This function provide an overview of all the $m/z$ features in all experiments during all the chromatogram, by generating a Heatscatter plot using `LSD::heatscatter()` function exploiting *LSD* package (https://cran.r-project.org/web/packages/LSD/index.html)
+This function generates a heatscatter plot, using `LSD::heatscatter()` function exploiting *LSD* package (https://cran.r-project.org/web/packages/LSD/index.html). The plot is a representation of the chromatography for all samples or a specific samples if it is indicated in fuction, plotting 
+$m/z$ intensity on the y-axis over the RT, retention time.
+
+
 ```{r, eval=FALSE}
 heatscatter_chromatography(mRList, mz_limits = NULL, rt_limits = NULL, sample = NULL)
 ```
@@ -123,11 +127,12 @@ heatscatter_chromatography(mRList, mz_limits = NULL, rt_limits = NULL, sample = 
 
 * `rt_limits`: vector parameter, default value is `NULL`, that specifies the minimum and maximum value of the retention time window that have to be displayed.
 
-![](images/hetascatter.png){width=100%}
+![](images/hs_chrom.png){width=100%}
+
 
 ## Batch effect correction
 
-batch_effect function remove batch effect using *limma* package. Batch of each samples is indicated in a column, as number, in metadata and then reported in sample_ann data frame.
+batch_effect function remove batch effect using *limma* package. Batch of each samples has to be indicated in a column, as number, in metadata and then reported in sample_ann data frame.
 
 ```{r, eval=FALSE}
 mRList<-batch_effect(mRList)
@@ -136,7 +141,13 @@ mRList<-batch_effect(mRList)
 
 ## Normalization
 
-The choose of normalization is a key passage in the analysis of metabolomic data.margheRita provides three ways for normalizing metabolite profiles: 'log', log2-normalization (scrivere qualche parola), 'reference', reference values can be imported and used for normalization, 'pqn' (probabilistic quotient normalization),for every feature the mean response is calculated across all QC samples. A reference vector is then generated. The median between the reference vector and every sample is computed obtaining a vector of coefficients related to each sample. Each sample is then divided by the median value of the vector of coefficients; this median value is different for each sample. This method was adapted by Dieterle et al. (2006) (see references). Its purpose is to take into account the concentration changes of some metabolite features that affect limited regions of the data.
+The choose of normalization is a key passage in the analysis of metabolomic data. margheRita provides three ways for normalizing metabolite profiles: 
+
+-'log', log2-normalization 
+
+-'reference', reference values can be imported and used for normalization
+
+-'pqn' (probabilistic quotient normalization),for every feature the mean response is calculated across all QC samples. A reference vector is then generated. The median between the reference vector and every sample is computed obtaining a vector of coefficients related to each sample. Each sample is then divided by the median value of the vector of coefficients; this median value is different for each sample. This method was adapted by Dieterle et al. (2006) (see references). Its purpose is to take into account the concentration changes of some metabolite features that affect limited regions of the data.
 
 Here's the code for using pqn normalization:
 
@@ -146,17 +157,22 @@ mRList_norm <- normalize_profiles(mRList, method = "pqn")
 ```
 
 
-## Principal Component Analysis and plot score and loading plot
+## Principal Component Analysis (funzione da rinominare)
 
-pca_fast function allows to perform Principal Component Analysis (PCA) during the analysis. Data can be scaled specified the type of scaling to use, the user can choose between "pareto", "uv","vector" or "none". QC can be included or not in the analysis.
-Graphical outputs are pairs plot and screeplot, number of the principal components (PCs) to visualize has to be chosen by user. Tables of loadings and scores can be saved as .csv files. 
-QC can be included in the analysis. After function collapse_tech_rep QCs have to be excluded from PCA. (lo scriviamo????)
+pca_fast_VM function performs Principal Component Analysis (PCA) in different moments during the analysis. margheRita provides four different scaling, users can choose between:
+-"pareto"
+-"uv"
+-"vector"
+-"none". 
+QCs  can be included or not in the analysis.
+Graphical outputs are pairs plot and screeplot, number of the principal components (PCs) to visualize has to be chosen by user. Tables of loadings and scores can be saved as .csv files, specifying write_output=T, when function is launched. 
+QC can be included in the analysis. After function collapse_tech_rep QCs have to be excluded from PCA.
 
 ```{r , eval=F}
-mRList<-pca_fast(mRList, dirout="PCA", col_by="class", method="svd", scaling=c("pareto"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=5, write_output=FALSE)
+mRList<-pca_fast_VM(mRList, dirout = paste0(dir_out, "/PCA_raw2"),nPcs=5,scaling="uv")
 ```
 
-![Pairs of the first four components](images/Pairs.png){width=60%}
+![Pairs of the first four components](images/Pairs.png){width=80%}
 
 
 
@@ -169,20 +185,23 @@ Plot2DPCA_fast(mRList, pcx=1, pcy=2, dirout = "PCA", col_by="class", include_QC=
 ```
 
 
-![Scoreplot of the first two components](images/Scoreplot.png){width=60%}
+![Scoreplot of the first two components](images/Scoreplot.png){width=80% }
 
 
 
 
-![Loading plot of the first two components](images/Loadingplot.png){width=60%}
+![Loading plot of the first two components](images/Loadingplot.png){width=80%}
 
 
 ## Filter by coefficient of variation
 
 CV function calculates the coefficient of variation for each metabolite for samples and QC, separately, to assess the precision and repeatability of the measurements. 
-CV is calculated using the following equation:
-     $CV= (stdev/mean)*100$.
-If $CV QC > CV sample$ metabolite is trashed away. The outputs are data frame with only reliable features. 
+CV is calculated, as percentage, using the following equation:
+
+$CV=(\frac{{σ}}{{μ}})*100$
+
+If $CV QC > CV sample$ metabolite is trashed away. 
+The outputs are data frames cleaned from the features not reliable.
 
 ```{r, eval=FALSE}
 mRList<-CV(mRList)
@@ -192,7 +211,8 @@ mRList<-CV(mRList)
 
 ## Collapse technical replicates
 
-The collapse_tech_rep function calculated the mean of each feature for technical replicates, in order data only of biological replicates. In this manner data and metadata contain information only of biological replicates.
+The collapse_tech_rep function allows to return dataframe with only biological replicates.
+Function calculates the mean of the technical replicates for each biological replicates for each feature. The outputs are dataframe with only biological replicates both in data and in metadata. 
 
 
 ```{r,eval=FALSE}
@@ -222,7 +242,7 @@ margheRita implements differential abundance analysis by using the fold change i
 
 Within margheRita regarding this context are implemented two functions: calculate_lfc_all, that calculates log2 FC among all useful pairwise comparisons, calculate_lfc, that calculates log2 FC indicating the couple of samples to compare.
 
-The function calculate_lfc_all calculates log2 fold change for all $m/z$ features, among all useful pairwise comparisons. The threshold, for the upper and lower values, has to be specified in lfc_threshold, by default threshold is set at 0.25. (è giusto? nella funzione non trovo sto parametro)
+The function calculate_lfc_all calculates log2 fold change for all $m/z$ features, among all useful pairwise comparisons. The threshold, for the upper and lower values, has to be specified in lfc_threshold, by default threshold is set at 0.25. 
 
 ```{r, eval=FALSE}
 mRList <- calculate_lfc_all(mRList = mRList, lfc_threshold = 0.25)
@@ -253,25 +273,27 @@ User can choose different types of statistical tests to apply: Student t-test, W
 ```{r, eval=FALSE}
 mRList$univariate<-univariate (mRList, test_method=c( "anova"), paired=c("FALSE"), group_factor="class")
 ```
-# Graphic data visualization
+# Data visualization
 
 In addition to the plots from PCA analysis, margheRita provides also boxplots and heatmaps to graph results. 
 
-## Boxplot Check function
+## Boxplot (R base function)
 
-metab_boxplot function draws boxplots of the features. Boxplots are drawn for all the features, it takes time according to the number of features, or for only features of interest, indicated in the parameter features as vector.
+metab_boxplot function draws boxplots of the features of interest or all. Boxplots can be drawn for all the features, it takes time according to the number of features, or for only features of interest, indicated in the parameter features as vector.
 
 
 ```{r, eval=FALSE}
 metab_boxplot(mRList, dirout="Boxplot", col_by="class", group="class")
 ```
-
+ ## ggplot
+ 
+ This function allows to draw boxplot and report p-value calculated using Student t test.
 
 ## Heatmap
 
 h_map function draws heatmap taking all metabolites or only features of interest.
 
-```{r}
+```{r, eval=FALSE}
 h_map(mRList, dirout="heatmap", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=500)
 ```
 
