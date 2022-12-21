@@ -25,7 +25,7 @@ metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class",
   col_factor <- as.factor(X_ann[, col_by])
   col_pal <- rainbow(length(levels(col_factor)))
 
-  data <- mRList$data[rownames(mRList$data) %in% features, ] #select the metabolites (features), according to list from users
+  data <- mRList$data[rownames(mRList$data) %in% rownames(features), ] #select the metabolites (features), according to list from users
 
   if(nrow(data)<1){
     message("None of the features was found in the dataset.\n")
@@ -37,7 +37,7 @@ metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class",
 
   for (i in 1:nrow(data)) {
 
-    png(filename = paste0(dirout, "metabolite", rownames(data)[i], ".png"), width = 200, height = 200, units = "mm", res=300)
+    png(filename = paste0(dirout="./Boxplot", "metabolite", rownames(data)[i], ".png"), width = 200, height = 200, units = "mm", res=300)
 
     i_min <- min(data[i, ])
     i_max <- max(data[i, ])
