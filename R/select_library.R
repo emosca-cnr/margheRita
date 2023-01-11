@@ -27,9 +27,14 @@ select_library <- function(source=c("margheRita", "MS-DIAL"), column=NULL, mode=
   
   if(source=="margheRita"){
     
-    data("mRlib_peaks_list", envir=environment())
-    data("mRlib_peaks_df", envir=environment())
-    data("mRlib_precursors", envir=environment())
+    input_data_file <- system.file("extdata", "mRlib_peaks_list.rds", package = "margheRita")
+    mRlib_peaks_list <- readRDS(input_data_file)
+    
+    input_data_file <- system.file("extdata", "mRlib_peaks_df.rds", package = "margheRita")
+    mRlib_peaks_df <- readRDS(input_data_file)
+    
+    input_data_file <- system.file("extdata", "mRlib_precursors.rds", package = "margheRita")
+    mRlib_precursors <- readRDS(input_data_file)
     
     lib_precursor <- unique(mRlib_precursors[mRlib_precursors$COL==column, c("ID", "CAS", "Name", "rt", mode, "PubChemCID")])
     rownames(lib_precursor) <- lib_precursor$ID
