@@ -23,21 +23,25 @@ metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, 
   #extract feature information from metabolite metadata
   out_levels <- unique(mRList_raw$metab_ann[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])
   
- 
+  
   ### check retention time and mass
-  cat("Checking RT... ")
-  RT <-  check_RT(feature_data = out_levels, reference = library_list$lib_precursor, rt_err_thr=rt_err)
-  cat("done\n")
+  if(length(library_list$lib_precursor$rt)>0){
+    cat("Checking RT... ")
+    RT <-  check_RT(feature_data = out_levels, reference = library_list$lib_precursor, rt_err_thr=rt_err)
+    cat("done\n")
+  }
   
   cat("Checking precursor mz... ")
   mass <- check_mass(feature_data = out_levels, reference = library_list$lib_precursor, unaccept_flag=unaccept_flag, accept_flag=accept_flag, suffer_flag=suffer_flag)
   cat("done\n")
   
-  cat("Integrating RT and mz results... ")
-  RT_mass <- check_RT_mass(RT = RT, mass = mass)
-  cat("done\n")
+  if(length(library_list$lib_precursor$rt)>0){
+    cat("Integrating RT and mz results... ")
+    RT_mass <- check_RT_mass(RT = RT, mass = mass)
+    cat("done\n")
+  }
   
-  cat("Assembling output for precursors... ")
+  cat("Assembling output for precursors...")
   ### features with appropriate mass
   mass_ok <- stack(lapply(mass, function(x) x$Feature_ID))
   mass_ok <- merge(library_list$lib_precursor, mass_ok, by.x="ID", by.y="ind", all.y=T)
@@ -47,28 +51,44 @@ metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, 
   out_levels <- merge(library_list$lib_precursor, out_levels, by="ID", all = T, suffixes = c("_lib", ""))
   
   ### features with appropriate mass and RT
-  RT_mass_ok <- stack(lapply(RT_mass, function(x) x$Feature_ID))
-  RT_mass_ok <- merge(library_list$lib_precursor, RT_mass_ok, by.x="ID", by.y="ind", all.y=T)
-
-  out_levels <- merge(out_levels, data.frame(ID=rep(names(RT_mass), unlist(lapply(RT_mass, nrow))), do.call(rbind, lapply(RT_mass, function(x) x[, c("Feature_ID", "rt", "RT_err", "RT_flag")])), stringsAsFactors = F), by=c("ID", "Feature_ID", "rt"), all=T)
+  if(length(library_list$lib_precursor$rt)>0){
+    
+    RT_mass_ok <- stack(lapply(RT_mass, function(x) x$Feature_ID))
+    RT_mass_ok <- merge(library_list$lib_precursor, RT_mass_ok, by.x="ID", by.y="ind", all.y=T)
+    
+    out_levels <- merge(out_levels, data.frame(ID=rep(names(RT_mass), unlist(lapply(RT_mass, nrow))), do.call(rbind, lapply(RT_mass, function(x) x[, c("Feature_ID", "rt", "RT_err", "RT_flag")])), stringsAsFactors = F), by=c("ID", "Feature_ID", "rt"), all=T)
+    
+  }else{
+    out_levels$RT_err <- NA
+    out_levels$RT_flag <- NA
+    out_levels$rt_lib <- NA
+  }
+  
   cat("done\n")
   
   
-  ###MS/MS matching - at least mass
-  cat("MS/MS analysis... ")
-  feature_spectra_list <- get_spectra_list_from_vector(spectra = setNames(out_levels$MS_MS_spectrum[!is.na(out_levels$MS_MS_spectrum)], out_levels$Feature_ID[!is.na(out_levels$MS_MS_spectrum)]))
-  RI_sample <- RI_sample_data(feature_spectra=feature_spectra_list, accept_RI = min_RI)
+  ###MS/MS matching - features that match at mass level and have MSMSspectra
+  cat("MS/MS analysis...\n")
+  feature_spectra_list <- unique(out_levels$Feature_ID[which(!is.na(out_levels$MS_MS_spectrum) & out_levels$mass_flag)]) ## features already associated at least with mass and MS/MS available
   
-  intense_peak <- peak_matching(RT_mass = mass, RI_lib = library_list$lib_peaks, reference = library_list$lib_precursor, lib_peaks_data=library_list$lib_peaks_data, mode = mode, RI_sample = RI_sample, ppm_err = ppm_err, intensity = RI_err, RI_diff_type = RI_err_type)
+  feature_spectra_list <- get_spectra_list_from_vector(spectra = setNames(mRList_raw$metab_ann$MS_MS_spectrum[mRList_raw$metab_ann$Feature_ID %in% feature_spectra_list], mRList_raw$metab_ann$Feature_ID[mRList_raw$metab_ann$Feature_ID %in% feature_spectra_list])) #list of features and their spectra
+  
+  RI_sample <- RI_sample_data(feature_spectra=feature_spectra_list, accept_RI = min_RI) #define RI
+  
+  #remove from mass those features that do not appear in RI_sample, because do not have MSMS spectra
+  mass <- lapply(mass, function(x) x[x$Feature_ID %in% names(RI_sample), ])
+  mass <- mass[unlist(lapply(mass, nrow)) > 0]
+  
+  intense_peak <- peak_matching(library_list = library_list, library_matched_features = mass, RI_sample = RI_sample, ppm_err = ppm_err, intensity = RI_err, RI_diff_type = RI_err_type)
   cat("done\n")
   
   
-  cat("Assembling final output...  ")
+  cat("Assembling final output... ")
   
   intense_peak_unq <- unique(intense_peak$matched_peaks[, c("ID", "Feature_ID")])
   intense_peak_unq <- merge(library_list$lib_precursor, intense_peak_unq, by="ID", all.y=T)
   
-
+  
   out_levels <- merge(out_levels, intense_peak$matched_peaks[, c("ID", "Feature_ID", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS")], by=c("ID", "Feature_ID"), all=T)
   
   out_levels$Level <- ""
@@ -91,11 +111,13 @@ metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, 
   
   ### summary
   out_levels <- out_levels[out_levels$Level != "", ]
-  out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum", "RT_err", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note", "CAS", "PubChemCID")]
+  
+  #out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum", "RT_err", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note", "CAS", "PubChemCID")]
+  out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note")]
   
   cat("done\n")
   
-  return(out_levels)
+  return(list(identified_features=out_levels, MS_MS_info=intense_peak$matrices))
   
   
- }
+}

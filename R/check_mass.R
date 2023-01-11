@@ -16,7 +16,7 @@
 #' @return A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
 
 
-check_mass <- function(reference=NULL, feature_data=NULL, unaccept_flag=15, accept_flag=5, suffer_flag=10, filter=TRUE){
+check_mass <- function(reference=NULL, feature_data=NULL, unaccept_flag=20, accept_flag=5, suffer_flag=10, filter=TRUE){
   
   mass = vector("list", nrow(reference))
   names(mass) = reference$ID
@@ -29,12 +29,12 @@ check_mass <- function(reference=NULL, feature_data=NULL, unaccept_flag=15, acce
     
     if(nrow(mass[[j]]) > 0){   #issue with empty data.frame
       
-      mass[[j]]$mass_flag = mass[[j]]$ppm_error < unaccept_flag
+      mass[[j]]$mass_flag = mass[[j]]$ppm_error <= unaccept_flag
       
       mass[[j]]$mass_status = "super"  #comes here because it can not add column to empty data.frame
-      mass[[j]]$mass_status[mass[[j]]$ppm_error >= accept_flag] = "acceptable"
-      mass[[j]]$mass_status[mass[[j]]$ppm_error >= suffer_flag] = "suffer"
-      mass[[j]]$mass_status[mass[[j]]$ppm_error >= unaccept_flag] = "unacceptable"
+      mass[[j]]$mass_status[mass[[j]]$ppm_error > accept_flag] = "acceptable"
+      mass[[j]]$mass_status[mass[[j]]$ppm_error > suffer_flag] = "suffer"
+      mass[[j]]$mass_status[mass[[j]]$ppm_error > unaccept_flag] = "unacceptable"
       
       if(filter){
         mass[[j]] = mass[[j]][mass[[j]]$mass_flag, ]
