@@ -21,7 +21,7 @@
 metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, mode=NULL, RI_err=20, RI_err_type="rel"){
   
   #extract feature information from metabolite metadata
-  out_levels <- unique(mRList_raw$metab_ann[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])
+  out_levels <- unique(mRList$metab_ann[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])
   
   
   ### check retention time and mass
@@ -71,7 +71,7 @@ metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, 
   cat("MS/MS analysis...\n")
   feature_spectra_list <- unique(out_levels$Feature_ID[which(!is.na(out_levels$MS_MS_spectrum) & out_levels$mass_flag)]) ## features already associated at least with mass and MS/MS available
   
-  feature_spectra_list <- get_spectra_list_from_vector(spectra = setNames(mRList_raw$metab_ann$MS_MS_spectrum[mRList_raw$metab_ann$Feature_ID %in% feature_spectra_list], mRList_raw$metab_ann$Feature_ID[mRList_raw$metab_ann$Feature_ID %in% feature_spectra_list])) #list of features and their spectra
+  feature_spectra_list <- get_spectra_list_from_vector(spectra = setNames(mRList$metab_ann$MS_MS_spectrum[mRList$metab_ann$Feature_ID %in% feature_spectra_list], mRList$metab_ann$Feature_ID[mRList$metab_ann$Feature_ID %in% feature_spectra_list])) #list of features and their spectra
   
   RI_sample <- RI_sample_data(feature_spectra=feature_spectra_list, accept_RI = min_RI) #define RI
   
