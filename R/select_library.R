@@ -12,7 +12,7 @@
 #' @importFrom utils data
 select_library <- function(source=c("margheRita", "MS-DIAL"), column=NULL, mode=c("POS", "NEG"), accept_RI=10){
   
-  mRlib_peaks_list <- mRlib_peaks_df <- mRlib_precursors <- NULL #to please the check
+  #mRlib_peaks_list <- mRlib_peaks_df <- mRlib_precursors <- NULL #to please the check
   
   source <- match.arg(source, c("margheRita", "MS-DIAL"))
   column <- match.arg(column, c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"))
