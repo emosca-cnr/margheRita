@@ -7,7 +7,7 @@
 check_mass(
   reference = NULL,
   feature_data = NULL,
-  unaccept_flag = 15,
+  unaccept_flag = 20,
   accept_flag = 5,
   suffer_flag = 10,
   filter = TRUE

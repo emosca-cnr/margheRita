@@ -8,16 +8,15 @@ Run the metabolite identification pipeline}
 metabolite_annotation(
   mRList = NULL,
   library_list = NULL,
-  feature_spectra = NULL,
-  rt_err_thr = 1,
-  unaccept_flag = 15,
+  rt_err = 1,
+  unaccept_flag = 20,
   accept_flag = 5,
   suffer_flag = 10,
-  acceptable_RI = 10,
-  acceptable_PPM_err = 10,
+  min_RI = 10,
+  ppm_err = 20,
   mode = NULL,
-  max_RI_diff = 30,
-  RI_diff_type = "rel"
+  RI_err = 20,
+  RI_err_type = "rel"
 )
 }
 \arguments{
@@ -25,9 +24,7 @@ metabolite_annotation(
 
 \item{library_list}{library data obtained from margherita_library() function}
 
-\item{feature_spectra}{MS_MS spectra (optional). By default spectra are taken from mRList object}
-
-\item{rt_err_thr}{threshold over the retention time error}
+\item{rt_err}{threshold over the retention time error}
 
 \item{unaccept_flag}{A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
 
@@ -35,14 +32,16 @@ metabolite_annotation(
 
 \item{suffer_flag}{A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"}
 
-\item{acceptable_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense
+\item{min_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense
 peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
 
-\item{acceptable_PPM_err}{A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
+\item{ppm_err}{A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
 
 \item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}
 
-\item{max_RI_diff}{maximum absolute RI difference between MS/MS peaks of sample and library}
+\item{RI_err}{maximum absolute RI difference between MS/MS peaks of sample and library}
+
+\item{RI_err_type}{type of RI error calculation.}
 }
 \value{
 data.frame with matches between features and library metabolites

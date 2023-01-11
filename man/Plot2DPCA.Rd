@@ -2,10 +2,16 @@
 % Please edit documentation in R/Plot2DPCA.R
 \name{Plot2DPCA}
 \alias{Plot2DPCA}
-\title{Create 2D PCA score and loading plots
-Create 2D PCA score and loading plots choosing the principal components.}
+\title{Plot score and loading plot}
 \usage{
-Plot2DPCA(mRList, pcx, pcy, dirout = "./", col_by = "class", include_QC = TRUE)
+Plot2DPCA(
+  mRList,
+  pcx = 1,
+  pcy = 2,
+  dirout = "./",
+  col_by = "class",
+  include_QC = TRUE
+)
 }
 \arguments{
 \item{mRList}{mRList object}
@@ -21,6 +27,5 @@ Plot2DPCA(mRList, pcx, pcy, dirout = "./", col_by = "class", include_QC = TRUE)
 \item{include_QC}{(default TRUE)}
 }
 \description{
-Create 2D PCA score and loading plots
-Create 2D PCA score and loading plots choosing the principal components.
+Plot 2D PCA score and loading plots choosing the principal components.
 }

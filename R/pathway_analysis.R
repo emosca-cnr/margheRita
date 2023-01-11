@@ -23,7 +23,7 @@
 
 pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"), tax_id=9606, include_general_pathways=FALSE, pvalueCutoff = 0.05, pAdjustMethod = "BH", minGSSize = 10, maxGSSize = 500, qvalueCutoff = 0.2, TERM2METAB=NULL, TERM2NAME = NULL, nPerm=1000, verbose=TRUE, gsea_by="fgsea", seed=FALSE, exponent=1){
 
-  bsid2cid <- bsid2info <- NULL #to please the check
+  #bsid2cid <- bsid2info <- NULL #to please the check
   
   type <- match.arg(type, c("ora", "gsea"))
 
@@ -31,9 +31,12 @@ pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"),
 
     cat("loading pathway data...\n")
 
-    data("bsid2cid", envir=environment())
-    data("bsid2info", envir=environment())
-
+    input_data_file <- system.file("extdata", "bsid2cid.rds", package = "margheRita")
+    bsid2cid <- readRDS(input_data_file)
+    
+    input_data_file <- system.file("extdata", "bsid2info.rds", package = "margheRita")
+    bsid2info <- readRDS(input_data_file)
+    
     cat("preprocessing pathway data...\n")
 
     #pathway definitions only from the given tax

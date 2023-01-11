@@ -11,13 +11,14 @@ Library of margheRita contains three list:
 }}
 \usage{
 select_library(
-  column = c("HILIC", "LipC8", "pZIC", "RPLong", "RPShort"),
+  source = c("margheRita", "MS-DIAL"),
+  column = NULL,
   mode = c("POS", "NEG"),
   accept_RI = 10
 )
 }
 \arguments{
-\item{column}{it is specify the type of the column which could be; HILIC, LipC8, pZIC, RPLong, RPShort. based on the type of the column, the retention time of same metabolite could be different.}
+\item{column}{column type, only if source=="margheRita". Possible values are: HILIC, LipC8, pZIC, RPLong, RPShort. Based on the type of the column, the retention time of same metabolite could be different.}
 
 \item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}
 

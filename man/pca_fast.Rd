@@ -2,8 +2,7 @@
 % Please edit documentation in R/pca_fast.R
 \name{pca_fast}
 \alias{pca_fast}
-\title{PCA
-Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted. Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function.}
+\title{PCA}
 \usage{
 pca_fast(
   mRList,
@@ -14,7 +13,8 @@ pca_fast(
   center = TRUE,
   include_QC = TRUE,
   top = Inf,
-  nPcs = 5,
+  nPcs,
+  write_output = FALSE,
   ...
 )
 }
@@ -37,12 +37,18 @@ pca_fast(
 
 \item{nPcs}{number of principal components}
 
+\item{write_output}{if score and loading table have to be saved (default=FALSE)}
+
 \item{...}{further argments to pcaMethods::pca}
 }
 \value{
-mRList object with "pca" element
+mRList object with "pca" element. Images of screeplot and pairs, table of score,loading and variance can be saved if write_output=TRUE.
 }
 \description{
-PCA
-Function that allows to perform PCA. Graphs of Scree plot and pairs of the first 10 components were plotted. Score and loading plot, choosing pcx and pcy, were plotted launching function plot2DPCA after pca function.
+This function allows to perform PCA.
+}
+\examples{
+##library(dataset.margheRita)
+##dataset(norm_pos)
+pca_fast(mRList, col_by="class", scaling="pareto",nPcs=5,write_output=FALSE)
 }
