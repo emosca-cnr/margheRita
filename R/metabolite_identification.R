@@ -1,4 +1,4 @@
-#' Metabolite Annotation
+#' Metabolite Identification
 #' Run the metabolite identification pipeline
 #' @param mRList mRList object
 #' @param library_list library data obtained from margherita_library() function
@@ -19,7 +19,7 @@
 #' @export
 #' @importFrom stats setNames
 
-metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, mode=NULL, RI_err=20, RI_err_type="rel", filter=TRUE){
+metabolite_identification <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, mode=NULL, RI_err=20, RI_err_type="rel", filter=TRUE){
   
   #extract feature information from metabolite metadata
   out_levels <- unique(mRList$metab_ann[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])
