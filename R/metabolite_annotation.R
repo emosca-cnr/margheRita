@@ -12,13 +12,14 @@
 #' @param mode mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.
 #' @param RI_err maximum absolute RI difference between MS/MS peaks of sample and library
 #' @param RI_err_type type of RI error calculation.
+#' @param filter whether to filter metabolite-feature associations or not.
 
 #' @return data.frame with matches between features and library metabolites
 
 #' @export
 #' @importFrom stats setNames
 
-metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, mode=NULL, RI_err=20, RI_err_type="rel"){
+metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, mode=NULL, RI_err=20, RI_err_type="rel", filter=TRUE){
   
   #extract feature information from metabolite metadata
   out_levels <- unique(mRList$metab_ann[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])
@@ -104,9 +105,11 @@ metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, 
   
   idx <- which(!is.na(out_levels$peaks_found_ppm_RI))
   out_levels$Level[idx] <- 2
+  out_levels$Level_note[idx] <- ""
   
   idx <- which(!is.na(out_levels$peaks_found_ppm_RI) & out_levels$mass_flag & out_levels$RT_flag)
   out_levels$Level[idx] <- 1
+  out_levels$Level_note[idx] <- ""
   
   
   ### summary
@@ -115,9 +118,18 @@ metabolite_annotation <- function(mRList = NULL, library_list = NULL, rt_err=1, 
   #out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum", "RT_err", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note", "CAS", "PubChemCID")]
   out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note")]
   
+  
+  #add the results to mRList
+  mRList$metabolite_identification <- list(associations=out_levels, MS_MS_info=intense_peak$matrices)
+  
+  ## FILTERING
+  #metabolite-feature association of level 1 imply that these do not appear in other pairs, and so on for other levels
+  if(filter){
+    mRList <- filter_metabolite_associations(mRList)
+  }
+  
   cat("done\n")
   
-  return(list(identified_features=out_levels, MS_MS_info=intense_peak$matrices))
-  
+  return(mRList)
   
 }
