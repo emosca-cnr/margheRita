@@ -16,7 +16,8 @@ metabolite_annotation(
   ppm_err = 20,
   mode = NULL,
   RI_err = 20,
-  RI_err_type = "rel"
+  RI_err_type = "rel",
+  filter = TRUE
 )
 }
 \arguments{
@@ -42,6 +43,8 @@ peaks could be noise, it is filtering sample dataset by deleting the relative in
 \item{RI_err}{maximum absolute RI difference between MS/MS peaks of sample and library}
 
 \item{RI_err_type}{type of RI error calculation.}
+
+\item{filter}{whether to filter metabolite-feature associations or not.}
 }
 \value{
 data.frame with matches between features and library metabolites
