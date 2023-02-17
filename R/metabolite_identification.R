@@ -9,7 +9,6 @@
 #' @param min_RI numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense 
 #' peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.
 #' @param ppm_err A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.
-#' @param mode mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.
 #' @param RI_err maximum absolute RI difference between MS/MS peaks of sample and library
 #' @param RI_err_type type of RI error calculation.
 #' @param filter whether to filter metabolite-feature associations or not.
@@ -19,7 +18,7 @@
 #' @export
 #' @importFrom stats setNames
 
-metabolite_identification <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, mode=NULL, RI_err=20, RI_err_type="rel", filter=TRUE){
+metabolite_identification <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter=TRUE){
   
   #extract feature information from metabolite metadata
   out_levels <- unique(mRList$metab_ann[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])

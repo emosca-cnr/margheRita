@@ -14,7 +14,6 @@ metabolite_identification(
   suffer_flag = 10,
   min_RI = 10,
   ppm_err = 20,
-  mode = NULL,
   RI_err = 20,
   RI_err_type = "rel",
   filter = TRUE
@@ -37,8 +36,6 @@ metabolite_identification(
 peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
 
 \item{ppm_err}{A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
-
-\item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}
 
 \item{RI_err}{maximum absolute RI difference between MS/MS peaks of sample and library}
 
