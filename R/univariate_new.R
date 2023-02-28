@@ -15,9 +15,8 @@
 #' mRList<-univariate(mRList, test_method="anova",paired="FALSE",group_factor="class")
 
 
-univariate_new<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), paired=c("FALSE", "TRUE"), contrast_samples="class"){
+univariate_new<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), paired=c(FALSE, TRUE), contrast_samples="class"){
 
-  paired<- match.arg(paired)
   test_method <- match.arg(test_method)
 
   dirout = paste(dirout, sep = "")

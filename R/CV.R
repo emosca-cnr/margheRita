@@ -14,9 +14,6 @@
 #' mRList<-CV(mRList)
 #'
 
-
-#apply CV QC vs CV of samples: eliminate when CV of QC >CV of samples for each metabolites
-
 CV <- function(mRList, dirout="./") {
 
   dir.create(dirout)
@@ -36,8 +33,11 @@ CV <- function(mRList, dirout="./") {
   colnames(CV_all) = c("CV_QC", "CV_Samples")
   utils::write.csv(CV_all, paste0(dirout, "/CV_all.csv"))
 
+  cat("Summary of CV_samples - CV_QC:\n")
+  print(summary(CV_all[, 2]- CV_all[, 1]))
+  
   idx_keep <- CV_QC < CV_Samples
-  cat("# Metabolites with appropriate CV", sum(idx_keep), "\n")
+  cat("# Metabolites with appropriate CV", sum(idx_keep), "/", nrow(CV_all), "\n")
 
   mRList$data <- mRList$data[idx_keep, ] #mRList$data cleaned
   mRList$metab_ann <- mRList$metab_ann[idx_keep, ] #mRList$data cleaned

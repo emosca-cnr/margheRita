@@ -261,7 +261,7 @@ mRList <- calculate_lfc(mRList = mRList, lfc_theshold = 0.25, contrast_samples =
 norm_check function uses Shapiro-wilk's test to check the normal distribution of each metabolite. The output is a list of p-values for each feature: metabolite with a p-value<0.05 is not normally distributed, metabolite with a p-value>0.05 is normally distributed.
 
 ```{r, eval=FALSE}
-mRList$shapirotest<-norm_check(mRList)
+mRList <- norm_check(mRList)
 
 ```
 
@@ -271,7 +271,7 @@ Univariate function allows to perform univariate analysis comparing only biologi
 User can choose different types of statistical tests to apply: Student t-test, Wilcoxon test, anova or kruskal.
 
 ```{r, eval=FALSE}
-mRList$univariate<-univariate (mRList, test_method=c( "anova"), paired=c("FALSE"), group_factor="class")
+mRList <- univariate(mRList, test_method=c( "anova"), paired=c("FALSE"), group_factor="class")
 ```
 # Data visualization
 

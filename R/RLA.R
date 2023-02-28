@@ -12,7 +12,7 @@
 #' @importFrom grDevices jpeg
 #' @importFrom graphics par abline
 
-RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_dir="./", ...){
+RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_file="RLA.jpg", ...){
 
 
   if(include_QC){
@@ -34,14 +34,15 @@ RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FAL
 
 	if(do_plot){
 	  ## add col_by
-	  dir.create(out_dir)
-	  jpeg(paste0(out_dir, "/RLA.jpg"), width = 200, height = 100, res=300, units="mm")
+	  jpeg(out_file, width = 200, height = 100, res=300, units="mm")
 	  par(mar=c(4, 4, 1, 1))
 	  boxplot(ans, ..., ylab="x - <x>", main="Relative log Abudance")
 	  abline(h=0, lty=2)
 	  dev.off()
 	}
 
-	return(ans)
+  mRList$RLA <- ans
+	
+  return(mRList)
 
 }
