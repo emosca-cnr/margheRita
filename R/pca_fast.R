@@ -73,8 +73,8 @@ pca_fast <- function(mRList, dirout, col_by="class", method="svd", scaling=c("no
   pairplot= paste(dirout, "/Pairs.png", sep = "")
   grDevices::png(
     pairplot,
-    width = 8,
-    height = 8,
+    width = 6,
+    height = 6,
     units = "in",
     res= 300
   )
@@ -86,6 +86,8 @@ pca_fast <- function(mRList, dirout, col_by="class", method="svd", scaling=c("no
         col = col_pal[as.numeric(col_factor)],
         pch = 19
   )
+  par(xpd = TRUE)
+  legend("topleft", legend = levels(col_factor), col = col_pal, pch=8, cex=0.5,ncol=6)
 
   grDevices::dev.off()
 
