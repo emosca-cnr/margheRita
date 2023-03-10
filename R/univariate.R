@@ -2,13 +2,13 @@
 #' @description User can choose between T-test, U-test, Anova test  or Kruskal-Wallis test.
 #' @param mRList dataframe with data of samples that contains only biological replicates. Technical replicates have to be collapsed before using collapse_tech_rep function
 #' @param test_method choice of the test to apply
-#' @param paired TRUE if data are paired, FALSE for unpaired data
-#' @param contrast_samples specify the name of groups to compare as specify in the metadata
+#' @param paired FALSE by default.
+#' @param contrast_samples specify the group name to compare as specify in the metadata
 #' @param dirout output directory
 #' @importFrom utils write.csv
 #' @importFrom stats na.omit t.test p.adjust wilcox.test anova aov kruskal.test
 #' @export
-#' @return mRList object with mRList$"testchosen" with univariate analysis
+#' @return mRList object with mRList$"testchosen" with univariate analysis with p-values and q-values, p-values corrected by fdr
 #' @examples
 #' ##library(dataset.margheRita)
 #' ##dataset(norm_pos)
@@ -46,7 +46,7 @@ univariate<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova
     colnames(ans)<-"pvalue"
     #ans <- lapply(ans, function(x) data.frame(estimate=x$estimate, stderr=x$stderr, t=x$statistic, p=x$p.value))
     #ans <- do.call(rbind, ans_a)
-    ans$qvalue <- p.adjust(ans$pvalue, method ="BH")
+    ans$qvalue <- p.adjust(ans$pvalue, method ="fdr")
     #colnames(ans)<-c("t-statistics","p-value","q-value")
     mRList$ttest <- as.data.frame(ans)
     rownames(mRList$ttest)<-rownames(mRList$data)
@@ -66,7 +66,7 @@ univariate<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova
     ans <- apply(X_data, 1, function(x)  wilcox.test(x ~ group_factor))
     ans <- lapply(ans, function(x) data.frame(t=x$statistic, p=x$p.value))
     ans <- do.call(rbind, ans)
-    ans$q <- p.adjust(ans$p, method ="BH")
+    ans$q <- p.adjust(ans$p, method ="fdr")
     colnames(ans)<-c("t-statistics","p-value","q-value")
     mRList$Utest <- as.data.frame(ans)
     rownames(mRList$Utest)<-rownames(mRList$data)
@@ -90,7 +90,8 @@ univariate<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova
     ans_p<-as.data.frame(ans_p)
     anova_res<-cbind(ans_t,ans_p)
     colnames(anova_res)<-c("t","p")
-    anova_res$q <- p.adjust(anova_res$p, method ="fdr")
+    #anova_res$q <- p.adjust(anova_res$p, method ="fdr")
+   anova_res$q<-TukeyHSD(anova_res$p, conf.level=.95)
     anova_res<-cbind(anova_res$t,anova_res$p,anova_res$q)
     colnames(anova_res)<-c("t-statistic","p-value","q-value")
     anova_res<-as.data.frame(anova_res)
