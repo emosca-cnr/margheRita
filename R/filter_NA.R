@@ -13,14 +13,14 @@ filter_NA <- function(mRList, min_metab_in_sample=100, min_sample_with_metab=10,
     cat("setting", na_value, "to NA\n")
     mRList$data[mRList$data == na_value] <- NA
   }
-  
+
   idx_keep <- colSums(!is.na(mRList$data)) >= min_metab_in_sample
   cat("# Samples with >=", min_metab_in_sample, "metabolites", sum(idx_keep), "/", ncol(mRList$data), "\n")
   mRList$data <- mRList$data[, idx_keep]
   mRList$sample_ann <- mRList$sample_ann[idx_keep, ]
 
   idx_keep <- rowSums(!is.na(mRList$data)) >= min_sample_with_metab
-  cat("# Metabolites occurring in >= ", min_sample_with_metab, "samples", sum(idx_keep), "/", nrow(mRList$data), "\n")
+  cat("# Features occurring in >= ", min_sample_with_metab, "samples", sum(idx_keep), "/", nrow(mRList$data), "\n")
 
   mRList$data <- mRList$data[idx_keep, ]
   mRList$metab_ann <- mRList$metab_ann[idx_keep, ]
