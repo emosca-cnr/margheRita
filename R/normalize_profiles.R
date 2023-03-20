@@ -7,14 +7,17 @@
 normalize_profiles <- function(mRList, method=c("log", "reference", "pqn")){
 
   if(method == "log"){
+    cat("log normalization\n")
     mRList$data <- log2(mRList$data+1)
   }
 
   if(method == "reference"){
+    cat("normalizing to a reference\n")
     mRList$data <- t(t(mRList$data) / mRList$metab_ann$reference)
   }
 
   if(method == "pqn"){
+    cat("PQN normalization\n")
     mRList$data <- apply(mRList$data, 2, function(x) pqn(x, xref = mRList$metab_ann$reference)$y)
   }
 
