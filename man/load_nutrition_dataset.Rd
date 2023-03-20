@@ -4,12 +4,12 @@
 \alias{load_nutrition_dataset}
 \title{Load nutrition dataset}
 \usage{
-load_nutrition_dataset(column = NULL, normalized = FALSE)
+load_nutrition_dataset(mode = NULL, normalized = FALSE)
 }
 \arguments{
-\item{column}{POS or NEG}
-
 \item{normalized}{dataset with/without normalized samples.#'}
+
+\item{column}{POS or NEG}
 }
 \description{
 Load nutrition dataset

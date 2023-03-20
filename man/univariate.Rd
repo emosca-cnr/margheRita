@@ -5,32 +5,30 @@
 \title{Univariate analysis}
 \usage{
 univariate(
-  mRList,
+  mRList = NULL,
   dirout = "./",
   test_method = c("ttest", "Utest", "anova", "kruskal"),
-  paired = c("FALSE", "TRUE"),
-  group_factor = "class"
+  exp.levels = NULL,
+  exp.factor = "class"
 )
 }
 \arguments{
-\item{mRList}{dataframe with data of samples that contains only biological replicates. Technical replicates have to be collapsed before using collapse_tech_rep function}
+\item{mRList}{mRList object}
 
 \item{dirout}{output directory}
 
-\item{test_method}{choice of the test to apply}
+\item{test_method}{any between "ttest", "Utest", "anova" or "kruskal".}
 
-\item{paired}{TRUE if data are paired, FALSE for unpaired data}
+\item{exp.levels}{the levels to be considered in the column specified by exp.factor}
 
-\item{group_factor}{specify the groups to compare}
+\item{exp.factor}{column of mRList$sample_ann that defines the level for each sample}
 }
 \value{
 mRList object with mRList$"testchosen" with univariate analysis
 }
 \description{
-User can choose between T-test, U-test, Anova test  or Kruskal-Wallis test.
+It applies T test, U test, Anova or Kruskal-Wallis test over dataset features.
 }
 \examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-mRList<-univariate(mRList, test_method="anova",paired=FALSE,group_factor="class")
+mRList<-univariate(mRList, test_method="anova", exp.levels=c("AA", "MM", "DD"))
 }

@@ -1,21 +1,19 @@
 #' Univariate analysis
-#' @description User can choose between T-test, U-test, Anova test  or Kruskal-Wallis test.
-#' @param mRList dataframe with data of samples that contains only biological replicates. Technical replicates have to be collapsed before using collapse_tech_rep function
-#' @param test_method choice of the test to apply
-#' @param paired FALSE by default.
-#' @param contrast_samples specify the group name to compare as specify in the metadata
+#' @description It applies T test, U test, Anova or Kruskal-Wallis test over dataset features.
+#' @param mRList mRList object
+#' @param test_method any between "ttest", "Utest", "anova" or "kruskal".
+#' @param exp.factor column of mRList$sample_ann that defines the level for each sample 
+#' @param exp.levels the levels to be considered in the column specified by exp.factor
 #' @param dirout output directory
 #' @importFrom utils write.csv
-#' @importFrom stats na.omit t.test p.adjust wilcox.test anova aov kruskal.test
+#' @importFrom stats t.test p.adjust wilcox.test anova aov kruskal.test TukeyHSD
 #' @export
-#' @return mRList object with mRList$"testchosen" with univariate analysis with p-values and q-values, p-values corrected by fdr
+#' @return mRList object with mRList$"testchosen" with univariate analysis
 #' @examples
-#' ##library(dataset.margheRita)
-#' ##dataset(norm_pos)
-#' mRList<-univariate(mRList, test_method="anova",paired=FALSE,contrast_samples=c("AA","MM","DD"))
+#' mRList<-univariate(mRList, test_method="anova", exp.levels=c("AA", "MM", "DD"))
 
 
-univariate<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), paired=FALSE, contrast_samples){
+univariate <- function(mRList=NULL, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), exp.levels=NULL, exp.factor="class"){
 
   #paired<- match.arg(paired)
   test_method <- match.arg(test_method)
@@ -23,55 +21,48 @@ univariate<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova
   dirout = paste(dirout, sep = "")
   dir.create(dirout)
 
-
-  X_ann <- mRList$sample_ann
-  X_ann <- na.omit(X_ann)
-  X_ann$contrast_samples<-X_ann$class
-  X_ann$contrast_samples[! X_ann$contrast_samples %in% contrast_samples] <- NA
-  X_ann <- na.omit(X_ann)
-  group_factor <- as.factor(X_ann$contrast_samples)
-  X_data<-mRList$data[,rownames(X_ann)]
+  cat("exp.levels: ", exp.levels, "\n")
+  cat("exp.factor: ", exp.factor, "\n")
+  
+  idx_samples <- mRList$sample_ann[, exp.factor] %in% exp.levels
+  exp_design <- data.frame(id=rownames(mRList$sample_ann)[idx_samples], level=factor(mRList$sample_ann[idx_samples, exp.factor]))
+  cat("selecxted samples:\n")
+  print(exp_design)
+  
+  X_data <- mRList$data[, match(exp_design$id, colnames(mRList$data))]
 
   if(test_method == "ttest"){
 
-    if(length(levels(group_factor))>2){
-      cat("groups:", levels(group_factor), "\n")
+    if(length(levels(exp_design$level))>2){
+      cat("groups:", levels(exp_design$level), "\n")
       stop("can not apply t test for more than 2 groups")
    }
 
-    cat("t tests between", levels(group_factor), "\n")
+    cat("t tests between", levels(exp_design$level), "\n")
 
-    ans <- apply(X_data, 1, function(x) t.test(x ~ group_factor)$ "p.value"[1])
-    ans<-as.data.frame(ans)
-    colnames(ans)<-"pvalue"
-    #ans <- lapply(ans, function(x) data.frame(estimate=x$estimate, stderr=x$stderr, t=x$statistic, p=x$p.value))
-    #ans <- do.call(rbind, ans_a)
-    ans$qvalue <- p.adjust(ans$pvalue, method ="fdr")
-    #colnames(ans)<-c("t-statistics","p-value","q-value")
-    mRList$ttest <- as.data.frame(ans)
-    rownames(mRList$ttest)<-rownames(mRList$data)
-    uni_t= paste(dirout, "/ttest.csv", sep ="")
-    utils::write.csv(mRList$ttest, uni_t)
+    ans <- apply(X_data, 1, function(x) t.test(x ~ exp_design$level))
+    ans <- lapply(ans, function(x) data.frame(t=x$statistic, p=x$p.value))
+    ans <- do.call(rbind, ans)
+    ans$q <- p.adjust(ans$p, method ="fdr")
+    mRList$ttest <- ans
+    utils::write.csv(mRList$ttest, file=paste0(dirout, "/ttest.csv"))
   }
 
   if(test_method == "Utest"){
 
-    if(length(levels(group_factor))>2){
-      cat("groups:", levels(group_factor), "\n")
+    if(length(levels(exp_design$level))>2){
+      cat("groups:", levels(exp_design$level), "\n")
     stop("can not apply Utest for more than 2 groups")
   }
 
-    cat("U tests between", levels(group_factor), "\n")
+    cat("U tests between", levels(exp_design$level), "\n")
 
-    ans <- apply(X_data, 1, function(x)  wilcox.test(x ~ group_factor))
-    ans <- lapply(ans, function(x) data.frame(t=x$statistic, p=x$p.value))
+    ans <- apply(X_data, 1, function(x)  wilcox.test(x ~ exp_design$level))
+    ans <- lapply(ans, function(x) data.frame(U=x$statistic, p=x$p.value))
     ans <- do.call(rbind, ans)
     ans$q <- p.adjust(ans$p, method ="fdr")
-    colnames(ans)<-c("t-statistics","p-value","q-value")
-    mRList$Utest <- as.data.frame(ans)
-    rownames(mRList$Utest)<-rownames(mRList$data)
-    uni_u= paste(dirout, "/Utest.csv", sep ="")
-    utils::write.csv(mRList$Utest, uni_u)
+    mRList$Utest <- ans
+    utils::write.csv(mRList$Utest, file = paste0(dirout, "/Utest.csv"))
 
   }
 
@@ -79,47 +70,36 @@ univariate<- function(mRList, dirout="./", test_method=c("ttest","Utest", "anova
 
   if(test_method == "anova"){
 
-    if(length(levels(group_factor))<3){
-      cat("groups:", levels(group_factor), "\n")
+    if(length(levels(exp_design$level))<3){
+      cat("groups:", levels(exp_design$level), "\n")
       stop("can not apply anova test for less than 3 groups")
     }
 
-    ans_t <- apply(X_data, 1, function(x)  anova(aov(x ~ group_factor))$"F value"[1])
-    ans_p<- apply(X_data, 1, function(x)  anova(aov(x ~ group_factor)) $"Pr(>F)"[1])
-    ans_t<-as.data.frame(ans_t)
-    ans_p<-as.data.frame(ans_p)
-    anova_res<-cbind(ans_t,ans_p)
-    colnames(anova_res)<-c("t","p")
-    #anova_res$q <- p.adjust(anova_res$p, method ="fdr")
-   anova_res$q<-TukeyHSD(anova_res$p, conf.level=.95)
-    anova_res<-cbind(anova_res$t,anova_res$p,anova_res$q)
-    colnames(anova_res)<-c("t-statistic","p-value","q-value")
-    anova_res<-as.data.frame(anova_res)
-    mRList$anova <- as.data.frame(anova_res)
-    rownames(mRList$anova)<-rownames(mRList$data)
+    cat("Performing ANOVA between", levels(exp_design$level),"\n")
+    aov_res <- apply(X_data, 1, function(x)  aov(x ~ exp_design$level))
+    anova_res <- lapply(aov_res, anova)
+    anova_res <- do.call(rbind, lapply(anova_res, function(x) data.frame(F=x$`F value`[1], p=x$`Pr(>F)`[1])))
+    tukey_res <- lapply(aov_res, TukeyHSD)
+    
+    anova_res$q <- p.adjust(anova_res$p, method ="fdr")
 
-    uni_anova= paste(dirout, "/anova.csv", sep ="")
-    utils::write.csv(mRList$anova, uni_anova)
+    mRList$anova <- list(anova=anova_res, tukeyHSD=tukey_res)
+    utils::write.csv(mRList$anova$anova, file=paste0(dirout, "/anova.csv"))
   }
 
   if(test_method == "kruskal"){
 
-    if(length(levels(group_factor))<3){
-      cat("groups:", levels(group_factor), "\n")
+    if(length(levels(exp_design$level))<3){
+      cat("groups:", levels(exp_design$level), "\n")
      stop("can not apply kruskal test for less than 3 groups")
    }
 
-    #cat("U tests between", levels(group_factor), "\n")
-
-    ans <- apply(X_data, 1, function(x)  kruskal.test(x ~ group_factor))
-    ans <- lapply(ans, function(x) data.frame(t=x$statistic, p=x$p.value))
+    ans <- apply(X_data, 1, function(x)  kruskal.test(x ~ exp_design$level))
+    ans <- lapply(ans, function(x) data.frame(H=x$statistic, p=x$p.value))
     ans <- do.call(rbind, ans)
     ans$q <- p.adjust(ans$p, method ="fdr")
-    colnames(ans)<-c("t-statistics","p-value","q-value")
     mRList$kruskal <- as.data.frame( ans)
-    rownames(mRList$kruskal)<-rownames(mRList$data)
-    uni_kru= paste(dirout, "/kruskal_test.csv", sep ="")
-    utils::write.csv(mRList$kruskal, uni_kru)
+    utils::write.csv(mRList$kruskal, file = paste0(dirout, "/kruskal_test.csv"))
   }
 
   return(mRList)

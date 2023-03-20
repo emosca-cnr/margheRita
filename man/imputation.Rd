@@ -4,7 +4,7 @@
 \alias{imputation}
 \title{Missing values imputation}
 \usage{
-imputation(mRList, seed = NULL, a = 0.1, b = 0.25)
+imputation(mRList, seed = NULL, a = 0.1, b = 0.25, n = 100)
 }
 \arguments{
 \item{mRList}{mRList object}

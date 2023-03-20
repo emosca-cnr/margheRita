@@ -10,7 +10,7 @@ RLA(
   logged = FALSE,
   robust = TRUE,
   do_plot = FALSE,
-  out_dir = "./",
+  out_file = "RLA.jpg",
   ...
 )
 }
@@ -25,9 +25,9 @@ RLA(
 
 \item{do_plot}{whether to plot or not}
 
-\item{out_dir}{output directory}
-
 \item{...}{further arguments to boxplot function}
+
+\item{out_dir}{output directory}
 }
 \description{
 Relative Log Abudance
