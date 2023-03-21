@@ -9,17 +9,20 @@
 #' @export
 #' @author Ettore Mosca (CNR-ITB)
 #' @importFrom stats median
-#' @importFrom grDevices jpeg
+#' @importFrom grDevices jpeg rainbow
 #' @importFrom graphics par abline
 
-RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_file="RLA.jpg", ...){
+RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_file="RLA.jpg",colors=NULL, ...){
 
 
   if(include_QC){
     mRList$data <- cbind(mRList$data, mRList$QC)
     mRList$sample_ann<- rbind(mRList$sample_ann, mRList$QC_ann)
   }
-
+  if(is.null(colors)){
+	n <- length(as.factor(mRList$sample_ann$class))
+	colors <- rainbow(n)                                 # Apply rainbow function
+  }else{colors=colors}	
 
   ans <- mRList$data
   if(!logged){
@@ -36,7 +39,7 @@ RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FAL
 	  ## add col_by
 	  jpeg(out_file, width = 200, height = 100, res=300, units="mm")
 	  par(mar=c(4, 4, 1, 1))
-	  boxplot(ans, ..., ylab="x - <x>", main="Relative log Abudance")
+	  boxplot(ans, ..., ylab="x - <x>", main="Relative log Abudance", col = colors)
 	  abline(h=0, lty=2)
 	  dev.off()
 	}
