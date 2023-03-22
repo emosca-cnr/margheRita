@@ -1,4 +1,4 @@
-#' ref_samples_subset
+#' remove_ref_samples
 #' @param mRList mRList object
 #' @param samples_to_remove character vector of samples to be removed
 #' @param  make_new_object if set true a new mRList will be returned
@@ -9,7 +9,7 @@
 #' @return mRList mRList object
 #' @import data.table %in%
 
-ref_samples_subset <- function(mRList, remove_all_QCs=FALSE, remove_all_Blanch=FALSE, QCs_to_remove=NULL){
+remove_ref_samples <- function(mRList, remove_all_QCs=FALSE, remove_all_Blanch=FALSE, QCs_to_remove=NULL){
     if(remove_all_Blanch){
         samples_to_keep <- mRList$sample_ann[mRList$sample_ann$class != "Blank",][,1]
         mRList$data <- mRList$data[samples_to_keep]
