@@ -109,6 +109,6 @@ filtering <- function(mRList, seed=NULL, a=0.1, b=0.25, n=100, do_plot=TRUE, out
 }
  mRList <- filter_NA(mRList)
  mRList <- m_z_filtering(mRList)
- mRlist <- imputation(mRList)
- return(mRlist)
+ mRList <- imputation(mRList)
+ return(mRList)
  }
