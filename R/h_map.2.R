@@ -16,7 +16,7 @@
 #' @import viridis
 
 
-h_map <- function(mRList, dirout="./", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=500, ...){
+h_map <- function(mRList, dirout="./", column_ann="class", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=500, ...){
 
   #dirout = paste(dirout, sep = "")
   dir.create(dirout, showWarnings = F)
@@ -41,14 +41,13 @@ h_map <- function(mRList, dirout="./", col_ann=NULL, col=NULL, scale_features=TR
     samples <- colnames(data)
   }
 
+  column_ann <- as.factor(mRList$sample_ann[rownames(mRList$sample_ann) %in% samples, column_ann])
   
   if(is.null(col_ann)){
-    class <- as.factor(mRList$sample_ann$class[rownames(mRList$sample_ann) %in% samples])
-    col_ann <- setNames(viridis::turbo(length(levels(class))), levels(class))
-    
+    col_ann <- setNames(viridis::turbo(length(levels(column_ann))), levels(column_ann))
   }
   
-  column_ha <- HeatmapAnnotation(class=class, col = list(class=col_ann))
+  column_ha <- HeatmapAnnotation(class=column_ann, col = list(class=col_ann))
   
   
     
