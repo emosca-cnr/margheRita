@@ -3,7 +3,7 @@
 #' @export
 
 
-splitQC<-function(mRList){
+splitQC<-function(mRList=NULL){
 
   idx_QC <- mRList$sample_ann$class=="QC"
 

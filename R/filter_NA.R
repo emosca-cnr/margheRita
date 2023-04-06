@@ -7,7 +7,7 @@
 #' @return filtered mRList object
 
 
-filter_NA <- function(mRList, min_metab_in_sample=100, min_sample_with_metab=10, na_value="NA"){
+filter_NA <- function(mRList=NULL, min_metab_in_sample=100, min_sample_with_metab=10, na_value="NA"){
 
   if(na_value != "NA"){
     cat("setting", na_value, "to NA\n")

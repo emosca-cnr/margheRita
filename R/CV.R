@@ -14,7 +14,7 @@
 #' mRList<-CV(mRList)
 #'
 
-CV <- function(mRList, dirout="./") {
+CV <- function(mRList=NULL, dirout="./") {
 
   dir.create(dirout)
 
