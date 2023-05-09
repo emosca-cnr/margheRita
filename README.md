@@ -1,4 +1,4 @@
-<img src="vignettes/images/logo.jpg" width="200">
+<img src="vignettes/images/logo.png" width="200">
 
 # margheRita an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles
 
