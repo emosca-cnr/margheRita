@@ -8,7 +8,7 @@
 
 
 
-norm_check <- function(mRList) {
+norm_check <- function(mRList=NULL) {
 
   Shapirotest <- apply(mRList$data,1,function(x) shapiro.test(as.numeric(x))$"p.value"[1])
   Shapirotest<-as.data.frame(Shapirotest)

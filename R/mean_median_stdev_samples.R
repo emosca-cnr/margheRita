@@ -15,7 +15,7 @@
 #' mRList<-mean_median_stdev_samples(mRList, write_output=TRUE)
 
 
-mean_median_stdev_samples<-function(mRList, dirout="./", write_output=FALSE){
+mean_median_stdev_samples<-function(mRList, dirout, write_output=FALSE){
 
   cat("According to dataset size, this might take a few minutes.\n")
 
