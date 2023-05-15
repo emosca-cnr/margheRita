@@ -21,7 +21,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
   #get the features associated with metabolite_id
   associated_features <- unique(mRList$metabolite_identification$associations[mRList$metabolite_identification$associations$ID == metabolite_id, c("Feature_ID", "ID_peaks"), drop=F])
   
-  RI_sample <- mRList_norm_filtered$metabolite_identification$RI_sample
+  RI_sample <- mRList$metabolite_identification$RI_sample
   RI_lib <- mR_library$lib_peaks
   
   for(i in 1:nrow(associated_features)){
