@@ -18,7 +18,7 @@
 #' @export
 #' @importFrom stats setNames
 
-metabolite_identification <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter=TRUE){
+metabolite_identification <- function(mRList = NULL, library_list = NULL, rt_err=1, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter=FALSE){
   
   #extract feature information from metabolite metadata
   out_levels <- unique(mRList$metab_ann[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])
@@ -119,7 +119,7 @@ metabolite_identification <- function(mRList = NULL, library_list = NULL, rt_err
   
   
   #add the results to mRList
-  mRList$metabolite_identification <- list(associations=out_levels, MS_MS_info=intense_peak$matrices)
+  mRList$metabolite_identification <- list(associations=out_levels, RI_sample=RI_sample, MS_MS_info=intense_peak$matrices)
   
   ## FILTERING
   #metabolite-feature association of level 1 imply that these do not appear in other pairs, and so on for other levels

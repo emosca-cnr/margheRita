@@ -11,7 +11,7 @@ filter_metabolite_associations <- function(mRList=NULL){
   
   cat("Filtering...\n")
   cat("before filtering:", nrow(out_levels), "\n")
-  out_levels <- unique(out_levels[, -which(colnames(out_levels) == "ID_peaks")]) #remove the redundant ID_peak
+  #out_levels <- unique(out_levels[, -which(colnames(out_levels) == "ID_peaks")]) #remove the redundant ID_peak
   
   ####### by LEVEL 	######
   for(lev in c(1, 2)){

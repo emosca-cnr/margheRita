@@ -10,7 +10,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Depends: R (>= 3.5.0)
-Imports: readxl, grDevices, stats, utils, clusterProfiler, limma, pcaMethods, ComplexHeatmap, LSD, notame, MSnbase, igraph, viridis, plotly
+Imports: readxl, grDevices, stats, utils, clusterProfiler, limma, pcaMethods, ComplexHeatmap, LSD, notame, MSnbase, igraph, viridis, plotly, devtools
 Suggests: rmarkdown, knitr
 VignetteBuilder: knitr
 NeedsCompilation: no

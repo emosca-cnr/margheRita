@@ -59,8 +59,8 @@ mRList<-read_input_file("margheRita/example/Norm NEG/Urine_RP_NEG_norm_2batches_
                         split_QC=T, data_start_col=6, rt_col=2, mz_col=3)
 ```
 
-## The margheRita object
-The object class used by the DESeq2 package to store the read counts and the intermediate estimated quantities during statistical analysis is the DESeqDataSet, which will usually be represented in the code here as an object dds.
+# The margheRita object
+
 The mRList object has this structure:
 
 Objects in mRList  | Description
@@ -77,11 +77,11 @@ mset <- as.metaboset.mRList(mRlist)
 msnset <- as.MSnSet.mRList(mRlist)
 ```
 
-# Preprocessing step
+# Pre-processing
 
 The step of preprocessing data is crucial in order to filter missing and not accurate values. margheRita has three function for preprocessing data.
 
-## filter_NA
+## Filtering
 
 filter_NA function checks missing values in the experimental data.
 If missing values are > 80% of the measured values, feature is trashed, otherwise missing values have to be imputed with imputation function.
@@ -91,8 +91,6 @@ If missing values are > 80% of the measured values, feature is trashed, otherwis
 mRList_filt <- filter_NA(mRList = mRList_filt, min_metab_in_sample = 100, min_sample_with_metab = 10)
 ```
 
-## Imputation missing value
-
 Imputation function provides to impute missing value of each feature replacing NA with a random number, calculated as the 10% and 25% of the minimum value of the feature. 
 
 ```{r, eval=FALSE}
@@ -100,7 +98,6 @@ mRList_imp <- imputation(mRList, seed=NULL, a=0.1, b=0.25)
 
 ```
 
-## m/z filtering
 m/z function filters features with m/z value not accurate. Values with the first decimal place comprises between 4 and 8 are excluded as they are not accurate.
 
 ```{r, eval=FALSE}
@@ -109,8 +106,6 @@ mRList_filt <- m_z_filtering(mRList = mRList, lower_quality_mass_acc = 0.4,
                              color="black")
 
 ```
-
-## Heatscatter Cromatography
 
 This function generates a heatscatter plot, using `LSD::heatscatter()` function exploiting **[LSD package](https://cran.r-project.org/web/packages/LSD/index.html)**. The plot is a representation of the chromatography for all samples or a specific samples if it is indicated in fuction, plotting 
 $m/z$ intensity on the y-axis over the RT, retention time.
@@ -128,14 +123,6 @@ heatscatter_chromatography(mRList, mz_limits = NULL, rt_limits = NULL, sample = 
 ![](images/hs_chrom.png){width=100%}
 
 
-## Batch effect correction
-
-batch_effect function remove batch effect using *limma* package. Batch of each samples has to be indicated in a column, as number, in metadata and then reported in sample_ann data frame.
-
-```{r, eval=FALSE}
-mRList <- batch_effect(mRList)
-
-```
 
 ## Normalization
 
@@ -159,7 +146,7 @@ mRList_norm <- normalize_profiles(mRList, method = "pqn")
 ```
 
 
-## Principal Component Analysis (funzione da rinominare)
+## Principal Component Analysis
 
 pca_fast_VM function performs Principal Component Analysis (PCA) in different moments during the analysis. margheRita provides four different scaling, users can choose between:
 -"pareto"
@@ -209,7 +196,6 @@ The outputs are data frames cleaned from the features not reliable.
 mRList <- CV(mRList)
 
 ```
-
 
 ## Collapse technical replicates
 
@@ -302,118 +288,56 @@ h_map(mRList, dirout="heatmap", col_ann=NULL, col=NULL, scale_features=TRUE, fea
 
 # Metabolite identification
 
-Metabolite identification is based on a level-1 library containing about 800 metabolites spanning several biological functions. The identification follows these steps:
+Metabolite identification in margheRita is performed by means of the function `metabolite_identification()`, which requires an mRList object and a reference library with MS and MS/MS metabolite information. The identification is possible up to level-1, provided that the required information are available in the reference library. The identification is based on the quantification of the following quantities:
 
-* precursor RT;
+- retention time (RT) error: $\epsilon_t(i) = |t(i) - t^*(i)|$;
+- ppm error: $\epsilon_m(i) = \frac{|m(i) - m^*(i)|}{m^*(i)} 10^6$;
+- percent relative intensity error: $\epsilon_{I_R}(i,j) = \frac{|I_R(i,j) - I^*(i,j)|}{I^*_R(i,j)} 100$.
 
-* precursor ppm error;
+Such quantities are used to score the similarity among precursors of features and metabolites, as well as their MS/MS spectra.
 
-* ppm errors of ions;
+The function `select_library()` provides a means to select any of two sources:
 
-* relative intensity of ions.
+- **margheRita**, which contains MS and MS/MS information for about 800 metabolites spanning several biological functions; these libraries provideup to level 1 identifications in positive and negative modalities for "HILIC", "LipC8", "pZIC", "RPLong" and "RPShort" chromatographic columns;
 
+- **MS-Dial**, which covers a much larger set of metabolites ($10^5$), but is limited to level 2 identifications in positive and negative modalities.
 
-## Generate dataset for metabolite annotation 
-
-Mass spectrometry provides us variety of information but, metabolite annotation needs only four set of data called feature data and reference including retention time (RT) and m/z and spectra of the feature and reference. 
-`annotation_dataset()` function generate required data. 
-
-
-## Metabolite annotation function 
-
-metabolites_annotation function uses the four dataset and default values for retention time (RT) threshold, range of acceptable and unacceptable PPM error, acceptable relative intensity in order to have a clean dataset and number of the most intensive peaks which are calculated for acceptable PPM error. All these values are modifiable based on the specificity and goal of the study. 
+In this example, we load the margheRita library in positive modalitity with retention times of RPShort columns and we discard all peaks with relative intensity less than 10:
 
 ```{r, eval=FALSE}
-metabolites_annotation = metabolite_annotation(feature_data = NULL , reference = NULL , feature_spectra = NULL, reference_spectra= NULL,
-                                               rt_err_thr=1, 
-                                               unaccept_flag=15, accept_flag=5, suffer_flag=10,
-                                               acceptable_RI = 10,
-                                               n_peaks=1, acceptable_PPM_err = 10)
+mR_library <- select_library(column = "RPShort", mode = "POS", accept_RI=10)
 ```
 
-* `feature_data`: ... parameter, default value is NULL. it is a data frame contains retention time (rt) and m/z (mz) of the sample which are stored by their specific ID (Feature_ID)
-
-* `reference`: ... parameter, default value is NULL. it is a data frame contains retention time (rt) and m/z (mz) of the compounds which are stored by the name of the compound (Name)
-
-* `feature_spectra`: ... parameter, default value is NULL. it is extracted from MS/MS spectroscopy. it is a list of sample ID which each contains list of its m/z and Intensity for each ion
-
-* `reference_spectra`: ... parameter, default value is NULL. it is extracted from MS/MS spectroscopy. it is a list of compounds names which each contains list of its m/z and Intensity for each ion.
-
-* `rt_err_thr`: ...parameter, default value is 1. it is tolerance window of retention time that align sample with compound. 
-
-* `unaccept_flag`: ...parameter, default value is 15. it is specify the unacceptable number for PPM error. the number above this will be deleted.
-
-* `accept_flag`: ...parameter, default value is 5. it is specify a range of the acceptable number for PPM error. PPM error below 5 will tagged by "super" flag and PPM error above 5 and below 10, tagged by "acceptable" flag.
-
-* `suffer_flag`: ...parameter, default value is 10. it is specify a lowest acceptable number for PPM error in suffer group. range of PPM error between 10 and 15 will tagged as "suffer".
-
-* `acceptable_RI`: ...parameter, default value is 10. it is cleaning the data set both in library and sample by deleting the low intensity peaks.
-
-* `n_peaks`: ...parameter, default value is 1. it is specify the number of the most intense peaks of ion in MS/MS data that PPM error are calculated on.
-
-* `acceptable_PPM_err`: ...parameter, default value is 10. it is specify the lowest acceptable PPM error for the ions in MS/MS data.
-
-
-
-## The workflow of metabolic identification 
-
-metabolites_annotation function consists in four main steps:
-
-a) Retention time (RT) similarity: comparison of RT of precursor in the library and in the samples.
-b) Mass similarity: comparison of mass of precursor in library and sample, calculating PPM error
-c) Conversion intensity to relative intensity
-d) Ion mass similarity by calculating PPM error for intensive peaks for MS/MS spectroscopy 
-
-### a)Retention time similarity
-
-If the RT for the metabolite i in reference library is t_i and the RT for the compound j in the sample be t_j then the retention time error between a sample feature j and metabolite i in the reference library is the absolute difference between the two retention times
-
-```{r, eval=FALSE}
-RT = check_RT(feature_data = NULL , reference = NULL, rt_err_thr= rt_err_thr)
+The resulting `mR_library` is a list that contains information about precursors
+```{r echo=FALSE}
+mRList_demo$library$lib_precursor
 ```
+and MS/MS peaks 
+```{r echo=FALSE}
+mRList_demo$library$lib_peaks[1:3]
+```
+Once the library is selected, `metabolite_identification` will annotatate all features contained in the `mRList` given in input:
+```{r, eval=FALSE}
+mRList <- metabolite_identification(mRList = mRList, library_list = mR_library)
+```
+The function `metabolite_identification` has a series of parameters that can be adjusted to optimize the identification process (see its documentation). The resulting associations are stored in `mRList$metabolite_identification$associations`:
+```{r echo=FALSE}
+head(mRList_demo$norm$metabolite_identification$associations)
+```
+## Filtering the assocations
 
-### b)Mass similarity by calculating PPM error
+By default alla association that met the considered criteria are returned. When metabolite identification is applied on a large number of features (e.g., $10^3$), it's highly probale to observe many features associated with the same metabolite and the opposite, that is, a feature associated with different metabolites. This redundancy can be addressed setting `filter=TRUE`. In this case the various features associated with the same metabolite are filtered considering the best association based on the following columns: "Level", "mass_status", "peaks_found_ppm_RI" and lastly "RT_err".
 
-The similarity between two masses is calculated by the ppm error (parts per million) which is determining mass tolerance. The PPM error is calculated as the relative error between the mass of a feature j and mass of the reference in the library i.
+## Visualization of MS/MS peaks
 
-According to our study goal, we delete those with bad PPM error and assign a feature to the one with good PPM error in mass status column. 
-
-Ppm error < a – super
-
-Ppm error < b – acceptable, may happen when ions are of low intensities
-
-Ppm error < c – may happen when machine suffer a bit.
-
-Ppm error > c – not good
-
+The spectra from all the features that match a metabolite can be inspected creating the following plots through the function `visualize_associated_spectra`,
 
 ```{r, eval=FALSE}
-mass = check_mass(feature_data = NULL , reference = NULL, unaccept_flag= c, accept_flag= a, suffer_flag= b)
+visualize_associated_spectra(mRList = mRList_norm_filtered, mR_library = mR_library, metabolite_id = "L508")
 ```
 
 
-#### Merging ideal candidate in term of Retention Time and PPM error
-
-```{r, eval=FALSE}
-RT_mass = check_RT_mass (RT , mass, reference= NULL )
-```
-
-### c) Convert intensity to relative intensity: establishing new library & sample data by calculating relative intensity
-
-Convert intensity to relative intensity and deleting the negligible relative intensity, both in library and sample spectra.
-Relative intensity is calculated by dividing ion intensity to the maximum ion intensity in spectra.
-
-```{r, eval=FALSE}
-RI_lib = RI_lib_data ( reference = NULL , RT_mass, acceptable_RI = acceptable_RI)
-```
-
-
-```{r, eval=FALSE}
-RI_sample = RI_sample_data (feature_spectra= NULL, acceptable_RI = acceptable_RI )
-```
-
-
-![](images/I.png) 
+![](images/){width=80%}
 
 
 # Pathway analysis
