@@ -2,7 +2,7 @@
 #' @description It applies T test, U test, Anova or Kruskal-Wallis test over dataset features.
 #' @param mRList mRList object
 #' @param test_method any between "ttest", "Utest", "anova" or "kruskal".
-#' @param exp.factor column of mRList$sample_ann that defines the level for each sample 
+#' @param exp.factor column of mRList$sample_ann that defines the level for each sample
 #' @param exp.levels the levels to be considered in the column specified by exp.factor
 #' @param dirout output directory
 #' @importFrom utils write.csv
@@ -10,25 +10,24 @@
 #' @export
 #' @return mRList object with mRList$"testchosen" with univariate analysis
 #' @examples
-#' mRList<-univariate(mRList, test_method="anova", exp.levels=c("AA", "MM", "DD"))
+#' mRList<-univariate(mRList, test_method="anova", exp.levels=c("AA", "MM", "DD"),exp.factor="class")
 
 
-univariate <- function(mRList=NULL, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), exp.levels=NULL, exp.factor="class"){
+univariate <- function(mRList=NULL, dirout, test_method=c("ttest","Utest", "anova","kruskal"), exp.levels=NULL, exp.factor="class"){
 
-  #paired<- match.arg(paired)
-  test_method <- match.arg(test_method)
+    test_method <- match.arg(test_method)
 
   dirout = paste(dirout, sep = "")
   dir.create(dirout)
 
   cat("exp.levels: ", exp.levels, "\n")
   cat("exp.factor: ", exp.factor, "\n")
-  
+
   idx_samples <- mRList$sample_ann[, exp.factor] %in% exp.levels
   exp_design <- data.frame(id=rownames(mRList$sample_ann)[idx_samples], level=factor(mRList$sample_ann[idx_samples, exp.factor]))
   cat("selecxted samples:\n")
   print(exp_design)
-  
+
   X_data <- mRList$data[, match(exp_design$id, colnames(mRList$data))]
 
   if(test_method == "ttest"){
@@ -80,7 +79,7 @@ univariate <- function(mRList=NULL, dirout="./", test_method=c("ttest","Utest", 
     anova_res <- lapply(aov_res, anova)
     anova_res <- do.call(rbind, lapply(anova_res, function(x) data.frame(F=x$`F value`[1], p=x$`Pr(>F)`[1])))
     tukey_res <- lapply(aov_res, TukeyHSD)
-    
+
     anova_res$q <- p.adjust(anova_res$p, method ="fdr")
 
     mRList$anova <- list(anova=anova_res, tukeyHSD=tukey_res)

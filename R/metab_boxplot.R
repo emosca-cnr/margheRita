@@ -16,7 +16,7 @@
 #' ##dataset(norm_pos)
 #' metab_boxplot(mRList,features=mRLIst$data[1:10,],col_by="class",group="class")
 
-metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class", group="class"){
+metab_boxplot<-function(mRList=NULL, dirout, features=NULL, col_by="class", group="class"){
 
   dirout = paste(dirout, sep = "")
   dir.create(dirout)
