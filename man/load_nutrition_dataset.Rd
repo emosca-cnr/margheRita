@@ -4,7 +4,7 @@
 \alias{load_nutrition_dataset}
 \title{Load nutrition dataset}
 \usage{
-load_nutrition_dataset(mode = NULL, normalized = FALSE, split.QC = TRUE)
+load_nutrition_dataset(mode = NULL, normalized = FALSE)
 }
 \arguments{
 \item{normalized}{dataset with/without experimental normalization to Urine volume}

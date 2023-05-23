@@ -14,7 +14,7 @@
 #' mRList<-collapse_tech_rep(mRList, remove.QC=FALSE)
 
 
-collapse_tech_rep <-function(mRList, remove.QC=FALSE){
+collapse_tech_rep <-function(mRList=NULL, remove.QC=FALSE){
 
   cat("According to dataset size, this might take a few minutes.\n")
   mRList$sample_ann$class_biorep <- as.factor(paste(mRList$sample_ann$class, mRList$sample_ann$biological_rep, sep="_"))

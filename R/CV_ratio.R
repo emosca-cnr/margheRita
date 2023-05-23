@@ -7,7 +7,7 @@
 #' Only metabolites with ratio >= ratioCV are used for the analysis.
 #'
 #' @param mRList mRList object
-#' @param ratioCV User set the value of the ratio between CV samples/ CC QC
+#' @param ratioCV only metabolites with CV ratio (sample/QC) higher than ratioCV will be kept
 #' @export
 #' @return filtered mRList object
 #' @param dirout output directory
@@ -17,37 +17,28 @@
 #' mRList<-CV(mRList, dirout, ratioCV=2)
 #'
 
-CV_ratio <- function(mRList=NULL, dirout, ratioCV) {
+CV_ratio <- function(mRList=NULL, dirout=NULL, ratioCV=1) {
 
   dir.create(dirout)
 
   mean_QC <- apply(mRList$QC, MARGIN=1, mean)
   sd_QC <- apply(mRList$QC, MARGIN = 1, sd)
-  CV_QC <- (sd_QC / mean_QC) * 100
-  utils::write.csv(CV_QC, file = paste0(dirout,"/CV_QC.csv"))
-
+  CV_QC <- (sd_QC / mean_QC)
 
   mean_Samples <- apply(mRList$data, MARGIN=1, mean)
   sd_Samples <- apply(mRList$data, MARGIN = 1, sd)
-  CV_Samples <- (sd_Samples / mean_Samples) * 100
-  utils::write.csv(CV_Samples, file = paste0(dirout,"/CV_Sample.csv"))
+  CV_Samples <- (sd_Samples / mean_Samples)
 
-  CV_all <- cbind(CV_QC, CV_Samples)
-  colnames(CV_all) = c("CV_QC", "CV_Samples")
-  utils::write.csv(CV_all, paste0(dirout, "/CV_all.csv"))
-
-  cat("Summary of CV_samples / CV_QC:\n")
-  print(summary(CV_all[, 1]/ CV_all[, 2]))
-
-  ratio<-CV_Samples/CV_QC
-  ratio<-as.data.frame(ratio)
-  rownames(ratio)<-mRList$metab_ann$Feature_ID
-
-  CV_all <- cbind(CV_Samples,CV_QC,ratio)
+  ratio <- CV_Samples / CV_QC
+  
+  CV_all <- cbind(CV_Samples, CV_QC, ratio)
   colnames(CV_all) = c( "CV_Samples", "CV_QC", "ratio")
   utils::write.csv(CV_all, paste0(dirout, "/CV_all.csv"))
+  
+  cat("Summary of CV ratio (samples / QC):\n")
+  print(summary(ratio))
 
-  idx_keep <- CV_Samples/CV_QC >= ratioCV
+  idx_keep <- ratio > ratioCV
   cat("# Metabolites with appropriate CV", sum(idx_keep), "/", nrow(CV_all), "\n")
 
   mRList$data <- mRList$data[idx_keep, ] #mRList$data cleaned

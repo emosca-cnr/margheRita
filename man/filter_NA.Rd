@@ -5,7 +5,7 @@
 \title{filter NA}
 \usage{
 filter_NA(
-  mRList,
+  mRList = NULL,
   min_metab_in_sample = 100,
   min_sample_with_metab = 10,
   na_value = "NA"

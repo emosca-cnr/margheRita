@@ -5,14 +5,14 @@
 \title{Import data and metadata}
 \usage{
 read_input_file(
-  input,
-  metadata,
+  input = NULL,
+  metadata = NULL,
   split_QC = TRUE,
   mz_col = 3,
   rt_col = 2,
-  data_start_col = 4,
+  data_start_col = 5,
   MS_MS_column = NULL,
-  type = c("excel", "txt"),
+  type = c("Excel", "txt"),
   ...
 )
 }
@@ -31,7 +31,7 @@ read_input_file(
 
 \item{MS_MS_column}{column that contains the MS/MS spectrum}
 
-\item{type}{type of imported files excel or .csv or .txt}
+\item{type}{type of imported files Excel or .csv or .txt}
 
 \item{...}{further arguments to read.table}
 }

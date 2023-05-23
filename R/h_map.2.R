@@ -9,11 +9,10 @@
 #' @param top only the top most variable features are plotted (if features is NULL)
 #' @param ... further arguments for ComplexHeatmap::Heatmap
 #' @export
-#' @import ComplexHeatmap
+#' @import ComplexHeatmap viridis
 #' @importFrom grDevices dev.off png
 #' @importFrom graphics plot
 #' @importFrom stats var setNames
-#' @import viridis
 
 
 h_map <- function(mRList, dirout="./", column_ann="class", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=500, ...){

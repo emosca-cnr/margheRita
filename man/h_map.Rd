@@ -7,6 +7,7 @@
 h_map(
   mRList,
   dirout = "./",
+  column_ann = "class",
   col_ann = NULL,
   col = NULL,
   scale_features = TRUE,

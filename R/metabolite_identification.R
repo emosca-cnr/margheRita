@@ -12,9 +12,7 @@
 #' @param RI_err maximum absolute RI difference between MS/MS peaks of sample and library
 #' @param RI_err_type type of RI error calculation.
 #' @param filter whether to filter metabolite-feature associations or not.
-
 #' @return data.frame with matches between features and library metabolites
-
 #' @export
 #' @importFrom stats setNames
 

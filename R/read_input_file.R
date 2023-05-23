@@ -4,7 +4,7 @@
 #' @param  mz_col column that contains m/z value
 #' @param rt_col column that contains rt value
 #' @param data_start_col column from which data starts
-#' @param type type of imported files excel or .csv or .txt
+#' @param type type of imported files Excel or .csv or .txt
 #' @importFrom readxl read_excel
 #' @importFrom utils read.table
 #' @export
@@ -18,11 +18,11 @@
 #' ##dataset(norm_pos)
 #' mRList<-(norm_pos.xlsx, norm_pos_meta.xlsx, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type="excel")
 
-read_input_file <- function(input, metadata, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type=c("excel", "txt"), ...){
+read_input_file <- function(input=NULL, metadata=NULL, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=5, MS_MS_column=NULL, type=c("Excel", "txt"), ...){
 
   type <- match.arg(type)
 
-  if (type=="excel"){
+  if (type=="Excel"){
     data <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
   }
 

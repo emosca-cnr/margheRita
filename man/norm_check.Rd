@@ -4,7 +4,7 @@
 \alias{norm_check}
 \title{Test the normality of each metabolite by Shapiro-Wilk's test}
 \usage{
-norm_check(mRList)
+norm_check(mRList = NULL)
 }
 \arguments{
 \item{mRList}{mRList object}

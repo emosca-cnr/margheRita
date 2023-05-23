@@ -4,7 +4,7 @@
 \alias{mean_median_stdev_samples}
 \title{Calculate mean, median and standard deviation for each biological group.}
 \usage{
-mean_median_stdev_samples(mRList, dirout = "./", write_output = FALSE)
+mean_median_stdev_samples(mRList, dirout, write_output = FALSE)
 }
 \arguments{
 \item{mRList}{mRList object}

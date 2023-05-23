@@ -11,6 +11,7 @@ RLA(
   robust = TRUE,
   do_plot = FALSE,
   out_file = "RLA.jpg",
+  colors = NULL,
   ...
 )
 }

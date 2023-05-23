@@ -16,7 +16,7 @@ metabolite_identification(
   ppm_err = 20,
   RI_err = 20,
   RI_err_type = "rel",
-  filter = TRUE
+  filter = FALSE
 )
 }
 \arguments{

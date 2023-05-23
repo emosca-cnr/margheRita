@@ -6,7 +6,7 @@
 \usage{
 univariate(
   mRList = NULL,
-  dirout = "./",
+  dirout,
   test_method = c("ttest", "Utest", "anova", "kruskal"),
   exp.levels = NULL,
   exp.factor = "class"
@@ -30,5 +30,5 @@ mRList object with mRList$"testchosen" with univariate analysis
 It applies T test, U test, Anova or Kruskal-Wallis test over dataset features.
 }
 \examples{
-mRList<-univariate(mRList, test_method="anova", exp.levels=c("AA", "MM", "DD"))
+mRList<-univariate(mRList, test_method="anova", exp.levels=c("AA", "MM", "DD"),exp.factor="class")
 }

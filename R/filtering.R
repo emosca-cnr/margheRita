@@ -9,15 +9,12 @@
 #' @param upper_quality_mass_acc upper quality value
 #' @param color point color
 #' @param ... further arguments to plot function
-#' @return filtered mRList
 #' @param seed set this seed with set.seed
 #' @param a minimum increase factor
 #' @param b maxmimum increase factor
 #' @export
 #' @importFrom stats density
 #' @importFrom graphics polygon
-
-#' @export
 #' @return filtered mRList object
 
 filtering <- function(mRList, seed=NULL, a=0.1, b=0.25, n=100, do_plot=TRUE, out_file="mz_quality.png", lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, min_metab_in_sample=100, min_sample_with_metab=10, na_value="NA"){
