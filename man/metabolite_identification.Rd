@@ -7,8 +7,10 @@ Run the metabolite identification pipeline}
 \usage{
 metabolite_identification(
   mRList = NULL,
+  features = NULL,
   library_list = NULL,
   rt_err = 1,
+  rt_best_thr = 0.5,
   unaccept_flag = 20,
   accept_flag = 5,
   suffer_flag = 10,
@@ -16,15 +18,20 @@ metabolite_identification(
   ppm_err = 20,
   RI_err = 20,
   RI_err_type = "rel",
-  filter = FALSE
+  filter = FALSE,
+  lib_ann_fields = c("ID", "Name", "PubChemCID")
 )
 }
 \arguments{
 \item{mRList}{mRList object}
 
+\item{features}{the feaatures to be annotated. If NULL all features in the mRList will be annotated}
+
 \item{library_list}{library data obtained from margherita_library() function}
 
 \item{rt_err}{threshold over the retention time error}
+
+\item{rt_best_thr}{Features with RT error < rt_best_thr  will be labelled as "super", those with rt_best_thr < RT error <= rt_err_thr as "acceptable", the remaining as "unacceptable".}
 
 \item{unaccept_flag}{A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
 
@@ -42,6 +49,8 @@ peaks could be noise, it is filtering sample dataset by deleting the relative in
 \item{RI_err_type}{type of RI error calculation.}
 
 \item{filter}{whether to filter metabolite-feature associations or not.}
+
+\item{lib_ann_fields}{columns of library_list$lib_precursor that will be added to metabolite annotations}
 }
 \value{
 data.frame with matches between features and library metabolites

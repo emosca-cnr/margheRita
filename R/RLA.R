@@ -11,41 +11,50 @@
 #' @importFrom stats median
 #' @importFrom grDevices jpeg rainbow
 #' @importFrom graphics par abline
+#' @importFrom pals alphabet2
 
-RLA <- function(mRList, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_file="RLA.jpg",colors=NULL, ...){
-
-
+RLA <- function(mRList=NULL, include_QC=FALSE, logged=FALSE, robust=TRUE, do_plot=FALSE, out_file="RLA.jpg", pal=NULL, col_by="class", ...){
+  
+  
   if(include_QC){
-    mRList$data <- cbind(mRList$data, mRList$QC)
-    mRList$sample_ann<- rbind(mRList$sample_ann, mRList$QC_ann)
+    X_data <- cbind(mRList$data, mRList$QC)
+    X_sample_ann <- rbind(mRList$sample_ann, mRList$QC_ann)
+  }else{
+    X_data <- mRList$data
+    X_sample_ann <- mRList$sample_ann
   }
-  if(is.null(colors)){
-	n <- length(as.factor(mRList$sample_ann$class))
-	colors <- rainbow(n)                                 # Apply rainbow function
-  }else{colors=colors}	
-
-  ans <- mRList$data
+  
+  col_factor <- as.factor(X_sample_ann[, col_by])
+  n <- length(levels(col_factor))
+  
+  if(is.null(pal) | length(pal) != n){
+    pal <- pals::alphabet(n)
+  }
+  colors <- pal[as.numeric(col_factor)]
+  
   if(!logged){
-    ans <- log2(mRList$data + 1)
+    X_data <- log2(X_data + 1)
   }
-
-	if(robust){
-		ans <- t(apply(ans, 1, function(y) y - stats::median(y)))
-	}else{
-		ans <- t(apply(ans, 1, function(y) y - mean(y)))
-	}
-
-	if(do_plot){
-	  ## add col_by
-	  jpeg(out_file, width = 200, height = 100, res=300, units="mm")
-	  par(mar=c(4, 4, 1, 1))
-	  boxplot(ans, ..., ylab="x - <x>", main="Relative log Abudance", col = colors)
-	  abline(h=0, lty=2)
-	  dev.off()
-	}
-
-  mRList$RLA <- ans
-	
+  
+  if(robust){
+    X_data <- t(apply(X_data, 1, function(y) y - stats::median(y)))
+  }else{
+    X_data <- t(apply(X_data, 1, function(y) y - mean(y)))
+  }
+  
+  if(do_plot){
+    ## add col_by
+    jpeg(out_file, width = 200, height = 100, res=300, units="mm")
+    par(mar=c(4, 4, 1, 1))
+    boxplot(X_data, ..., ylab="x - <x>", main="Relative log Abudance", col = colors)
+    abline(h=0, lty=2)
+    
+    legend("bottomright", legend = levels(col_factor), pch=15, col = pal, cex=0.5, horiz = T)
+    dev.off()
+  }
+  
+  mRList$RLA <- X_data
+  
   return(mRList)
-
+  
 }

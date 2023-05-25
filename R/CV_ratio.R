@@ -11,11 +11,6 @@
 #' @export
 #' @return filtered mRList object
 #' @param dirout output directory
-#' @examples
-#' ##library(dataset.margheRita)
-#' ##dataset(norm_pos)
-#' mRList<-CV(mRList, dirout, ratioCV=2)
-#'
 
 CV_ratio <- function(mRList=NULL, dirout=NULL, ratioCV=1) {
 

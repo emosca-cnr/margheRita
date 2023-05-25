@@ -1,4 +1,4 @@
-#' Peak matching for metabolite families
+#' MS/MS peaks matching
 #'
 #' @export
 #' @param library_list an object structured as the element "lib_precursor" of the list returned by margherita_library()
@@ -129,7 +129,8 @@ peak_matching <- function(library_list=NULL, library_matched_features=NULL, RI_s
           #store the number of peaks matching, this will be over written in case a different number of matches is found for z,zi but different zzzz;
           #UPDATE save peaks_found_ppm_RI in ans
           #library_matched_features[[z]]$peaks_found_ppm_RI[zi] <- sum(sign(rowSums(flags_matrix==3))) 
-          n_matched_peaks <- sum(sign(rowSums(flags_matrix==3))) 
+          n_matched_peaks <- sum(sign(rowSums(flags_matrix==3)))
+          ratio_matched_peaks <- n_matched_peaks / nrow(flags_matrix)
           
           
           ans2[[z]][[zzzz]][[zi]] <- list(
@@ -138,14 +139,15 @@ peak_matching <- function(library_list=NULL, library_matched_features=NULL, RI_s
             RI_diff=RI,
             RI_diff_flags=RI_flags,
             flags=flags_matrix,
-            n=n_matched_peaks
+            n=n_matched_peaks,
+            n_ratio=ratio_matched_peaks
           )
           
           #save current result for library element z, feature zi, library MS/MS spectra zzzz
           if(is.null(ans[[z]])){
-            ans[[z]] <- data.frame(Feature_ID=library_matched_features[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, precursor_in_MSMS=precursor_feature_peaks_ppmerror, stringsAsFactors = F)
+            ans[[z]] <- data.frame(Feature_ID=library_matched_features[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, matched_peaks_ratio=ratio_matched_peaks, precursor_in_MSMS=precursor_feature_peaks_ppmerror, stringsAsFactors = F)
           }else{
-            ans[[z]] <- rbind(ans[[z]], data.frame(Feature_ID=library_matched_features[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, precursor_in_MSMS=precursor_feature_peaks_ppmerror, stringsAsFactors = F))
+            ans[[z]] <- rbind(ans[[z]], data.frame(Feature_ID=library_matched_features[[z]]$Feature_ID[zi], ID_peaks=names(z_peaks_all)[zzzz], peaks_found_ppm_RI=n_matched_peaks, matched_peaks_ratio=ratio_matched_peaks, precursor_in_MSMS=precursor_feature_peaks_ppmerror, stringsAsFactors = F))
           }
           
         } #END cycle through the features assigned to the library element

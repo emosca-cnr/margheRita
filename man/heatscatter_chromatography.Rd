@@ -5,7 +5,7 @@
 \title{Draw the "heatscatter chromatography"}
 \usage{
 heatscatter_chromatography(
-  mRList,
+  mRList = NULL,
   mz_limits = NULL,
   rt_limits = NULL,
   sample = NULL,

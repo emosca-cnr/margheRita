@@ -5,13 +5,14 @@
 \title{Relative Log Abudance}
 \usage{
 RLA(
-  mRList,
+  mRList = NULL,
   include_QC = FALSE,
   logged = FALSE,
   robust = TRUE,
   do_plot = FALSE,
   out_file = "RLA.jpg",
-  colors = NULL,
+  pal = NULL,
+  col_by = "class",
   ...
 )
 }

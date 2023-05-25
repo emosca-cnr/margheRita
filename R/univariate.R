@@ -82,8 +82,14 @@ univariate <- function(mRList=NULL, dirout, test_method=c("ttest","Utest", "anov
 
     anova_res$q <- p.adjust(anova_res$p, method ="fdr")
 
-    mRList$anova <- list(anova=anova_res, tukeyHSD=tukey_res)
-    utils::write.csv(mRList$anova$anova, file=paste0(dirout, "/anova.csv"))
+    tukey_p_adj <- do.call(rbind, lapply(mRList_norm_bio$anova$tukeyHSD, function(x) x[[1]][, "p adj"]))
+    anova_res <- merge(anova_res, tukey_p_adj, by=0, all=T, sort=F)
+    rownames(anova_res) <- anova_res[, 1]
+    anova_res[, 1] <- NULL
+    mRList$anova <- anova_res
+    mRList$anova <- mRList$anova[match(mRList$metab_ann$Feature_ID, rownames(mRList$anova)), ]
+    
+    utils::write.csv(mRList$anova, file=paste0(dirout, "/anova.csv"))
   }
 
   if(test_method == "kruskal"){

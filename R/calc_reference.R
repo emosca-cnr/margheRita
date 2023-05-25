@@ -12,10 +12,10 @@
 #' @examples
 #' ##library(dataset.margheRita)
 #' ##dataset(norm_pos)
-#' mRList<-calc_reference(mRList, samples_col="class",samples_class="QC", approach="mean")
+#' mRList<-calc_reference(mRList=mRList, sample_col="class", sample_class="QC", approach="mean")
 
 
-calc_reference <- function(mRList, sample_col="class", sample_class="QC", approach=c("median", "mean")){
+calc_reference <- function(mRList=NULL, sample_col="class", sample_class="QC", approach=c("median", "mean")){
 
   approach <- approach[1]
 

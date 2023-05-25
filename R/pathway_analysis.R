@@ -1,8 +1,8 @@
 #' Pathway analysis
-#' Run enricher or gsea from clusterProfiler on pathways provided by NCBI Biosytems
+#' Run clusterProfiler on pathways provided by NCBI Biosytems to perform ORA or MSEA
 #' @param in_list metabolite set
 #' @param universe universe
-#' @param type "ora" or "gsea"
+#' @param type "ora" or "msea"
 #' @param tax_id tax id
 #' @param include_general_pathways whether to include general pathways or not
 #' @param pvalueCutoff p-value cutoff
@@ -14,18 +14,18 @@
 #' @param TERM2NAME 2-columns data.frame of pathways and pathway names
 #' @param nPerm number of permutations
 #' @param verbose verbose mode
-#' @param gsea_by gsea type
+#' @param msea_by msea type
 #' @param seed set the seed
-#' @param exponent exponent in the gsea approach
+#' @param exponent exponent in the msea approach
 #' @export
 #' @importFrom  clusterProfiler GSEA enricher
 #' @importFrom utils data
 
-pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"), tax_id=9606, include_general_pathways=FALSE, pvalueCutoff = 0.05, pAdjustMethod = "BH", minGSSize = 10, maxGSSize = 500, qvalueCutoff = 0.2, TERM2METAB=NULL, TERM2NAME = NULL, nPerm=1000, verbose=TRUE, gsea_by="fgsea", seed=FALSE, exponent=1){
+pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "msea"), tax_id=9606, include_general_pathways=FALSE, pvalueCutoff = 0.05, pAdjustMethod = "BH", minGSSize = 10, maxGSSize = 500, qvalueCutoff = 0.2, TERM2METAB=NULL, TERM2NAME = NULL, nPerm=1000, verbose=TRUE, msea_by="fgsea", seed=FALSE, exponent=1){
 
   #bsid2cid <- bsid2info <- NULL #to please the check
   
-  type <- match.arg(type, c("ora", "gsea"))
+  type <- match.arg(type, c("ora", "msea"))
 
   if(is.null(TERM2METAB)){
 
@@ -79,7 +79,7 @@ pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "gsea"),
 
     cat("GSEA...\n")
 
-    res <- clusterProfiler::GSEA(geneList = in_list, exponent = exponent, nPerm = nPerm, minGSSize = minGSSize, maxGSSize = maxGSSize, pvalueCutoff = pvalueCutoff, pAdjustMethod = pAdjustMethod, TERM2GENE = TERM2METAB, TERM2NAME = TERM2NAME, verbose = verbose, seed = seed, by = gsea_by)
+    res <- clusterProfiler::GSEA(geneList = in_list, exponent = exponent, nPerm = nPerm, minGSSize = minGSSize, maxGSSize = maxGSSize, pvalueCutoff = pvalueCutoff, pAdjustMethod = pAdjustMethod, TERM2GENE = TERM2METAB, TERM2NAME = TERM2NAME, verbose = verbose, seed = seed, by = msea_by)
 
   }
 

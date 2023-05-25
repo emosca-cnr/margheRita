@@ -10,9 +10,9 @@
 
 norm_check <- function(mRList=NULL) {
 
-  Shapirotest <- apply(mRList$data,1,function(x) shapiro.test(as.numeric(x))$"p.value"[1])
+  Shapirotest <- apply(mRList$data, 1, function(x) shapiro.test(as.numeric(x))$"p.value"[1])
   Shapirotest<-as.data.frame(Shapirotest)
-  rownames(Shapirotest)<-rownames(mRList$data)
+  rownames(Shapirotest) <- rownames(mRList$data)
   mRList$shapirotest <- Shapirotest
 
   return(mRList)

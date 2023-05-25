@@ -3,12 +3,12 @@
 \name{pathway_analysis}
 \alias{pathway_analysis}
 \title{Pathway analysis
-Run enricher or gsea from clusterProfiler on pathways provided by NCBI Biosytems}
+Run clusterProfiler on pathways provided by NCBI Biosytems to perform ORA or MSEA}
 \usage{
 pathway_analysis(
   in_list = NULL,
   universe = NULL,
-  type = c("ora", "gsea"),
+  type = c("ora", "msea"),
   tax_id = 9606,
   include_general_pathways = FALSE,
   pvalueCutoff = 0.05,
@@ -20,7 +20,7 @@ pathway_analysis(
   TERM2NAME = NULL,
   nPerm = 1000,
   verbose = TRUE,
-  gsea_by = "fgsea",
+  msea_by = "fgsea",
   seed = FALSE,
   exponent = 1
 )
@@ -30,7 +30,7 @@ pathway_analysis(
 
 \item{universe}{universe}
 
-\item{type}{"ora" or "gsea"}
+\item{type}{"ora" or "msea"}
 
 \item{tax_id}{tax id}
 
@@ -54,13 +54,13 @@ pathway_analysis(
 
 \item{verbose}{verbose mode}
 
-\item{gsea_by}{gsea type}
+\item{msea_by}{msea type}
 
 \item{seed}{set the seed}
 
-\item{exponent}{exponent in the gsea approach}
+\item{exponent}{exponent in the msea approach}
 }
 \description{
 Pathway analysis
-Run enricher or gsea from clusterProfiler on pathways provided by NCBI Biosytems
+Run clusterProfiler on pathways provided by NCBI Biosytems to perform ORA or MSEA
 }

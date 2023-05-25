@@ -5,7 +5,7 @@
 \title{Calculate a reference profile}
 \usage{
 calc_reference(
-  mRList,
+  mRList = NULL,
   sample_col = "class",
   sample_class = "QC",
   approach = c("median", "mean")
@@ -30,5 +30,5 @@ Launch function before normalize_profiles function
 \examples{
 ##library(dataset.margheRita)
 ##dataset(norm_pos)
-mRList<-calc_reference(mRList, samples_col="class",samples_class="QC", approach="mean")
+mRList<-calc_reference(mRList=mRList, sample_col="class", sample_class="QC", approach="mean")
 }

@@ -5,7 +5,7 @@
 \alias{mRList_demo}
 \title{mRList_demo}
 \format{
-An object of class \code{list} of length 3.
+An object of class \code{list} of length 4.
 }
 \usage{
 mRList_demo

@@ -4,7 +4,13 @@
 \alias{check_RT}
 \title{Check the retention time}
 \usage{
-check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 1, filter = TRUE)
+check_RT(
+  reference = NULL,
+  feature_data = NULL,
+  rt_err_thr = 1,
+  rt_best_thr = 0.5,
+  filter = TRUE
+)
 }
 \arguments{
 \item{reference}{A list of library contain retention time with specific ID.}
@@ -13,7 +19,9 @@ check_RT(reference = NULL, feature_data = NULL, rt_err_thr = 1, filter = TRUE)
 
 \item{rt_err_thr}{A number that specify the desired absolute difference of retention time between sample and library metabolite.}
 
-\item{keep_all}{keep all the features}
+\item{rt_best_thr}{Features with RT error < rt_best_thr  will be labelled as "super", those with rt_best_thr < RT error <= rt_err_thr as "acceptable", the remaining as "unacceptable".}
+
+\item{filter}{whether to consider only features with RT error <= rt_err_thr}
 }
 \value{
 A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr

@@ -23,9 +23,3 @@ CV samples and CV QC are compared, calculating the ratio between CV samples and 
 The threshold of the ratio has to be decided by the user in ratioCV.
 Only metabolites with ratio >= ratioCV are used for the analysis.
 }
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-mRList<-CV(mRList, dirout, ratioCV=2)
-
-}

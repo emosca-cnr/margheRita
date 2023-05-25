@@ -1,8 +1,11 @@
 Package: margheRita
 Title: Mass spectrometry-based metabolic data analysis
-Version: 0.1.2
+Version: 0.2.0
 Authors@R: 
-  person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "YOUR-ORCID-ID"))
+  c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
+  person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zahrasadat.alavikakhki@studenti.unimi.it"),
+  person(given = "Edoardo", family = "Bellini", role = "aut", email="Bellini.Edoardo@hsr.it"),
+  person(given = "Valeria", family = "Mannella", role = "aut", email="mannella.valeria@hsr.it"))
 Description: margheRita: an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles.
 License: GPL-3
 Encoding: UTF-8
@@ -10,11 +13,7 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.2
 Depends: R (>= 3.5.0)
-Imports: readxl, grDevices, stats, utils, clusterProfiler, limma, pcaMethods, ComplexHeatmap, LSD, notame, MSnbase, igraph, viridis, plotly, devtools
+Imports: readxl, grDevices, stats, utils, clusterProfiler, limma, pcaMethods, ComplexHeatmap, LSD, notame, MSnbase, igraph, viridis, plotly, devtools, plotrix, pals, Hmisc
 Suggests: rmarkdown, knitr
 VignetteBuilder: knitr
-NeedsCompilation: no
-Packaged: 2022-04-07 14:46:27 UTC; emosca
-Author: Ettore Mosca [aut, cre] (YOUR-ORCID-ID)
-Maintainer: Ettore Mosca <ettore.mosca@itb.cnr.it>
 

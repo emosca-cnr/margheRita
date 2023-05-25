@@ -2,7 +2,7 @@
 % Please edit documentation in R/peak_matching.R
 \name{peak_matching}
 \alias{peak_matching}
-\title{Peak matching for metabolite families}
+\title{MS/MS peaks matching}
 \usage{
 peak_matching(
   library_list = NULL,
@@ -27,5 +27,5 @@ peak_matching(
 \item{RI_diff_type}{type of relative intensity difference: absolute or relative}
 }
 \description{
-Peak matching for metabolite families
+MS/MS peaks matching
 }

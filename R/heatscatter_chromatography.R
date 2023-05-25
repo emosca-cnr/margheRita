@@ -10,7 +10,7 @@
 #' @param ... further arguments to LSD::heatscatter
 #'
 
-heatscatter_chromatography <- function(mRList, mz_limits=NULL, rt_limits=NULL, sample=NULL, outfile="heatscatter.png",...) {
+heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NULL, sample=NULL, outfile="heatscatter.png",...) {
 
   ### change sample into colnames or index
   if (!is.null(sample)) {
