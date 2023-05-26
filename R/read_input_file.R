@@ -16,7 +16,7 @@
 #' @examples
 #' ##library(dataset.margheRita)
 #' ##dataset(norm_pos)
-#' mRList<-(norm_pos.xlsx, norm_pos_meta.xlsx, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type="excel")
+#' mRList<-(norm_pos.xlsx, norm_pos_meta.xlsx, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type="Excel")
 
 read_input_file <- function(input=NULL, metadata=NULL, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=5, MS_MS_column=NULL, type=c("Excel", "txt"), ...){
 
@@ -42,7 +42,7 @@ read_input_file <- function(input=NULL, metadata=NULL, split_QC=TRUE, mz_col=3, 
     colnames(mRList$metab_ann)[MS_MS_column] <- "MS_MS_spectrum"
   }
 
-  if (type=="excel"){
+  if (type=="Excel"){
     mRList$sample_ann <- data.frame(readxl::read_excel(metadata), stringsAsFactors = F)
     rownames(mRList$sample_ann) <- mRList$sample_ann[, 1]
   }
