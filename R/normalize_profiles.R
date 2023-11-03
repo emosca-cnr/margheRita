@@ -4,7 +4,7 @@
 #' @export
 #' @return mRList object with normalized data
 
-normalize_profiles <- function(mRList, method=c("log", "reference", "pqn")){
+normalize_profiles <- function(mRList=NULL, method=c("log", "reference", "pqn")){
 
   if(method == "log"){
     cat("log normalization\n")
@@ -12,12 +12,20 @@ normalize_profiles <- function(mRList, method=c("log", "reference", "pqn")){
   }
 
   if(method == "reference"){
+    if(length(mRList$metab_ann$reference)==0){
+      cat("No reference profile found, using calc_reference() function...\n")
+      mRList <- calc_reference(mRList)
+    }
     cat("normalizing to a reference\n")
     mRList$data <- t(t(mRList$data) / mRList$metab_ann$reference)
   }
 
   if(method == "pqn"){
     cat("PQN normalization\n")
+    if(length(mRList$metab_ann$reference)==0){
+      cat("No reference profile found, using calc_reference() function...\n")
+      mRList <- calc_reference(mRList)
+    }
     mRList$data <- apply(mRList$data, 2, function(x) pqn(x, xref = mRList$metab_ann$reference)$y)
   }
 

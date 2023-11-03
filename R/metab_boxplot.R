@@ -16,33 +16,31 @@
 #' ##dataset(norm_pos)
 #' metab_boxplot(mRList,features=mRLIst$data[1:10,],col_by="class",group="class")
 
-metab_boxplot<-function(mRList=NULL, dirout, features=NULL, col_by="class", group="class"){
+metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class", group="class"){
 
-  dirout = paste(dirout, sep = "")
-  dir.create(dirout)
 
   X_ann <- mRList$sample_ann
   col_factor <- as.factor(X_ann[, col_by])
   col_pal <- rainbow(length(levels(col_factor)))
 
-  data <- mRList$data[rownames(mRList$data) %in% rownames(features), ] #select the metabolites (features), according to list from users
+  data <- mRList$data[rownames(mRList$data) %in% features, , drop=FALSE] #select the metabolites (features), according to list from users
 
   if(nrow(data)<1){
     message("None of the features was found in the dataset.\n")
   }
 
   #data<-t(data)
-  groups<-as.factor(X_ann[,group])
+  groups<-as.factor(X_ann[, group])
 
 
   for (i in 1:nrow(data)) {
 
-    png(filename = paste0(dirout="./Boxplot", "metabolite", rownames(data)[i], ".png"), width = 200, height = 200, units = "mm", res=300)
+    png(file.path(dirout, paste0("boxplot.", rownames(data)[i], ".png")), width = 200, height = 200, units = "mm", res=300)
 
     i_min <- min(data[i, ])
     i_max <- max(data[i, ])
 
-    graphics::boxplot(
+    boxplot(
       as.numeric(data[i, ]) ~ groups , data=data,
       names =levels(groups),
       main = rownames(data)[i], #metabolites or Ms ID or annotation

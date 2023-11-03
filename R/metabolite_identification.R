@@ -13,13 +13,13 @@
 #' @param ppm_err A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 #' @param RI_err maximum absolute RI difference between MS/MS peaks of sample and library
 #' @param RI_err_type type of RI error calculation.
-#' @param filter whether to filter metabolite-feature associations or not.
+#' @param filter_ann whether to filter metabolite-feature associations or not.
 #' @param lib_ann_fields columns of library_list$lib_precursor that will be added to metabolite annotations
 #' @return data.frame with matches between features and library metabolites
 #' @export
 #' @importFrom stats setNames
 
-metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter=FALSE, lib_ann_fields=c("ID", "Name", "PubChemCID")){
+metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, lib_ann_fields=c("ID", "Name", "PubChemCID")){
   
   if(is.null(features)){
     idx <- 1:nrow(mRList$metab_ann) 
@@ -31,7 +31,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   
   #extract feature information from metabolite metadata
   out_levels <- unique(mRList$metab_ann[idx, c("Feature_ID", "rt", "mz", "MS_MS_spectrum")])
-  
+  out_levels$MS_MS_spectrum[out_levels$MS_MS_spectrum == ""] <- NA
   
   ### check retention time and mass
   if(length(library_list$lib_precursor$rt)>0){
@@ -129,23 +129,31 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   out_levels <- out_levels[out_levels$Level != "", ]
   
   #out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum", "RT_err", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note", "CAS", "PubChemCID")]
-  out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_class", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note")]
+  out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_class", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "SMILES", "Level", "Level_note")]
   
   #add the results to mRList
   mRList$metabolite_identification <- list(associations=out_levels, RI_sample=RI_sample, MS_MS_info=intense_peak$matrices)
   
   ## FILTERING
   #metabolite-feature association of level 1 imply that these do not appear in other pairs, and so on for other levels
-  if(filter){
+  if(filter_ann){
     mRList <- filter_metabolite_associations(mRList)
+  }else{
+    ### summary associations and Feature ID assignment
+    #summary associations
+    mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note")])
   }
   
   
-  ### summary associations and Feature ID assignment
-  #summary associations
-  mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note")])
   
   cat("Adding annotations to metab_ann...\n")
+  
+  if(any(lib_ann_fields) %in% colnames(mRList$metab_ann)){
+    
+    cat("Any of ", lib_ann_fields, "is already in metab_ann table; these columns will be replaced.\n")
+    mRList$metab_ann[, which(colnames(mRList$metab_ann) %in% lib_ann_fields)] <- NULL
+    
+  }
   #add name to metab_ann
   feat_name <- split(mRList$metabolite_identification$associations_summary$ID, mRList$metabolite_identification$associations_summary$Feature_ID)
   
@@ -155,7 +163,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
     mRList$metab_ann <- merge(mRList$metab_ann, mapped_feat, by.x="Feature_ID", by.y=0, all.x = T, sort = F)
   }
 
-  mRList$metab_ann <- mRList$metab_ann[order(mRList$metab_ann$Feature_ID), ]
+  mRList$metab_ann <- mRList$metab_ann[match(rownames(mRList$data), mRList$metab_ann$Feature_ID), ]
   
   cat("done\n")
   

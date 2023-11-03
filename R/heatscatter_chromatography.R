@@ -1,16 +1,15 @@
 #' Draw the "heatscatter chromatography"
 #' @importFrom LSD heatscatter
-#' @importFrom grDevices png
 #' @export
 #' @param mRList mRList object
 #' @param mz_limits numeric vector with minimum and maximum rt values
 #' @param rt_limits numeric vector with minimum and maximum rt values
-#' @param sample ???
+#' @param sample if not null, consider only the given samples
 #' @param outfile out file name
 #' @param ... further arguments to LSD::heatscatter
 #'
 
-heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NULL, sample=NULL, outfile="heatscatter.png",...) {
+heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NULL, sample=NULL, ...) {
 
   ### change sample into colnames or index
   if (!is.null(sample)) {
@@ -21,11 +20,11 @@ heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NU
     df$sum <- rowSums(df[3:ncol(df)])
     df <- df[df[,ncol(df)]> 0,]
     df <- df[1:2]
-    title <- paste("RT and m/z scatterplot of", sample, sep = "")
+    #title <- paste("RT and m/z scatterplot of", sample, sep = "")
   }else {
      df <- mRList$metab_ann[, c("rt", "mz")]
      df[is.na(df)] <- 0
-     title <- "RT and m/z scatterplot"
+     #title <- "RT and m/z scatterplot"
   }
 
 
@@ -34,8 +33,6 @@ heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NU
     df <- df[df$mz >= mz_limits[1] &  df$mz <= mz_limits[2], ]
   }
 
-  grDevices::png(outfile, width = 180, height = 180, res=300, units="mm")
-  LSD::heatscatter(df$rt, df$mz, xlab="RT", ylab="m/z", ..., main = title)
-  dev.off()
+  heatscatter(df$rt, df$mz, xlab="RT", ylab="m/z", main = "", ...)
 
 }

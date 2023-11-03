@@ -17,9 +17,16 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
   type <- match.arg(type)
 
   metabolite_name <- unique(mRList$metabolite_identification$associations$Name[mRList$metabolite_identification$associations$ID == metabolite_id])
+  
+  if(length(metabolite_name) == 0){
+    stop("Can't find ", metabolite_id, " between level 1-2 associations.\n")
+  }
+  if(!any(mRList$metabolite_identification$associations$Level[mRList$metabolite_identification$associations$Name %in% metabolite_name] %in% c(1, 2))){
+    stop("Can't find ", metabolite_id, " between level 1-2 associations.\n")
+  }
 
   #get the features associated with metabolite_id
-  associated_features <- unique(mRList$metabolite_identification$associations[mRList$metabolite_identification$associations$ID == metabolite_id, c("Feature_ID", "ID_peaks"), drop=F])
+  associated_features <- unique(mRList$metabolite_identification$associations[mRList$metabolite_identification$associations$ID == metabolite_id & mRList$metabolite_identification$associations$Level %in% c(1, 2), c("Feature_ID", "ID_peaks"), drop=F])
 
   RI_sample <- mRList$metabolite_identification$RI_sample
   RI_lib <- mR_library$lib_peaks

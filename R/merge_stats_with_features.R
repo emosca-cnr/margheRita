@@ -13,7 +13,7 @@ merge_stats_with_features <- function(mRList = NULL, feature_stats=NULL){
     feature_stats <- mRList[[feature_stats]]
   }
   
-  ans <- merge(mRList_norm_bio$metab_ann, feature_stats, by.x = "Feature_ID", by.y=0)
+  ans <- merge(mRList$metab_ann, feature_stats, by.x = "Feature_ID", by.y=0)
   ans <- ans[, ! colnames(ans) %in% c("rt", "mz", "MS1.isotopic.spectrum", "MS_MS_spectrum", "quality", "reference")]
   
   return(ans)

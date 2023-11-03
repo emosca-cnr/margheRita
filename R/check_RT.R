@@ -13,7 +13,7 @@
 #'
 
 
-check_RT <- function(reference=NULL, feature_data=NULL, rt_err_thr = 1, rt_best_thr=0.5, filter=TRUE){
+check_RT <- function(reference=NULL, feature_data=NULL, rt_err_thr = 1, rt_best_thr=0.5, filter=FALSE){
   
   RT <- vector("list", nrow(reference))
   names(RT) <- reference$ID

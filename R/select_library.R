@@ -36,7 +36,7 @@ select_library <- function(source=c("margheRita", "MS-DIAL"), column=NULL, mode=
     input_data_file <- system.file("extdata", "mRlib_precursors.rds", package = "margheRita")
     mRlib_precursors <- readRDS(input_data_file)
     
-    lib_precursor <- unique(mRlib_precursors[mRlib_precursors$COL==column, c("ID", "CAS", "Name", "rt", mode, "PubChemCID")])
+    lib_precursor <- unique(mRlib_precursors[mRlib_precursors$COL==column, c("ID", "CAS", "Name", "rt", mode, "PubChemCID", "SMILES")])
     rownames(lib_precursor) <- lib_precursor$ID
     colnames(lib_precursor)[5] <- "mz"
     

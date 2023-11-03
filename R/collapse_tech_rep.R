@@ -14,18 +14,20 @@
 #' mRList<-collapse_tech_rep(mRList, remove.QC=FALSE)
 
 
-collapse_tech_rep <-function(mRList=NULL, remove.QC=FALSE){
+collapse_tech_rep <-function(mRList=NULL, remove.QC=TRUE){
 
   cat("According to dataset size, this might take a few minutes.\n")
   mRList$sample_ann$class_biorep <- as.factor(paste(mRList$sample_ann$class, mRList$sample_ann$biological_rep, sep="_"))
 
-  mRList$data <- stats::aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class_biorep), mean)
-
-  rownames(mRList$data) <- mRList$data$Group.1
-  mRList$data <- mRList$data[, -1]
-  mRList$data <- t(mRList$data)
-  mRList$data <- as.data.frame(mRList$data)
-  #row.names(mRList$data)<-mRList$metab_ann$MS.Dial.ID
+  mRList$data <- t(apply(mRList$data, 1, function(x) tapply(x, mRList$sample_ann$class_biorep, mean)))
+  
+  # mRList$data <- stats::aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class_biorep), mean)
+  # 
+  # rownames(mRList$data) <- mRList$data$Group.1
+  # mRList$data <- mRList$data[, -1]
+  # mRList$data <- t(mRList$data)
+  # mRList$data <- as.data.frame(mRList$data)
+  # #row.names(mRList$data)<-mRList$metab_ann$MS.Dial.ID
 
   mRList$sample_ann <- unique(mRList$sample_ann[, c("class_biorep", "class", "biological_rep")])
   rownames(mRList$sample_ann) <- mRList$sample_ann$class_biorep
@@ -33,12 +35,11 @@ collapse_tech_rep <-function(mRList=NULL, remove.QC=FALSE){
 
   if(remove.QC){
     mRList$QC <- mRList$QC_ann <- NULL
+  }else{
+    mRList$QC_ann$class_biorep <- as.factor(paste(mRList$QC_ann$class, mRList$QC_ann$biological_rep, sep="_"))
+    mRList$QC_ann<-cbind(mRList$QC_ann$class_biorep, mRList$QC_ann$class,mRList$QC_ann$biological_rep)
+    colnames(mRList$QC_ann)<-c("class_biorep", "class","biological_rep")
   }
-
-
-  mRList$QC_ann$class_biorep <- as.factor(paste(mRList$QC_ann$class, mRList$QC_ann$biological_rep, sep="_"))
-  mRList$QC_ann<-cbind(mRList$QC_ann$class_biorep, mRList$QC_ann$class,mRList$QC_ann$biological_rep)
-  colnames(mRList$QC_ann)<-c("class_biorep", "class","biological_rep")
 
   #ensure correct order of samples
   idx <- match(colnames(mRList$data), mRList$sample_ann$class_biorep)

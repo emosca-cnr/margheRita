@@ -30,13 +30,14 @@ imputation <- function(mRList, seed=NULL, a=0.1, b=0.25, n=100) {
   
   #index of rows with NA
   idx_na_rows <- apply(na_val, 1, any)
+  
   if(any(idx_na_rows)){
     
     #replacement
     mRList$data[idx_na_rows, ] <- apply(mRList$data[idx_na_rows, ], 1, function(x) replace(x = x, list = is.na(x), values = imp_row(min(x, na.rm = T), sum(is.na(x)), a=a, b=b, n=n)))
     
   }else{
-    cat("Nothing to do.\n")
+    cat("No NAs: imputation not performed.\n")
   }
   return(mRList)
   

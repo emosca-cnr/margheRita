@@ -1,7 +1,7 @@
-#' Import data and metadata
+#' Create an mRList from feature data and sample information
 #' @description Import data and metadata as excel or .csv or .txt format
 #' @param split_QC (default=TRUE) split input and metadata in two one for QC and the other for data
-#' @param  mz_col column that contains m/z value
+#' @param mz_col column that contains m/z value
 #' @param rt_col column that contains rt value
 #' @param data_start_col column from which data starts
 #' @param type type of imported files Excel or .csv or .txt
@@ -10,47 +10,69 @@
 #' @export
 #' @param MS_MS_column column that contains the MS/MS spectrum
 #' @param ... further arguments to read.table
-#' @param input data file name
-#' @param metadata metadata file name
-#' @return mRList S4 object that contain data and metadata.
-#' @examples
-#' ##library(dataset.margheRita)
-#' ##dataset(norm_pos)
-#' mRList<-(norm_pos.xlsx, norm_pos_meta.xlsx, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type="Excel")
+#' @param feature_file tab-delimited text files with feature abundances, mz, rt and MS/MS spectra
+#' @param sample_file sample information file
+#' @return mRList object that contain data and metadata.
 
-read_input_file <- function(input=NULL, metadata=NULL, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=5, MS_MS_column=NULL, type=c("Excel", "txt"), ...){
+read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, split_QC=TRUE, mz_col=NULL, rt_col=NULL, data_start_col=NULL, MS_MS_column=NULL, ...){
 
-  type <- match.arg(type)
 
-  if (type=="Excel"){
-    data <- data.frame(readxl::read_excel(input, col_names = T), stringsAsFactors = F)
+  if(MSDial){
+    
+    cat("Reading MS-Dial input file...\n")
+    feat_data <- read.delim(feature_file, stringsAsFactors = F, quote="", comment.char="", header=F)
+    
+    data_start_col <- which(feat_data[2, ] == "File type")+1
+    data_end_col <- which(feat_data[4, ] == "Average")[1]-1
+    if(is.na(data_end_col)){
+      data_end_col <- ncol(feat_data)
+    }
+    mz_col <- which(feat_data[5, ] == "Average Mz")
+    rt_col <- which(feat_data[5, ] == "Average Rt(min)")
+    MS_MS_column <- which(feat_data[5, ] == "MS/MS spectrum")
+    
+    feat_data <- feat_data[-c(1:4), ]
+    colnames(feat_data) <- feat_data[1, ]
+    feat_data <- feat_data[-1, ]
+    rownames(feat_data) <- feat_data[, 1]
+    
+    mRList <- list(
+      data=data.frame(feat_data[, data_start_col:data_end_col]),
+      metab_ann=data.frame(feat_data[, c(1, which(colnames(feat_data) == "Metabolite name"), which(colnames(feat_data) == "SMILES"), rt_col, mz_col, MS_MS_column)])
+    )
+    colnames(mRList$metab_ann) <- c("Feature_ID", "MSDialName", "MSDialSMILES", "rt", "mz", "MS_MS_spectrum")
+    mRList$metab_ann$rt <- as.numeric(mRList$metab_ann$rt)
+    mRList$metab_ann$mz <- as.numeric(mRList$metab_ann$mz)
+    
+    for(i in 1:ncol(mRList$data)){
+      mRList$data[, i] <- as.numeric(mRList$data[, i])
+    }
+    
+  }else{
+    
+    cat("Reading generic input file...\n")
+    
+    data <- read.delim(feature_file, header=T, stringsAsFactors = F, quote="", comment.char="", header=F)
+    
+    mRList <- list(data=data[, -c(1:(data_start_col-1))])
+    rownames(mRList$data) <- data[, 1]
+    
+    mRList$metab_ann <- data[, 1:(data_start_col-1)]
+    colnames(mRList$metab_ann)[1] <- "Feature_ID"
+    colnames(mRList$metab_ann)[mz_col] <- "mz"
+    colnames(mRList$metab_ann)[rt_col] <- "rt"
+    rownames(mRList$metab_ann) <- data[, 1]
+    if(!is.null(MS_MS_column)){
+      colnames(mRList$metab_ann)[MS_MS_column] <- "MS_MS_spectrum"
+    }
   }
-
-  if (type=="txt"){
-    data<-read.table(input, header=T, stringsAsFactors = F, ...)
-  }
-
-  mRList <- list(data=data[, -c(1:(data_start_col-1))])
-  rownames(mRList$data) <- data[, 1]
-
-  mRList$metab_ann <- data[, 1:(data_start_col-1)]
-  colnames(mRList$metab_ann)[1] <- "Feature_ID"
-  colnames(mRList$metab_ann)[mz_col] <- "mz"
-  colnames(mRList$metab_ann)[rt_col] <- "rt"
-  rownames(mRList$metab_ann) <- data[, 1]
-  if(!is.null(MS_MS_column)){
-    colnames(mRList$metab_ann)[MS_MS_column] <- "MS_MS_spectrum"
-  }
-
-  if (type=="Excel"){
-    mRList$sample_ann <- data.frame(readxl::read_excel(metadata), stringsAsFactors = F)
-    rownames(mRList$sample_ann) <- mRList$sample_ann[, 1]
-  }
-  if (type=="txt"){
-    mRList$sample_ann <- read.table(metadata, header=T, ..., stringsAsFactors = F)
-    rownames(mRList$sample_ann) <- mRList$sample_ann[, 1]
-  }
-
+  
+  print(dim(mRList$data))
+  
+  cat("Reading sample annotation\n")
+  mRList$sample_ann <- read.delim(sample_file, header=T, stringsAsFactors = F, ...)
+  rownames(mRList$sample_ann) <- mRList$sample_ann[, 1]
+  
   if(!all(c("id", "injection_order", "batch", "class", "biological_rep", "technical_rep") %in% colnames(mRList$sample_ann))){
     cat("sample annotation must contain 'id', 'injection_order', 'batch', 'class', 'biological_rep' and 'technical_rep'\n")
     cat("found", colnames(mRList$sample_ann), "\n")
