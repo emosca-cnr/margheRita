@@ -3,11 +3,10 @@
 #' @param spectra_top MS/MS spectra as two-columns data.frame
 #' @param spectra_bottom MS/MS spectra as two-columns data.frame
 #' @param name_top name for top spectra
-#' @param name_bottomname for bottom spectra
-#' @param peak_id peak id
+#' @param name_bottom name for bottom spectra
 #' @param out_file output file
 #' @export
-#' @importFrom graphics par lines legend
+#' @importFrom graphics par lines legend abline
 #' @importFrom grDevices jpeg adjustcolor
 #' @importFrom plotrix thigmophobe.labels
 #' @importFrom Hmisc minor.tick
@@ -43,7 +42,7 @@ visualize_1spectra <- function(spectra_top=NULL, spectra_bottom=NULL, name_top=N
   points(spectra_top[, 1], spectra_top[,2], col=adjustcolor("red", 0.8), pch=16)
 
   if(peak_number){
-    plotrix::thigmophobe.labels(spectra_top[, 1], spectra_top[,2], 1:nrow(spectra_top))
+    thigmophobe.labels(spectra_top[, 1], spectra_top[,2], 1:nrow(spectra_top))
   }
 
   ### feature
@@ -52,7 +51,7 @@ visualize_1spectra <- function(spectra_top=NULL, spectra_bottom=NULL, name_top=N
     lines(spectra_bottom[, 1], -spectra_bottom[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
     points(spectra_bottom[, 1], -spectra_bottom[,2], col=adjustcolor("blue", 0.6), pch=16)
     if(peak_number){
-      plotrix::thigmophobe.labels(spectra_bottom[, 1], -spectra_bottom[, 2], 1:nrow(spectra_bottom))
+      thigmophobe.labels(spectra_bottom[, 1], -spectra_bottom[, 2], 1:nrow(spectra_bottom))
     }
 
   }else{
@@ -60,7 +59,7 @@ visualize_1spectra <- function(spectra_top=NULL, spectra_bottom=NULL, name_top=N
     lines(spectra_bottom[, 1], spectra_bottom[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
     points(spectra_bottom[, 1], spectra_bottom[,2], col=adjustcolor("blue", 0.6), pch=16)
     if(peak_number){
-      plotrix::thigmophobe.labels(spectra_bottom[, 1], spectra_bottom[, 2], 1:nrow(spectra_bottom))
+      thigmophobe.labels(spectra_bottom[, 1], spectra_bottom[, 2], 1:nrow(spectra_bottom))
     }
 
   }

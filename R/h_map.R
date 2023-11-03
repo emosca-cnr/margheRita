@@ -1,7 +1,7 @@
 #' Draw an heatmap
 #' @param mRList mRList object
-#' @param dirout output directory
 #' @param col_ann set of colors for sample annotation
+#' @param column_ann sample_ann column for sample annotation
 #' @param col set of color for data values 
 #' @param scale_features whether to scale features or not
 #' @param features names of features to plot (optiooal)
@@ -9,11 +9,11 @@
 #' @param top only the top most variable features are plotted (if features is NULL)
 #' @param ... further arguments for ComplexHeatmap::Heatmap
 #' @export
-#' @importFrom ComplexHeatmap Heatmap
+#' @importFrom ComplexHeatmap Heatmap HeatmapAnnotation
 #' @importFrom grDevices dev.off png
 #' @importFrom graphics plot
 #' @importFrom stats var setNames
-#' @import pals 
+#' @importFrom pals brewer.rdylbu brewer.purples polychrome
 
 
 h_map <- function(mRList=NULL, column_ann="class", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=20, ...){
@@ -55,9 +55,9 @@ h_map <- function(mRList=NULL, column_ann="class", col_ann=NULL, col=NULL, scale
   
   if(is.null(col)){
     if(scale_features){
-      col <- rev(pals::brewer.rdylbu(7))
+      col <- rev(brewer.rdylbu(7))
     }else{
-      col <- pals::brewer.purples(7)
+      col <- brewer.purples(7)
     }
   }
   

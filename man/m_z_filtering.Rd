@@ -6,8 +6,6 @@
 \usage{
 m_z_filtering(
   mRList,
-  do_plot = TRUE,
-  out_file = "mz_quality.png",
   lower_quality_mass_acc = 0.4,
   upper_quality_mass_acc = 0.8,
   color = "black",
@@ -16,10 +14,6 @@ m_z_filtering(
 }
 \arguments{
 \item{mRList}{mRList object}
-
-\item{do_plot}{whether to plot or not}
-
-\item{out_file}{output file name}
 
 \item{lower_quality_mass_acc}{lower quality value}
 
@@ -36,10 +30,4 @@ mRList object filtered by m/z not accurate
 }
 \description{
 Function filters metabolites with 0.4>m/z<0.8 as it is not accurate.
-}
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-mRList<-m_z_filtering(mRList,do_plot=TRUE, out_file="mz_quality.png", lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black")
-
 }

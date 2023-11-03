@@ -5,7 +5,6 @@
 #' @param mz_limits numeric vector with minimum and maximum rt values
 #' @param rt_limits numeric vector with minimum and maximum rt values
 #' @param sample if not null, consider only the given samples
-#' @param outfile out file name
 #' @param ... further arguments to LSD::heatscatter
 #'
 

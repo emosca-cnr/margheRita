@@ -5,12 +5,12 @@
 \title{Plot score and loading plot}
 \usage{
 Plot2DPCA(
-  mRList,
+  mRList = NULL,
   pcx = 1,
   pcy = 2,
   dirout = "./",
   col_by = "class",
-  include_QC = TRUE
+  include_QC = FALSE
 )
 }
 \arguments{

@@ -24,6 +24,8 @@ visualize_associated_spectra(
 \item{out_dir}{output directory}
 
 \item{type}{mirrored or overlapped visualization}
+
+\item{peak_number}{if TRUE write the peak number}
 }
 \description{
 MS/MS Spectra Visualization

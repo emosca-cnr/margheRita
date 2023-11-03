@@ -7,20 +7,15 @@
 #' @param scaling see pcaMethods::prep()
 #' @param include_QC (default TRUE)
 #' @param nPcs number of principal components (PCs)
-#' @param write_output if score and loading table have to be saved (default=FALSE)
 #' @return  mRList object with "pca" element. Images of screeplot and pairs, table of score,loading and variance can be saved if write_output=TRUE.
 #' @export
-#' @importFrom graphics plot barplot
+#' @importFrom graphics plot barplot pairs
 #' @importFrom grDevices dev.off png rainbow
 #' @importFrom pcaMethods pca
 #' @param top only the top most varying features will be used
 #' @param dirout output directory
 #' @param nPcs number of principal components
 #' @param ... further argments to pcaMethods::pca
-#' @examples
-#' ##library(dataset.margheRita)
-#' ##dataset(norm_pos)
-#' pca_fast(mRList, col_by="class", scaling="pareto",nPcs=5,write_output=FALSE)
 
 mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=2, ...) {
   
@@ -48,7 +43,7 @@ mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scali
   
   #it is the same as PCA for euclidean distance
   
-  mRList$pca <- pcaMethods::pca(t(X), method = method, nPcs = nPcs, scale = scaling, center = center, ...)
+  mRList$pca <- pca(t(X), method = method, nPcs = nPcs, scale = scaling, center = center, ...)
   
   
   #Graphic screeplot
@@ -64,7 +59,7 @@ mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scali
   
   #Graphic pairs
   
-  grDevices::png(
+  png(
     file.path(dirout, "pairs.png"),
     width = 20,
     height = 20,

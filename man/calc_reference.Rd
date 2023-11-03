@@ -27,8 +27,3 @@ mRList object with mRList$reference
 The reference profile is calculated using the samples annotated as "sample_class" in the sample annotation column "sample_col".
 Launch function before normalize_profiles function
 }
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-mRList<-calc_reference(mRList=mRList, sample_col="class", sample_class="QC", approach="mean")
-}

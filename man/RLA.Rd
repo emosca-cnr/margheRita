@@ -9,8 +9,6 @@ RLA(
   include_QC = FALSE,
   logged = FALSE,
   robust = TRUE,
-  do_plot = FALSE,
-  out_file = "RLA.jpg",
   pal = NULL,
   col_by = "class",
   ...
@@ -25,15 +23,12 @@ RLA(
 
 \item{robust}{whether to use the median or not}
 
-\item{do_plot}{whether to plot or not}
+\item{pal}{color palette}
+
+\item{col_by}{column of sample_ann to color}
 
 \item{...}{further arguments to boxplot function}
-
-\item{out_dir}{output directory}
 }
 \description{
 Relative Log Abudance
-}
-\author{
-Ettore Mosca (CNR-ITB)
 }

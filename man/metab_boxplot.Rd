@@ -6,7 +6,7 @@
 \usage{
 metab_boxplot(
   mRList = NULL,
-  dirout,
+  dirout = "./",
   features = NULL,
   col_by = "class",
   group = "class"
@@ -23,14 +23,6 @@ metab_boxplot(
 
 \item{group}{define what you want to compare}
 }
-\value{
-.png of boxplot
-}
 \description{
 Plot boxplot of metabolites, and save them as .png.
-}
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-metab_boxplot(mRList,features=mRLIst$data[1:10,],col_by="class",group="class")
 }

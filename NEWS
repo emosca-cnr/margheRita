@@ -1,5 +1,8 @@
 02 November, v0.2.1
--- read MS-Dial text files
+-- read MS-Dial text files;
+-- changes to the vignette;
+-- improved speed;
+-- various minor improvements;
 
 25 may 2023, v0.2.0
 -- major improvements

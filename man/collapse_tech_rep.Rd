@@ -4,7 +4,7 @@
 \alias{collapse_tech_rep}
 \title{Collapse technical replicates}
 \usage{
-collapse_tech_rep(mRList = NULL, remove.QC = FALSE)
+collapse_tech_rep(mRList = NULL, remove.QC = TRUE)
 }
 \arguments{
 \item{mRList}{mRList object}
@@ -17,9 +17,4 @@ mRList object with only biological replicates
 \description{
 Collapse technical replicates of each biological replicate calculating the mean.
 The resulting dataframe and metadata contain only biological replicates.
-}
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-mRList<-collapse_tech_rep(mRList, remove.QC=FALSE)
 }

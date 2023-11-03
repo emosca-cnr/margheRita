@@ -2,24 +2,26 @@
 % Please edit documentation in R/read_input_file.R
 \name{read_input_file}
 \alias{read_input_file}
-\title{Import data and metadata}
+\title{Create an mRList from feature data and sample information}
 \usage{
 read_input_file(
-  input = NULL,
-  metadata = NULL,
+  feature_file = NULL,
+  sample_file = NULL,
+  MSDial = TRUE,
   split_QC = TRUE,
-  mz_col = 3,
-  rt_col = 2,
-  data_start_col = 5,
+  mz_col = NULL,
+  rt_col = NULL,
+  data_start_col = NULL,
   MS_MS_column = NULL,
-  type = c("Excel", "txt"),
   ...
 )
 }
 \arguments{
-\item{input}{data file name}
+\item{feature_file}{tab-delimited text files with feature abundances, mz, rt and MS/MS spectra}
 
-\item{metadata}{metadata file name}
+\item{sample_file}{sample information file}
+
+\item{MSDial}{(default=TRUE) the input file is MS-Dial native format}
 
 \item{split_QC}{(default=TRUE) split input and metadata in two one for QC and the other for data}
 
@@ -31,18 +33,11 @@ read_input_file(
 
 \item{MS_MS_column}{column that contains the MS/MS spectrum}
 
-\item{type}{type of imported files Excel or .csv or .txt}
-
-\item{...}{further arguments to read.table}
+\item{...}{further arguments to read.delim}
 }
 \value{
-mRList S4 object that contain data and metadata.
+mRList object that contain data and metadata.
 }
 \description{
 Import data and metadata as excel or .csv or .txt format
-}
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-mRList<-(norm_pos.xlsx, norm_pos_meta.xlsx, split_QC=TRUE, mz_col=3, rt_col=2, data_start_col=4, MS_MS_column=NULL, type="excel")
 }

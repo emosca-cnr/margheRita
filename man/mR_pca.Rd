@@ -5,16 +5,15 @@
 \title{PCA}
 \usage{
 mR_pca(
-  mRList,
-  dirout,
+  mRList = NULL,
+  dirout = "./",
   col_by = "class",
   method = "svd",
   scaling = c("none", "pareto", "vector", "uv"),
   center = TRUE,
   include_QC = TRUE,
   top = Inf,
-  nPcs,
-  write_output = FALSE,
+  nPcs = 2,
   ...
 )
 }
@@ -37,8 +36,6 @@ mR_pca(
 
 \item{nPcs}{number of principal components}
 
-\item{write_output}{if score and loading table have to be saved (default=FALSE)}
-
 \item{...}{further argments to pcaMethods::pca}
 }
 \value{
@@ -46,9 +43,4 @@ mRList object with "pca" element. Images of screeplot and pairs, table of score,
 }
 \description{
 This function allows to perform PCA.
-}
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-pca_fast(mRList, col_by="class", scaling="pareto",nPcs=5,write_output=FALSE)
 }

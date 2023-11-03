@@ -1,15 +1,15 @@
 #' Create an mRList from feature data and sample information
 #' @description Import data and metadata as excel or .csv or .txt format
 #' @param split_QC (default=TRUE) split input and metadata in two one for QC and the other for data
+#' @param MSDial (default=TRUE) the input file is MS-Dial native format
 #' @param mz_col column that contains m/z value
 #' @param rt_col column that contains rt value
 #' @param data_start_col column from which data starts
-#' @param type type of imported files Excel or .csv or .txt
 #' @importFrom readxl read_excel
-#' @importFrom utils read.table
+#' @importFrom utils read.delim
 #' @export
 #' @param MS_MS_column column that contains the MS/MS spectrum
-#' @param ... further arguments to read.table
+#' @param ... further arguments to read.delim
 #' @param feature_file tab-delimited text files with feature abundances, mz, rt and MS/MS spectra
 #' @param sample_file sample information file
 #' @return mRList object that contain data and metadata.
@@ -52,7 +52,7 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     
     cat("Reading generic input file...\n")
     
-    data <- read.delim(feature_file, header=T, stringsAsFactors = F, quote="", comment.char="", header=F)
+    data <- read.delim(feature_file, header=T, stringsAsFactors = F, quote="", comment.char="")
     
     mRList <- list(data=data[, -c(1:(data_start_col-1))])
     rownames(mRList$data) <- data[, 1]

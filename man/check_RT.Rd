@@ -9,7 +9,7 @@ check_RT(
   feature_data = NULL,
   rt_err_thr = 1,
   rt_best_thr = 0.5,
-  filter = TRUE
+  filter = FALSE
 )
 }
 \arguments{

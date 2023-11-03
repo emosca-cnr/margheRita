@@ -3,12 +3,6 @@
 #' @param ids rownames of $sample_ann to be removed. Otherwise, if "column" is given, all samples corresponding to the values appearing in the specfied column of $sample_ann will be removed.
 #' @param column a column of $sample_ann to be used for selecting samples to be removed.
 #' @export
-#' @examples
-#' ##To remove all samples "Blank" of the column "class"
-#' mRList <- remove_samples(mRList, ids="Blank", column = "class")
-#' 
-#' ##To remove two samples by id
-#' mRList <- remove_samples(mRList, ids=c("x186_UR_norm_AA_mealB_t00_rtech2_RP_short_SWATH_pos", "x189_UR_norm_MM_mealC_t03_rtech2_RP_short_SWATH_pos"))
 
 remove_samples <- function(mRList=NULL, ids=NULL, column=NULL){
 	

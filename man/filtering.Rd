@@ -9,9 +9,6 @@ filtering(
   seed = NULL,
   a = 0.1,
   b = 0.25,
-  n = 100,
-  do_plot = TRUE,
-  out_file = "mz_quality.png",
   lower_quality_mass_acc = 0.4,
   upper_quality_mass_acc = 0.8,
   min_metab_in_sample = 100,
@@ -28,10 +25,6 @@ filtering(
 
 \item{b}{maxmimum increase factor}
 
-\item{do_plot}{whether to plot or not}
-
-\item{out_file}{output file name}
-
 \item{lower_quality_mass_acc}{lower quality value}
 
 \item{upper_quality_mass_acc}{upper quality value}
@@ -41,10 +34,6 @@ filtering(
 \item{min_sample_with_metab}{min number of samples in which a metabolite must appear}
 
 \item{na_value}{value that indicate missing values}
-
-\item{color}{point color}
-
-\item{...}{further arguments to plot function}
 }
 \value{
 filtered mRList object

@@ -5,17 +5,32 @@
 \title{Vh_map_MSMS_comparison}
 \usage{
 h_map_MSMS_comparison(
-  matrices_list = NULL,
-  out_prefix = "MSMS_comparison",
+  mRList = NULL,
+  metab_id = NULL,
+  feature_id = NULL,
+  out_dir = "./",
   col = NULL,
-  ppm_error = 10,
+  na_col = "black",
+  ppm_error = 20,
   RI_difference = 10
 )
 }
 \arguments{
-\item{matrices_list}{list of matrices with ppm error, RI difference and flags}
+\item{mRList}{mRList object with metabolite_identification element}
 
-\item{out_prefix}{prefix for output files}
+\item{metab_id}{metabolite ID}
+
+\item{feature_id}{feature ID}
+
+\item{out_dir}{output directory}
+
+\item{col}{color palette}
+
+\item{na_col}{color for NA values}
+
+\item{ppm_error}{ppm_errors above this threshold are not shown}
+
+\item{RI_difference}{RI_difference above this threshold are not shown}
 }
 \description{
 Vh_map_MSMS_comparison

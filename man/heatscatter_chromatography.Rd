@@ -9,7 +9,6 @@ heatscatter_chromatography(
   mz_limits = NULL,
   rt_limits = NULL,
   sample = NULL,
-  outfile = "heatscatter.png",
   ...
 )
 }
@@ -20,9 +19,7 @@ heatscatter_chromatography(
 
 \item{rt_limits}{numeric vector with minimum and maximum rt values}
 
-\item{sample}{???}
-
-\item{outfile}{out file name}
+\item{sample}{if not null, consider only the given samples}
 
 \item{...}{further arguments to LSD::heatscatter}
 }

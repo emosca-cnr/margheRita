@@ -18,6 +18,7 @@
 #' @return data.frame with matches between features and library metabolites
 #' @export
 #' @importFrom stats setNames
+#' @importFrom utils stack
 
 metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, lib_ann_fields=c("ID", "Name", "PubChemCID")){
   

@@ -9,11 +9,6 @@
 #'
 #' @export
 #' @return mRList object with mRList$reference
-#' @examples
-#' ##library(dataset.margheRita)
-#' ##dataset(norm_pos)
-#' ## mRList<-calc_reference(mRList=mRList, sample_col="class", sample_class="QC", approach="mean")
-
 
 calc_reference <- function(mRList=NULL, sample_col="class", sample_class="QC", approach=c("median", "mean")){
 

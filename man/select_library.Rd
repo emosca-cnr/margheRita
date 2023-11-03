@@ -18,6 +18,8 @@ select_library(
 )
 }
 \arguments{
+\item{source}{"margheRita" or "MS-DIAL"}
+
 \item{column}{column type, only if source=="margheRita". Possible values are: HILIC, LipC8, pZIC, RPLong, RPShort. Based on the type of the column, the retention time of same metabolite could be different.}
 
 \item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}

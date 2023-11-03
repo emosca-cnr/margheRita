@@ -3,13 +3,13 @@
 #' @param include_QC whether to include or not the QC samples
 #' @param logged are the input data on log-scale or not?
 #' @param robust whether to use the median or not
+#' @param pal color palette
+#' @param col_by column of sample_ann to color
 #' @param ... further arguments to boxplot function
 #' @export
-#' @author Ettore Mosca (CNR-ITB)
 #' @importFrom stats median
-#' @importFrom grDevices jpeg rainbow
-#' @importFrom graphics par abline
 #' @importFrom pals alphabet2
+#' @importFrom graphics abline
 
 RLA <- function(mRList=NULL, include_QC=FALSE, logged=FALSE, robust=TRUE, pal=NULL, col_by="class", ...){
   
@@ -26,7 +26,7 @@ RLA <- function(mRList=NULL, include_QC=FALSE, logged=FALSE, robust=TRUE, pal=NU
   n <- length(levels(col_factor))
   
   if(is.null(pal) | length(pal) != n){
-    pal <- pals::alphabet(n)
+    pal <- alphabet2(n)
   }
   colors <- pal[as.numeric(col_factor)]
   
@@ -35,7 +35,7 @@ RLA <- function(mRList=NULL, include_QC=FALSE, logged=FALSE, robust=TRUE, pal=NU
   }
   
   if(robust){
-    X_data <- t(apply(X_data, 1, function(y) y - stats::median(y)))
+    X_data <- t(apply(X_data, 1, function(y) y - median(y)))
   }else{
     X_data <- t(apply(X_data, 1, function(y) y - mean(y)))
   }

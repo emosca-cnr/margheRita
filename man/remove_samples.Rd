@@ -16,10 +16,3 @@ remove_samples(mRList = NULL, ids = NULL, column = NULL)
 \description{
 Remove samples from mRList
 }
-\examples{
-##To remove all samples "Blank" of the column "class"
-mRList <- remove_samples(mRList, ids="Blank", column = "class")
-
-##To remove two samples by id
-mRList <- remove_samples(mRList, ids=c("x186_UR_norm_AA_mealB_t00_rtech2_RP_short_SWATH_pos", "x189_UR_norm_MM_mealC_t03_rtech2_RP_short_SWATH_pos"))
-}

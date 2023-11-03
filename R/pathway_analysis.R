@@ -72,14 +72,14 @@ pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "msea"),
   if(type=="ora"){
 
     cat("ORA...\n")
-    res <- clusterProfiler::enricher(in_list, pvalueCutoff = pvalueCutoff, pAdjustMethod = pAdjustMethod, universe=universe, minGSSize = minGSSize, maxGSSize = maxGSSize, qvalueCutoff = qvalueCutoff, TERM2GENE=TERM2METAB, TERM2NAME = TERM2NAME)
+    res <- enricher(in_list, pvalueCutoff = pvalueCutoff, pAdjustMethod = pAdjustMethod, universe=universe, minGSSize = minGSSize, maxGSSize = maxGSSize, qvalueCutoff = qvalueCutoff, TERM2GENE=TERM2METAB, TERM2NAME = TERM2NAME)
 
 
   }else{
 
     cat("GSEA...\n")
 
-    res <- clusterProfiler::GSEA(geneList = in_list, exponent = exponent, nPerm = nPerm, minGSSize = minGSSize, maxGSSize = maxGSSize, pvalueCutoff = pvalueCutoff, pAdjustMethod = pAdjustMethod, TERM2GENE = TERM2METAB, TERM2NAME = TERM2NAME, verbose = verbose, seed = seed, by = msea_by)
+    res <- GSEA(geneList = in_list, exponent = exponent, nPerm = nPerm, minGSSize = minGSSize, maxGSSize = maxGSSize, pvalueCutoff = pvalueCutoff, pAdjustMethod = pAdjustMethod, TERM2GENE = TERM2METAB, TERM2NAME = TERM2NAME, verbose = verbose, seed = seed, by = msea_by)
 
   }
 

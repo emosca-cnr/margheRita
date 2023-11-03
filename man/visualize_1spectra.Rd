@@ -21,15 +21,13 @@ visualize_1spectra(
 
 \item{name_top}{name for top spectra}
 
+\item{name_bottom}{name for bottom spectra}
+
 \item{out_file}{output file}
 
 \item{type}{mirrored or overlapped visualization}
 
 \item{peak_number}{whether to show the peak number or not}
-
-\item{name_bottomname}{for bottom spectra}
-
-\item{peak_id}{peak id}
 }
 \description{
 Visualize the spectra of good candidates

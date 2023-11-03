@@ -5,14 +5,8 @@
 #'
 #' @param mRList mRList object
 #' @param remove.QC (default FALSE), set TRUE if you want to remove QC from the dataframe
-#' @importFrom stats aggregate
 #' @export
 #' @return mRList object with only biological replicates
-#' @examples
-#' ##library(dataset.margheRita)
-#' ##dataset(norm_pos)
-#' mRList<-collapse_tech_rep(mRList, remove.QC=FALSE)
-
 
 collapse_tech_rep <-function(mRList=NULL, remove.QC=TRUE){
 
@@ -21,14 +15,6 @@ collapse_tech_rep <-function(mRList=NULL, remove.QC=TRUE){
 
   mRList$data <- t(apply(mRList$data, 1, function(x) tapply(x, mRList$sample_ann$class_biorep, mean)))
   
-  # mRList$data <- stats::aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class_biorep), mean)
-  # 
-  # rownames(mRList$data) <- mRList$data$Group.1
-  # mRList$data <- mRList$data[, -1]
-  # mRList$data <- t(mRList$data)
-  # mRList$data <- as.data.frame(mRList$data)
-  # #row.names(mRList$data)<-mRList$metab_ann$MS.Dial.ID
-
   mRList$sample_ann <- unique(mRList$sample_ann[, c("class_biorep", "class", "biological_rep")])
   rownames(mRList$sample_ann) <- mRList$sample_ann$class_biorep
 

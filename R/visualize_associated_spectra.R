@@ -5,8 +5,9 @@
 #' @param mR_library library list used during annotation
 #' @param metabolite_id ID of the metabolite to be visualized
 #' @param out_dir output directory
+#' @param peak_number if TRUE write the peak number
 #' @export
-#' @importFrom graphics par lines legend
+#' @importFrom graphics par lines legend abline
 #' @importFrom grDevices jpeg adjustcolor
 #' @importFrom plotrix thigmophobe.labels
 #' @importFrom Hmisc minor.tick
@@ -64,7 +65,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
     points(library_spectra[, 1], library_spectra[, 2], col=adjustcolor("red", 0.8), pch=16)
 
     if(peak_number){
-      plotrix::thigmophobe.labels(library_spectra[, 1], library_spectra[,2], 1:nrow(library_spectra))
+      thigmophobe.labels(library_spectra[, 1], library_spectra[,2], 1:nrow(library_spectra))
     }
 
     ### feature
@@ -73,7 +74,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
       lines(feature_spectra[, 1], -feature_spectra[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
       points(feature_spectra[, 1], -feature_spectra[,2], col=adjustcolor("blue", 0.6), pch=16)
       if(peak_number){
-        plotrix::thigmophobe.labels(feature_spectra[, 1], -feature_spectra[, 2], 1:nrow(feature_spectra))
+        thigmophobe.labels(feature_spectra[, 1], -feature_spectra[, 2], 1:nrow(feature_spectra))
       }
 
     }else{
@@ -81,7 +82,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
       lines(feature_spectra[, 1], feature_spectra[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
       points(feature_spectra[, 1], feature_spectra[,2], col=adjustcolor("blue", 0.6), pch=16)
       if(peak_number){
-        plotrix::thigmophobe.labels(feature_spectra[, 1], feature_spectra[, 2], 1:nrow(feature_spectra))
+        thigmophobe.labels(feature_spectra[, 1], feature_spectra[, 2], 1:nrow(feature_spectra))
       }
 
     }

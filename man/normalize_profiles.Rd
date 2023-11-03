@@ -4,7 +4,7 @@
 \alias{normalize_profiles}
 \title{Normalize profiles}
 \usage{
-normalize_profiles(mRList, method = c("log", "reference", "pqn"))
+normalize_profiles(mRList = NULL, method = c("log", "reference", "pqn"))
 }
 \arguments{
 \item{mRList}{mRList object}

@@ -1,5 +1,5 @@
 Package: margheRita
-Title: Mass spectrometry-based metabolic data analysis
+Title: Mass spectrometry-based metabolomics data analysis
 Version: 0.2.1
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
@@ -11,9 +11,8 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Depends: R (>= 3.5.0)
-Imports: readxl, grDevices, stats, utils, clusterProfiler, limma, pcaMethods, ComplexHeatmap, LSD, notame, MSnbase, igraph, viridis, plotly, devtools, plotrix, pals, Hmisc
+Imports: readxl, grDevices, stats, utils, clusterProfiler, limma, pcaMethods, ComplexHeatmap, LSD, notame, MSnbase, plotly, devtools, plotrix, pals, Hmisc
 Suggests: rmarkdown, knitr
 VignetteBuilder: knitr
-

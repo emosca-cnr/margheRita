@@ -8,7 +8,7 @@
 #' @param b maxmimum increase factor
 #' #' @export
 
-imputation <- function(mRList, seed=NULL, a=0.1, b=0.25, n=100) {
+imputation <- function(mRList, seed=NULL, a=0.1, b=0.25) {
   
   
   #internal function

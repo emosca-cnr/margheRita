@@ -9,9 +9,6 @@
 #' @importFrom stats t.test p.adjust wilcox.test anova aov kruskal.test TukeyHSD
 #' @export
 #' @return mRList object with mRList$"testchosen" with univariate analysis
-#' @examples
-#' mRList<-univariate(mRList, test_method="anova", exp.levels=c("AA", "MM", "DD"),exp.factor="class")
-
 
 univariate <- function(mRList=NULL, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), exp.levels=NULL, exp.factor="class"){
   

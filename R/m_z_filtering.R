@@ -1,8 +1,6 @@
 #' Filter m/z of metabolites
 #' @description Function filters metabolites with 0.4>m/z<0.8 as it is not accurate.
 #' @param mRList mRList object
-#' @param do_plot whether to plot or not
-#' @param out_file output file name
 #' @param lower_quality_mass_acc lower quality value
 #' @param upper_quality_mass_acc upper quality value
 #' @param color point color
@@ -13,13 +11,8 @@
 #' @importFrom graphics polygon
 #' @importFrom grDevices png
 #' @return mRList object filtered by m/z not accurate
-#' @examples
-#' ##library(dataset.margheRita)
-#' ##dataset(norm_pos)
-#'mRList<-m_z_filtering(mRList,do_plot=TRUE, out_file="mz_quality.png", lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black")
-#'
 
-m_z_filtering <- function(mRList, do_plot=TRUE, lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black" , ...){
+m_z_filtering <- function(mRList, lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black" , ...){
   
   mRList$metab_ann$quality <- quality <- mRList$metab_ann$mz %% 1
   

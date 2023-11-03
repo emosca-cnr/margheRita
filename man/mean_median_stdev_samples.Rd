@@ -4,23 +4,16 @@
 \alias{mean_median_stdev_samples}
 \title{Calculate mean, median and standard deviation for each biological group.}
 \usage{
-mean_median_stdev_samples(mRList, dirout, write_output = FALSE)
+mean_median_stdev_samples(mRList = NULL, dirout = "./")
 }
 \arguments{
 \item{mRList}{mRList object}
 
 \item{dirout}{output directory}
-
-\item{write_output}{(default FALSE), if TRUE table, as .csv format, is written and saved.}
 }
 \value{
 mRList object with mean, median and sd written in mRList$metab_ann element
 }
 \description{
 Calculate mean, median and standard deviation for each biological group under study. This function works after collapse_tech_rep.
-}
-\examples{
-##library(dataset.margheRita)
-##dataset(norm_pos)
-mRList<-mean_median_stdev_samples(mRList, write_output=TRUE)
 }

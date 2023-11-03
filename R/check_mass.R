@@ -11,7 +11,7 @@
 #' @param accept_flag A number with default value of 5. PPM errors < accept_flag will be tagged as "super", while those > accept_flag and < suffer_flag will be tagged as "acceptable"
 #' @param suffer_flag A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"
 #' @param unaccept_flag A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.
-#' @param keep_all keep all the features
+#' @param filter whether to remove unacceptable associations
 
 #' @return A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
 
