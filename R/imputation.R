@@ -26,7 +26,7 @@ imputation <- function(mRList, seed=NULL, a=0.1, b=0.25) {
   }
   
   na_val <- is.na(mRList$data)
-  n <- min(n, max(rowSums(na_val))) #n is set possibly to the maximum number of na found in a row.
+  n <- min(100, max(rowSums(na_val))) #n is set possibly to the maximum number of na found in a row.
   
   #index of rows with NA
   idx_na_rows <- apply(na_val, 1, any)

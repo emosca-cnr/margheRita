@@ -34,7 +34,7 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     feat_data <- feat_data[-c(1:4), ]
     colnames(feat_data) <- feat_data[1, ]
     feat_data <- feat_data[-1, ]
-    rownames(feat_data) <- feat_data[, 1]
+    rownames(feat_data) <- feat_data[, 1] <- paste0("F", feat_data[, 1])
     
     mRList <- list(
       data=data.frame(feat_data[, data_start_col:data_end_col]),

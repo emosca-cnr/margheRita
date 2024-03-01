@@ -4,12 +4,10 @@
 \alias{filter_metabolite_associations}
 \title{Filter metabolite-feature pairs}
 \usage{
-filter_metabolite_associations(mRList = NULL, strategy = c("nrpl", "lpn"))
+filter_metabolite_associations(mRList = NULL)
 }
 \arguments{
 \item{mRList}{mRList object}
-
-\item{strategy}{"nrpl" stands for number of peaks, peak ratio, ppm error, level; "lpn" stands for level, ppm error, number of peaks}
 }
 \description{
 Filter metabolite-feature pairs

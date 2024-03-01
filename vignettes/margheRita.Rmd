@@ -19,6 +19,8 @@ link-citations: TRUE
 devtools::load_all()
 ```
 
+![](images/logo.png){width=30%}
+
 # Introduction
 
 Untargeted metabolomics allows acquisition of thousands metabolite signals in a single sample that demands computational techniques for post-acquisition steps. Web-based data processing solutions as well as R packages exist and provide tools for metabolomics data analysis. Frequently these tools cover only a part of the entire workflow thus requiring the use of different platforms. Moreover, despite the existence of several databases, metabolite identification remains the bottleneck in metabolomics due to the high variability in the fragmentation pattern resulting from different mass spectrometer configuration-based libraries.
@@ -44,7 +46,7 @@ Contacts:
 - [Annapaola Andolfo](https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html), Proteomics and Metabolomcis Facility, HSR
 - [Ettore Mosca](https://www.itb.cnr.it/en/institute/staff/ettore-mosca), Bioinformatics Lab, CNR-ITB
 
-![](images/logo.png){width=30%}
+
 
 # Installation
 
@@ -294,13 +296,24 @@ margheRita implements both Over Representation Analysis (ORA) and Metabolite Set
 
 ```{r, eval=FALSE}
 pa_res <- pathway_analysis(sig_metab, type = "ora", universe = metab_universe)
-msea_res <- pathway_analysis(ranked_metab_vector, type = "msea", universe = metab_universe)
 ```
 
 The result is a list that contains (i) a table with pathway descriptions and (ii) an object of class "enrichResult", which can be used to obtain various visualizations through clusterProfiler functions.
 
-![](images/ora_barplot.jpg){width=80%}
+```{r echo=FALSE}
+mL_demo$ora
+```
 
+
+![](images/ora_barplot.png){width=80%}
+
+# Inter-operability
+
+We provide two functions to map the mRList into data structures used by other packages, which provide complementary functionalities:
+
+- `as.metaboset()` produces a "MetaboSet" object, used by package "notame" [@Klavus2020];
+
+- `as.PomaSummarizedExperiment()` produces a "PomaSummarizedExperiment" object, used by package "POMA" [@Castellano2021].
 
 # References
 

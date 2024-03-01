@@ -149,7 +149,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   
   cat("Adding annotations to metab_ann...\n")
   
-  if(any(lib_ann_fields) %in% colnames(mRList$metab_ann)){
+  if(any(lib_ann_fields %in% colnames(mRList$metab_ann))){
     
     cat("Any of ", lib_ann_fields, "is already in metab_ann table; these columns will be replaced.\n")
     mRList$metab_ann[, which(colnames(mRList$metab_ann) %in% lib_ann_fields)] <- NULL

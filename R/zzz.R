@@ -1,7 +1,3 @@
 .onAttach <- function(libname, pkgname){
-    packageStartupMessage(
-"         ################
-         #  margheRita  #
-         ################"
-        )
-    }
+    packageStartupMessage("margheRita ", packageVersion("margheRita"), "\n")
+}
