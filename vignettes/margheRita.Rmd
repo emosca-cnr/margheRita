@@ -136,9 +136,9 @@ Typically, after normalization, the various samples should have similar distribu
 margheRita performs Principal Component Analysis (PCA) using the function `mR_pca()`, which relies on the package pca_methods [@Stacklies2007]. Besides choosing the scaling method (argument `scaling`) and number of PCs (`nPcS`), it allows to include/exclude quality control samples by means of argument `include_QC`:
 
 ```{r , eval=F}
-mRList <- mR_pca(mRList = mRList, nPcs=5, scaling="uv", include_QC=FALSE)
+mL_norm <- mR_pca(mRList = mL_norm, nPcs=5, scaling="uv", include_QC=FALSE)
 ```
-The results are added to the mRList in the element `pca`. It also provides some plots, like the visualization of distribution of loadings for all-pairs of the top 5 PCs.
+The results are added to the mRList in the element `pca`. It also provides some plots, like the visualization of distribution of loadings for all-pairs of the top 5 PCs. The plots are directly saved in the current working directory (or in the sub directory created with the argument `dirout`)
 
 ![](images/pairs.png){width=100%}
 The results of PCA can be plotted using `Plot2DPCA()` function. The argument `col_by` enables the choice of the `mRList$sample_ann` column to be used to color samples:
