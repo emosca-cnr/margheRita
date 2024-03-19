@@ -68,7 +68,7 @@ margheRita is intended to be used after having done a number of data acquisition
 Usingh such two files, the function `read_input_file()` creates the "mRList" object, which is used by most of the margheRita functions as main input/output:
 
 ```{r, eval=FALSE}
-mL <- read_input_file(feature_file = "MS-Dial_file.txt", metadata = "sample_info.txt")
+mL <- read_input_file(feature_file = "MS-Dial_file.txt", sample_file = "sample_info.txt")
 ```
 
 The initial mRList object contains the following elements:
