@@ -13,9 +13,9 @@
 #' @param dirout output directory
 #' @importFrom utils write.csv
 
-CV_ratio <- function(mRList=NULL, dirout=NULL, ratioCV=1) {
+CV_ratio <- function(mRList=NULL, dirout="./", ratioCV=1) {
 
-  if (!is.null(dirout)) {
+  if (dirout != "./") {
     dir.create(dirout)
   }
 
