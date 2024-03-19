@@ -18,37 +18,39 @@
 #' @param ... further argments to pcaMethods::pca
 
 mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=2, ...) {
-  
-  
+
+
   scaling <- match.arg(scaling)
-  
-  dir.create(dirout)
-  
+
+  if (dirout != "./") {
+    dir.create(dirout)
+  }
+
   X <- mRList$data
   X_ann <- mRList$sample_ann
-  
+
   #include QC
   if(include_QC){
     cat("Including QC\n")
     X <- cbind(X, mRList$QC)
     X_ann<- rbind(X_ann, mRList$QC_ann)
   }
-  
+
   if(nrow(X) > top){
     cat("using only top", top, "metabolites by variance\n")
     idx <- order(-apply(X, 1, var))[1:top]
     X <- X[idx, ]
   }
-  
-  
+
+
   #it is the same as PCA for euclidean distance
-  
+
   mRList$pca <- pca(t(X), method = method, nPcs = nPcs, scale = scaling, center = center, ...)
-  
-  
+
+
   #Graphic screeplot
   png(file.path(dirout, "scree.png"), width = 20, height = 20, units = "cm", res = 300)
-  
+
   barplot(
     mRList$pca@R2,
     xlab = "Principal Components",
@@ -56,9 +58,9 @@ mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scali
     main = "Screeplot"
   )
   dev.off()
-  
+
   #Graphic pairs
-  
+
   png(
     file.path(dirout, "pairs.png"),
     width = 20,
@@ -66,7 +68,7 @@ mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scali
     units = "cm",
     res= 300
   )
-  
+
   col_factor <- as.factor(X_ann[, col_by])
   col_pal <- rainbow(length(levels(col_factor)))
   pairs(mRList$pca@scores[,1:nPcs],labels=paste(colnames(mRList$pca@scores),"(",round(mRList$pca@R2*100,3), "%)"),
@@ -75,16 +77,16 @@ mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scali
         pch = 19,
         oma= c(3,3,3,15)
   )
-  
+
   par(xpd = TRUE)
   legend("bottomright", legend = levels(col_factor), col = col_pal, pch=8, cex=0.8,ncol=1)
-  
+
   dev.off()
-  
-  write.csv(mRList$pca@scores, file.path(dirout, "scores.txt"))
-  write.csv(mRList$pca@loadings, file.path(dirout, "loadings.txt"))
-  write.csv(mRList$pca@R2cum, file.path(dirout, "variance.txt"))
-  
+
+  write.csv(mRList$pca@scores, file.path(dirout, "scores.csv"))
+  write.csv(mRList$pca@loadings, file.path(dirout, "loadings.csv"))
+  write.csv(mRList$pca@R2cum, file.path(dirout, "variance.csv"))
+
   return(mRList)
-  
+
 }
