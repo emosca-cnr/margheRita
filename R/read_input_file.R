@@ -18,10 +18,10 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
 
 
   if(MSDial){
-    
+
     cat("Reading MS-Dial input file...\n")
     feat_data <- read.delim(feature_file, stringsAsFactors = F, quote="", comment.char="", header=F)
-    
+
     data_start_col <- which(feat_data[2, ] == "File type")+1
     data_end_col <- which(feat_data[4, ] == "Average")[1]-1
     if(is.na(data_end_col)){
@@ -30,12 +30,12 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     mz_col <- which(feat_data[5, ] == "Average Mz")
     rt_col <- which(feat_data[5, ] == "Average Rt(min)")
     MS_MS_column <- which(feat_data[5, ] == "MS/MS spectrum")
-    
+
     feat_data <- feat_data[-c(1:4), ]
     colnames(feat_data) <- feat_data[1, ]
     feat_data <- feat_data[-1, ]
     rownames(feat_data) <- feat_data[, 1] <- paste0("F", feat_data[, 1])
-    
+
     mRList <- list(
       data=data.frame(feat_data[, data_start_col:data_end_col]),
       metab_ann=data.frame(feat_data[, c(1, which(colnames(feat_data) == "Metabolite name"), which(colnames(feat_data) == "SMILES"), rt_col, mz_col, MS_MS_column)])
@@ -43,20 +43,20 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     colnames(mRList$metab_ann) <- c("Feature_ID", "MSDialName", "MSDialSMILES", "rt", "mz", "MS_MS_spectrum")
     mRList$metab_ann$rt <- as.numeric(mRList$metab_ann$rt)
     mRList$metab_ann$mz <- as.numeric(mRList$metab_ann$mz)
-    
+
     for(i in 1:ncol(mRList$data)){
       mRList$data[, i] <- as.numeric(mRList$data[, i])
     }
-    
+
   }else{
-    
+
     cat("Reading generic input file...\n")
-    
+
     data <- read.delim(feature_file, header=T, stringsAsFactors = F, quote="", comment.char="")
-    
+
     mRList <- list(data=data[, -c(1:(data_start_col-1))])
     rownames(mRList$data) <- data[, 1]
-    
+
     mRList$metab_ann <- data[, 1:(data_start_col-1)]
     colnames(mRList$metab_ann)[1] <- "Feature_ID"
     colnames(mRList$metab_ann)[mz_col] <- "mz"
@@ -66,13 +66,13 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
       colnames(mRList$metab_ann)[MS_MS_column] <- "MS_MS_spectrum"
     }
   }
-  
+
   print(dim(mRList$data))
-  
+
   cat("Reading sample annotation\n")
   mRList$sample_ann <- read.delim(sample_file, header=T, stringsAsFactors = F, ...)
   rownames(mRList$sample_ann) <- mRList$sample_ann[, 1]
-  
+
   if(!all(c("id", "injection_order", "batch", "class", "biological_rep", "technical_rep") %in% colnames(mRList$sample_ann))){
     cat("sample annotation must contain 'id', 'injection_order', 'batch', 'class', 'biological_rep' and 'technical_rep'\n")
     cat("found", colnames(mRList$sample_ann), "\n")
@@ -88,11 +88,24 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
   }
 
   idx <- match(colnames(mRList$data), mRList$sample_ann$id)
-  if(any(is.na(idx))){
-    print(colnames(mRList$data)[is.na(idx)])
+
+  if(any(is.na(idx))){ #GF: fixing special characters
+    colnames(mRList$data) <- gsub("[[:punct:]]", ".", colnames(mRList$data))
+    colnames(mRList$data) <- gsub("\\s", ".", colnames(mRList$data))
+    colnames(mRList$data) <- ifelse(grepl("^\\d", colnames(mRList$data)), paste0("X", colnames(mRList$data)), colnames(mRList$data))
+
+    mRList$sample_ann$id <- gsub("[[:punct:]]", ".", mRList$sample_ann$id)
+    mRList$sample_ann$id <- gsub("\\s", ".", mRList$sample_ann$id)
+    mRList$sample_ann$id <- ifelse(grepl("^\\d", mRList$sample_ann$id), paste0("X", mRList$sample_ann$id), mRList$sample_ann$id)
+  }
+
+  idx_updt <- match(colnames(mRList$data), mRList$sample_ann$id)
+
+  if(any(is.na(idx_updt))){
+    print(colnames(mRList$data)[is.na(idx_updt)])
     stop("ERROR: not all samples found in annotation")
   }
-  mRList$sample_ann <- mRList$sample_ann[idx,] #ettore
+  mRList$sample_ann <- mRList$sample_ann[idx_updt,] #ettore
 
 
   ###
