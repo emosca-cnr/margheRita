@@ -71,6 +71,8 @@ Usingh such two files, the function `read_input_file()` creates the "mRList" obj
 mL <- read_input_file(feature_file = "MS-Dial_file.txt", sample_file = "sample_info.txt")
 ```
 
+Please, also consider that, to properly split QC samples, you must indicate exactly "QC" as class of a sample in the sample_file.
+
 The initial mRList object contains the following elements:
 
 Element of the mRList  | Description
