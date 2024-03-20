@@ -18,7 +18,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
   type <- match.arg(type)
 
   metabolite_name <- unique(mRList$metabolite_identification$associations$Name[mRList$metabolite_identification$associations$ID == metabolite_id])
-  
+
   if(length(metabolite_name) == 0){
     stop("Can't find ", metabolite_id, " between level 1-2 associations.\n")
   }
@@ -43,7 +43,10 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
 
     lib_n <- which(apply(match_matrix, 1, function(x) any(x==3)))
 
-    dir.create(out_dir, recursive = T)
+
+    if (out_dir != "./") {
+      dir.create(out_dir, recursive = T)
+    }
 
     jpeg(filename = paste0(out_dir, "/", metabolite_id, "_", feature_id, "_",  peak_id, "_", type, ".jpg"), width = 200, height = 200, res=300, units = "mm")
 
