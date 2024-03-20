@@ -273,7 +273,7 @@ visualize_associated_spectra(mRList = mL_norm_bio, mR_library = mR_library, meta
 The function `h_map_MSMS_comparison()` draws heatmaps to visually compare ppm errors and RI differences between feature and metabolite spectra:
 
 ```{r, eval=FALSE}
-h_map_MSMS_comparison(mL_norm_bio_ann, metab_id = "L1660", feature_id = "10165")
+h_map_MSMS_comparison(mL_norm_bio, metab_id = "L1660", feature_id = "10165")
 ```
 
 ![](images/ppm_error_L1660_M1029_10165.jpg){width=80%}
