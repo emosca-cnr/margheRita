@@ -11,6 +11,10 @@
 
 mean_median_stdev_samples<-function(mRList=NULL, dirout="./"){
 
+  if (dirout != "./") {
+    dir.create(dirout)
+  }
+
   cat("According to dataset size, this might take a few minutes.\n")
 
   cat("Calculating means...\n")
@@ -18,7 +22,7 @@ mean_median_stdev_samples<-function(mRList=NULL, dirout="./"){
   colnames(class_means) <- paste0("mean_",  colnames(class_means))
   class_means <- data.frame(Feature_ID=rownames(class_means), class_means, stringsAsFactors = F)
   write.csv(class_means, file.path(dirout, "class_means.csv"), row.names = F)
-  
+
   # mean_sample<-aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class), mean)
   # rownames(mean_sample)<-mean_sample$Group.1
   # mean_sample<-mean_sample[,-1]
@@ -33,7 +37,7 @@ mean_median_stdev_samples<-function(mRList=NULL, dirout="./"){
   colnames(class_medians) <- paste0("median_",  colnames(class_medians))
   class_medians <- data.frame(Feature_ID=rownames(class_medians), class_medians, stringsAsFactors = F)
   write.csv(class_medians, file.path(dirout, "class_medians.csv"), row.names = F)
-  
+
   # median_sample<-aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class), median)
   # rownames(median_sample)<-median_sample$Group.1
   # median_sample<-median_sample[,-1]
@@ -48,7 +52,7 @@ mean_median_stdev_samples<-function(mRList=NULL, dirout="./"){
   colnames(class_sd) <- paste0("sd_",  colnames(class_sd))
   class_sd <- data.frame(Feature_ID=rownames(class_sd), class_sd, stringsAsFactors = F)
   write.csv(class_sd, file.path(dirout, "class_sd.csv"), row.names = F)
-  
+
     # sd_sample<-aggregate.data.frame(t(mRList$data), list(mRList$sample_ann$class), sd)
   # rownames(sd_sample)<-sd_sample$Group
   # sd_sample<-sd_sample[,-1]
@@ -60,7 +64,7 @@ mean_median_stdev_samples<-function(mRList=NULL, dirout="./"){
 
   # Mean_median_stdev <- cbind(mean_sample, median_sample, sd_sample)
   # mRList$metab_ann <- cbind(mRList$metab_ann, Mean_median_stdev)
-  # 
+  #
   # names(mRList$metab_ann) <- gsub("1", "mean", names(mRList$metab_ann))
   # names(mRList$metab_ann) <- gsub("2", "median", names(mRList$metab_ann))
 

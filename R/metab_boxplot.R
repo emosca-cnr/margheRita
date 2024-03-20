@@ -13,6 +13,10 @@
 
 metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class", group="class"){
 
+  if (dirout != "./") {
+    dir.create(dirout)
+  }
+
 
   X_ann <- mRList$sample_ann
   col_factor <- as.factor(X_ann[, col_by])
