@@ -215,7 +215,7 @@ Such quantities are used to score the similarity among precursors of features an
 
 The function `select_library()` provides a means to select any of two sources:
 
-- **margheRita**, which contains MS and MS/MS information for about 800 metabolites spanning several biological functions; these libraries provideup to level 1 identifications in positive and negative modalities for "HILIC", "LipC8", "pZIC", "RPLong" and "RPShort" chromatographic columns;
+- **margheRita**, which contains MS and MS/MS information for about 800 metabolites spanning several biological functions; these libraries provideup to level 1 identifications in positive and negative modalities for "HILIC", "LipC8", "pZIC", "RPLong" and "RPShort" chromatographic columns, that are acquired following the methods reported in the supplementary material of Mosca et al. (manuscript in preparation).
 
 - **MS-Dial**, which covers a much larger set of metabolites ($10^5$), but is limited to level 2 identifications in positive and negative modalities.
 
@@ -244,19 +244,19 @@ The function `metabolite_identification()` has a series of parameters that can b
 3. "peaks_found_ppm_RI": number of matching peaks in MS/MS spectra, in decreasing order
 4. "RT_class": precursor RT error class, in the order: super, acceptable.
 
-Then, multiple metabolites associated with the same feature are filtered considering the best association based on the same priority. The resulting associations with full details of the analysis are stored in `mRList$metabolite_identification$associations`:
+Then, multiple metabolites associated with the same feature are filtered considering the best association based on the same priority. The resulting associations with full details of the analysis are stored in `mL_norm_bio$metabolite_identification$associations`:
 
 ```{r echo=FALSE}
 mL_demo$metab_assoc
 ```
 
-A summary of the associations is available in `mRList$metabolite_identification$associations_summary`:
+A summary of the associations is available in `mL_norm_bio$metabolite_identification$associations_summary`:
 
 ```{r echo=FALSE}
 mL_demo$metab_assoc_summ
 ```
 
-Lastly, the associations are used to add metabolite information to `mRList$metab_ann` (here, we omit MS/MS spectra for the sake of brevity):
+Lastly, the associations are used to add metabolite information to `mL_norm_bio$metab_ann` (here, we omit MS/MS spectra for the sake of brevity):
 
 ```{r echo=FALSE}
 mL_demo$metab_annoted
@@ -265,7 +265,7 @@ mL_demo$metab_annoted
 The spectra from all the features that match a metabolite can be inspected creating the following plot through:
 
 ```{r, eval=FALSE}
-visualize_associated_spectra(mRList = mRList, mR_library = mR_library, metabolite_id = "L1660")
+visualize_associated_spectra(mRList = mL_norm_bio, mR_library = mR_library, metabolite_id = "L1660")
 ```
 
 ![](images/L1660_10165_M1029_mirrored.jpg){width=80%}
