@@ -64,9 +64,9 @@ h_map <- function(mRList=NULL, dirout="./", column_ann="class", col_ann=NULL, co
     }
   }
 
-  png(file.path(dirout, "Heatmap.png"), width = 200, height = 200, units = "mm", res=300)
+  png(filename = paste0(dirout, "Heatmap.png"), width = 200, height = 200, units = "mm", res=300)
 
-  Heatmap(as.matrix(data), top_annotation = column_ha, col=col, name = hm_name, ...)
+  print(Heatmap(as.matrix(data), top_annotation = column_ha, col=col, name = hm_name, ...))
 
   dev.off()
 
