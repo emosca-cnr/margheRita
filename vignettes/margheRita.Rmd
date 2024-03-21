@@ -284,11 +284,11 @@ h_map_MSMS_comparison(mL_norm_bio, metab_id = "L1660", feature_id = "10165")
 The results of statistical test and metabolite identification can be merged using the function `merge_stats_with_features()`. The argument `feature_stats` should be the name of any statistical test saved in the `mRList` or a custom data frame with Feature_ID as row names:
 
 ```{r, eval=FALSE}
-sig_metab <- merge_stats_with_features(mRList = mL_norm_bio, feature_stats = "anova")
+metab_stat <- merge_stats_with_features(mRList = mL_norm_bio, feature_stats = "anova")
 ```
 
 ```{r echo=FALSE}
-mL_demo$sig_metab
+mL_demo$metab_stat
 ```
 
 
@@ -297,7 +297,7 @@ mL_demo$sig_metab
 margheRita implements both Over Representation Analysis (ORA) and Metabolite Set Enrichment Analysis (MSEA), based on clusterProfiler [@Wu2021] over BioCyc, KEGG and Reactome pathway databases. These analyses can be run by means of function `pathway_analysis()`, which takes as input a vector of PubChemCID or a ranked list of PubChemCID in case of ORA or MSEA respectively:
 
 ```{r, eval=FALSE}
-pa_res <- pathway_analysis(sig_metab, type = "ora", universe = metab_universe)
+pa_res <- pathway_analysis(metab_stat, type = "ora", universe = metab_universe)
 ```
 
 The result is a list that contains (i) a table with pathway descriptions and (ii) an object of class "enrichResult", which can be used to obtain various visualizations through clusterProfiler functions.
