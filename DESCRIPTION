@@ -1,19 +1,20 @@
 Package: margheRita
 Title: Mass spectrometry-based metabolomics data analysis
-Version: 0.2.2
+Version: 0.2.3
+Date: 2024-03-29
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
   person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zahrasadat.alavikakhki@studenti.unimi.it"),
   person(given = "Edoardo", family = "Bellini", role = "aut", email="Bellini.Edoardo@hsr.it"),
   person(given = "Valeria", family = "Mannella", role = "aut", email="mannella.valeria@hsr.it"),
   person(given = "Gianfranco", family = "Frigerio", role = "aut", email = "frigerio.gianfranco@hsr.it", comment = c(ORCID = "0000-0002-3538-1443")))
-Description: margheRita: an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles.
+Description: MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: R (>= 3.5.0)
-Imports: readxl, grDevices, stats, utils, clusterProfiler, pcaMethods, ComplexHeatmap, LSD, plotly, devtools, plotrix, pals, Hmisc
-Suggests: rmarkdown, knitr, notame, POMA
+Imports: readxl, grDevices, stats, utils, clusterProfiler, pcaMethods, ComplexHeatmap, LSD, plotly, devtools, plotrix, pals, Hmisc, notame, POMA, Biobase
+Suggests: rmarkdown, knitr
 VignetteBuilder: knitr

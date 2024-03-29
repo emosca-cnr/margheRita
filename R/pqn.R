@@ -6,7 +6,6 @@
 #'    - se = size effects;
 #'    - se_med = average size effect.
 #' @export
-#' @author Ettore Mosca
 
 
 pqn <- function(x, xref){

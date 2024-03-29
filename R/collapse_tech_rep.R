@@ -4,7 +4,7 @@
 #' The resulting dataframe and metadata contain only biological replicates.
 #'
 #' @param mRList mRList object
-#' @param remove.QC (default FALSE), set TRUE if you want to remove QC from the dataframe
+#' @param remove.QC whether to remove QC samples
 #' @export
 #' @return mRList object with only biological replicates
 

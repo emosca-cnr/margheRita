@@ -2,7 +2,7 @@
 #' @param mRList mRList object with metabolite_identification element
 #' @param metab_id metabolite ID
 #' @param feature_id feature ID
-#' @param out_dir output directory
+#' @param dirout output directory
 #' @param col color palette
 #' @param ppm_error ppm_errors above this threshold are not shown
 #' @param na_col color for NA values
@@ -12,9 +12,13 @@
 #' @importFrom pals brewer.purples
 #' @importFrom grid gpar grid.text
 
-h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, out_dir="./", col=NULL, na_col="black", ppm_error=20, RI_difference=10){
+h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, dirout=NULL, col=NULL, na_col="black", ppm_error=20, RI_difference=10){
 
 
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
+  }
+  
   if(is.null(col)){
     col <- brewer.purples(7)
   }
@@ -49,7 +53,7 @@ h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, o
 
     X[X > ppm_error] <- NA
 
-    jpeg(filename = paste0(out_dir, "/ppm_error_", id_assoc$ID[i], "_", id_assoc$ID_peaks[i], "_", id_assoc$Feature_ID[i], ".jpg"), width = 200, height = 200, res=300, units = "mm")
+    jpeg(filename = file.path(dirout, paste0("ppm_error_", id_assoc$ID[i], "_", id_assoc$ID_peaks[i], "_", id_assoc$Feature_ID[i], ".jpg")), width = 200, height = 200, res=300, units = "mm")
     hm <- Heatmap(X, cluster_rows = F, cluster_columns = F, row_labels = 1:nrow(X), column_labels = 1:ncol(X), name = paste0("ppm\nerror\n<", ppm_error), col=col, cell_fun = cell_ppm, rect_gp = gpar(col = "white", lwd = 1, lty=2), row_names_side = "left", row_title = "library", column_title = "sample", column_title_side = "bottom", na_col = na_col)
     plot(hm)
     dev.off()
@@ -69,7 +73,7 @@ h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, o
     X <- m_list$RI_diff
     X[X > RI_difference] <- NA
 
-    jpeg(filename = paste0(out_dir, "/RI_diff_", id_assoc$ID[i], "_", id_assoc$ID_peaks[i], "_", id_assoc$Feature_ID[i], ".jpg"), width = 200, height = 200, res=300, units = "mm")
+    jpeg(filename = file.path(dirout, paste0("RI_diff_", id_assoc$ID[i], "_", id_assoc$ID_peaks[i], "_", id_assoc$Feature_ID[i], ".jpg")), width = 200, height = 200, res=300, units = "mm")
     hm <- Heatmap(X, cluster_rows = F, cluster_columns = F, row_labels = 1:nrow(X), column_labels = 1:ncol(X), name = paste0("RI\ndiff\n<", RI_difference), col=col, cell_fun = cell_RI, rect_gp = gpar(col = "white", lwd = 1, lty=2), row_names_side = "left", row_title = "library", column_title = "sample", column_title_side = "bottom", na_col = na_col)
     plot(hm)
     dev.off()

@@ -29,6 +29,9 @@ RLA(
 
 \item{...}{further arguments to boxplot function}
 }
+\value{
+mRList object with element "RLA"
+}
 \description{
 Relative Log Abudance
 }

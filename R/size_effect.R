@@ -1,4 +1,4 @@
-#' size effect for pqn
+#' Size effect for pqn
 #' @param x metabolomics profile
 #' @param xref reference profile
 #' @param robust TRUE/FALSE
@@ -8,9 +8,8 @@
 #' @return list of:
 #'    - se = size effects;
 #'    - avg = average size effect.
-#' @author Ettore Mosca (CNR-ITB)
 
-size_effect <- function(x, xref, robust=T){
+size_effect <- function(x=NULL, xref=NULL, robust=T){
 
   #full size effects
   se <- x / xref

@@ -1,7 +1,8 @@
 #' Get significant features
-#' Merge mRList$metab_ann with a data.frame with statistical analysis
+#' @description Merge mRList$metab_ann with feature_stats
 #' @param mRList mRList object
 #' @param feature_stats name of an element of mRList object containing results of statistical test or a custom data frame with Feature_ID as row names.
+#' @return a data.frame
 #' @export
 
 merge_stats_with_features <- function(mRList = NULL, feature_stats=NULL){

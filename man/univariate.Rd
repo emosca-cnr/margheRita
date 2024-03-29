@@ -6,7 +6,7 @@
 \usage{
 univariate(
   mRList = NULL,
-  dirout = "./",
+  dirout = NULL,
   test_method = c("ttest", "Utest", "anova", "kruskal"),
   exp.levels = NULL,
   exp.factor = "class"

@@ -2,9 +2,9 @@
 % Please edit documentation in R/size_effect.R
 \name{size_effect}
 \alias{size_effect}
-\title{size effect for pqn}
+\title{Size effect for pqn}
 \usage{
-size_effect(x, xref, robust = T)
+size_effect(x = NULL, xref = NULL, robust = T)
 }
 \arguments{
 \item{x}{metabolomics profile}
@@ -21,8 +21,5 @@ list of:
 }
 }
 \description{
-size effect for pqn
-}
-\author{
-Ettore Mosca (CNR-ITB)
+Size effect for pqn
 }

@@ -9,18 +9,19 @@
 #' @param group define what you want to compare
 #' @param dirout output directory
 #' @export
-#' @importFrom grDevices dev.off png rainbow
+#' @importFrom grDevices dev.off png
+#' @importFrom pals brewer.paired
 
-metab_boxplot<-function(mRList=NULL, dirout="./", features=NULL, col_by="class", group="class"){
+metab_boxplot<-function(mRList=NULL, dirout=NULL, features=NULL, col_by="class", group="class"){
 
-  if (dirout != "./") {
-    dir.create(dirout)
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
   }
-
+  
 
   X_ann <- mRList$sample_ann
   col_factor <- as.factor(X_ann[, col_by])
-  col_pal <- rainbow(length(levels(col_factor)))
+  col_pal <- brewer.paired(length(levels(col_factor)))
 
   data <- mRList$data[rownames(mRList$data) %in% features, , drop=FALSE] #select the metabolites (features), according to list from users
 

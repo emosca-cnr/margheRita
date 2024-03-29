@@ -4,7 +4,7 @@
 \alias{get_spectra_list_from_vector}
 \title{Convert spectra from character vector to a list of data frames}
 \usage{
-get_spectra_list_from_vector(spectra)
+get_spectra_list_from_vector(spectra = NULL)
 }
 \arguments{
 \item{spectra}{a character vector where each element is a spectra, encoded as mz1:I1 mz2:I2, for example: "45.9732:9894 46.97655:21358..."}

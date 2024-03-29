@@ -2,13 +2,13 @@
 % Please edit documentation in R/h_map_MSMS_comparison.R
 \name{h_map_MSMS_comparison}
 \alias{h_map_MSMS_comparison}
-\title{Vh_map_MSMS_comparison}
+\title{h_map_MSMS_comparison}
 \usage{
 h_map_MSMS_comparison(
   mRList = NULL,
   metab_id = NULL,
   feature_id = NULL,
-  out_dir = "./",
+  dirout = NULL,
   col = NULL,
   na_col = "black",
   ppm_error = 20,
@@ -22,7 +22,7 @@ h_map_MSMS_comparison(
 
 \item{feature_id}{feature ID}
 
-\item{out_dir}{output directory}
+\item{dirout}{output directory}
 
 \item{col}{color palette}
 
@@ -33,5 +33,5 @@ h_map_MSMS_comparison(
 \item{RI_difference}{RI_difference above this threshold are not shown}
 }
 \description{
-Vh_map_MSMS_comparison
+h_map_MSMS_comparison
 }

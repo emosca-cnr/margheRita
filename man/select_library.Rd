@@ -2,13 +2,7 @@
 % Please edit documentation in R/select_library.R
 \name{select_library}
 \alias{select_library}
-\title{Library selection
-Library of margheRita contains three list:
-\itemize{
-\item precursors library: it is a list of metabolites which each contains information of retention time and mz with their specific IDs, CAS numbers and names.
-\item lib_peaks_data:it is a list of metabolites which each contains information of collision energy with their specific IDs, CAS numbers and names.
-\item lib_peaks: it is a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mz and relative intensity.
-}}
+\title{Library selection}
 \usage{
 select_library(
   source = c("margheRita", "MS-DIAL"),
@@ -26,12 +20,15 @@ select_library(
 
 \item{accept_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, it is filtering the library by deleting the relative intensity lower then accept_RI.}
 }
-\description{
-Library selection
-Library of margheRita contains three list:
+\value{
+A list with:
 \itemize{
 \item precursors library: it is a list of metabolites which each contains information of retention time and mz with their specific IDs, CAS numbers and names.
 \item lib_peaks_data:it is a list of metabolites which each contains information of collision energy with their specific IDs, CAS numbers and names.
 \item lib_peaks: it is a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mz and relative intensity.
+\item key_field: the key field of the library
 }
+}
+\description{
+Library selection
 }

@@ -4,15 +4,12 @@
 \alias{mean_median_stdev_samples}
 \title{Calculate mean, median and standard deviation for each biological group.}
 \usage{
-mean_median_stdev_samples(mRList = NULL, dirout = "./")
+mean_median_stdev_samples(mRList = NULL, dirout = NULL)
 }
 \arguments{
 \item{mRList}{mRList object}
 
 \item{dirout}{output directory}
-}
-\value{
-mRList object with mean, median and sd written in mRList$metab_ann element
 }
 \description{
 Calculate mean, median and standard deviation for each biological group under study. This function works after collapse_tech_rep.

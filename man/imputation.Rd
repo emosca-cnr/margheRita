@@ -4,7 +4,7 @@
 \alias{imputation}
 \title{Missing values imputation}
 \usage{
-imputation(mRList, seed = NULL, a = 0.1, b = 0.25)
+imputation(mRList = NULL, seed = NULL, a = 0.1, b = 0.25)
 }
 \arguments{
 \item{mRList}{mRList object}
@@ -13,8 +13,10 @@ imputation(mRList, seed = NULL, a = 0.1, b = 0.25)
 
 \item{a}{minimum increase factor}
 
-\item{b}{maxmimum increase factor
-#' @export}
+\item{b}{maxmimum increase factor}
+}
+\value{
+mRList object with imputed values
 }
 \description{
 the NA values are replaced with a fraction of the minimum value of that row (min_r), sampled in the interval \eqn{[min_r * a, min_r * b]}

@@ -3,7 +3,7 @@
 #' @export
 #' @return a list of spectra, where each spectra is a data.frame with two columns (mz and intensity)
 
-get_spectra_list_from_vector <- function(spectra){
+get_spectra_list_from_vector <- function(spectra=NULL){
 
 	ref_lib_spectra <- sapply(spectra, function(x) strsplit(x, " "))
 	ref_lib_spectra <- lapply(ref_lib_spectra, function(x) lapply(strsplit(x, ":"), as.numeric))

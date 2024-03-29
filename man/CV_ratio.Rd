@@ -4,7 +4,7 @@
 \alias{CV_ratio}
 \title{Coefficient of variation filter}
 \usage{
-CV_ratio(mRList = NULL, dirout = "./", ratioCV = 1)
+CV_ratio(mRList = NULL, dirout = NULL, ratioCV = 1)
 }
 \arguments{
 \item{mRList}{mRList object}

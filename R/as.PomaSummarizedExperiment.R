@@ -1,7 +1,8 @@
 #' Transforms mRList into PomaSummarizedExperiment
 #' @param mRList mRList object
 #' @export
-#' @return a list that cotains the arguments for notame::construct_metabosets function
+#' @return PomaSummarizedExperiment
+#' @importFrom POMA PomaCreateObject
 
 as.PomaSummarizedExperiment <- function(mRList=NULL){
   
@@ -16,7 +17,7 @@ as.PomaSummarizedExperiment <- function(mRList=NULL){
   colnames(pheno_data)[1] <- "Sample_ID"
   colnames(pheno_data)[colnames(pheno_data) == "injection_order"] <- "Injection_order"
   
-  pse <- POMA::PomaSummarizedExperiment(target = pheno_data, features = exprs_data)
+  pse <- PomaCreateObject(metadata = pheno_data, features = t(exprs_data))
   
   return(pse)
 }

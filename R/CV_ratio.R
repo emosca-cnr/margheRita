@@ -8,15 +8,16 @@
 #'
 #' @param mRList mRList object
 #' @param ratioCV only metabolites with CV ratio (sample/QC) higher than ratioCV will be kept
-#' @export
-#' @return filtered mRList object
 #' @param dirout output directory
 #' @importFrom utils write.csv
+#' @importFrom stats sd
+#' @export
+#' @return filtered mRList object
 
-CV_ratio <- function(mRList=NULL, dirout="./", ratioCV=1) {
+CV_ratio <- function(mRList=NULL, dirout=NULL, ratioCV=1) {
 
-  if (dirout != "./") {
-    dir.create(dirout)
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
   }
 
 

@@ -10,7 +10,7 @@ as.PomaSummarizedExperiment(mRList = NULL)
 \item{mRList}{mRList object}
 }
 \value{
-a list that cotains the arguments for notame::construct_metabosets function
+PomaSummarizedExperiment
 }
 \description{
 Transforms mRList into PomaSummarizedExperiment

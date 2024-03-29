@@ -22,6 +22,3 @@ list of:
 \description{
 PQN normalization
 }
-\author{
-Ettore Mosca
-}

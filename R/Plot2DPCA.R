@@ -9,13 +9,14 @@
 #' @export
 #' @importFrom pcaMethods scores
 #' @importFrom grDevices png rainbow dev.off
+#' @importFrom graphics layout plot.new
 
-Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = "./", col_by="class", include_QC=FALSE){
+Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_by="class", include_QC=FALSE){
 
-  if (dirout != "./") {
-    dir.create(dirout)
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
   }
-
+  
 
   xlabel = paste("PC", pcx, "(",round(mRList$pca@R2[pcx]*100,3), "%)")
   ylabel = paste("PC", pcy, "(",round(mRList$pca@R2[pcy]*100,3), "%)")
@@ -35,8 +36,10 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = "./", col_by="class", 
   col_factor <- as.factor(X_ann[, col_by])
   col_pal <- rainbow(length(levels(col_factor)))
 
-  png(file.path(dirout, "scores.png"), width = 200, height = 200, units = "mm", res = 300)
+  png(file.path(dirout, "scores.png"), width = 200, height = 160, units = "mm", res = 300)
 
+  layout(matrix(c(1:2), nrow = 1), widths = c(.8, .2))
+  
   plot(
     xy[, 1], xy[, 2],
     xlab=xlabel, ylab=ylabel,
@@ -44,7 +47,9 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = "./", col_by="class", 
     col = col_pal[as.numeric(col_factor)],
     pch = 19
   )
-  legend("bottomright", legend = levels(col_factor), col = col_pal, pch=16, cex=1)
+  par(mar=c(.1, .1, .1, .1))
+  plot.new()
+  legend("center", legend = levels(col_factor), col = col_pal, pch=16, cex=.6)
 
   dev.off()
 
@@ -52,7 +57,6 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = "./", col_by="class", 
   ylabeL = paste("Loading", pcy)
   xyL <- as.data.frame(mRList$pca@loadings)
   xyL <- xyL[, c(pcx, pcy)]
-
 
   png(file.path(dirout, "loadings.png"), width = 200, height = 200, units = "mm", res = 300)
 

@@ -5,12 +5,12 @@
 \alias{mL_demo}
 \title{mL_demo}
 \format{
-An object of class \code{list} of length 10.
+An object of class \code{list} of length 12.
 }
 \usage{
 mL_demo
 }
 \description{
-mL_demo
+data structure that contains data for the vignettes
 }
 \keyword{datasets}

@@ -7,7 +7,6 @@
 #' @param scaling see pcaMethods::prep()
 #' @param include_QC (default TRUE)
 #' @param nPcs number of principal components (PCs)
-#' @return  mRList object with "pca" element. Images of screeplot and pairs, table of score,loading and variance can be saved if write_output=TRUE.
 #' @export
 #' @importFrom graphics plot barplot pairs
 #' @importFrom grDevices dev.off png rainbow
@@ -15,17 +14,18 @@
 #' @param top only the top most varying features will be used
 #' @param dirout output directory
 #' @param nPcs number of principal components
-#' @param ... further argments to pcaMethods::pca
+#' @param ... further argments to `pcaMethods::pca()`
+#' @return  mRList object with "pca" element. Images of screeplot and pairs, table of score,loading and variance can be saved if write_output=TRUE.
 
-mR_pca <- function(mRList=NULL, dirout="./", col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=2, ...) {
+mR_pca <- function(mRList=NULL, dirout=NULL, col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=2, ...) {
 
 
   scaling <- match.arg(scaling)
 
-  if (dirout != "./") {
-    dir.create(dirout)
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
   }
-
+  
   X <- mRList$data
   X_ann <- mRList$sample_ann
 

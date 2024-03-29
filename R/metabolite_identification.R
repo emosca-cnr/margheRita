@@ -10,7 +10,7 @@
 #' @param unaccept_flag A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 #' @param min_RI numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense 
 #' peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.
-#' @param ppm_err A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.
+#' @param ppm_err A number with default value of 20. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 #' @param RI_err maximum absolute RI difference between MS/MS peaks of sample and library
 #' @param RI_err_type type of RI error calculation.
 #' @param filter_ann whether to filter metabolite-feature associations or not.
@@ -84,7 +84,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   
   feature_spectra_list <- get_spectra_list_from_vector(spectra = setNames(mRList$metab_ann$MS_MS_spectrum[mRList$metab_ann$Feature_ID %in% feature_spectra_list], mRList$metab_ann$Feature_ID[mRList$metab_ann$Feature_ID %in% feature_spectra_list])) #list of features and their spectra
   
-  RI_sample <- RI_sample_data(feature_spectra=feature_spectra_list, accept_RI = min_RI) #define RI
+  RI_sample <- calc_RI(feature_spectra=feature_spectra_list, accept_RI = min_RI) #define RI
   
   #remove from mass those features that do not appear in RI_sample, because do not have MSMS spectra
   mass <- lapply(mass, function(x) x[x$Feature_ID %in% names(RI_sample), ])

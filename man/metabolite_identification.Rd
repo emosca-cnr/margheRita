@@ -42,7 +42,7 @@ metabolite_identification(
 \item{min_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense
 peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
 
-\item{ppm_err}{A number with default value of 10. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
+\item{ppm_err}{A number with default value of 20. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
 
 \item{RI_err}{maximum absolute RI difference between MS/MS peaks of sample and library}
 

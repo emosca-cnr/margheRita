@@ -8,7 +8,7 @@ Plot2DPCA(
   mRList = NULL,
   pcx = 1,
   pcy = 2,
-  dirout = "./",
+  dirout = NULL,
   col_by = "class",
   include_QC = FALSE
 )

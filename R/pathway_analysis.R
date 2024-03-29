@@ -1,7 +1,7 @@
 #' Pathway analysis
 #' Run clusterProfiler on pathways provided by NCBI Biosytems to perform ORA or MSEA
-#' @param in_list metabolite set
-#' @param universe universe
+#' @param in_list a vector of metabolite id for ORA or a ranked named vector with scores for MSEA, where names are metabolite ids
+#' @param universe the set of all metabolites, required by ORA
 #' @param type "ora" or "msea"
 #' @param tax_id tax id
 #' @param include_general_pathways whether to include general pathways or not
@@ -20,7 +20,10 @@
 #' @export
 #' @importFrom  clusterProfiler GSEA enricher
 #' @importFrom utils data
-
+#' @return A list with two elements
+#'   - res: gseaResult object or an enrichResult instance 
+#'   - term_annotation: data.frame with pathway annotation
+#' 
 pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "msea"), tax_id=9606, include_general_pathways=FALSE, pvalueCutoff = 1, pAdjustMethod = "BH", minGSSize = 10, maxGSSize = 500, qvalueCutoff = 1, TERM2METAB=NULL, TERM2NAME = NULL, nPerm=1000, verbose=TRUE, msea_by="fgsea", seed=FALSE, exponent=1){
 
   #bsid2cid <- bsid2info <- NULL #to please the check

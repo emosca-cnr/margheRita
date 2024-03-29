@@ -1,0 +1,7 @@
+bibentry(
+  bibtype  = "misc",
+  title    = "MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards",
+  author   = "Ettore Mosca and Marynka Ulaszewska and Edoardo Niccolò Bellini and Zahrasadat Alavikakhki and Gianfranco Frigerio and Denise Drago and Valeria Mannella and Annapaola Andolfo",
+  year     = "2024",
+  note = "R package version 0.2.3"
+)

@@ -1,6 +1,6 @@
 <img src="vignettes/images/logo.png" width="200">
 
-# margheRita: an R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles
+# MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards
 
 Untargeted metabolomics allows acquisition of thousands metabolite signals in a single sample that demands computational techniques for post-acquisition steps. Web-based data processing solutions as well as R packages exist and provide tools for metabolomics data analysis. Frequently these tools cover only a part of the entire workflow thus requiring the use of different platforms. Moreover, despite the existence of several databases, metabolite identification remains the bottleneck in metabolomics due to the high variability in the fragmentation pattern resulting from different mass spectrometer configuration-based libraries.
 
@@ -20,7 +20,7 @@ The R package margheRita is developed thanks to the collaboration between:
 - COSR, HSR;
 - Bioinformatics Lab, CNR-ITB.
 
-Documentation: ...
+Documentation: https://emosca-cnr.github.io/margheRita
 
 Source code: https://github.com/emosca-cnr/margheRita
 

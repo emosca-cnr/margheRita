@@ -6,6 +6,7 @@
 \usage{
 h_map(
   mRList = NULL,
+  dirout = NULL,
   column_ann = "class",
   col_ann = NULL,
   col = NULL,
@@ -18,6 +19,8 @@ h_map(
 }
 \arguments{
 \item{mRList}{mRList object}
+
+\item{dirout}{output directory}
 
 \item{column_ann}{sample_ann column for sample annotation}
 

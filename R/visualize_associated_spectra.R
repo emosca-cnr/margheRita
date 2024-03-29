@@ -4,7 +4,7 @@
 #' @param mRList mRList object that contains the results of metabolite identification
 #' @param mR_library library list used during annotation
 #' @param metabolite_id ID of the metabolite to be visualized
-#' @param out_dir output directory
+#' @param dirout output directory
 #' @param peak_number if TRUE write the peak number
 #' @export
 #' @importFrom graphics par lines legend abline
@@ -13,10 +13,13 @@
 #' @importFrom Hmisc minor.tick
 #' @param type mirrored or overlapped visualization
 
-visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolite_id=NULL, out_dir="./", type=c("mirrored", "overlapped"), peak_number=FALSE){
+visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolite_id=NULL, dirout=NULL, type=c("mirrored", "overlapped"), peak_number=FALSE){
 
   type <- match.arg(type)
 
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
+  }
   metabolite_name <- unique(mRList$metabolite_identification$associations$Name[mRList$metabolite_identification$associations$ID == metabolite_id])
 
   if(length(metabolite_name) == 0){
@@ -43,12 +46,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
 
     lib_n <- which(apply(match_matrix, 1, function(x) any(x==3)))
 
-
-    if (out_dir != "./") {
-      dir.create(out_dir, recursive = T)
-    }
-
-    jpeg(filename = paste0(out_dir, "/", metabolite_id, "_", feature_id, "_",  peak_id, "_", type, ".jpg"), width = 200, height = 200, res=300, units = "mm")
+    jpeg(filename = file.path(dirout, paste0(metabolite_id, "_", feature_id, "_",  peak_id, "_", type, ".jpg")), width = 200, height = 200, res=300, units = "mm")
 
     if(type=="mirrored"){
       ylim <- c(-100, 100)

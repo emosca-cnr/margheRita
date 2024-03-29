@@ -9,7 +9,7 @@ visualize_associated_spectra(
   mRList = NULL,
   mR_library = NULL,
   metabolite_id = NULL,
-  out_dir = "./",
+  dirout = NULL,
   type = c("mirrored", "overlapped"),
   peak_number = FALSE
 )
@@ -21,7 +21,7 @@ visualize_associated_spectra(
 
 \item{metabolite_id}{ID of the metabolite to be visualized}
 
-\item{out_dir}{output directory}
+\item{dirout}{output directory}
 
 \item{type}{mirrored or overlapped visualization}
 

@@ -26,9 +26,9 @@ pathway_analysis(
 )
 }
 \arguments{
-\item{in_list}{metabolite set}
+\item{in_list}{a vector of metabolite id for ORA or a ranked named vector with scores for MSEA, where names are metabolite ids}
 
-\item{universe}{universe}
+\item{universe}{the set of all metabolites, required by ORA}
 
 \item{type}{"ora" or "msea"}
 
@@ -59,6 +59,13 @@ pathway_analysis(
 \item{seed}{set the seed}
 
 \item{exponent}{exponent in the msea approach}
+}
+\value{
+A list with two elements
+\itemize{
+\item res: gseaResult object or an enrichResult instance
+\item term_annotation: data.frame with pathway annotation
+}
 }
 \description{
 Pathway analysis

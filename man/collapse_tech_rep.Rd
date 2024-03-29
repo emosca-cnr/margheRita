@@ -9,7 +9,7 @@ collapse_tech_rep(mRList = NULL, remove.QC = TRUE)
 \arguments{
 \item{mRList}{mRList object}
 
-\item{remove.QC}{(default FALSE), set TRUE if you want to remove QC from the dataframe}
+\item{remove.QC}{whether to remove QC samples}
 }
 \value{
 mRList object with only biological replicates

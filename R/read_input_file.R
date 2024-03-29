@@ -12,7 +12,7 @@
 #' @param ... further arguments to read.delim
 #' @param feature_file tab-delimited text files with feature abundances, mz, rt and MS/MS spectra
 #' @param sample_file sample information file
-#' @return mRList object that contain data and metadata.
+#' @return mRList object
 
 read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, split_QC=TRUE, mz_col=NULL, rt_col=NULL, data_start_col=NULL, MS_MS_column=NULL, ...){
 
@@ -22,11 +22,14 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     cat("Reading MS-Dial input file...\n")
     feat_data <- read.delim(feature_file, stringsAsFactors = F, quote="", comment.char="", header=F)
 
+    stopifnot(any(feat_data[2, ] == "File type"), any(feat_data[4, ] == "Average"))
     data_start_col <- which(feat_data[2, ] == "File type")+1
     data_end_col <- which(feat_data[4, ] == "Average")[1]-1
     if(is.na(data_end_col)){
       data_end_col <- ncol(feat_data)
     }
+    
+    stopifnot(any(feat_data[5, ] == "Average Mz"), any(feat_data[5, ] == "Average Rt(min)"))
     mz_col <- which(feat_data[5, ] == "Average Mz")
     rt_col <- which(feat_data[5, ] == "Average Rt(min)")
     MS_MS_column <- which(feat_data[5, ] == "MS/MS spectrum")
@@ -36,6 +39,7 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     feat_data <- feat_data[-1, ]
     rownames(feat_data) <- feat_data[, 1] <- paste0("F", feat_data[, 1])
 
+    stopifnot(any(colnames(feat_data) == "Metabolite name"), any(colnames(feat_data)== "SMILES"))
     mRList <- list(
       data=data.frame(feat_data[, data_start_col:data_end_col]),
       metab_ann=data.frame(feat_data[, c(1, which(colnames(feat_data) == "Metabolite name"), which(colnames(feat_data) == "SMILES"), rt_col, mz_col, MS_MS_column)])
@@ -71,8 +75,10 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
 
   cat("Reading sample annotation\n")
   mRList$sample_ann <- read.delim(sample_file, header=T, stringsAsFactors = F, ...)
-  rownames(mRList$sample_ann) <- mRList$sample_ann[, 1]
-
+  mRList$sample_ann$id <- make.names(mRList$sample_ann$id)
+  #rownames(mRList$sample_ann) <- mRList$sample_ann[, 1]
+  rownames(mRList$sample_ann) <- mRList$sample_ann$id
+  
   if(!all(c("id", "injection_order", "batch", "class", "biological_rep", "technical_rep") %in% colnames(mRList$sample_ann))){
     cat("sample annotation must contain 'id', 'injection_order', 'batch', 'class', 'biological_rep' and 'technical_rep'\n")
     cat("found", colnames(mRList$sample_ann), "\n")
@@ -87,24 +93,25 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     stop("ERROR: different number of elements between data and annotation")
   }
 
-  idx <- match(colnames(mRList$data), mRList$sample_ann$id)
-
-  if(any(is.na(idx))){ #GF: fixing special characters
-    colnames(mRList$data) <- gsub("[[:punct:]]", ".", colnames(mRList$data))
-    colnames(mRList$data) <- gsub("\\s", ".", colnames(mRList$data))
-    colnames(mRList$data) <- ifelse(grepl("^\\d", colnames(mRList$data)), paste0("X", colnames(mRList$data)), colnames(mRList$data))
-
-    mRList$sample_ann$id <- gsub("[[:punct:]]", ".", mRList$sample_ann$id)
-    mRList$sample_ann$id <- gsub("\\s", ".", mRList$sample_ann$id)
-    mRList$sample_ann$id <- ifelse(grepl("^\\d", mRList$sample_ann$id), paste0("X", mRList$sample_ann$id), mRList$sample_ann$id)
-  }
-
+  # idx <- match(colnames(mRList$data), mRList$sample_ann$id)
+  # 
+  # if(any(is.na(idx))){ #GF: fixing special characters
+  #   colnames(mRList$data) <- gsub("[[:punct:]]", ".", colnames(mRList$data))
+  #   colnames(mRList$data) <- gsub("\\s", ".", colnames(mRList$data))
+  #   colnames(mRList$data) <- ifelse(grepl("^\\d", colnames(mRList$data)), paste0("X", colnames(mRList$data)), colnames(mRList$data))
+  # 
+  #   mRList$sample_ann$id <- gsub("[[:punct:]]", ".", mRList$sample_ann$id)
+  #   mRList$sample_ann$id <- gsub("\\s", ".", mRList$sample_ann$id)
+  #   mRList$sample_ann$id <- ifelse(grepl("^\\d", mRList$sample_ann$id), paste0("X", mRList$sample_ann$id), mRList$sample_ann$id)
+  # }
+  
   idx_updt <- match(colnames(mRList$data), mRList$sample_ann$id)
 
   if(any(is.na(idx_updt))){
     print(colnames(mRList$data)[is.na(idx_updt)])
     stop("ERROR: not all samples found in annotation")
   }
+  
   mRList$sample_ann <- mRList$sample_ann[idx_updt,] #ettore
 
 

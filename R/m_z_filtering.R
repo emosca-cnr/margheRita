@@ -4,15 +4,13 @@
 #' @param lower_quality_mass_acc lower quality value
 #' @param upper_quality_mass_acc upper quality value
 #' @param color point color
-#' @param ... further arguments to plot function
-#' @return filtered mRList
+#' @param ... further arguments to function `plot()`
 #' @export
 #' @importFrom stats density
 #' @importFrom graphics polygon
-#' @importFrom grDevices png
-#' @return mRList object filtered by m/z not accurate
+#' @return filteredd mRList object
 
-m_z_filtering <- function(mRList, lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black" , ...){
+m_z_filtering <- function(mRList=NULL, lower_quality_mass_acc=0.4, upper_quality_mass_acc=0.8, color="black" , ...){
   
   mRList$metab_ann$quality <- quality <- mRList$metab_ann$mz %% 1
   

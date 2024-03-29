@@ -6,7 +6,7 @@
 \usage{
 metab_boxplot(
   mRList = NULL,
-  dirout = "./",
+  dirout = NULL,
   features = NULL,
   col_by = "class",
   group = "class"

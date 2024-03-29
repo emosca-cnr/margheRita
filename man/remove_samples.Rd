@@ -13,6 +13,9 @@ remove_samples(mRList = NULL, ids = NULL, column = NULL)
 
 \item{column}{a column of $sample_ann to be used for selecting samples to be removed.}
 }
+\value{
+mRList object
+}
 \description{
 Remove samples from mRList
 }

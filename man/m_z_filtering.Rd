@@ -5,7 +5,7 @@
 \title{Filter m/z of metabolites}
 \usage{
 m_z_filtering(
-  mRList,
+  mRList = NULL,
   lower_quality_mass_acc = 0.4,
   upper_quality_mass_acc = 0.8,
   color = "black",
@@ -21,12 +21,10 @@ m_z_filtering(
 
 \item{color}{point color}
 
-\item{...}{further arguments to plot function}
+\item{...}{further arguments to function \code{plot()}}
 }
 \value{
-filtered mRList
-
-mRList object filtered by m/z not accurate
+filteredd mRList object
 }
 \description{
 Function filters metabolites with 0.4>m/z<0.8 as it is not accurate.

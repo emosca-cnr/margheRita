@@ -2,17 +2,17 @@
 % Please edit documentation in R/filtering.R
 \name{filtering}
 \alias{filtering}
-\title{filtering}
+\title{Filtering of features}
 \usage{
 filtering(
-  mRList,
+  mRList = NULL,
   seed = NULL,
   a = 0.1,
   b = 0.25,
   lower_quality_mass_acc = 0.4,
   upper_quality_mass_acc = 0.8,
   min_metab_in_sample = 100,
-  min_sample_with_metab = 10,
+  min_sample_with_metab = 3,
   na_value = "NA"
 )
 }
@@ -39,5 +39,5 @@ filtering(
 filtered mRList object
 }
 \description{
-filtering
+Filtering of features by missing values, m/z values and imputation of missing values
 }

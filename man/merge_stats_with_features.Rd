@@ -2,8 +2,7 @@
 % Please edit documentation in R/merge_stats_with_features.R
 \name{merge_stats_with_features}
 \alias{merge_stats_with_features}
-\title{Get significant features
-Merge mRList$metab_ann with a data.frame with statistical analysis}
+\title{Get significant features}
 \usage{
 merge_stats_with_features(mRList = NULL, feature_stats = NULL)
 }
@@ -12,7 +11,9 @@ merge_stats_with_features(mRList = NULL, feature_stats = NULL)
 
 \item{feature_stats}{name of an element of mRList object containing results of statistical test or a custom data frame with Feature_ID as row names.}
 }
+\value{
+a data.frame
+}
 \description{
-Get significant features
-Merge mRList$metab_ann with a data.frame with statistical analysis
+Merge mRList$metab_ann with feature_stats
 }

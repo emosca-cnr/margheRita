@@ -6,7 +6,7 @@
 \usage{
 mR_pca(
   mRList = NULL,
-  dirout = "./",
+  dirout = NULL,
   col_by = "class",
   method = "svd",
   scaling = c("none", "pareto", "vector", "uv"),
@@ -36,7 +36,7 @@ mR_pca(
 
 \item{nPcs}{number of principal components}
 
-\item{...}{further argments to pcaMethods::pca}
+\item{...}{further argments to \code{pcaMethods::pca()}}
 }
 \value{
 mRList object with "pca" element. Images of screeplot and pairs, table of score,loading and variance can be saved if write_output=TRUE.

@@ -1,6 +1,7 @@
 ---
 title: "margheRita"
-subtitle: 'An R package for analyzing the entire workflow of mass spectrometry-based metabolic profiles'
+subtitle: "MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards"
+author: Ettore Mosca (1), Marynka Ulaszewska (2), Edoardo Niccolò Bellini (2), Zahrasadat Alavikakhki (3), Gianfranco Frigerio (2), Denise Drago (2), Valeria Mannella (2), Annapaola Andolfo (2)
 package: margheRita
 output:
   rmarkdown::html_document:
@@ -35,18 +36,16 @@ The package provides:
 - simplified execution of parametric and non-parametric statistical tests over a large number of features;
 - pathway analysis based on ORA and MSEA over various databases.
 
-The R package margheRita is developed thanks to the collaboration between:
-
-- Proteomics and Metabolomcis Facility, HSR;
-- COSR, HSR;
-- Bioinformatics Lab, CNR-ITB.
-
 Contacts:
 
 - [Annapaola Andolfo](https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html), Proteomics and Metabolomcis Facility, HSR
 - [Ettore Mosca](https://www.itb.cnr.it/en/institute/staff/ettore-mosca), Bioinformatics Lab, CNR-ITB
 
+Affiliations:
 
+1. Institute of Biomedical Technologies, National Research Council, Segrate (Milan), Italy;
+2. ProMeFa, Proteomics and Metabolomics Facility, Center for Omics Sciences (COSR), IRCCS San Raffaele Scientific Institute, Milan, Italy;
+3. Università degli Studi di Milano, Milan, Italy.
 
 # Installation
 
@@ -55,6 +54,17 @@ The package can be installed using devtools:
 if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
+if (!requireNamespace("POMA", quietly = TRUE)){ 
+  devtools::install_github("pcastellanoescuder/POMA")
+}
+if (!requireNamespace("notame", quietly = TRUE)){ 
+  devtools::install_github("antonvsdata/notame")
+}
+if (!require("BiocManager", quietly = TRUE)){
+  install.packages("BiocManager")
+}
+BiocManager::install(c("clusterProfiler", "pcaMethods"))
+
 devtools::install_github("emosca-cnr/margheRita", dependencies = T)
 ```
 
@@ -84,7 +94,29 @@ QC | matrix containing metabolite abundances of QC samples
 QC_ann | annotation of QC samples
 
 ```{r echo=FALSE}
-lapply(mL_demo$raw, head)
+head(mL_demo$raw$data[, 1:3])
+head(mL_demo$raw$metab_ann[, 1:5])
+head(mL_demo$raw$sample_ann)
+head(mL_demo$raw$QC[, 1:3])
+head(mL_demo$raw$QC_ann)
+```
+
+# Inter-operability
+
+To support interoperability with other packages with a focus on metabolomics, the margheRitaList can be reorganized as a "MetaboSet" object, used by package "notame" [@Klavus2020]:
+
+```{r, eval=FALSE}
+ms <- as.metaboset(mRList)
+```
+```{r, eval=T, echo=F}
+mL_demo$ms
+```
+or as “PomaSummarizedExperiment” object, used by package "POMA" [@Castellano2021]:
+```{r, eval=FALSE}
+se <- as.PomaSummarizedExperiment(mRList)
+```
+```{r eval=T, echo=F, message=FALSE, warning=FALSE}
+mL_demo$se
 ```
 
 # Filtering, imputation and normalization
@@ -167,7 +199,8 @@ mL_norm_bio <- collapse_tech_rep(mRList = mL_norm)
 ```
 
 ```{r echo=FALSE}
-lapply(mL_demo$bio, head)
+head(mL_demo$bio$data)
+head(mL_demo$bio$sample_ann)
 ```
 
 # Statistical analysis
@@ -308,14 +341,6 @@ mL_demo$ora
 
 
 ![](images/ora_barplot.png){width=80%}
-
-# Inter-operability
-
-We provide two functions to map the mRList into data structures used by other packages, which provide complementary functionalities:
-
-- `as.metaboset()` produces a "MetaboSet" object, used by package "notame" [@Klavus2020];
-
-- `as.PomaSummarizedExperiment()` produces a "PomaSummarizedExperiment" object, used by package "POMA" [@Castellano2021].
+See the [documentation](https://bioconductor.org/packages/release/bioc/vignettes/clusterProfiler/inst/doc/clusterProfiler.html) of clusterProfiler for further information.
 
 # References
-

@@ -36,7 +36,7 @@ read_input_file(
 \item{...}{further arguments to read.delim}
 }
 \value{
-mRList object that contain data and metadata.
+mRList object
 }
 \description{
 Import data and metadata as excel or .csv or .txt format

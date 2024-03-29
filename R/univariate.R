@@ -10,16 +10,14 @@
 #' @export
 #' @return mRList object with mRList$"testchosen" with univariate analysis
 
-univariate <- function(mRList=NULL, dirout="./", test_method=c("ttest","Utest", "anova","kruskal"), exp.levels=NULL, exp.factor="class"){
+univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest","Utest", "anova","kruskal"), exp.levels=NULL, exp.factor="class"){
 
   test_method <- match.arg(test_method)
 
-  if (dirout != "./") {
-    dir.create(dirout)
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
   }
-
-
-
+  
   cat("exp.levels: ", exp.levels, "\n")
   cat("exp.factor: ", exp.factor, "\n")
 

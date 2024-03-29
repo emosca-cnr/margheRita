@@ -6,9 +6,10 @@
 #' @param seed set this seed with set.seed
 #' @param a minimum increase factor
 #' @param b maxmimum increase factor
-#' #' @export
+#' @export
+#' @return mRList object with imputed values
 
-imputation <- function(mRList, seed=NULL, a=0.1, b=0.25) {
+imputation <- function(mRList=NULL, seed=NULL, a=0.1, b=0.25) {
   
   
   #internal function
