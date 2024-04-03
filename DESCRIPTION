@@ -12,6 +12,7 @@ Description: MargheRita: an R package for LC-MS/MS SWATH metabolomics data analy
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
+LazyDataCompression: bzip2
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Depends: R (>= 3.5.0)

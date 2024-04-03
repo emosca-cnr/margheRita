@@ -17,6 +17,8 @@ h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, d
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
+  }else{
+    dirout <- getwd()
   }
   
   if(is.null(col)){

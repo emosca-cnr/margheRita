@@ -7,7 +7,6 @@
 #' @param features names of features to plot (optiooal)
 #' @param samples samples to consider (optional)
 #' @param top only the top most variable features are plotted (if features is NULL)
-#' @param dirout output directory
 #' @param ... further arguments for ComplexHeatmap::Heatmap
 #' @export
 #' @importFrom ComplexHeatmap Heatmap HeatmapAnnotation
@@ -17,12 +16,8 @@
 #' @importFrom pals brewer.rdylbu brewer.purples polychrome
 
 
-h_map <- function(mRList=NULL, dirout=NULL, column_ann="class", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=20, ...){
+h_map <- function(mRList=NULL, column_ann="class", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=20, ...){
 
-  if (!is.null(dirout)) {
-    dir.create(dirout, showWarnings = F)
-  }
-  
   if(!is.null(samples)){
     data <- mRList$data[, colnames(mRList$data) %in% samples]
   }else{
@@ -65,10 +60,10 @@ h_map <- function(mRList=NULL, dirout=NULL, column_ann="class", col_ann=NULL, co
     }
   }
 
-  png(filename = file.path(dirout, "Heatmap.png"), width = 200, height = 200, units = "mm", res=300)
+  #png(filename = file.path(dirout, "Heatmap.png"), width = 200, height = 200, units = "mm", res=300)
 
   print(Heatmap(as.matrix(data), top_annotation = column_ha, col=col, name = hm_name, ...))
 
-  dev.off()
+  #dev.off()
 
 }

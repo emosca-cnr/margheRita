@@ -12,7 +12,7 @@
 #' @importFrom grDevices dev.off png
 #' @importFrom pals brewer.paired
 
-metab_boxplot<-function(mRList=NULL, dirout=NULL, features=NULL, col_by="class", group="class"){
+metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class", group="class"){
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)

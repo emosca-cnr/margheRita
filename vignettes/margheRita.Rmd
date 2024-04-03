@@ -49,17 +49,12 @@ Affiliations:
 
 # Installation
 
-The package can be installed using devtools:
+The package requires a series of other R packages, which are availble in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) or[github](https://github.com/). In most of the cases, the following instructions guarantee that all such dependencies are installed:
+
 ```{r, eval=FALSE}
-if (!requireNamespace("devtools", quietly = TRUE)) {
-  install.packages("devtools")
-}
-if (!requireNamespace("POMA", quietly = TRUE)){ 
-  devtools::install_github("pcastellanoescuder/POMA")
-}
-if (!requireNamespace("notame", quietly = TRUE)){ 
-  devtools::install_github("antonvsdata/notame")
-}
+install.packages("devtools")
+devtools::install_github(c("pcastellanoescuder/POMA", "antonvsdata/notame"))
+
 if (!require("BiocManager", quietly = TRUE)){
   install.packages("BiocManager")
 }
@@ -199,7 +194,7 @@ mL_norm_bio <- collapse_tech_rep(mRList = mL_norm)
 ```
 
 ```{r echo=FALSE}
-head(mL_demo$bio$data)
+head(mL_demo$bio$data[, 1:5])
 head(mL_demo$bio$sample_ann)
 ```
 
@@ -225,9 +220,9 @@ head(mL_demo$anova)
 The function `metab_boxplot()` draws boxplots of feature abundances grouped by the levels of a given factor:
 
 ```{r, eval=FALSE}
-metab_boxplot(mRList = mL_norm_bio, col_by="class", group="class", features = 1)
+metab_boxplot(mRList = mL_norm_bio, col_by="class", group="class", features = "F3957")
 ```
-![](images/boxplot.20091.png){width=80%}
+![](images/boxplot.F3957.png){width=80%}
 
 This function allows to draw boxplot and report p-value calculated using Student t test. The function `h_map()` provides heatmaps based on package ComplexHeatmap [@Gu2016]:
 
@@ -270,14 +265,7 @@ Once the library is selected, metabolite identification can be performed by the 
 ```{r, eval=FALSE}
 mL_norm_bio <- metabolite_identification(mL_norm_bio, library_list = mR_library)
 ```
-The function `metabolite_identification()` has a series of parameters that can be adjusted to optimize the identification process (see its documentation). By default, all association that met the considered criteria are returned. When metabolite identification is applied on a large number of features (e.g., $10^3$), it's common to obtain multiple features associated with the same metabolite and the opposite (1 feature, multiple metabolites). This redundancy can be addressed setting `filter=TRUE`. In this case, firstly, the various features associated with the same metabolite are filtered considering the best association based on the following priority:
-
-1. "Level" ("Level_note"): the identification level, in the order: 1, 2, 3 (mz, rt), 3 (mz);
-2. "mass_status": precursor ppm error class, in the order: super, acceptable, suffer;
-3. "peaks_found_ppm_RI": number of matching peaks in MS/MS spectra, in decreasing order
-4. "RT_class": precursor RT error class, in the order: super, acceptable.
-
-Then, multiple metabolites associated with the same feature are filtered considering the best association based on the same priority. The resulting associations with full details of the analysis are stored in `mL_norm_bio$metabolite_identification$associations`:
+The function `metabolite_identification()` has a series of parameters that can be adjusted to optimize the identification process (see its documentation). By default, all association that met the considered criteria are returned. When metabolite identification is applied on a large number of features (e.g., $10^3$), it's common to obtain multiple features associated with the same metabolite and the opposite (1 feature, multiple metabolites). This redundancy can be addressed setting `filter=TRUE`. In this case, the various features associated with the same metabolite are filtered considering the classification (Level 1, Level 2, Level 3a and Level 3b), the errors (see above) and a series of quantitative and qualitative scores (see below and our article for further details). The resulting associations (including full details of the analysis) are stored in `mL_norm_bio$metabolite_identification$associations`:
 
 ```{r echo=FALSE}
 mL_demo$metab_assoc
@@ -301,7 +289,7 @@ The spectra from all the features that match a metabolite can be inspected creat
 visualize_associated_spectra(mRList = mL_norm_bio, mR_library = mR_library, metabolite_id = "L1660")
 ```
 
-![](images/L1660_10165_M1029_mirrored.jpg){width=80%}
+![](images/L1660_F10165_M1028_mirrored.jpg){width=80%}
 
 The function `h_map_MSMS_comparison()` draws heatmaps to visually compare ppm errors and RI differences between feature and metabolite spectra:
 
@@ -309,8 +297,8 @@ The function `h_map_MSMS_comparison()` draws heatmaps to visually compare ppm er
 h_map_MSMS_comparison(mL_norm_bio, metab_id = "L1660", feature_id = "10165")
 ```
 
-![](images/ppm_error_L1660_M1029_10165.jpg){width=80%}
-![](images/RI_diff_L1660_M1029_10165.jpg){width=80%}
+![](images/ppm_error_L1660_M1028_F10165.jpg){width=80%}
+![](images/RI_diff_L1660_M1028_F10165.jpg){width=80%}
 
 # Retriving statistics for identified metabolites
 
@@ -341,6 +329,7 @@ mL_demo$ora
 
 
 ![](images/ora_barplot.png){width=80%}
+
 See the [documentation](https://bioconductor.org/packages/release/bioc/vignettes/clusterProfiler/inst/doc/clusterProfiler.html) of clusterProfiler for further information.
 
 # References
