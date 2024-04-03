@@ -33,7 +33,7 @@ Contacts:
 
 # Installation
 
-The package requires a series of other R packages, which are availble in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) or[github](https://github.com/). In most of the cases, the following instructions guarantee that all such dependencies are installed:
+The package requires a series of other R packages, which are availble in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) and [github](https://github.com/). In most of the cases, the following instructions guarantee that all such dependencies are installed:
 
 ```{r, eval=FALSE}
 install.packages("devtools")
