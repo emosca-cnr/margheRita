@@ -30,3 +30,20 @@ Contacts:
 
 - [Annapaola Andolfo](https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html), Proteomics and Metabolomcis Facility, HSR
 - [Ettore Mosca](https://www.itb.cnr.it/en/institute/staff/ettore-mosca), Bioinformatics Lab, CNR-ITB
+
+# Installation
+
+The package requires a series of other R packages, which are availble in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) or[github](https://github.com/). In most of the cases, the following instructions guarantee that all such dependencies are installed:
+
+```{r, eval=FALSE}
+install.packages("devtools")
+devtools::install_github(c("pcastellanoescuder/POMA", "antonvsdata/notame"))
+
+if (!require("BiocManager", quietly = TRUE)){
+  install.packages("BiocManager")
+}
+BiocManager::install(c("clusterProfiler", "pcaMethods"))
+
+devtools::install_github("emosca-cnr/margheRita", dependencies = T)
+```
+
