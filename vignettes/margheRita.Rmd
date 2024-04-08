@@ -1,13 +1,12 @@
 ---
-title: "margheRita"
-subtitle: "MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards"
-author: Ettore Mosca (1), Marynka Ulaszewska (2), Edoardo Niccolò Bellini (2), Zahrasadat Alavikakhki (3), Gianfranco Frigerio (2), Denise Drago (2), Valeria Mannella (2), Annapaola Andolfo (2)
+title: "MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards"
 package: margheRita
 output:
   rmarkdown::html_document:
     toc: true
     number_sections: true
     anchor_sections: true
+toc-title: "Contents"
 vignette: >
   %\VignetteIndexEntry{margheRita}
   %\VignetteEngine{knitr::rmarkdown}
@@ -40,12 +39,6 @@ Contacts:
 
 - [Annapaola Andolfo](https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html), Proteomics and Metabolomcis Facility, HSR
 - [Ettore Mosca](https://www.itb.cnr.it/en/institute/staff/ettore-mosca), Bioinformatics Lab, CNR-ITB
-
-Affiliations:
-
-1. Institute of Biomedical Technologies, National Research Council, Segrate (Milan), Italy;
-2. ProMeFa, Proteomics and Metabolomics Facility, Center for Omics Sciences (COSR), IRCCS San Raffaele Scientific Institute, Milan, Italy;
-3. Università degli Studi di Milano, Milan, Italy.
 
 # Installation
 
@@ -294,7 +287,7 @@ visualize_associated_spectra(mRList = mL_norm_bio, mR_library = mR_library, meta
 The function `h_map_MSMS_comparison()` draws heatmaps to visually compare ppm errors and RI differences between feature and metabolite spectra:
 
 ```{r, eval=FALSE}
-h_map_MSMS_comparison(mL_norm_bio, metab_id = "L1660", feature_id = "10165")
+h_map_MSMS_comparison(mL_norm_bio, metab_id = "L1660", feature_id = "F10165")
 ```
 
 ![](images/ppm_error_L1660_M1028_F10165.jpg){width=80%}

@@ -48,4 +48,4 @@ vignettes/*.pdf
 # R Environment Variables
 *.Renviron
 
-inst/doc
+# inst/doc

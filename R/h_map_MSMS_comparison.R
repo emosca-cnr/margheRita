@@ -31,7 +31,7 @@ h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, d
       ppm_error_ij <- ""
       col_ij <- "black"
     }else{
-      ppm_error_ij <- format(X[i, j], digits=0,  scientific = F)
+      ppm_error_ij <- format(X[i, j], digits=1,  scientific = F)
       col_ij <- "red"
     }
     grid.text(ppm_error_ij, x, y, gp = gpar(fontsize = 9, col=col_ij, font=2))
