@@ -22,6 +22,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
   }else{
     dirout <- getwd()
   }
+  
   metabolite_name <- unique(mRList$metabolite_identification$associations$Name[mRList$metabolite_identification$associations$ID == metabolite_id])
 
   if(length(metabolite_name) == 0){

@@ -15,8 +15,9 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_by="class", 
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
+  }else{
+    dirout <- getwd()
   }
-  
 
   xlabel = paste("PC", pcx, "(",round(mRList$pca@R2[pcx]*100,3), "%)")
   ylabel = paste("PC", pcy, "(",round(mRList$pca@R2[pcy]*100,3), "%)")

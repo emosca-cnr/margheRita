@@ -12,6 +12,8 @@ mean_median_stdev_samples<-function(mRList=NULL, dirout=NULL){
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
+  }else{
+    dirout <- getwd()
   }
   
   cat("According to dataset size, this might take a few minutes.\n")

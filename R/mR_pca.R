@@ -24,6 +24,8 @@ mR_pca <- function(mRList=NULL, dirout=NULL, col_by="class", method="svd", scali
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
+  }else{
+    dirout <- getwd()
   }
   
   X <- mRList$data

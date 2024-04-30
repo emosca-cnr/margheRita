@@ -16,6 +16,8 @@ univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest","Utest", 
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
+  }else{
+    dirout <- getwd()
   }
   
   cat("exp.levels: ", exp.levels, "\n")

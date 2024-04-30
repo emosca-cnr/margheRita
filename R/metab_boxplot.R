@@ -16,6 +16,8 @@ metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
+  }else{
+    dirout <- getwd()
   }
   
 
