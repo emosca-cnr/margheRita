@@ -7,6 +7,7 @@
 h_map(
   mRList = NULL,
   column_ann = "class",
+  data.use = c("data", "data_ann"),
   col_ann = NULL,
   col = NULL,
   scale_features = TRUE,
@@ -20,6 +21,8 @@ h_map(
 \item{mRList}{mRList object}
 
 \item{column_ann}{sample_ann column for sample annotation}
+
+\item{data.use}{whether to use mRList$data (default) or mRList$data_ann, which is the annotated version obtained via metabolite_identification}
 
 \item{col_ann}{set of colors for sample annotation}
 

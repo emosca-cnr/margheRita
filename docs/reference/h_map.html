@@ -50,6 +50,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">h_map</span><span class="op">(</span></span>
 <span>  mRList <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  column_ann <span class="op">=</span> <span class="st">"class"</span>,</span>
+<span>  data.use <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"data_ann"</span><span class="op">)</span>,</span>
 <span>  col_ann <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  col <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  scale_features <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -68,6 +69,10 @@
 
 <dt>column_ann</dt>
 <dd><p>sample_ann column for sample annotation</p></dd>
+
+
+<dt>data.use</dt>
+<dd><p>whether to use mRList$data (default) or mRList$data_ann, which is the annotated version obtained via metabolite_identification</p></dd>
 
 
 <dt>col_ann</dt>

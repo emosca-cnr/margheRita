@@ -1,6 +1,7 @@
 #' Draw an heatmap
 #' @param mRList mRList object
 #' @param col_ann set of colors for sample annotation
+#' @param data.use whether to use mRList$data (default) or mRList$data_ann, which is the annotated version obtained via metabolite_identification
 #' @param column_ann sample_ann column for sample annotation
 #' @param col set of color for data values
 #' @param scale_features whether to scale features or not
@@ -16,15 +17,18 @@
 #' @importFrom pals brewer.rdylbu brewer.purples polychrome
 
 
-h_map <- function(mRList=NULL, column_ann="class", col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=20, ...){
+h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_ann"), col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=20, ...){
 
+  data.use <- match.arg(data.use, c("data", "data_ann"))
+  
+  data <- mRList[[data.use]]
+  stopifnot(length(data)>0)
+  
   if(!is.null(samples)){
-    data <- mRList$data[, colnames(mRList$data) %in% samples]
-  }else{
-    data <- mRList$data
+    data <- data[, colnames(data) %in% samples]
   }
-
-
+  stopifnot(length(data)>0)
+  
   if(scale_features){
     data<-t(scale(t(data)))
     hm_name <- "z"
