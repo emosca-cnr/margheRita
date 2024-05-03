@@ -1,7 +1,7 @@
 Package: margheRita
 Title: Mass spectrometry-based metabolomics data analysis
-Version: 0.2.4
-Date: 2024-04-30
+Version: 0.2.5
+Date: 2024-05-03
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
   person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zahrasadat.alavikakhki@studenti.unimi.it"),

@@ -8,11 +8,13 @@
 #' @param col_by define how to color the boxplot, default=class
 #' @param group define what you want to compare
 #' @param dirout output directory
+#' @param col_pal optional palette. It must match the number of levels of the factor indicated by col_by
+
 #' @export
 #' @importFrom grDevices dev.off png
 #' @importFrom pals brewer.paired
 
-metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class", group="class"){
+metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class", group="class", col_pal=NULL){
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
@@ -23,16 +25,12 @@ metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class
 
   X_ann <- mRList$sample_ann
   col_factor <- as.factor(X_ann[, col_by])
-  
-  if (length(levels(col_factor)) < 1) {
-    stop("Less than 1 group of samples!")
-  } else if (length(levels(col_factor)) == 1) {
-    col_pal <- brewer.paired(3)[2]
-  } else if (length(levels(col_factor)) == 2) {
-    col_pal <- brewer.paired(3)[c(1,3)]
-  } else {
-    col_pal <- brewer.paired(length(levels(col_factor)))
+  col_factor_lev <- levels(col_factor)
+  if(is.null(col_pal) | length(col_pal) < length(col_factor_lev)){
+    cat("Using default palette\n")
+    col_pal <- alphabet(length(col_factor_lev))
   }
+  
 
   data <- mRList$data[rownames(mRList$data) %in% features, , drop=FALSE] #select the metabolites (features), according to list from users
 

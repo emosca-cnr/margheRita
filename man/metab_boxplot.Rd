@@ -9,7 +9,8 @@ metab_boxplot(
   dirout = NULL,
   features = NULL,
   col_by = "class",
-  group = "class"
+  group = "class",
+  col_pal = NULL
 )
 }
 \arguments{
@@ -22,6 +23,8 @@ metab_boxplot(
 \item{col_by}{define how to color the boxplot, default=class}
 
 \item{group}{define what you want to compare}
+
+\item{col_pal}{optional palette. It must match the number of levels of the factor indicated by col_by}
 }
 \description{
 Plot boxplot of metabolites, and save them as .png.

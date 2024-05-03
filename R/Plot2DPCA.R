@@ -8,13 +8,15 @@
 #' @param include_QC (default TRUE)
 #' @param name_samples whether the names of samples should be added to each point
 #' @param name_samples_cex if name_samples is TRUE, specify here the size of the sample names 
+#' @param col_pal optional palette. It must match the number of levels of the factor indicated by col_by
 #' 
 #' @export
 #' @importFrom pcaMethods scores
-#' @importFrom grDevices png rainbow dev.off
-#' @importFrom graphics layout plot.new
+#' @importFrom grDevices png dev.off
+#' @importFrom graphics layout plot.new text
+#' @importFrom pals alphabet
 
-Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_by="class", include_QC=FALSE, name_samples = FALSE, name_samples_cex = 0.8){
+Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, col_by="class", include_QC=FALSE, name_samples = FALSE, name_samples_cex = 0.8){
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
@@ -38,7 +40,11 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_by="class", 
   X_ann <- X_ann[match(rownames(xy), X_ann[, 1]), ]
 
   col_factor <- as.factor(X_ann[, col_by])
-  col_pal <- rainbow(length(levels(col_factor)))
+  col_factor_lev <- levels(col_factor)
+  if(is.null(col_pal) | length(col_pal) < length(col_factor_lev)){
+    cat("Using default palette\n")
+    col_pal <- alphabet(length(col_factor_lev))
+  }
 
   png(file.path(dirout, "scores.png"), width = 200, height = 160, units = "mm", res = 300)
 

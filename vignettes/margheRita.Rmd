@@ -308,13 +308,22 @@ mL_demo$metab_stat
 
 # Pathway analysis
 
-margheRita implements both Over Representation Analysis (ORA) and Metabolite Set Enrichment Analysis (MSEA), based on clusterProfiler [@Wu2021] over BioCyc, KEGG and Reactome pathway databases. These analyses can be run by means of function `pathway_analysis()`, which takes as input a vector of PubChemCID or a ranked list of PubChemCID in case of ORA or MSEA respectively:
+margheRita implements both Over Representation Analysis (ORA) and Metabolite Set Enrichment Analysis (MSEA), based on clusterProfiler [@Wu2021] over BioCyc, KEGG and Reactome pathway databases. These analyses can be run by means of function `pathway_analysis()`. In case of ORA the minimum requirements are the vector of PubChemCID to be tested and the reference universe of all PubChemCIDs in the dataset:
 
 ```{r, eval=FALSE}
-pa_res <- pathway_analysis(metab_stat, type = "ora", universe = metab_universe)
+pa_res <- pathway_analysis(in_list = significant_PubChemCID, type = "ora", universe = all_PubChemCID)
 ```
 
-The result is a list that contains (i) a table with pathway descriptions and (ii) an object of class "enrichResult", which can be used to obtain various visualizations through clusterProfiler functions.
+while, in case of MSEA, a named ranked vector of scores for all PubChemCIDs in the dataset, in decreasing order of importance:
+
+```{r, eval=FALSE}
+pa_res <- pathway_analysis(in_list = ranked_vector, type = "msea")
+```
+
+The result is a list that contains:
+
+- a table with pathway descriptions;
+- an object of class "enrichResult", which can be used to obtain various visualizations through clusterProfiler functions.
 
 ```{r echo=FALSE}
 mL_demo$ora

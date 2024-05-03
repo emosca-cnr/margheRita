@@ -12,7 +12,7 @@ h_map_MSMS_comparison(
   col = NULL,
   na_col = "black",
   ppm_error = 20,
-  RI_difference = 10
+  RI_difference = 20
 )
 }
 \arguments{
