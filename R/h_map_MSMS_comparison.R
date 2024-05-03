@@ -12,7 +12,7 @@
 #' @importFrom pals brewer.purples
 #' @importFrom grid gpar grid.text
 
-h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, dirout=NULL, col=NULL, na_col="black", ppm_error=20, RI_difference=10){
+h_map_MSMS_comparison <- function(mRList=NULL, metab_id=NULL, feature_id=NULL, dirout=NULL, col=NULL, na_col="black", ppm_error=20, RI_difference=20){
 
 
   if (!is.null(dirout)) {
