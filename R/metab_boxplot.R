@@ -23,7 +23,16 @@ metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class
 
   X_ann <- mRList$sample_ann
   col_factor <- as.factor(X_ann[, col_by])
-  col_pal <- brewer.paired(length(levels(col_factor)))
+  
+  if (length(levels(col_factor)) < 1) {
+    stop("Less than 1 group of samples!")
+  } else if (length(levels(col_factor)) == 1) {
+    col_pal <- brewer.paired(3)[2]
+  } else if (length(levels(col_factor)) == 2) {
+    col_pal <- brewer.paired(3)[c(1,3)]
+  } else {
+    col_pal <- brewer.paired(length(levels(col_factor)))
+  }
 
   data <- mRList$data[rownames(mRList$data) %in% features, , drop=FALSE] #select the metabolites (features), according to list from users
 
