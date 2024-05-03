@@ -6,12 +6,15 @@
 #' @param dirout output directory
 #' @param col_by (default class)
 #' @param include_QC (default TRUE)
+#' @param name_samples whether the names of samples should be added to each point
+#' @param name_samples_cex if name_samples is TRUE, specify here the size of the sample names 
+#' 
 #' @export
 #' @importFrom pcaMethods scores
 #' @importFrom grDevices png rainbow dev.off
 #' @importFrom graphics layout plot.new
 
-Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_by="class", include_QC=FALSE){
+Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_by="class", include_QC=FALSE, name_samples = FALSE, name_samples_cex = 0.8){
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
@@ -67,7 +70,11 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_by="class", 
     main = "Loading plot",
     pch = 19
   )
-  #text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=0.8, pos=3)
+  
+  if (name_samples) {
+    text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex, pos=3)
+  }
+  
 
   dev.off()
 }
