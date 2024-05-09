@@ -57,6 +57,11 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     col = col_pal[as.numeric(col_factor)],
     pch = 19
   )
+  if (name_samples) {
+    text(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, pos=3)
+  }
+  
+  
   par(mar=c(.1, .1, .1, .1))
   plot.new()
   legend("center", legend = levels(col_factor), col = col_pal, pch=16, cex=.6)
@@ -76,7 +81,6 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     main = "Loading plot",
     pch = 19
   )
-  
   if (name_samples) {
     text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex, pos=3)
   }
