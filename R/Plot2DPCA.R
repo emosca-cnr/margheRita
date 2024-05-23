@@ -58,7 +58,7 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     pch = 19
   )
   if (name_samples) {
-    text(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, pos=3)
+    text(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, pos=3, xpd=TRUE)
   }
   
   
@@ -82,7 +82,7 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     pch = 19
   )
   if (name_samples) {
-    text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex, pos=3)
+    text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex, pos=3, xpd=TRUE)
   }
   
 

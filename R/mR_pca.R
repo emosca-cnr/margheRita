@@ -35,7 +35,7 @@ mR_pca <- function(mRList=NULL, dirout=NULL, col_by="class", method="svd", scali
   if(include_QC){
     cat("Including QC\n")
     X <- cbind(X, mRList$QC)
-    X_ann<- rbind(X_ann, mRList$QC_ann)
+    X_ann <- rbind(X_ann, mRList$QC_ann)
   }
 
   if(nrow(X) > top){

@@ -23,8 +23,10 @@ collapse_tech_rep <-function(mRList=NULL, remove.QC=TRUE){
     mRList$QC <- mRList$QC_ann <- NULL
   }else{
     mRList$QC_ann$class_biorep <- as.factor(paste(mRList$QC_ann$class, mRList$QC_ann$biological_rep, sep="_"))
-    mRList$QC_ann<-cbind(mRList$QC_ann$class_biorep, mRList$QC_ann$class,mRList$QC_ann$biological_rep)
-    colnames(mRList$QC_ann)<-c("class_biorep", "class","biological_rep")
+    mRList$QC <- t(apply(mRList$QC, 1, function(x) tapply(x, mRList$QC_ann$class_biorep, mean)))
+    mRList$QC_ann <-  unique(mRList$QC_ann[, c("class_biorep", "class", "biological_rep")])
+    rownames(mRList$QC_ann) <- mRList$QC_ann$class_biorep
+    
   }
 
   #ensure correct order of samples
