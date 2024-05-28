@@ -167,7 +167,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   mRList$metab_ann <- mRList$metab_ann[match(rownames(mRList$data), mRList$metab_ann$Feature_ID), ]
   
   ###annotated data
-  mRList$data_ann <- merge(unique(mRList$metab_ann[!is.na(mRList$metab_ann$Name), c("Feature_ID", "Name")]), mRList$data, , by.x=1, by.y=0, sort=F)
+  mRList$data_ann <- merge(unique(mRList$metab_ann[!is.na(mRList$metab_ann$Name), c("Feature_ID", "Name")]), mRList$data, by.x=1, by.y=0, sort=F)
   if(any(duplicated(mRList$data_ann$Name))){
     mRList$data_ann <- keep_strongest_representative(X=mRList$data_ann[, -c(1:2)], row.names=mRList$data_ann$Name)
   }

@@ -5,7 +5,7 @@
 #' @param column_ann sample_ann column for sample annotation
 #' @param col set of color for data values
 #' @param scale_features whether to scale features or not
-#' @param features names of features to plot (optiooal)
+#' @param features names of features to plot (optional)
 #' @param samples samples to consider (optional)
 #' @param top only the top most variable features are plotted (if features is NULL)
 #' @param ... further arguments for ComplexHeatmap::Heatmap
@@ -50,6 +50,9 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
 
   if(is.null(col_ann)){
     col_ann <- setNames(polychrome(length(levels(column_ann))), levels(column_ann))
+  } else {
+    if (length(col_ann) != length(levels(column_ann))) {stop("the length of col_ann must be identical to the length of groups")}
+    names(col_ann) <- levels(column_ann)
   }
 
   column_ha <- HeatmapAnnotation(class=column_ann, col = list(class=col_ann))
@@ -63,6 +66,8 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
       col <- brewer.purples(7)
     }
   }
+  
+  row.names(data) <- sub(";.*", "", row.names(data))
 
   #png(filename = file.path(dirout, "Heatmap.png"), width = 200, height = 200, units = "mm", res=300)
 

@@ -30,7 +30,7 @@ h_map(
 
 \item{scale_features}{whether to scale features or not}
 
-\item{features}{names of features to plot (optiooal)}
+\item{features}{names of features to plot (optional)}
 
 \item{samples}{samples to consider (optional)}
 
