@@ -17,17 +17,22 @@ select_sign_features <- function(mRList=NULL, data.use = c("data", "data_ann"), 
   
   data <- mRList[[data.use]]
   
+  mRList[[test_method]] <- mRList[[test_method]][order(mRList[[test_method]][ , test_value]),]
+  
   sign_feat <- row.names(mRList[[test_method]])[which(mRList[[test_method]][ , test_value] < cutoff_value)]
   
   
   
   if (data.use == "data") {
     
-    return(row.names(data)[which(row.names(data) %in% sign_feat)])
+    return(sign_feat[which(sign_feat %in% row.names(data))])
     
   } else if (data.use == "data_ann") {
     
-    sign_molecules_all <- mRList[["metab_ann"]][which(mRList[["metab_ann"]][,"Feature_ID"] %in% sign_feat), "Name"]
+    
+    mRList[["metab_ann"]] <- mRList[["metab_ann"]][match(row.names(mRList[[test_method]]), mRList[["metab_ann"]]$Feature_ID), ]
+    
+    sign_molecules_all <- mRList[["metab_ann"]][which(mRList[["metab_ann"]]$Feature_ID %in% sign_feat), "Name"]
     
     sign_molecules <- unique(sign_molecules_all[which(!is.na(sign_molecules_all))])
     

@@ -37,12 +37,13 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
   }
 
   if(is.null(features)){
+    if(length(top_var)<top) {top <- length(top_var)}
     top_var <- apply(data, 1, var)
     top_var <- order(top_var, decreasing = T)[1:top]
     data <- data[top_var, ]
   }else{
+    if(length(features)>top) {features <- features[1:top]}
     data <- data[rownames(data) %in% features, ]
-
   }
 
 
