@@ -14,12 +14,6 @@ The package provides:
 - simplified execution of parametric and non-parametric statistical tests over a large number of features;
 - pathway analysis based on ORA and MSEA over various databases.
 
-The R package margheRita is developed thanks to the collaboration between:
-
-- Proteomics and Metabolomcis Facility, HSR;
-- COSR, HSR;
-- Bioinformatics Lab, CNR-ITB.
-
 Documentation: https://emosca-cnr.github.io/margheRita
 
 Source code: https://github.com/emosca-cnr/margheRita
