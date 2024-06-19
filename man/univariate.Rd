@@ -29,3 +29,6 @@ mRList object with mRList$"testchosen" with univariate analysis
 \description{
 It applies T test, U test, Anova or Kruskal-Wallis test over dataset features.
 }
+\details{
+In case of "anova", the results of stats::aov() will be analysed by stats::TukeyHSD()
+}

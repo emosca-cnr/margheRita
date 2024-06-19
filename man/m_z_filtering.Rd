@@ -9,6 +9,7 @@ m_z_filtering(
   lower_quality_mass_acc = 0.4,
   upper_quality_mass_acc = 0.8,
   color = "black",
+  dirout = NULL,
   ...
 )
 }
@@ -20,6 +21,8 @@ m_z_filtering(
 \item{upper_quality_mass_acc}{upper quality value}
 
 \item{color}{point color}
+
+\item{dirout}{output directory}
 
 \item{...}{further arguments to function \code{plot()}}
 }

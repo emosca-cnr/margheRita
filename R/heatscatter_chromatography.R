@@ -1,14 +1,17 @@
-#' Draw the "heatscatter chromatography"
+#' Heatscatter chromatography plot
+#' Draw the "heatscatter chromatography" and save it to a png file
 #' @importFrom LSD heatscatter
+#' @importFrom grDevices png
 #' @export
 #' @param mRList mRList object
 #' @param mz_limits numeric vector with minimum and maximum rt values
 #' @param rt_limits numeric vector with minimum and maximum rt values
 #' @param sample if not null, consider only the given samples
+#' @param out_file png file name
 #' @param ... further arguments to LSD::heatscatter
 #'
 
-heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NULL, sample=NULL, ...) {
+heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NULL, sample=NULL, out_file="heatscatter_chromatography.png", ...) {
 
   ### change sample into colnames or index
   if (!is.null(sample)) {
@@ -32,6 +35,10 @@ heatscatter_chromatography <- function(mRList=NULL, mz_limits=NULL, rt_limits=NU
     df <- df[df$mz >= mz_limits[1] &  df$mz <= mz_limits[2], ]
   }
 
+  png(out_file, width = 200, height = 200, res=300, units="mm")
+  par(mar=c(3, 3, 1, 1))
+  par(mgp=c(1.5, .5, 0))
   heatscatter(df$rt, df$mz, xlab="RT", ylab="m/z", main = "", ...)
-
+  dev.off()
+  
 }

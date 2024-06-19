@@ -48,12 +48,15 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
 
   png(file.path(dirout, "scores.png"), width = 200, height = 160, units = "mm", res = 300)
 
-  layout(matrix(c(1:2), nrow = 1), widths = c(.8, .2))
+  layout(matrix(c(1:2), nrow = 1), widths = c(.85, .15))
+  
+  par(mar=c(3, 3, .5, .5))
+  par(mgp=c(1.6, .5, 0))
   
   plot(
     xy[, 1], xy[, 2],
     xlab=xlabel, ylab=ylabel,
-    main = "Score plot",
+    main = "",
     col = col_pal[as.numeric(col_factor)],
     pch = 19
   )

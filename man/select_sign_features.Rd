@@ -6,24 +6,28 @@
 \usage{
 select_sign_features(
   mRList = NULL,
-  data.use = c("data", "data_ann"),
   test_method = "anova",
   test_value = "q",
-  cutoff_value = 0.05
+  cutoff_value = 0.05,
+  feature_id = "Feature_ID",
+  values = FALSE
 )
 }
 \arguments{
 \item{mRList}{mRList object}
 
-\item{data.use}{whether to use mRList$data (default) or mRList$data_ann, which is the annotated version obtained via metabolite_identification}
-
 \item{test_method}{the name of the statistical test table contained in the mRlist object}
 
 \item{test_value}{the column of the statistical test table to consider (e.g.: p or q)}
 
-\item{cutoff_value}{the value of p-value cut-off to consider a feature as significant
+\item{cutoff_value}{the value of p-value cut-off to consider a feature as significant}
 
-#' @return a character vector with features names}
+\item{feature_id}{"Feature_ID", or any other feature identifier in mRList$metab_ann}
+
+\item{values}{if TRUE a named vector with test_value values will be given in output; the beast value will be considered in case of 1-to-n mappings}
+}
+\value{
+a character vector with features names
 }
 \description{
 The output of this function can be passed in the features argument of the h_map function

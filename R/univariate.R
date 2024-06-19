@@ -9,8 +9,9 @@
 #' @importFrom stats t.test p.adjust wilcox.test anova aov kruskal.test TukeyHSD
 #' @export
 #' @return mRList object with mRList$"testchosen" with univariate analysis
-
-univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest","Utest", "anova","kruskal"), exp.levels=NULL, exp.factor="class"){
+#' @details In case of "anova", the results of stats::aov() will be analysed by stats::TukeyHSD()
+#'  
+univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest","Utest", "anova", "kruskal"), exp.levels=NULL, exp.factor="class"){
 
   test_method <- match.arg(test_method)
 
@@ -25,7 +26,7 @@ univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest","Utest", 
 
   idx_samples <- mRList$sample_ann[, exp.factor] %in% exp.levels
   exp_design <- data.frame(id=rownames(mRList$sample_ann)[idx_samples], level=factor(mRList$sample_ann[idx_samples, exp.factor]))
-  cat("selecxted samples:\n")
+  cat("selected samples:\n")
   print(exp_design)
 
   X_data <- mRList$data[, match(exp_design$id, colnames(mRList$data))]

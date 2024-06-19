@@ -42,10 +42,8 @@ RLA <- function(mRList=NULL, include_QC=FALSE, logged=FALSE, robust=TRUE, pal=NU
   }
 
   ## add col_by
-  par(mar=c(12, 4, 1, 1))
-  boxplot(X_data, ..., ylab="x - <x>", main="Relative log Abudance", col = colors)
+  boxplot(X_data, ..., ylab="x - <x>", main="Relative log abundance", col = colors)
   abline(h=0, lty=2)
-
   legend("bottomright", legend = levels(col_factor), pch=15, col = pal, cex=0.5, horiz = T)
 
 

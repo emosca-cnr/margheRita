@@ -15,18 +15,27 @@
 #' @param RI_err_type type of RI error calculation.
 #' @param filter_ann whether to filter metabolite-feature associations or not.
 #' @param lib_ann_fields columns of library_list$lib_precursor that will be added to metabolite annotations
+#' @param dirout output directory
 #' @return data.frame with matches between features and library metabolites
 #' @export
 #' @importFrom stats setNames
 #' @importFrom utils stack
+#' @importFrom openxlsx createWorkbook addWorksheet writeDataTable saveWorkbook
 
-metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, lib_ann_fields=c("ID", "Name", "PubChemCID")){
+metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, lib_ann_fields=c("ID", "Name", "PubChemCID"), dirout=NULL){
   
   if(is.null(features)){
     idx <- 1:nrow(mRList$metab_ann) 
   }else{
     idx <- which(mRList$metab_ann$Feature_ID %in% features) 
   }
+  
+  if (!is.null(dirout)) {
+    dir.create(dirout, showWarnings = F)
+  }else{
+    dirout <- getwd()
+  }
+  
   
   cat("# Features considered: ", length(idx), ".\n")
   
@@ -168,9 +177,21 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   
   ###annotated data
   mRList$data_ann <- merge(unique(mRList$metab_ann[!is.na(mRList$metab_ann$Name), c("Feature_ID", "Name")]), mRList$data, by.x=1, by.y=0, sort=F)
+  
   if(any(duplicated(mRList$data_ann$Name))){
-    mRList$data_ann <- keep_strongest_representative(X=mRList$data_ann[, -c(1:2)], row.names=mRList$data_ann$Name)
+    mRList$data_ann <- keep_strongest_representative(X = mRList$data_ann)
   }
+  
+  wb <- createWorkbook()
+  addWorksheet(wb, "associations")
+  addWorksheet(wb, "summary")
+  addWorksheet(wb, "metab_ann")
+  addWorksheet(wb, "data_ann")
+  writeDataTable(wb, "associations", mRList$metabolite_identification$associations)
+  writeDataTable(wb, "summary", mRList$metabolite_identification$associations_summary)
+  writeDataTable(wb, "metab_ann", mRList$metab_ann)
+  writeDataTable(wb, "data_ann", mRList$data_ann)
+  saveWorkbook(wb, file = file.path(dirout, "metabolite_identification.xlsx"), overwrite = T)
   
   cat("done\n")
   

@@ -2,7 +2,6 @@
 #' @param mRList mRList object
 #' @export
 #' @return PomaSummarizedExperiment
-#' @importFrom POMA PomaCreateObject
 
 as.PomaSummarizedExperiment <- function(mRList=NULL){
   
@@ -17,7 +16,7 @@ as.PomaSummarizedExperiment <- function(mRList=NULL){
   colnames(pheno_data)[1] <- "Sample_ID"
   colnames(pheno_data)[colnames(pheno_data) == "injection_order"] <- "Injection_order"
   
-  pse <- PomaCreateObject(metadata = pheno_data, features = t(exprs_data))
+  pse <- POMA::PomaCreateObject(metadata = pheno_data, features = t(exprs_data))
   
   return(pse)
 }

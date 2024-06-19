@@ -13,7 +13,7 @@ h_map(
   scale_features = TRUE,
   features = NULL,
   samples = NULL,
-  top = 20,
+  top = 200,
   ...
 )
 }

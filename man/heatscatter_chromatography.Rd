@@ -2,13 +2,15 @@
 % Please edit documentation in R/heatscatter_chromatography.R
 \name{heatscatter_chromatography}
 \alias{heatscatter_chromatography}
-\title{Draw the "heatscatter chromatography"}
+\title{Heatscatter chromatography plot
+Draw the "heatscatter chromatography" and save it to a png file}
 \usage{
 heatscatter_chromatography(
   mRList = NULL,
   mz_limits = NULL,
   rt_limits = NULL,
   sample = NULL,
+  out_file = "heatscatter_chromatography.png",
   ...
 )
 }
@@ -21,8 +23,11 @@ heatscatter_chromatography(
 
 \item{sample}{if not null, consider only the given samples}
 
+\item{out_file}{png file name}
+
 \item{...}{further arguments to LSD::heatscatter}
 }
 \description{
-Draw the "heatscatter chromatography"
+Heatscatter chromatography plot
+Draw the "heatscatter chromatography" and save it to a png file
 }

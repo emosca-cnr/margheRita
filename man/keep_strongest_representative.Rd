@@ -4,12 +4,10 @@
 \alias{keep_strongest_representative}
 \title{Keep the feature with the highest average across samples}
 \usage{
-keep_strongest_representative(X = NULL, row.names = NULL)
+keep_strongest_representative(X = NULL)
 }
 \arguments{
 \item{X}{features-by-samples data matrix}
-
-\item{row.names}{row.names that have to be assigned}
 }
 \description{
 Keep the feature with the highest average across samples

@@ -5,7 +5,6 @@
 #' @param mz_col column that contains m/z value
 #' @param rt_col column that contains rt value
 #' @param data_start_col column from which data starts
-#' @importFrom readxl read_excel
 #' @importFrom utils read.delim
 #' @export
 #' @param MS_MS_column column that contains the MS/MS spectrum

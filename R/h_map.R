@@ -17,12 +17,15 @@
 #' @importFrom pals brewer.rdylbu brewer.purples polychrome
 
 
-h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_ann"), col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=20, ...){
+h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_ann"), col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=200, ...){
 
   data.use <- match.arg(data.use, c("data", "data_ann"))
   
   data <- mRList[[data.use]]
   stopifnot(length(data)>0)
+  if(data.use == "data_ann"){
+    data <- data[, ! colnames(data) %in% c("Feature_ID", "Name")]
+  }
   
   if(!is.null(samples)){
     data <- data[, colnames(data) %in% samples]
