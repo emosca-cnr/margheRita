@@ -35,6 +35,11 @@ The package provides:
 - simplified execution of parametric and non-parametric statistical tests over a large number of features;
 - pathway analysis based on ORA and MSEA over various databases.
 
+Source code: https://github.com/emosca-cnr/margheRita
+
+Citation:  Ettore Mosca, Marynka Ulaszewska, Zahrasadat Alavikakhki, Edoardo Niccolò Bellini, Valeria Mannella, Gianfranco Frigerio, Denise Drago, Annapaola Andolfo. MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards. bioRxiv 2024.06.20.599545; doi: https://doi.org/10.1101/2024.06.20.599545
+
+
 Contacts:
 
 - [Annapaola Andolfo](https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html), Proteomics and Metabolomics Facility, HSR
@@ -42,7 +47,7 @@ Contacts:
 
 # Installation
 
-The package requires a series of other R packages, which are availble in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) or [github](https://github.com/), namely:
+The package requires a series of other R packages, which are available in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) or [github](https://github.com/), namely:
 
 ```{r, echo=FALSE}
 cat(packageDescription("margheRita")$Imports)
@@ -99,6 +104,13 @@ head(mL_demo$raw$metab_ann[, 1:5])
 head(mL_demo$raw$sample_ann)
 head(mL_demo$raw$QC[, 1:3])
 head(mL_demo$raw$QC_ann)
+```
+
+The full version of the "Urine" dataset, which was used for margheRita assessment and to generate this documentation, is available at https://doi.org/10.5281/zenodo.11243781, files "Urine_RP_NEG_norm.txt" and "Urine_RP_POS_norm.txt". The corresponding sample information files can be accessed as follows:
+
+```{r, eval=FALSE}
+sample_file_NEG <- system.file("extdata", "Urine_RP_NEG_norm_metadata.txt", package = "margheRita")
+sample_file_POS <- system.file("extdata", "Urine_RP_POS_norm_metadata.txt", package = "margheRita")
 ```
 
 # Inter-operability

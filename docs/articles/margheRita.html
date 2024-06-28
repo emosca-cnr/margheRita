@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">margheRita</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.7</span>
       </span>
     </div>
 
@@ -105,6 +105,13 @@ types: RP-C18, HILIC, RP-C8 and pZIC-HILIC Zwitterionic.</li>
 tests over a large number of features;</li>
 <li>pathway analysis based on ORA and MSEA over various databases.</li>
 </ul>
+<p>Source code: <a href="https://github.com/emosca-cnr/margheRita" class="external-link uri">https://github.com/emosca-cnr/margheRita</a></p>
+<p>Citation: Ettore Mosca, Marynka Ulaszewska, Zahrasadat Alavikakhki,
+Edoardo Niccolò Bellini, Valeria Mannella, Gianfranco Frigerio, Denise
+Drago, Annapaola Andolfo. MargheRita: an R package for LC-MS/MS SWATH
+metabolomics data analysis and confident metabolite identification based
+on a spectral library of reference standards. bioRxiv 2024.06.20.599545;
+doi: <a href="https://doi.org/10.1101/2024.06.20.599545" class="external-link uri">https://doi.org/10.1101/2024.06.20.599545</a></p>
 <p>Contacts:</p>
 <ul>
 <li>
@@ -118,8 +125,8 @@ Mosca</a>, Bioinformatics Lab, CNR-ITB</li>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The package requires a series of other R packages, which are availble
-in <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a> or <a href="https://github.com/" class="external-link">github</a>, namely:</p>
+<p>The package requires a series of other R packages, which are
+available in <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a> or <a href="https://github.com/" class="external-link">github</a>, namely:</p>
 <pre><code><span><span class="co">## graphics, grDevices, stats, utils, clusterProfiler, pcaMethods, ComplexHeatmap, LSD, plotrix, pals, Hmisc, notame, Biobase, openxlsx, devtools</span></span></code></pre>
 <p>In most of the cases, the following instructions guarantee that all
 such dependencies are installed:</p>
@@ -251,6 +258,14 @@ indicate exactly “QC” as class of a sample in the sample_file.</p>
 <span><span class="co">## QC26          QC_QC   QC   QC     QC_QC</span></span>
 <span><span class="co">## QC29          QC_QC   QC   QC     QC_QC</span></span>
 <span><span class="co">## QC30          QC_QC   QC   QC     QC_QC</span></span></code></pre>
+<p>The full version of the “Urine” dataset, which was used for
+margheRita assessment and to generate this documentation, is available
+at <a href="https://doi.org/10.5281/zenodo.11243781" class="external-link uri">https://doi.org/10.5281/zenodo.11243781</a>, files
+“Urine_RP_NEG_norm.txt” and “Urine_RP_POS_norm.txt”. The corresponding
+sample information files can be accessed as follows:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sample_file_NEG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Urine_RP_NEG_norm_metadata.txt"</span>, package <span class="op">=</span> <span class="st">"margheRita"</span><span class="op">)</span></span>
+<span><span class="va">sample_file_POS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Urine_RP_POS_norm_metadata.txt"</span>, package <span class="op">=</span> <span class="st">"margheRita"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="inter-operability">Inter-operability<a class="anchor" aria-label="anchor" href="#inter-operability"></a>
@@ -259,7 +274,7 @@ indicate exactly “QC” as class of a sample in the sample_file.</p>
 metabolomics, the margheRitaList can be reorganized as a “MetaboSet”
 object, used by package “notame” <span class="citation">(<a href="#ref-Klavus2020" role="doc-biblioref">Klåvus et al.
 2020</a>)</span>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.metaboset.html">as.metaboset</a></span><span class="op">(</span><span class="va">mRList</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## MetaboSet object with 303 features and 253 samples.</span></span>
 <span><span class="co">## 10 QC samples included</span></span>
@@ -271,7 +286,7 @@ object, used by package “notame” <span class="citation">(<a href="#ref-Klavu
 <span><span class="co">## The object has the following parts (splits):</span></span>
 <span><span class="co">##   FALSE:  features</span></span></code></pre>
 <p>or as “PomaSummarizedExperiment” object, used by package “POMA” <span class="citation">(<a href="#ref-Castellano2021" role="doc-biblioref">Castellano-Escuder et al. 2021</a>)</span>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.PomaSummarizedExperiment.html">as.PomaSummarizedExperiment</a></span><span class="op">(</span><span class="va">mRList</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## class: SummarizedExperiment </span></span>
 <span><span class="co">## dim: 303 253 </span></span>
@@ -293,12 +308,12 @@ manually installed to use the function
 <p>The function <code><a href="../reference/filtering.html">filtering()</a></code> runs filters to exclude
 features/sample with many missing values, features with wrong m/z values
 and, lastly, performs imputation of missing values:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">filtering</span>(mL)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Samples with &gt;= 100 metabolites 243 / 243 </span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Features occurring in &gt;=  3 samples 604 / 604 </span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Features with appropriate m/z values: 548 </span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Features without appropriate m/z values: 56 </span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>No NAs<span class="sc">:</span> imputation not performed.</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">filtering</span>(mL)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Samples with &gt;= 100 metabolites 243 / 243 </span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Features occurring in &gt;=  3 samples 604 / 604 </span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Features with appropriate m/z values: 548 </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Features without appropriate m/z values: 56 </span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>No NAs<span class="sc">:</span> imputation not performed.</span></code></pre></div>
 <p>These three steps can be called independently through the function
 <code><a href="../reference/filter_NA.html">filter_NA()</a></code>, <code><a href="../reference/m_z_filtering.html">m_z_filtering()</a></code> and
 <code><a href="../reference/imputation.html">imputation()</a></code>, respectively. In particular,
@@ -309,7 +324,7 @@ the minimum value of the feature.</p>
 <p><img src="images/hist.mz.png" style="width:49.0%"><img src="images/hist.mz.filtered.png" style="width:49.0%"></p>
 <p>The function <code><a href="../reference/heatscatter_chromatography.html">heatscatter_chromatography()</a></code> creates a
 graphic overview of the mz and rt values in the dataset:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heatscatter_chromatography.html">heatscatter_chromatography</a></span><span class="op">(</span><span class="va">mL</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/hs.png" style="width:100.0%"></p>
 <p>margheRita provides three ways for normalizing metabolite
@@ -324,22 +339,22 @@ must be present in <code>mRList$metab_ann</code>. If missing, the
 function <code><a href="../reference/calc_reference.html">calc_reference()</a></code> sets up such column using average
 metabolite values and medians of QC samples. For example, here’s a call
 to <code><a href="../reference/normalize_profiles.html">normalize_profiles()</a></code> using pqn:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL, <span class="at">method =</span> <span class="st">"pqn"</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>PQN normalization</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>No reference profile found, using <span class="fu">calc_reference</span>() function...</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>Using QC...</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL, <span class="at">method =</span> <span class="st">"pqn"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>PQN normalization</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>No reference profile found, using <span class="fu">calc_reference</span>() function...</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>Using QC...</span></code></pre></div>
 <p>The comparison of the coefficient of variation of a metabolite in
 relation to QC samples provides a means to exclude low quality features.
 In particular, only features that have a CV ratio between no-QC samples
 and QC sample higher than a given threshold (by default 1) are kept:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">CV_ratio</span>(<span class="at">mRList =</span> mL_norm)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Summary of CV <span class="fu">ratio</span> (samples <span class="sc">/</span> QC)<span class="sc">:</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.3593</span>  <span class="fl">0.8025</span>  <span class="fl">1.1032</span>  <span class="fl">1.4645</span>  <span class="fl">1.6516</span> <span class="fl">13.4896</span> </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Metabolites with appropriate CV 303 / 539 </span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">CV_ratio</span>(<span class="at">mRList =</span> mL_norm)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>Summary of CV <span class="fu">ratio</span> (samples <span class="sc">/</span> QC)<span class="sc">:</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.3593</span>  <span class="fl">0.8025</span>  <span class="fl">1.1032</span>  <span class="fl">1.4645</span>  <span class="fl">1.6516</span> <span class="fl">13.4896</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Metabolites with appropriate CV 303 / 539 </span></span></code></pre></div>
 <p>The distributions of metabolite relative log-abundances can be
 calculated and visualized by means of:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RLA.html">RLA</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL</span><span class="op">)</span></span></code></pre></div>
 <p>Typically, after normalization, the various samples should have
 similar distributions of relative log-abundances. <img src="images/rla.png" style="width:100.0%"></p>
@@ -353,7 +368,7 @@ function <code><a href="../reference/mR_pca.html">mR_pca()</a></code>, which rel
 the scaling method (argument <code>scaling</code>) and number of PCs
 (<code>nPcS</code>), it allows to include/exclude quality control
 samples by means of argument <code>include_QC</code>:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mR_pca.html">mR_pca</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm</span>, nPcs<span class="op">=</span><span class="fl">5</span>, scaling<span class="op">=</span><span class="st">"uv"</span>, include_QC<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>The results are added to the mRList in the element <code>pca</code>.
 It also provides some plots, like the visualization of distribution of
@@ -363,7 +378,7 @@ argument <code>dirout</code>). The results of PCA can be plotted using
 <code><a href="../reference/Plot2DPCA.html">Plot2DPCA()</a></code> function. The argument <code>col_by</code>
 enables the choice of the <code>mRList$sample_ann</code> column to be
 used to color samples:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/Plot2DPCA.html">Plot2DPCA</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm</span>, pcx<span class="op">=</span><span class="fl">1</span>, pcy<span class="op">=</span><span class="fl">2</span>, col_by<span class="op">=</span><span class="st">"class"</span>, include_QC<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/scores.png" style="width:100.0%"></p>
 </div>
@@ -376,7 +391,7 @@ quality of some samples. The function <code><a href="../reference/remove_samples
 allows the user to remove one or more samples from the
 <code>mRList</code>. Here, for example we remove all “Blank”
 samples:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_samples.html">remove_samples</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL</span>, ids <span class="op">=</span> <span class="st">"Blank"</span>, column <span class="op">=</span> <span class="st">"class"</span><span class="op">)</span></span></code></pre></div>
 <p>In this case, the function removes all samples with value “Blank” in
 the column “class” of sample annotation.</p>
@@ -387,7 +402,7 @@ the column “class” of sample annotation.</p>
 <p>The definition of mean metabolite abundance for every biological
 replicate is performed by means of <code><a href="../reference/collapse_tech_rep.html">collapse_tech_rep()</a></code>
 function:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm_bio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collapse_tech_rep.html">collapse_tech_rep</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##       AA_mealA_t00 AA_mealA_t01 AA_mealA_t02 AA_mealA_t03 AA_mealA_t04</span></span>
 <span><span class="co">## F506      372.5212     314.9164     641.2731     328.3019     183.8177</span></span>
@@ -413,16 +428,16 @@ fold changes and to test for metabolite variations.</p>
 mean, median and standard deviation of metabolite abundance according to
 the sample classes specified in the column “class” of sample
 annotation:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_median_stdev_samples</span>(mL_norm_bio)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>Calculating means...</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>Calculating medians...</span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>Calculating standard deviations...</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_median_stdev_samples</span>(mL_norm_bio)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Calculating means...</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>Calculating medians...</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>Calculating standard deviations...</span></code></pre></div>
 <p>The function <code><a href="../reference/univariate.html">univariate()</a></code> performs dataset-wide
 statistical tests (Student t-tests, Wilcoxon test, Anova and
 Kruskal-Wallis test) between levels of a particular factor defined in
 the sample annotation:</p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm_bio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/univariate.html">univariate</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, exp.levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AA"</span>, <span class="st">"DD"</span>, <span class="st">"MM"</span><span class="op">)</span>, exp.factor <span class="op">=</span> <span class="st">"class"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##                F            p            q        DD-AA        MM-AA</span></span>
 <span><span class="co">## F506   56.603887 6.500895e-16 9.379863e-15 0.000000e+00 0.000000e+00</span></span>
@@ -442,7 +457,7 @@ the sample annotation:</p>
 <test_method>.txt.</test_method></p>
 <p>We found useful providing a function to retrieve the list of
 significant features:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "F3957"  "F18426" "F19199" "F10248" "F9507"  "F958"</span></span></code></pre>
 </div>
@@ -485,7 +500,7 @@ to level 2 identifications in positive and negative modalities.</p></li>
 <p>In this example, we load the margheRita library in positive
 modalitity with retention times of RPShort columns and we discard all
 peaks with relative intensity less than 10:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mR_library</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_library.html">select_library</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"RPShort"</span>, mode <span class="op">=</span> <span class="st">"POS"</span>, accept_RI<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <p>The resulting <code>mR_library</code> is a list that contains
 information about precursors</p>
@@ -537,7 +552,7 @@ performed by the homonymous function, where the argument
 <code>features</code> specifies the features to be considered (all
 features if it is left <code>features=NULL</code>, as in the following
 example):</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm_bio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metabolite_identification.html">metabolite_identification</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, library_list <span class="op">=</span> <span class="va">mR_library</span><span class="op">)</span></span></code></pre></div>
 <p>The function <code><a href="../reference/metabolite_identification.html">metabolite_identification()</a></code> has a series of
 parameters that can be adjusted to optimize the identification process
@@ -627,13 +642,13 @@ samples. Here is how it looks like:</p>
 to the xlsx file “metabolite_identification.xlsx”.</p>
 <p>The spectra from all the features that match a metabolite can be
 inspected creating the following plot through:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/visualize_associated_spectra.html">visualize_associated_spectra</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, mR_library <span class="op">=</span> <span class="va">mR_library</span>, metabolite_id <span class="op">=</span> <span class="st">"L1660"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/L1660_F10165_M1028_mirrored.jpg" style="width:80.0%"></p>
 <p>The function <code><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison()</a></code> draws heatmaps to
 visually compare ppm errors and RI differences between feature and
 metabolite spectra:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, metab_id <span class="op">=</span> <span class="st">"L1660"</span>, feature_id <span class="op">=</span> <span class="st">"F10165"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/ppm_error_L1660_M1028_F10165.jpg" style="width:80.0%"><img src="images/RI_diff_L1660_M1028_F10165.jpg" style="width:80.0%"></p>
 </div>
@@ -646,7 +661,7 @@ analysis results can be merged using the function
 <code>feature_stats</code> should be the name of any statistical test
 saved in the <code>mRList</code> or a custom data frame with Feature_ID
 as row names:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metab_stat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/annotate_univariate_results.html">annotate_univariate_results</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, feature_stats <span class="op">=</span> <span class="st">"anova"</span><span class="op">)</span></span></code></pre></div>
 <p>The resulting data.frame is saved to file “data_stats_ann.csv”.</p>
 </div>
@@ -655,14 +670,14 @@ as row names:</p>
 </h2>
 <p>The function <code><a href="../reference/metab_boxplot.html">metab_boxplot()</a></code> draws boxplots of feature
 abundances grouped by the levels of a given factor:</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/metab_boxplot.html">metab_boxplot</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, col_by<span class="op">=</span><span class="st">"class"</span>, group<span class="op">=</span><span class="st">"class"</span>, features <span class="op">=</span> <span class="st">"F3957"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/boxplot.F3957.png" style="width:80.0%"></p>
 <p>The function <code><a href="../reference/h_map.html">h_map()</a></code> provides heatmaps based on package
 ComplexHeatmap <span class="citation">(<a href="#ref-Gu2016" role="doc-biblioref">Gu, Eils, and Schlesner 2016</a>)</span>. Here we
 shoew the abundance of the most significant metabolites according to
 anova test:</p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">10e-10</span>, feature_id <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/h_map.html">h_map</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, scale_features<span class="op">=</span><span class="cn">TRUE</span>, features <span class="op">=</span> <span class="va">significant_features</span>, show_column_names<span class="op">=</span><span class="cn">F</span>, data.use <span class="op">=</span> <span class="st">"data_ann"</span><span class="op">)</span></span></code></pre></div>
 <p>Note that we extracted metabolite “Name” as feature_id and used
@@ -682,13 +697,13 @@ all PubChemCIDs in the dataset. In the following example we extract the
 PubChemCID of the most significat features according to anova and
 consider all the PubChemCID found in the dataset as reference
 universe:</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">10e-10</span>, feature_id <span class="op">=</span> <span class="st">"PubChemCID"</span><span class="op">)</span></span>
 <span><span class="va">all_PubChemCID</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">mL_norm_bio</span><span class="op">$</span><span class="va">metab_ann</span><span class="op">$</span><span class="va">PubChemCID</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mL_norm_bio</span><span class="op">$</span><span class="va">metab_ann</span><span class="op">$</span><span class="va">PubChemCID</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="va">pa_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pathway_analysis.html">pathway_analysis</a></span><span class="op">(</span>in_list <span class="op">=</span> <span class="va">significant_features</span>, type <span class="op">=</span> <span class="st">"ora"</span>, universe <span class="op">=</span> <span class="va">all_PubChemCID</span><span class="op">)</span></span></code></pre></div>
 <p>In case of MSEA, a named ranked vector of scores for all PubChemCIDs
 in the dataset, in decreasing order of importance:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ranked_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="cn">Inf</span>, feature_id <span class="op">=</span> <span class="st">"PubChemCID"</span>, values <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">ranked_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="va">ranked_vector</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">msea_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pathway_analysis.html">pathway_analysis</a></span><span class="op">(</span>in_list <span class="op">=</span> <span class="va">ranked_vector</span>, type <span class="op">=</span> <span class="st">"msea"</span><span class="op">)</span></span></code></pre></div>

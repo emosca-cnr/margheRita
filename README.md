@@ -18,7 +18,7 @@ Documentation: https://emosca-cnr.github.io/margheRita
 
 Source code: https://github.com/emosca-cnr/margheRita
 
-Citation: ...
+Citation:  Ettore Mosca, Marynka Ulaszewska, Zahrasadat Alavikakhki, Edoardo Niccolò Bellini, Valeria Mannella, Gianfranco Frigerio, Denise Drago, Annapaola Andolfo. MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards. bioRxiv 2024.06.20.599545; doi: https://doi.org/10.1101/2024.06.20.599545
 
 Contacts:
 
@@ -27,17 +27,5 @@ Contacts:
 
 # Installation
 
-The package requires a series of other R packages, which are availble in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) and [github](https://github.com/). In most of the cases, the following instructions guarantee that all such dependencies are installed:
-
-```{r, eval=FALSE}
-install.packages("devtools")
-devtools::install_github(c("pcastellanoescuder/POMA", "antonvsdata/notame"))
-
-if (!require("BiocManager", quietly = TRUE)){
-  install.packages("BiocManager")
-}
-BiocManager::install(c("clusterProfiler", "pcaMethods"))
-
-devtools::install_github("emosca-cnr/margheRita", dependencies = T)
-```
+See documentation at https://emosca-cnr.github.io/margheRita
 
