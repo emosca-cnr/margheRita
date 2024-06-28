@@ -27,5 +27,5 @@ Contacts:
 
 # Installation
 
-See documentation at https://emosca-cnr.github.io/margheRita
+See https://emosca-cnr.github.io/margheRita/articles/margheRita.html
 
