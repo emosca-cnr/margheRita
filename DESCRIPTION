@@ -1,6 +1,6 @@
 Package: margheRita
 Title: Mass spectrometry-based metabolomics data analysis
-Version: 0.2.7
+Version: 0.2.8
 Date: 2024-06-28
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
@@ -18,4 +18,4 @@ Depends: R (>= 3.5.0)
 Imports: graphics, grDevices, stats, utils, clusterProfiler, pcaMethods, ComplexHeatmap, LSD, plotrix, pals, Hmisc, notame, Biobase, openxlsx, devtools
 Suggests: rmarkdown, knitr, POMA
 VignetteBuilder: knitr
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2

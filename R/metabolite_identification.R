@@ -22,6 +22,8 @@
 #' @importFrom utils stack
 #' @importFrom openxlsx createWorkbook addWorksheet writeDataTable saveWorkbook
 
+
+
 metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, lib_ann_fields=c("ID", "Name", "PubChemCID"), dirout=NULL){
   
   if(is.null(features)){
@@ -105,6 +107,25 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   
   cat("Assembling final output... ")
   
+  if(is.null(intense_peak$matched_peaks)) {
+    intense_peak$matched_peaks <- data.frame(ID = character(),
+                                             Feature_ID = character(),
+                                             mz = numeric(),
+                                             ppm_error = numeric(),
+                                             mass_flag = logical(),
+                                             mass_status = character(),
+                                             ID_peaks = character(),
+                                             peaks_found_ppm_RI = numeric(),
+                                             matched_peaks_ratio = numeric(),
+                                             precursor_in_MSMS = logical(),
+                                             CAS = character(),
+                                             Name = character(),
+                                             rt = numeric(),
+                                             mz_lib = numeric(),
+                                             PubChemCID = character(),
+                                             SMILES = character())
+  }
+  
   intense_peak_unq <- unique(intense_peak$matched_peaks[, c("ID", "Feature_ID")])
   intense_peak_unq <- merge(library_list$lib_precursor, intense_peak_unq, by="ID", all.y=T)
   
@@ -172,7 +193,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
     colnames(mapped_feat) <- i_col
     mRList$metab_ann <- merge(mRList$metab_ann, mapped_feat, by.x="Feature_ID", by.y=0, all.x = T, sort = F)
   }
-
+  
   mRList$metab_ann <- mRList$metab_ann[match(rownames(mRList$data), mRList$metab_ann$Feature_ID), ]
   
   ###annotated data
@@ -198,3 +219,4 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   return(mRList)
   
 }
+

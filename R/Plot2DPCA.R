@@ -15,6 +15,7 @@
 #' @importFrom grDevices png dev.off
 #' @importFrom graphics layout plot.new text
 #' @importFrom pals alphabet
+#' @importFrom plotrix thigmophobe.labels
 
 Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, col_by="class", include_QC=FALSE, name_samples = FALSE, name_samples_cex = 0.8){
 
@@ -61,7 +62,8 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     pch = 19
   )
   if (name_samples) {
-    text(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, pos=3, xpd=TRUE)
+    #text(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, pos=3, xpd=TRUE)
+    thigmophobe.labels(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex)
   }
   
   
@@ -85,7 +87,8 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     pch = 19
   )
   if (name_samples) {
-    text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex, pos=3, xpd=TRUE)
+    #text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex, pos=3, xpd=TRUE)
+    thigmophobe.labels(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex)
   }
   
 

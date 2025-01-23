@@ -14,7 +14,7 @@
 #' @importFrom grDevices dev.off png
 #' @importFrom pals brewer.paired
 
-metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class", group="class", col_pal=NULL){
+metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class", group="class", col_pal=NULL, ...){
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)
@@ -49,6 +49,13 @@ metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class
     i_min <- min(data[i, ])
     i_max <- max(data[i, ])
 
+      
+    if ("las" %in% names(list(...))) {
+      if (list(...)$las == 2) {
+        par(mar = c(10, 4, 2, 2))  # Increase bottom margin to make space to vertical names of the labels
+      }
+    }  
+
     boxplot(
       as.numeric(data[i, ]) ~ groups , data=data,
       names =levels(groups),
@@ -57,7 +64,9 @@ metab_boxplot <- function(mRList=NULL, dirout=NULL, features=NULL, col_by="class
       border= col_pal,
       ylim=c(i_min, i_max),
       outline=F,
-      col="white"
+      col="white",
+      xlab = "",
+      ...
     )
     for(j in 1:length(levels(groups))){
       idx_i <- which(groups==levels(groups)[j])

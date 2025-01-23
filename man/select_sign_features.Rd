@@ -10,7 +10,8 @@ select_sign_features(
   test_value = "q",
   cutoff_value = 0.05,
   feature_id = "Feature_ID",
-  values = FALSE
+  values = FALSE,
+  split_by_semicolon = FALSE
 )
 }
 \arguments{
@@ -22,9 +23,11 @@ select_sign_features(
 
 \item{cutoff_value}{the value of p-value cut-off to consider a feature as significant}
 
-\item{feature_id}{"Feature_ID", or any other feature identifier in mRList$metab_ann}
+\item{feature_id}{"Feature_ID" or "Name" from the mRList$data_ann}
 
 \item{values}{if TRUE a named vector with test_value values will be given in output; the beast value will be considered in case of 1-to-n mappings}
+
+\item{split_by_semicolon}{if TRUE, the names will be split by semicolons.}
 }
 \value{
 a character vector with features names

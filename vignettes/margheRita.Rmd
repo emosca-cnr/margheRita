@@ -365,24 +365,48 @@ The function `h_map()` provides heatmaps based on package ComplexHeatmap [@Gu201
 
 ```{r, eval=FALSE}
 significant_features <- select_sign_features(mL_norm_bio, test_method="anova", test_value = "q", cutoff_value = 10e-10, feature_id = "Name")
-h_map(mL_norm_bio, scale_features=TRUE, features = significant_features, show_column_names=F, data.use = "data_ann")
+h_map(mL_norm_bio, scale_features=TRUE, column_ann="class", data.use = "data_ann", col_ann= pals::trubetskoy(3), features = significant_features, feature_id = "Name", top = Inf, use_top_annoteted_metab = TRUE, test_method="anova", test_value = "q", show_column_names=FALSE)
 ```
 Note that we extracted metabolite "Name" as feature_id and used "data_ann"
 ![](images/hm.png){width=80%}
+
+
+# Exporting results
+
+The function `merge_stats_w_features()` will export the full results, creating both in the local R-environment and as tab separated tables (.txt) in the working environment. In particular, the following tables will be created: 
+- `metab_stat`: table with featureINFO merged with results of the statistics
+- `metab_stat_w_features`: same as before, with also feature intensities
+- `metab_stat_w_features_only_sign`: same as before, but filtered only for significant features
+- `metab_stat_w_features_known`: only with features with an assigned compound
+- `metab_stat_w_features_known_only_sign`; only with features with an assigned compound and significant
+
+```{r, eval=FALSE}
+merge_stats_w_features(mRList = mL_norm_bio, test_method = "anova", test_value = "q", cutoff_value = 0.05)
+```
+
+
+
 
 # Pathway analysis
 
 margheRita implements both Over Representation Analysis (ORA) and Metabolite Set Enrichment Analysis (MSEA), based on clusterProfiler [@Wu2021] over BioCyc, KEGG and Reactome pathway databases. These analyses can be run by means of function `pathway_analysis()`. In case of ORA the minimum requirements are the vector of PubChemCID to be tested and the reference universe of all PubChemCIDs in the dataset. In the following example we extract the PubChemCID of the most significat features according to anova and consider all the PubChemCID found in the dataset as reference universe:
 
 ```{r, eval=FALSE}
-significant_features <- select_sign_features(mRList = mL_norm_bio, test_method="anova", test_value = "q", cutoff_value = 10e-10, feature_id = "PubChemCID")
-all_PubChemCID <-  unique(mL_norm_bio$metab_ann$PubChemCID[!is.na(mL_norm_bio$metab_ann$PubChemCID)])
-pa_res <- pathway_analysis(in_list = significant_features, type = "ora", universe = all_PubChemCID)
+significant_CIDs <- unique(metab_stat_w_features_known_only_sign$PubChemCID)
+significant_CIDs <- sub(";.*", "", significant_CIDs)
+
+all_PubChemCID <-  unique(metab_stat_w_features$PubChemCID)[which(!is.na(unique(metab_stat_w_features$PubChemCID)))]
+all_PubChemCID <- sub(";.*", "", all_PubChemCID)
+
+pa_res <- pathway_analysis(in_list = significant_CIDs, universe = all_PubChemCID, type = "ora")
 ```
 In case of MSEA, a named ranked vector of scores for all PubChemCIDs in the dataset, in decreasing order of importance:
 
 ```{r, eval=FALSE}
-ranked_vector <- select_sign_features(mRList = mL_norm_bio, test_method="anova", test_value = "q", cutoff_value = Inf, feature_id = "PubChemCID", values = TRUE)
+ranked_vector <- select_sign_features(mRList = mL_norm_bio, test_method="anova", test_value = "q", cutoff_value = Inf, feature_id = "Feature_ID", values = TRUE)
+names(ranked_vector) <- vapply(names(ranked_vector), function(x) metab_stat_w_features$PubChemCID[which(metab_stat_w_features$Feature_ID==x)][1], character(1))
+names(ranked_vector) <- sub(";.*", "", names(ranked_vector))
+
 ranked_vector <- sort(-log10(ranked_vector), decreasing = T)
 msea_res <- pathway_analysis(in_list = ranked_vector, type = "msea")
 ```
@@ -400,6 +424,12 @@ mL_demo$ora
 and MSEA:
 ```{r echo=FALSE}
 mL_demo$msea
+```
+
+A plot for the pathways analysis generated with ORA can be generated using the following function:
+
+```{r, eval=FALSE}
+barplot_ora(pa_res, p = "p.adjust", filename = "pathway_analysis_ora")
 ```
 
 ![](images/ora_barplot.png){width=80%}

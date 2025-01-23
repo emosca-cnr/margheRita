@@ -32,6 +32,7 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     mz_col <- which(feat_data[5, ] == "Average Mz")
     rt_col <- which(feat_data[5, ] == "Average Rt(min)")
     MS_MS_column <- which(feat_data[5, ] == "MS/MS spectrum")
+    Ontology_column <- which(feat_data[5, ] == "Ontology")
 
     feat_data <- feat_data[-c(1:4), ]
     colnames(feat_data) <- feat_data[1, ]
@@ -41,9 +42,9 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     stopifnot(any(colnames(feat_data) == "Metabolite name"), any(colnames(feat_data)== "SMILES"))
     mRList <- list(
       data=data.frame(feat_data[, data_start_col:data_end_col]),
-      metab_ann=data.frame(feat_data[, c(1, which(colnames(feat_data) == "Metabolite name"), which(colnames(feat_data) == "SMILES"), rt_col, mz_col, MS_MS_column)])
+      metab_ann=data.frame(feat_data[, c(1, which(colnames(feat_data) == "Metabolite name"), which(colnames(feat_data) == "SMILES"), Ontology_column, rt_col, mz_col, MS_MS_column)])
     )
-    colnames(mRList$metab_ann) <- c("Feature_ID", "MSDialName", "MSDialSMILES", "rt", "mz", "MS_MS_spectrum")
+    colnames(mRList$metab_ann) <- c("Feature_ID", "MSDialName", "MSDialSMILES", "Ontology", "rt", "mz", "MS_MS_spectrum")
     mRList$metab_ann$rt <- as.numeric(mRList$metab_ann$rt)
     mRList$metab_ann$mz <- as.numeric(mRList$metab_ann$mz)
 

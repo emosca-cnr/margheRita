@@ -10,7 +10,8 @@ metab_boxplot(
   features = NULL,
   col_by = "class",
   group = "class",
-  col_pal = NULL
+  col_pal = NULL,
+  ...
 )
 }
 \arguments{

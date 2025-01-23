@@ -12,8 +12,12 @@ h_map(
   col = NULL,
   scale_features = TRUE,
   features = NULL,
+  feature_id = "Feature_ID",
   samples = NULL,
   top = 200,
+  use_top_annoteted_metab = FALSE,
+  test_method = "anova",
+  test_value = "q",
   ...
 )
 }
@@ -32,9 +36,17 @@ h_map(
 
 \item{features}{names of features to plot (optional)}
 
+\item{feature_id}{"Feature_ID" or "Name" from the mRList$data_ann}
+
 \item{samples}{samples to consider (optional)}
 
 \item{top}{only the top most variable features are plotted (if features is NULL)}
+
+\item{use_top_annoteted_metab}{if TRUE, it'll use the best name for the metabolite from the annotation, considering the level and also the top significant specified in the following arguments.}
+
+\item{test_method}{the name of the statistical test table contained in the mRlist object}
+
+\item{test_value}{the column of the statistical test table to consider (e.g.: p or q)}
 
 \item{...}{further arguments for ComplexHeatmap::Heatmap}
 }
