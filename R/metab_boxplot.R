@@ -9,7 +9,7 @@
 #' @param group define what you want to compare
 #' @param dirout output directory
 #' @param col_pal optional palette. It must match the number of levels of the factor indicated by col_by
-
+#' @param ... further arguments to boxplot()
 #' @export
 #' @importFrom grDevices dev.off png
 #' @importFrom pals brewer.paired

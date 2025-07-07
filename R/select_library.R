@@ -47,6 +47,8 @@ select_library <- function(source=c("margheRita", "MS-DIAL"), column=NULL, mode=
     lib_peaks_data$Collision_energy[lib_peaks_data$Collision_energy != "NEG"] <- "POS"
     lib_peaks_data <- lib_peaks_data[lib_peaks_data$Collision_energy == mode, ]
     
+    colnames(lib_peaks_data)[colnames(lib_peaks_data) == "Collision_energy"] <- "Polarity"
+    
     lib_peaks <- mRlib_peaks_list
     
     key_field <- "CAS"

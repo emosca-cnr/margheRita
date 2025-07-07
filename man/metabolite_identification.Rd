@@ -19,7 +19,6 @@ metabolite_identification(
   RI_err = 20,
   RI_err_type = "rel",
   filter_ann = FALSE,
-  lib_ann_fields = c("ID", "Name", "PubChemCID"),
   dirout = NULL
 )
 }
@@ -50,8 +49,6 @@ peaks could be noise, it is filtering sample dataset by deleting the relative in
 \item{RI_err_type}{type of RI error calculation.}
 
 \item{filter_ann}{whether to filter metabolite-feature associations or not.}
-
-\item{lib_ann_fields}{columns of library_list$lib_precursor that will be added to metabolite annotations}
 
 \item{dirout}{output directory}
 }

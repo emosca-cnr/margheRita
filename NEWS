@@ -1,3 +1,10 @@
+07 July 2024, v0.3
+-- removed barplot_ora()
+-- updates in metabolite_identification() and merge_stats_w_features()
+-- library: Collision_energy -> Polarity
+-- notame moved among "suggest" packages
+-- h_map updated to better handle the choice of what to represent
+
 28 June 2024, v0.2.7
 -- addition of citation and link to zenodo dataset
 

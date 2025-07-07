@@ -8,8 +8,8 @@
 #' @export
 #' @importFrom graphics par lines legend abline
 #' @importFrom grDevices jpeg adjustcolor
-#' @importFrom plotrix thigmophobe.labels
-#' @importFrom Hmisc minor.tick
+#' @importFrom car pointLabel
+# #' @importFrom Hmisc minor.tick
 #' @param type mirrored or overlapped visualization
 #' @param peak_number whether to show the peak number or not
 
@@ -35,14 +35,14 @@ visualize_1spectra <- function(spectra_top=NULL, spectra_bottom=NULL, name_top=N
   #empty plot
   plot(0, pch="", xlim=c(min(spectra_top[, 1], spectra_bottom[, 1]), max(spectra_top[, 1], spectra_bottom[, 1])), ylim = ylim, xlab = "m/z", ylab = "Relative Intensity")
   abline(h=hlines, lty=2, col="gray")
-  minor.tick(ny = 2, nx=1)
+  #minor.tick(ny = 2, nx=1)
 
   #library
   points(spectra_top[, 1] , spectra_top[, 2], type = "h" , col= adjustcolor("red", 0.6), lwd=2)
   points(spectra_top[, 1], spectra_top[,2], col=adjustcolor("red", 0.8), pch=16)
 
   if(peak_number){
-    thigmophobe.labels(spectra_top[, 1], spectra_top[,2], 1:nrow(spectra_top))
+    pointLabel(spectra_top[, 1], spectra_top[,2], 1:nrow(spectra_top))
   }
 
   ### feature
@@ -51,7 +51,7 @@ visualize_1spectra <- function(spectra_top=NULL, spectra_bottom=NULL, name_top=N
     lines(spectra_bottom[, 1], -spectra_bottom[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
     points(spectra_bottom[, 1], -spectra_bottom[,2], col=adjustcolor("blue", 0.6), pch=16)
     if(peak_number){
-      thigmophobe.labels(spectra_bottom[, 1], -spectra_bottom[, 2], 1:nrow(spectra_bottom))
+      pointLabel(spectra_bottom[, 1], -spectra_bottom[, 2], 1:nrow(spectra_bottom))
     }
 
   }else{
@@ -59,7 +59,7 @@ visualize_1spectra <- function(spectra_top=NULL, spectra_bottom=NULL, name_top=N
     lines(spectra_bottom[, 1], spectra_bottom[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
     points(spectra_bottom[, 1], spectra_bottom[,2], col=adjustcolor("blue", 0.6), pch=16)
     if(peak_number){
-      thigmophobe.labels(spectra_bottom[, 1], spectra_bottom[, 2], 1:nrow(spectra_bottom))
+      pointLabel(spectra_bottom[, 1], spectra_bottom[, 2], 1:nrow(spectra_bottom))
     }
 
   }

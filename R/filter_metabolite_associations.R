@@ -275,12 +275,12 @@ filter_metabolite_associations <- function(mRList=NULL){
   cat(nrow(out_levels), "\n")
   
   if(any(duplicated(out_levels$Feature_ID))){
-    
+
     ##### RT_class #####
     cat("\tby RT (category)... ")
     rt_class <- as.numeric(factor(out_levels$RT_class, levels = c("super", "acceptable")))
     rt_class_set <- sort(unique(rt_class))
-    
+
     if(length(rt_class_set)>1){
       for(rt_i in rt_class_set[-length(rt_class_set)]){ #the highest value does have higher values
         feat_selected <- out_levels$Feature_ID[rt_class==rt_i] #IDs that have level ms
@@ -294,9 +294,12 @@ filter_metabolite_associations <- function(mRList=NULL){
         }
       }
     }
+  
   }
+    
   cat(nrow(out_levels), "\n")
   
+  ### further FILTERING
   f_id <- unique(out_levels$Feature_ID[duplicated(out_levels$Feature_ID)])
   
   out_levels$selected <- TRUE
@@ -374,6 +377,8 @@ filter_metabolite_associations <- function(mRList=NULL){
   mRList$metabolite_identification$associations <- out_levels
   
   mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note")])
+  mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note", "RT_err", "ppm_error", "peaks_found_ppm_RI", "matched_peaks_ratio")])
+  
   
   return(mRList)
   

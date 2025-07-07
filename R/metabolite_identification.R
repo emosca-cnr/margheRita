@@ -14,7 +14,7 @@
 #' @param RI_err maximum absolute RI difference between MS/MS peaks of sample and library
 #' @param RI_err_type type of RI error calculation.
 #' @param filter_ann whether to filter metabolite-feature associations or not.
-#' @param lib_ann_fields columns of library_list$lib_precursor that will be added to metabolite annotations
+# #' @param lib_ann_fields columns of library_list$lib_precursor that will be added to metabolite annotations
 #' @param dirout output directory
 #' @return data.frame with matches between features and library metabolites
 #' @export
@@ -24,7 +24,7 @@
 
 
 
-metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, lib_ann_fields=c("ID", "Name", "PubChemCID"), dirout=NULL){
+metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, dirout=NULL){
   
   if(is.null(features)){
     idx <- 1:nrow(mRList$metab_ann) 
@@ -159,7 +159,6 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   ### summary
   out_levels <- out_levels[out_levels$Level != "", ]
   
-  #out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "MS_MS_spectrum", "RT_err", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "Level", "Level_note", "CAS", "PubChemCID")]
   out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_class", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "SMILES", "Level", "Level_note")]
   
   #add the results to mRList
@@ -172,27 +171,42 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   }else{
     ### summary associations and Feature ID assignment
     #summary associations
-    mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note")])
+    #mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note")])
+    mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note", "RT_err", "ppm_error", "peaks_found_ppm_RI", "matched_peaks_ratio")])
   }
   
   
   
   cat("Adding annotations to metab_ann...\n")
   
-  if(any(lib_ann_fields %in% colnames(mRList$metab_ann))){
+  overlap_columns <- intersect(c("ID", "Name", "Level", "Level_note", "RT_err", "ppm_error", "peaks_found_ppm_RI", "matched_peaks_ratio"), colnames(mRList$metab_ann))
+  if(length(overlap_columns)>0){
     
-    cat("Any of ", lib_ann_fields, "is already in metab_ann table; these columns will be replaced.\n")
-    mRList$metab_ann[, which(colnames(mRList$metab_ann) %in% lib_ann_fields)] <- NULL
+    cat("Columns", overlap_columns, "will be replaced.\n")
+    mRList$metab_ann[, overlap_columns] <- NULL
     
   }
-  #add name to metab_ann
-  feat_name <- split(mRList$metabolite_identification$associations_summary$ID, mRList$metabolite_identification$associations_summary$Feature_ID)
   
-  for(i_col in lib_ann_fields){
-    mapped_feat <- as.data.frame(unlist(lapply(feat_name, function(x) paste0(sort(library_list$lib_precursor[match(x, library_list$lib_precursor$ID), i_col]), collapse = ";"))))
-    colnames(mapped_feat) <- i_col
-    mRList$metab_ann <- merge(mRList$metab_ann, mapped_feat, by.x="Feature_ID", by.y=0, all.x = T, sort = F)
+  feat_name <- split.data.frame(mRList$metabolite_identification$associations_summary, mRList$metabolite_identification$associations_summary$Feature_ID)
+  for(i in 1:length(feat_name)){
+    if(nrow(feat_name[[i]]) > 1){
+      
+      idx <- order(feat_name[[i]]$ID) #collapse order
+      for(j in c("ID", "Name", "Level", "Level_note", "RT_err", "ppm_error", "peaks_found_ppm_RI", "matched_peaks_ratio")){
+        
+        if(j %in% c("RT_err", "ppm_error", "matched_peaks_ratio")){
+          feat_name[[i]][idx, j] <- format(feat_name[[i]][idx, j], digits=3)
+        }
+        feat_name[[i]][, j] <- paste0(feat_name[[i]][idx, j], collapse = ";")
+        
+      }
+      feat_name[[i]] <- unique(feat_name[[i]])
+      stopifnot(nrow(feat_name[[i]]) == 1)
+      
+    }
   }
+  feat_name <- do.call(rbind, feat_name)
+  mRList$metab_ann <- merge(mRList$metab_ann, feat_name, by="Feature_ID", all.x=T, sort=F)
   
   mRList$metab_ann <- mRList$metab_ann[match(rownames(mRList$data), mRList$metab_ann$Feature_ID), ]
   

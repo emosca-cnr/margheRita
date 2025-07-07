@@ -26,6 +26,8 @@ metab_boxplot(
 \item{group}{define what you want to compare}
 
 \item{col_pal}{optional palette. It must match the number of levels of the factor indicated by col_by}
+
+\item{...}{further arguments to boxplot()}
 }
 \description{
 Plot boxplot of metabolites, and save them as .png.

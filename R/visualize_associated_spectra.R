@@ -9,8 +9,7 @@
 #' @export
 #' @importFrom graphics par lines legend abline
 #' @importFrom grDevices jpeg adjustcolor
-#' @importFrom plotrix thigmophobe.labels
-#' @importFrom Hmisc minor.tick
+#' @importFrom car pointLabel
 #' @param type mirrored or overlapped visualization
 
 visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolite_id=NULL, dirout=NULL, type=c("mirrored", "overlapped"), peak_number=FALSE){
@@ -62,14 +61,14 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
     #empty plot
     plot(0, pch="", xlim=c(min(library_spectra[, 1], feature_spectra[, 1]), max(library_spectra[, 1], feature_spectra[, 1])), ylim = ylim, xlab = "m/z", ylab = "Relative Intensity")
     abline(h=hlines, lty=2, col="gray")
-    minor.tick(ny = 2, nx=1)
+    #minor.tick(ny = 2, nx=1)
 
     #library
     points(library_spectra[, 1] , library_spectra[, 2], type = "h" , col= adjustcolor("red", 0.6), lwd=2)
     points(library_spectra[, 1], library_spectra[, 2], col=adjustcolor("red", 0.8), pch=16)
 
     if(peak_number){
-      thigmophobe.labels(library_spectra[, 1], library_spectra[,2], 1:nrow(library_spectra))
+      pointLabel(library_spectra[, 1], library_spectra[,2], as.character(1:nrow(library_spectra)))
     }
 
     ### feature
@@ -78,7 +77,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
       lines(feature_spectra[, 1], -feature_spectra[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
       points(feature_spectra[, 1], -feature_spectra[,2], col=adjustcolor("blue", 0.6), pch=16)
       if(peak_number){
-        thigmophobe.labels(feature_spectra[, 1], -feature_spectra[, 2], 1:nrow(feature_spectra))
+        pointLabel(feature_spectra[, 1], -feature_spectra[, 2], as.character(1:nrow(library_spectra)))
       }
 
     }else{
@@ -86,7 +85,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
       lines(feature_spectra[, 1], feature_spectra[,2], type = "h" , col=adjustcolor("blue", 0.6), lwd=2)
       points(feature_spectra[, 1], feature_spectra[,2], col=adjustcolor("blue", 0.6), pch=16)
       if(peak_number){
-        thigmophobe.labels(feature_spectra[, 1], feature_spectra[, 2], 1:nrow(feature_spectra))
+        pointLabel(feature_spectra[, 1], feature_spectra[, 2], as.character(1:nrow(feature_spectra)))
       }
 
     }

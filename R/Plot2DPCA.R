@@ -15,7 +15,7 @@
 #' @importFrom grDevices png dev.off
 #' @importFrom graphics layout plot.new text
 #' @importFrom pals alphabet
-#' @importFrom plotrix thigmophobe.labels
+#' @importFrom car pointLabel
 
 Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, col_by="class", include_QC=FALSE, name_samples = FALSE, name_samples_cex = 0.8){
 
@@ -62,8 +62,7 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     pch = 19
   )
   if (name_samples) {
-    #text(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, pos=3, xpd=TRUE)
-    thigmophobe.labels(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex)
+    pointLabel(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, xpd=T)
   }
   
   
@@ -86,9 +85,10 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
     main = "Loading plot",
     pch = 19
   )
+  
   if (name_samples) {
-    #text(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex, pos=3, xpd=TRUE)
-    thigmophobe.labels(xyL[,1], xyL[,2], labels=rownames(xyL), cex=name_samples_cex)
+    idx_out <- unique(c(order(-abs(xyL[, 1]))[1:10], order(-abs(xyL[, 2]))[1:10]))
+    pointLabel(xyL[idx_out, 1], xyL[idx_out, 2], labels=rownames(xyL)[idx_out], cex=name_samples_cex, xpd=T)
   }
   
 

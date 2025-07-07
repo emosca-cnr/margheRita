@@ -2,7 +2,7 @@
 #' @param mRList mRList object
 #' @export
 #' @return metabosets
-#' @importFrom notame construct_metabosets
+# #' @importFrom notame construct_metabosets
 #' @importFrom Biobase AnnotatedDataFrame fData
 
 as.metaboset <- function(mRList=NULL){
@@ -23,7 +23,7 @@ as.metaboset <- function(mRList=NULL){
   colnames(pheno_data)[1] <- "Sample_ID"
   colnames(pheno_data)[colnames(pheno_data) == "injection_order"] <- "Injection_order"
   
-  mset <- construct_metabosets(exprs = exprs_data, pheno_data = pheno_data, feature_data = feature_data, group_col = "class", split_data = F)
+  mset <- notame::construct_metabosets(exprs = exprs_data, pheno_data = pheno_data, feature_data = feature_data, group_col = "class", split_data = F)
   
   return(mset)
 }
