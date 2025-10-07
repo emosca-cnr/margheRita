@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">margheRita</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4</span>
       </span>
     </div>
 
@@ -57,6 +57,11 @@
 <span>  features <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  samples <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  top <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>  use_top_annotated_metab <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  test_method <span class="op">=</span> <span class="st">"anova"</span>,</span>
+<span>  test_value <span class="op">=</span> <span class="st">"q"</span>,</span>
+<span>  truncate_row_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  rm_outliers <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -97,6 +102,26 @@
 
 <dt>top</dt>
 <dd><p>only the top most variable features are plotted (if features is NULL)</p></dd>
+
+
+<dt>use_top_annotated_metab</dt>
+<dd><p>if TRUE, it'll use the best name for the metabolite from the annotation, considering the level and also the top significant specified in the following arguments.</p></dd>
+
+
+<dt>test_method</dt>
+<dd><p>the name of the statistical test table contained in the mRlist object</p></dd>
+
+
+<dt>test_value</dt>
+<dd><p>the column of the statistical test table to consider (e.g.: p or q)</p></dd>
+
+
+<dt>truncate_row_labels</dt>
+<dd><p>FALSE or a integer that specifies the number of characters to keep</p></dd>
+
+
+<dt>rm_outliers</dt>
+<dd><p>remove outliers when setting colours</p></dd>
 
 
 <dt>...</dt>

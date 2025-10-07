@@ -20,7 +20,7 @@ Run the metabolite identification pipeline"><!-- mathjax --><script src="https:/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">margheRita</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.4</span>
       </span>
     </div>
 
@@ -66,7 +66,6 @@ Run the metabolite identification pipeline</p>
 <span>  RI_err <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  RI_err_type <span class="op">=</span> <span class="st">"rel"</span>,</span>
 <span>  filter_ann <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  lib_ann_fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ID"</span>, <span class="st">"Name"</span>, <span class="st">"PubChemCID"</span><span class="op">)</span>,</span>
 <span>  dirout <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -124,10 +123,6 @@ peaks could be noise, it is filtering sample dataset by deleting the relative in
 
 <dt>filter_ann</dt>
 <dd><p>whether to filter metabolite-feature associations or not.</p></dd>
-
-
-<dt>lib_ann_fields</dt>
-<dd><p>columns of library_list$lib_precursor that will be added to metabolite annotations</p></dd>
 
 
 <dt>dirout</dt>
