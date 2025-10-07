@@ -1,4 +1,7 @@
-07 July 2024, v0.3
+October, 3, 2025, v0.4
+-- changes in h_map()
+
+07 July 2025, v0.3
 -- removed barplot_ora()
 -- updates in metabolite_identification() and merge_stats_w_features()
 -- library: Collision_energy -> Polarity

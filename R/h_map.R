@@ -6,27 +6,28 @@
 #' @param col set of color for data values
 #' @param scale_features whether to scale features or not
 #' @param features names of features to plot (optional)
-#' @param feature_label "Feature_ID" or "Name" from the mRList$data_ann
 #' @param samples samples to consider (optional)
 #' @param top only the top most variable features are plotted (if features is NULL)
 #' @param use_top_annotated_metab if TRUE, it'll use the best name for the metabolite from the annotation, considering the level and also the top significant specified in the following arguments.
 #' @param test_method the name of the statistical test table contained in the mRlist object
 #' @param test_value the column of the statistical test table to consider (e.g.: p or q)
+#' @param truncate_row_labels FALSE or a integer that specifies the number of characters to keep
+#' @param rm_outliers remove outliers when setting colours
 #' @param ... further arguments for ComplexHeatmap::Heatmap
 #' @export
 #' @importFrom ComplexHeatmap Heatmap HeatmapAnnotation
-#' @importFrom grDevices dev.off png
+#' @importFrom grDevices dev.off png boxplot.stats
 #' @importFrom graphics plot
 #' @importFrom stats var setNames
 #' @importFrom pals brewer.rdylbu brewer.purples polychrome
+#' @importFrom stringr str_trunc
+#' @importFrom circlize colorRamp2
 
 
-
-h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_ann"), col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, feature_label = c("Feature_ID", "Name"), samples=NULL, top=200, use_top_annotated_metab = FALSE, test_method="anova", test_value = "q", ...){
+h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_ann"), col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=200, use_top_annotated_metab = FALSE, test_method="anova", test_value = "q", truncate_row_labels=FALSE, rm_outliers=FALSE, ...){
   
   data.use <- match.arg(data.use, c("data", "data_ann"))
   test_value <- match.arg(test_value, c("q", "p"))
-  feature_label <- match.arg(feature_label, c("Feature_ID", "Name"))
   
   data <- mRList[[data.use]]
   stopifnot(length(data)>0)
@@ -34,14 +35,9 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
   # set rownames and remove character columns
   if(data.use == "data_ann"){
     
-    if (feature_label == "Feature_ID") {
-      rownames(data) <- data$Feature_ID
-    }
-    if (feature_label == "Name") {
-      rownames(data) <- data$Name
-    } 
-    
+    rownames(data) <- data$Name
     data <- data[, ! colnames(data) %in% c("Feature_ID", "Name")]
+    
   }
   
   #Selecting the best annotation metabolite as a name, also considering the statistics:
@@ -52,11 +48,7 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
     }
     
     top_sig_feat <- rownames(mRList[[test_method]])[order(mRList[[test_method]][, test_value])] #get results and order by test_value
-    if (feature_label == "Name") { #Name instead of Feature_ID
-      top_sig_feat <- mRList$data_ann$Name[match(top_sig_feat, mRList$data_ann$Feature_ID)]
-      top_sig_feat <- top_sig_feat[!is.na(top_sig_feat)]
-    }
-    
+ 
     data <- data[match(top_sig_feat, rownames(data)), ]
     
   }else{
@@ -99,12 +91,25 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
   if(is.null(col)){
     if(scale_features){
       col <- rev(brewer.rdylbu(7))
+      if(rm_outliers){
+        min_max <- max(abs(boxplot.stats(as.numeric(data))$stats[c(1, 5)]))
+        min_max <- c(-min_max, 0, min_max)
+      }else{
+        min_max <- c(min(data), 0, max(data))
+      }
+      col <- colorRamp2(min_max, col[c(1, 4, 7)])
+      
     }else{
       col <- brewer.purples(7)
     }
   }
   
-  print(Heatmap(as.matrix(data), top_annotation = column_ha, col=col, name = hm_name, ...))
+  if(is.numeric(truncate_row_labels)){
+    row_labels <- str_trunc(rownames(data), truncate_row_labels)
+  }else{
+    row_labels <- rownames(data)
+  }
+  print(Heatmap(as.matrix(data), top_annotation = column_ha, col=col, name = hm_name, row_labels=row_labels, ...))
   
 }
 

@@ -12,12 +12,13 @@ h_map(
   col = NULL,
   scale_features = TRUE,
   features = NULL,
-  feature_label = c("Feature_ID", "Name"),
   samples = NULL,
   top = 200,
   use_top_annotated_metab = FALSE,
   test_method = "anova",
   test_value = "q",
+  truncate_row_labels = FALSE,
+  rm_outliers = FALSE,
   ...
 )
 }
@@ -36,8 +37,6 @@ h_map(
 
 \item{features}{names of features to plot (optional)}
 
-\item{feature_label}{"Feature_ID" or "Name" from the mRList$data_ann}
-
 \item{samples}{samples to consider (optional)}
 
 \item{top}{only the top most variable features are plotted (if features is NULL)}
@@ -47,6 +46,10 @@ h_map(
 \item{test_method}{the name of the statistical test table contained in the mRlist object}
 
 \item{test_value}{the column of the statistical test table to consider (e.g.: p or q)}
+
+\item{truncate_row_labels}{FALSE or a integer that specifies the number of characters to keep}
+
+\item{rm_outliers}{remove outliers when setting colours}
 
 \item{...}{further arguments for ComplexHeatmap::Heatmap}
 }
