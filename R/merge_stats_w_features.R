@@ -8,7 +8,6 @@
 #' @return the data.frame metab_stat, metab_stat_w_features, metab_stat_w_features_known, metab_stat_w_features_only_sign, metab_stat_w_features_known_only_sign will be both saved in the global environemtn and exported as txt tab delimited files.
 #' @export
 
-
 merge_stats_w_features <- function(mRList = NULL, test_method = "anova", test_value = "q", cutoff_value = 0.05, dirout=NULL){
   
   stopifnot(!is.null(test_method))

@@ -16,15 +16,21 @@
 #' @param filter_ann whether to filter metabolite-feature associations or not.
 # #' @param lib_ann_fields columns of library_list$lib_precursor that will be added to metabolite annotations
 #' @param dirout output directory
-#' @return data.frame with matches between features and library metabolites
 #' @export
 #' @importFrom stats setNames
 #' @importFrom utils stack
 #' @importFrom openxlsx createWorkbook addWorksheet writeDataTable saveWorkbook
+#' @returns data.frames mRList$metabolite_identification$associations and mRList$metabolite_identification$associations_summary; it also adds information to mRList$metab_ann and mRList$data_ann. Collectively, such data.frames contain the following colums:
+#' - Name: metabolite name;
+#' - Level: annotation level;
+#' - Level_note: annotation level note;
+#' - RT_err: retention time error;
+#' - ppm_error: ppm error;
+#' - peaks_found_ppm_RI: number of MS/MS peaks that match;
+#' - matched_peaks_ratio: ratio between the number of MS/MS peaks that match and the number of peaks in the reference MS/MS spectra
 
 
-
-metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=FALSE, dirout=NULL){
+metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=TRUE, dirout=NULL){
   
   if(is.null(features)){
     idx <- 1:nrow(mRList$metab_ann) 

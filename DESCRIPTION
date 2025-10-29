@@ -1,7 +1,7 @@
 Package: margheRita
-Title: Mass spectrometry-based metabolomics data analysis
-Version: 0.4
-Date: 2025-10-03
+Title: LC-MS/MS metabolomics data analysis and confident metabolite identification
+Version: 0.5
+Date: 2025-10-29
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
   person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zara.alaviii@gmail.com"),
@@ -15,7 +15,7 @@ LazyData: true
 LazyDataCompression: bzip2
 Roxygen: list(markdown = TRUE)
 Depends: R (>= 3.5.0)
-Imports: graphics, grDevices, stats, utils, clusterProfiler, pcaMethods, ComplexHeatmap, LSD, pals, Biobase, openxlsx, devtools, car, stringr, circlize
+Imports: Biobase, ComplexHeatmap, LSD, car, circlize, clusterProfiler, devtools, grDevices, graphics, openxlsx, pals, pcaMethods, stats, stringr, utils
 Suggests: rmarkdown, knitr, POMA, notame
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2

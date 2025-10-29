@@ -18,7 +18,7 @@ metabolite_identification(
   ppm_err = 20,
   RI_err = 20,
   RI_err_type = "rel",
-  filter_ann = FALSE,
+  filter_ann = TRUE,
   dirout = NULL
 )
 }
@@ -53,7 +53,16 @@ peaks could be noise, it is filtering sample dataset by deleting the relative in
 \item{dirout}{output directory}
 }
 \value{
-data.frame with matches between features and library metabolites
+data.frames mRList$metabolite_identification$associations and mRList$metabolite_identification$associations_summary; it also adds information to mRList$metab_ann and mRList$data_ann. Collectively, such data.frames contain the following colums:
+\itemize{
+\item Name: metabolite name;
+\item Level: annotation level;
+\item Level_note: annotation level note;
+\item RT_err: retention time error;
+\item ppm_error: ppm error;
+\item peaks_found_ppm_RI: number of MS/MS peaks that match;
+\item matched_peaks_ratio: ratio between the number of MS/MS peaks that match and the number of peaks in the reference MS/MS spectra
+}
 }
 \description{
 Metabolite Identification

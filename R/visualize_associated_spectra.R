@@ -7,7 +7,7 @@
 #' @param dirout output directory
 #' @param peak_number if TRUE write the peak number
 #' @export
-#' @importFrom graphics par lines legend abline
+#' @importFrom graphics par lines legend abline axis
 #' @importFrom grDevices jpeg adjustcolor
 #' @importFrom car pointLabel
 #' @param type mirrored or overlapped visualization
@@ -59,9 +59,12 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
     }
 
     #empty plot
-    plot(0, pch="", xlim=c(min(library_spectra[, 1], feature_spectra[, 1]), max(library_spectra[, 1], feature_spectra[, 1])), ylim = ylim, xlab = "m/z", ylab = "Relative Intensity")
+    plot(0, pch="", xlim=c(min(library_spectra[, 1], feature_spectra[, 1]), max(library_spectra[, 1], feature_spectra[, 1])), ylim = ylim, xlab = "m/z", ylab = "Relative Intensity", yaxt="n")
     abline(h=hlines, lty=2, col="gray")
     #minor.tick(ny = 2, nx=1)
+    if(type=="mirrored"){
+      axis(2, at = seq(-100, 100, 20), labels = gsub("-", "", seq(-100, 100, 20)))
+    }
 
     #library
     points(library_spectra[, 1] , library_spectra[, 2], type = "h" , col= adjustcolor("red", 0.6), lwd=2)

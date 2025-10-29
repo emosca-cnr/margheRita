@@ -1,3 +1,8 @@
+ctober, 3, 2025, v0.5
+-- changes in visualize_associated_spectra() and visualize_1spectra()
+-- updates in documentation
+-- annotate_univariate_results() was replaced by merge_stats_w_features() 
+
 October, 3, 2025, v0.4
 -- changes in h_map()
 
