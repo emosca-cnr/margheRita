@@ -33,7 +33,7 @@ visualize_1spectra <- function(spectra_top=NULL, spectra_bottom=NULL, name_top=N
   }
 
   #empty plot
-  plot(0, pch="", xlim=c(min(spectra_top[, 1], spectra_bottom[, 1]), max(spectra_top[, 1], spectra_bottom[, 1])), ylim = ylim, xlab = "m/z", ylab = "Relative Intensity", yaxt="n")
+  plot(0, pch="", xlim=c(min(spectra_top[, 1], spectra_bottom[, 1]), max(spectra_top[, 1], spectra_bottom[, 1])), ylim = ylim, xlab = "m/z", ylab = "I", yaxt="n")
   abline(h=hlines, lty=2, col="gray")
   #minor.tick(ny = 2, nx=1)
   if(type=="mirrored"){

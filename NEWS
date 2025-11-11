@@ -1,4 +1,8 @@
-ctober, 3, 2025, v0.5
+November, 11, 2025, v0.51
+-- changes in plots produced by visualize_associated_spectra(), visualize_1spectra() and h_map_MSMS_comparison()
+-- updates in documentation
+
+October, 3, 2025, v0.5
 -- changes in visualize_associated_spectra() and visualize_1spectra()
 -- updates in documentation
 -- annotate_univariate_results() was replaced by merge_stats_w_features() 

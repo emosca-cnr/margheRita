@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">margheRita</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.51</span>
       </span>
     </div>
 
@@ -142,7 +142,7 @@ such dependencies are installed:</p>
 <h3 id="optional-packages">Optional packages<a class="anchor" aria-label="anchor" href="#optional-packages"></a>
 </h3>
 <p>The functions <code><a href="../reference/as.metaboset.html">as.metaboset()</a></code> and
-<code>as.PomaSummarizedExperiment</code> enable margheRita data
+<code><a href="../reference/as.PomaSummarizedExperiment.html">as.PomaSummarizedExperiment()</a></code> enable margheRita data
 structure export in formats that are compatible with, respectively,
 packages <a href="https://github.com/antonvsdata/notame" class="external-link">notame</a> and
 <a href="https://www.bioconductor.org/packages/release/bioc/html/POMA.html" class="external-link">POMA</a>.
@@ -484,17 +484,17 @@ the required information are available in the reference library. The
 identification is based on the quantification of the following
 quantities:</p>
 <ul>
-<li>retention time (RT) error: <span class="math display">\[\epsilon_t(i) = |t(i) - t^*(i)|\]</span>
+<li>retention time (RT) error: <span class="math display">\[\epsilon_{rt}(i) = |t(i) - t^*(i)|\]</span>
 </li>
-<li>ppm error: <span class="math display">\[\epsilon_m(i) = \frac{|m(i)
-- m^*(i)|}{m^*(i)} \cdot 10^6\]</span>
+<li>ppm error: <span class="math display">\[\epsilon_{m/z}(i) =
+\frac{|x(i) - x^*(i)|}{x^*(i)} \cdot 10^6\]</span>
 </li>
-<li>percent relative intensity error: <span class="math display">\[\epsilon_{I_R}(i,j) = \frac{|I_R(i,j) -
-I^*(i,j)|}{I^*_R(i,j)} \cdot 100\]</span>
+<li>percent relative intensity error: <span class="math display">\[\epsilon_{I}(i,j) = \frac{|I(i,j) -
+I^*(i,j)|}{I^*(i,j)} \cdot 100\]</span>
 </li>
 </ul>
 <p>Such quantities are used to score the similarity among precursors of
-features and metabolites, as well as their MS/MS spectra.</p>
+features and metabolites, as well as their MS/MS peaks.</p>
 <div class="section level3">
 <h3 id="spectral-library">Spectral library<a class="anchor" aria-label="anchor" href="#spectral-library"></a>
 </h3>
@@ -700,7 +700,7 @@ visually compare ppm errors and RI differences between feature and
 metabolite spectra:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, metab_id <span class="op">=</span> <span class="st">"L1660"</span>, feature_id <span class="op">=</span> <span class="st">"F10165"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="images/ppm_error_L253_M1102_F3277.jpg" style="width:49.0%"><img src="images/RI_diff_L253_M1102_F3277.jpg" style="width:49.0%"></p>
+<p><img src="images/e_mz_L253_M1102_F3277.jpg" style="width:49.0%"><img src="images/e_I_L253_M1102_F3277.jpg" style="width:49.0%"></p>
 </div>
 </div>
 <div class="section level2">

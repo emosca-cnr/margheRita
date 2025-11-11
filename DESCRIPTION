@@ -1,7 +1,7 @@
 Package: margheRita
 Title: LC-MS/MS metabolomics data analysis and confident metabolite identification
-Version: 0.5
-Date: 2025-10-29
+Version: 0.51
+Date: 2025-11-11
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
   person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zara.alaviii@gmail.com"),

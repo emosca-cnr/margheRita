@@ -59,7 +59,7 @@ visualize_associated_spectra <- function(mRList=NULL, mR_library=NULL, metabolit
     }
 
     #empty plot
-    plot(0, pch="", xlim=c(min(library_spectra[, 1], feature_spectra[, 1]), max(library_spectra[, 1], feature_spectra[, 1])), ylim = ylim, xlab = "m/z", ylab = "Relative Intensity", yaxt="n")
+    plot(0, pch="", xlim=c(min(library_spectra[, 1], feature_spectra[, 1]), max(library_spectra[, 1], feature_spectra[, 1])), ylim = ylim, xlab = "m/z", ylab = "I", yaxt="n")
     abline(h=hlines, lty=2, col="gray")
     #minor.tick(ny = 2, nx=1)
     if(type=="mirrored"){
