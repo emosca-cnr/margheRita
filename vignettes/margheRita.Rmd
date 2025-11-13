@@ -275,9 +275,9 @@ head(mL_demo$significant_features)
 
 Metabolite identification in margheRita is performed by means of the function `metabolite_identification()`, which requires an mRList object and a reference library with MS and MS/MS metabolite information. The identification is possible up to level-1, provided that the required information are available in the reference library. The identification is based on the quantification of the following quantities:
 
-- retention time (RT) error: $$\epsilon_{rt}(i) = |t(i) - t^*(i)|$$
-- ppm error: $$\epsilon_{m/z}(i) = \frac{|x(i) - x^*(i)|}{x^*(i)} \cdot 10^6$$
-- percent relative intensity error: $$\epsilon_{I}(i,j) = \frac{|I(i,j) - I^*(i,j)|}{I^*(i,j)} \cdot 100$$
+- retention time (RT) error: $$\epsilon_{rt}(i,j) = |t(i) - t(j)|$$
+- ppm error: $$\epsilon_{m/z}(i,j) = \frac{|x(i) - x(j)|}{x(j)} \cdot 10^6$$
+- percent relative intensity error: $$\epsilon_{I}(i,j) = \frac{|I(i) - I(j)|}{I(j)} \cdot 100$$
 
 Such quantities are used to score the similarity among precursors of features and metabolites, as well as their MS/MS peaks.
 
