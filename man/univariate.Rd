@@ -7,7 +7,7 @@
 univariate(
   mRList = NULL,
   dirout = NULL,
-  test_method = c("ttest", "Utest", "anova", "kruskal"),
+  test_method = c("ttest", "ttest_paired", "Utest", "anova", "kruskal"),
   exp.levels = NULL,
   exp.factor = "class"
 )
@@ -17,7 +17,7 @@ univariate(
 
 \item{dirout}{output directory}
 
-\item{test_method}{any between "ttest", "Utest", "anova" or "kruskal".}
+\item{test_method}{any between "ttest", "ttest_paired", "Utest", "anova" or "kruskal".}
 
 \item{exp.levels}{the levels to be considered in the column specified by exp.factor}
 

@@ -8,6 +8,7 @@
 
 #R project file
 .Rproj
+margheRita.Rproj
 
 # Session Data files
 *.RData

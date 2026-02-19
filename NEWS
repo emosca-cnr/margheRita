@@ -1,3 +1,7 @@
+February, 19, 2026, v0.5.2
+-- in univariate() added the option "ttest_paired" to perform paired t-test.
+-- fixed merge_stats_w_features() (the exported metab_stat_feat_known_sig table was wrongly the same as the metab_stat_feat_known).
+
 November, 11, 2025, v0.51
 -- changes in plots produced by visualize_associated_spectra(), visualize_1spectra() and h_map_MSMS_comparison()
 -- updates in documentation

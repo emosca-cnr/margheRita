@@ -45,7 +45,7 @@ merge_stats_w_features <- function(mRList = NULL, test_method = "anova", test_va
   ans$metab_stat_feat_sig <- ans$metab_stat_feat[ans$metab_stat_feat$Feature_ID %in% sign_feat_featID, ]
   
   ## Only known & significant
-  ans$metab_stat_feat_known_sig <- ans$metab_stat_feat_known[ans$metab_stat_feat_known$Feature_ID %in% ans$metab_stat_feat_known$Feature_ID, ]
+  ans$metab_stat_feat_known_sig <- ans$metab_stat_feat_known[ans$metab_stat_feat_known$Feature_ID %in% sign_feat_featID, ]
   
   ### write to files
   wb <- createWorkbook()

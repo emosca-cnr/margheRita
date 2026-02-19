@@ -1,7 +1,7 @@
 #' Univariate analysis
 #' @description It applies T test, U test, Anova or Kruskal-Wallis test over dataset features.
 #' @param mRList mRList object
-#' @param test_method any between "ttest", "Utest", "anova" or "kruskal".
+#' @param test_method any between "ttest", "ttest_paired", "Utest", "anova" or "kruskal".
 #' @param exp.factor column of mRList$sample_ann that defines the level for each sample
 #' @param exp.levels the levels to be considered in the column specified by exp.factor
 #' @param dirout output directory
@@ -11,7 +11,7 @@
 #' @return mRList object with mRList$"testchosen" with univariate analysis
 #' @details In case of "anova", the results of stats::aov() will be analysed by stats::TukeyHSD()
 #'  
-univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest","Utest", "anova", "kruskal"), exp.levels=NULL, exp.factor="class"){
+univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest", "ttest_paired", "Utest", "anova", "kruskal"), exp.levels=NULL, exp.factor="class"){
 
   test_method <- match.arg(test_method)
 
@@ -46,6 +46,39 @@ univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest","Utest", 
     ans$q <- p.adjust(ans$p, method ="fdr")
     mRList$ttest <- ans
     write.csv(mRList$ttest, file=file.path(dirout, "t_test.csv"))
+  }
+  
+  if (test_method == "ttest_paired") {
+    
+    if(length(levels(exp_design$level))>2){
+      cat("groups:", levels(exp_design$level), "\n")
+      stop("can not apply t test for more than 2 groups")
+    }
+    
+    if (nrow(exp_design[which(exp_design$level==levels(exp_design$level)[1]),]) != nrow(exp_design[which(exp_design$level==levels(exp_design$level)[2]),])) {
+      cat("samples in ", levels(exp_design$level)[1], ": ", nrow(exp_design[which(exp_design$level==levels(exp_design$level)[1]),]), "; samples in ", levels(exp_design$level)[2], ": ", nrow(exp_design[which(exp_design$level==levels(exp_design$level)[2]),]), "\n")
+      stop("can not apply t test paired if the gropus have different number of samples")
+    }
+    
+    cat("t tests paired between", levels(exp_design$level), "\n")
+    
+    ans <- data.frame(t = rep(NA_real_, nrow(X_data)),
+                      p = rep(NA_real_, nrow(X_data)))
+    rownames(ans) <- rownames(X_data)
+    
+    for (i in seq(nrow(X_data))) {
+      data_group1 <- as.numeric(X_data[i, which(exp_design$level==levels(exp_design$level)[1])])
+      data_group2 <- as.numeric(X_data[i, which(exp_design$level==levels(exp_design$level)[2])])
+      
+      tt <- t.test(data_group1, data_group2, paired = TRUE)
+      
+      ans$t[i] <- tt$statistic
+      ans$p[i] <- tt$p.value
+    }
+    
+    ans$q <- p.adjust(ans$p, method ="fdr")
+    mRList$ttest_paired <- ans
+    write.csv(mRList$ttest, file=file.path(dirout, "t_test_paired.csv"))
   }
 
   if(test_method == "Utest"){
