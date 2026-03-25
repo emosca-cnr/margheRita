@@ -136,55 +136,59 @@ filter_metabolite_associations <- function(mRList=NULL){
   }
   
   #duplicated IDs
-  m_id <- unique(out_levels$ID[duplicated(out_levels$ID)])
-  
-  out_levels$selected <- TRUE
-  
-  for(i in 1:length(m_id)){
+  if(any(duplicated(out_levels$ID))){
     
-    #by lowest RT error
-    if(sum(out_levels$selected[out_levels$ID == m_id[i]])>1){
+    m_id <- unique(out_levels$ID[duplicated(out_levels$ID)])
+    
+    out_levels$selected <- TRUE
+    
+    for(i in 1:length(m_id)){
       
-      rt_err_min <- min(out_levels$RT_err[out_levels$ID == m_id[i] & out_levels$selected])
-      
-      if(any(out_levels$RT_class[out_levels$ID ==  m_id[i] & out_levels$selected] != "unacceptable")){
+      #by lowest RT error
+      if(sum(out_levels$selected[out_levels$ID == m_id[i]])>1){
         
-        if(any(abs(out_levels$RT_err[out_levels$ID ==  m_id[i] & out_levels$selected] - rt_err_min) > 1e-4)){
+        rt_err_min <- min(out_levels$RT_err[out_levels$ID == m_id[i] & out_levels$selected])
+        
+        if(any(out_levels$RT_class[out_levels$ID ==  m_id[i] & out_levels$selected] != "unacceptable")){
           
-          cat("\tby RT... ")
-          idx_rm <- which(out_levels$ID == m_id[i] & out_levels$selected & abs(out_levels$RT_err - rt_err_min) > 1e-4)
+          if(any(abs(out_levels$RT_err[out_levels$ID ==  m_id[i] & out_levels$selected] - rt_err_min) > 1e-4)){
+            
+            cat("\tby RT... ")
+            idx_rm <- which(out_levels$ID == m_id[i] & out_levels$selected & abs(out_levels$RT_err - rt_err_min) > 1e-4)
+            out_levels$selected[idx_rm] <- FALSE
+            #out_levels <- out_levels[-idx_rm, ]
+            #print(out_levels[out_levels$ID == m_id[i], ])
+            cat(sum(out_levels$selected), "\n")
+            
+          }
+          
+        }
+      }
+      
+      #by lowest ppm error
+      if(sum(out_levels$selected[out_levels$ID == m_id[i]])>1){
+        
+        ppm_err_min <- min(out_levels$ppm_error[out_levels$ID == m_id[i] & out_levels$selected])
+        
+        if(any(abs(out_levels$ppm_error[out_levels$ID ==  m_id[i] & out_levels$selected] - ppm_err_min) > 1e-4)){
+          
+          cat("\tby ppm... ")
+          idx_rm <- which(out_levels$ID == m_id[i] & out_levels$selected & abs(out_levels$ppm_error - ppm_err_min) > 1e-4)
           out_levels$selected[idx_rm] <- FALSE
           #out_levels <- out_levels[-idx_rm, ]
           #print(out_levels[out_levels$ID == m_id[i], ])
           cat(sum(out_levels$selected), "\n")
           
         }
-        
       }
+      
+      
     }
     
-    #by lowest ppm error
-    if(sum(out_levels$selected[out_levels$ID == m_id[i]])>1){
-      
-      ppm_err_min <- min(out_levels$ppm_error[out_levels$ID == m_id[i] & out_levels$selected])
-      
-      if(any(abs(out_levels$ppm_error[out_levels$ID ==  m_id[i] & out_levels$selected] - ppm_err_min) > 1e-4)){
-        
-        cat("\tby ppm... ")
-        idx_rm <- which(out_levels$ID == m_id[i] & out_levels$selected & abs(out_levels$ppm_error - ppm_err_min) > 1e-4)
-        out_levels$selected[idx_rm] <- FALSE
-        #out_levels <- out_levels[-idx_rm, ]
-        #print(out_levels[out_levels$ID == m_id[i], ])
-        cat(sum(out_levels$selected), "\n")
-        
-      }
-    }
-    
+    out_levels <- out_levels[out_levels$selected, ]
+    out_levels$selected <- NULL
     
   }
-  
-  out_levels <- out_levels[out_levels$selected, ]
-  out_levels$selected <- NULL
   
   #cat(nrow(out_levels), "\n")
   
@@ -275,12 +279,12 @@ filter_metabolite_associations <- function(mRList=NULL){
   cat(nrow(out_levels), "\n")
   
   if(any(duplicated(out_levels$Feature_ID))){
-
+    
     ##### RT_class #####
     cat("\tby RT (category)... ")
     rt_class <- as.numeric(factor(out_levels$RT_class, levels = c("super", "acceptable")))
     rt_class_set <- sort(unique(rt_class))
-
+    
     if(length(rt_class_set)>1){
       for(rt_i in rt_class_set[-length(rt_class_set)]){ #the highest value does have higher values
         feat_selected <- out_levels$Feature_ID[rt_class==rt_i] #IDs that have level ms
@@ -294,9 +298,9 @@ filter_metabolite_associations <- function(mRList=NULL){
         }
       }
     }
-  
-  }
     
+  }
+  
   cat(nrow(out_levels), "\n")
   
   ### further FILTERING
@@ -376,8 +380,9 @@ filter_metabolite_associations <- function(mRList=NULL){
   
   mRList$metabolite_identification$associations <- out_levels
   
-  mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note")])
-  mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note", "RT_err", "ppm_error", "peaks_found_ppm_RI", "matched_peaks_ratio")])
+  #mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note")])
+  #mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "Level", "Level_note", "RT_err", "ppm_error", "peaks_found_ppm_RI", "matched_peaks_ratio")])
+  mRList$metabolite_identification$associations_summary <- unique(out_levels[, c("Feature_ID", "ID", "Name", "PubChemCID", "Level", "Level_note", "RT_err", "ppm_error", "peaks_found_ppm_RI", "matched_peaks_ratio")])
   
   
   return(mRList)

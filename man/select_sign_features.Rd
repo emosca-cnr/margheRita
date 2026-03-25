@@ -8,7 +8,7 @@ select_sign_features(
   mRList = NULL,
   test_method = "anova",
   test_value = "q",
-  cutoff_value = 0.05,
+  cutoff_value = Inf,
   feature_id = "Feature_ID",
   values = FALSE,
   split_by_semicolon = FALSE
@@ -23,7 +23,7 @@ select_sign_features(
 
 \item{cutoff_value}{the value of p-value cut-off to consider a feature as significant}
 
-\item{feature_id}{"Feature_ID" or "Name" from the mRList$data_ann}
+\item{feature_id}{"Feature_ID", "Name" or "PubChemCID"; "Name" or "PubChemCID" require metabolite annotation}
 
 \item{values}{if TRUE a named vector with test_value values will be given in output; the beast value will be considered in case of 1-to-n mappings}
 

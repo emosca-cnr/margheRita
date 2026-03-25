@@ -6,7 +6,7 @@
 #' @param test_method the name of the statistical test table contained in the mRlist object
 #' @param test_value the column of the statistical test table to consider (e.g.: p or q)
 #' @param cutoff_value the value of p-value cut-off to consider a feature as significant
-#' @param feature_id "Feature_ID" or "Name" from the mRList$data_ann
+#' @param feature_id "Feature_ID", "Name" or "PubChemCID"; "Name" or "PubChemCID" require metabolite annotation
 #' @param values if TRUE a named vector with test_value values will be given in output; the beast value will be considered in case of 1-to-n mappings
 #' @param split_by_semicolon if TRUE, the names will be split by semicolons.
 #' @importFrom stats setNames
@@ -15,19 +15,21 @@
 #' @export
 
 
-select_sign_features <- function(mRList=NULL, test_method="anova", test_value = "q", cutoff_value = 0.05, feature_id="Feature_ID", values=FALSE, split_by_semicolon = FALSE) {
+select_sign_features <- function(mRList=NULL, test_method="anova", test_value = "q", cutoff_value = Inf, feature_id="Feature_ID", values=FALSE, split_by_semicolon = FALSE) {
   
   #data.use <- match.arg(data.use, c("data", "data_ann"))
   #data <- mRList[[data.use]]
   
-  stopifnot(feature_id %in% colnames(mRList$data_ann))  
+  stopifnot(feature_id %in% c("Feature_ID", "Name", "PubChemCID"))
   
   if(values){
     
     ans <- setNames(mRList[[test_method]][, test_value], rownames(mRList[[test_method]]))
     ans <- sort(ans[ans < cutoff_value])
     
-    if(feature_id == "Name"){
+    if(feature_id %in% c("Name", "PubChemCID")){
+      
+      stopifnot(!is.null(mRList$data_ann))
       
       ans <- merge(data.frame(Feature_ID=names(ans), as.numeric(ans), stringsAsFactors = F), mRList$data_ann[, c("Feature_ID", feature_id)], by="Feature_ID")
       colnames(ans)[2] <- test_value
@@ -42,10 +44,10 @@ select_sign_features <- function(mRList=NULL, test_method="anova", test_value = 
           idx_keep <- !duplicated(ans[, 4])
           ans <- setNames(ans[idx_keep, test_value], ans[idx_keep, 4])
         }
+      }else{
+        ans <- setNames(ans[, test_value], ans[, 3])
       }
-    } else if (feature_id != "Name" & feature_id != "Feature_ID") {
-      stop('feature_id must be "Feature_ID" or "Name"')
-    }
+    } 
     
     
   }else{
@@ -54,7 +56,9 @@ select_sign_features <- function(mRList=NULL, test_method="anova", test_value = 
     ans <- row.names(mRList[[test_method]])[which(mRList[[test_method]][ , test_value] < cutoff_value)]
     
     
-    if(feature_id == "Name"){
+    if(feature_id %in% c("Name", "PubChemCID")){
+      
+      stopifnot(!is.null(mRList$data_ann))
       
       ans <- as.character(mRList$data_ann[mRList$data_ann$Feature_ID %in% ans, feature_id])
       
@@ -68,13 +72,9 @@ select_sign_features <- function(mRList=NULL, test_method="anova", test_value = 
       
       ans <- unique(ans[!is.na(ans)])
       
-    } else if (feature_id != "Name" & feature_id != "Feature_ID") {
-      stop('feature_id must be "Feature_ID" or "Name"')
     }
-    
   }
   
   return(ans)
   
 }
-

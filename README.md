@@ -23,7 +23,7 @@ Contacts:
 - [Annapaola Andolfo](https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html), Proteomics and Metabolomcis Facility, HSR
 - [Ettore Mosca](https://www.itb.cnr.it/en/institute/staff/ettore-mosca), Bioinformatics Lab, CNR-ITB
 
-# Installation
+## Installation
 
 See https://emosca-cnr.github.io/margheRita/articles/margheRita.html
 

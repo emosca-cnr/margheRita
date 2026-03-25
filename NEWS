@@ -1,3 +1,12 @@
+March, 25, 2026, v0.6
+-- updated various functions realted to metabolite annotation to keep the PubChemCID in the output
+-- fixed merge_stats_w_features() (the exported metab_stat_feat_known_sig table was wrongly the same as the metab_stat_feat_known).
+-- fixed a bug in select_sign_feature()
+-- fixed a bug in filter_metabolite_associations()
+-- updated h_map()
+-- updated select_sign_features() to add the possibility to retrieve PubChemCID
+-- removed unwanted spaces in PubChemCID column of the precursor metadata
+
 February, 19, 2026, v0.5.2
 -- in univariate() added the option "ttest_paired" to perform paired t-test.
 -- fixed merge_stats_w_features() (the exported metab_stat_feat_known_sig table was wrongly the same as the metab_stat_feat_known).

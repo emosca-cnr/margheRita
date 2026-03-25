@@ -5,7 +5,7 @@
 keep_strongest_representative <- function(X=NULL){
   
   #calculate rowMeans
-  rn_avg <- cbind(X, avg=rowMeans(X[, -c(1:2)]))
+  rn_avg <- cbind(X, avg=rowMeans(X[, -c(1:3)]))
   
   #sort by decreasing rowMeans
   rn_avg <- rn_avg[order(-rn_avg$avg), ]

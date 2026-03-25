@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">margheRita</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.51</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
       </span>
     </div>
 
@@ -50,7 +50,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">univariate</span><span class="op">(</span></span>
 <span>  mRList <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dirout <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  test_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ttest"</span>, <span class="st">"Utest"</span>, <span class="st">"anova"</span>, <span class="st">"kruskal"</span><span class="op">)</span>,</span>
+<span>  test_method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ttest"</span>, <span class="st">"ttest_paired"</span>, <span class="st">"Utest"</span>, <span class="st">"anova"</span>, <span class="st">"kruskal"</span><span class="op">)</span>,</span>
 <span>  exp.levels <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  exp.factor <span class="op">=</span> <span class="st">"class"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -67,7 +67,7 @@
 
 
 <dt>test_method</dt>
-<dd><p>any between "ttest", "Utest", "anova" or "kruskal".</p></dd>
+<dd><p>any between "ttest", "ttest_paired", "Utest", "anova" or "kruskal".</p></dd>
 
 
 <dt>exp.levels</dt>

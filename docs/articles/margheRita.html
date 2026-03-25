@@ -33,7 +33,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">margheRita</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.51</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
       </span>
     </div>
 
@@ -59,7 +59,9 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>MargheRita: an R package for LC-MS/MS metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards</h1>
+      <h1 data-toc-skip>MargheRita: an R package for LC-MS/MS
+metabolomics data analysis and confident metabolite identification based
+on a spectral library of reference standards</h1>
             
       
       
@@ -73,31 +75,60 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>Untargeted metabolomics studies by mass spectrometry technologies generate huge numbers of metabolite signals, requiring computational analyses for post-acquisition processing and dedicated databases for metabolite identification. Web-based data processing solutions frequently include only a part of the entire workflow thus implying the use of different platforms. The R package margheRita addresses the complete workflow for metabolomic profiling in untargeted studies based on liquid chromatography (LC) coupled with tandem mass spectrometry (MS/MS). This pipeline is specially advantageous in the case of data-independent acquisition (DIA), where all MS/MS spectra are acquired with high resolution. Interestingly, the R package margheRita enhances fragment matching accuracy by providing an original metabolite spectral library acquired in both polarities using different chromatographic columns.</p>
+<p>Untargeted metabolomics studies by mass spectrometry technologies
+generate huge numbers of metabolite signals, requiring computational
+analyses for post-acquisition processing and dedicated databases for
+metabolite identification. Web-based data processing solutions
+frequently include only a part of the entire workflow thus implying the
+use of different platforms. The R package margheRita addresses the
+complete workflow for metabolomic profiling in untargeted studies based
+on liquid chromatography (LC) coupled with tandem mass spectrometry
+(MS/MS). This pipeline is specially advantageous in the case of
+data-independent acquisition (DIA), where all MS/MS spectra are acquired
+with high resolution. Interestingly, the R package margheRita enhances
+fragment matching accuracy by providing an original metabolite spectral
+library acquired in both polarities using different chromatographic
+columns.</p>
 <p>The package provides:</p>
 <ul>
-<li>a series of pre-processing functions (quality control, filtering and normalization) with a particular focus on methods specifically recommended for metabolomic profiles, such as filtering by mass defects, filtering by coefficient of variation (samples vs QCs) and probabilistic quotient normalization;</li>
-<li>metabolite annotation up to level-1, based on in-house spectral libraries as well as freely available libraries;</li>
-<li>spectral libraries that covers 4 different chromatographic column types: RP-C18, HILIC, RP-C8 and pZIC-HILIC Zwitterionic.</li>
-<li>simplified execution of parametric and non-parametric statistical tests over a large number of features;</li>
+<li>a series of pre-processing functions (quality control, filtering and
+normalization) with a particular focus on methods specifically
+recommended for metabolomic profiles, such as filtering by mass defects,
+filtering by coefficient of variation (samples vs QCs) and probabilistic
+quotient normalization;</li>
+<li>metabolite annotation up to level-1, based on in-house spectral
+libraries as well as freely available libraries;</li>
+<li>spectral libraries that covers 4 different chromatographic column
+types: RP-C18, HILIC, RP-C8 and pZIC-HILIC Zwitterionic.</li>
+<li>simplified execution of parametric and non-parametric statistical
+tests over a large number of features;</li>
 <li>pathway analysis based on ORA and MSEA over various databases.</li>
 </ul>
 <p>Source code: <a href="https://github.com/emosca-cnr/margheRita" class="external-link uri">https://github.com/emosca-cnr/margheRita</a></p>
-<p>Citation: Ettore Mosca, Marynka Ulaszewska, Zahrasadat Alavikakhki, Edoardo Niccolò Bellini, Valeria Mannella, Gianfranco Frigerio, Denise Drago, Annapaola Andolfo. MargheRita: an R package for LC-MS/MS SWATH metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards. bioRxiv 2024.06.20.599545; doi: <a href="https://doi.org/10.1101/2024.06.20.599545" class="external-link uri">https://doi.org/10.1101/2024.06.20.599545</a></p>
+<p>Citation: Ettore Mosca, Marynka Ulaszewska, Zahrasadat Alavikakhki,
+Edoardo Niccolò Bellini, Valeria Mannella, Gianfranco Frigerio, Denise
+Drago, Annapaola Andolfo. MargheRita: an R package for LC-MS/MS SWATH
+metabolomics data analysis and confident metabolite identification based
+on a spectral library of reference standards. bioRxiv 2024.06.20.599545;
+doi: <a href="https://doi.org/10.1101/2024.06.20.599545" class="external-link uri">https://doi.org/10.1101/2024.06.20.599545</a></p>
 <p>Contacts:</p>
 <ul>
 <li>
-<a href="https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html" class="external-link">Annapaola Andolfo</a>, Proteomics and Metabolomics Facility, HSR</li>
+<a href="https://research.hsr.it/en/core-facilities/promefa/annapaola-andolfo.html" class="external-link">Annapaola
+Andolfo</a>, Proteomics and Metabolomics Facility, HSR</li>
 <li>
-<a href="https://www.itb.cnr.it/en/institute/staff/ettore-mosca" class="external-link">Ettore Mosca</a>, Bioinformatics Lab, CNR-ITB</li>
+<a href="https://www.itb.cnr.it/en/institute/staff/ettore-mosca" class="external-link">Ettore
+Mosca</a>, Bioinformatics Lab, CNR-ITB</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The package requires a series of other R packages, which are available in <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a> or <a href="https://github.com/" class="external-link">github</a>, namely:</p>
+<p>The package requires a series of other R packages, which are
+available in <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a> or <a href="https://github.com/" class="external-link">github</a>, namely:</p>
 <pre><code><span><span class="co">## Biobase, ComplexHeatmap, LSD, car, circlize, clusterProfiler, devtools, grDevices, graphics, openxlsx, pals, pcaMethods, stats, stringr, utils</span></span></code></pre>
-<p>In most of the cases, the following instructions guarantee that all such dependencies are installed:</p>
+<p>In most of the cases, the following instructions guarantee that all
+such dependencies are installed:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span></span>
@@ -110,7 +141,13 @@
 <div class="section level3">
 <h3 id="optional-packages">Optional packages<a class="anchor" aria-label="anchor" href="#optional-packages"></a>
 </h3>
-<p>The functions <code><a href="../reference/as.metaboset.html">as.metaboset()</a></code> and <code><a href="../reference/as.PomaSummarizedExperiment.html">as.PomaSummarizedExperiment()</a></code> enable margheRita data structure export in formats that are compatible with, respectively, packages <a href="https://github.com/antonvsdata/notame" class="external-link">notame</a> and <a href="https://www.bioconductor.org/packages/release/bioc/html/POMA.html" class="external-link">POMA</a>. If interested in these functions the user must install such packages:</p>
+<p>The functions <code><a href="../reference/as.metaboset.html">as.metaboset()</a></code> and
+<code><a href="../reference/as.PomaSummarizedExperiment.html">as.PomaSummarizedExperiment()</a></code> enable margheRita data
+structure export in formats that are compatible with, respectively,
+packages <a href="https://github.com/antonvsdata/notame" class="external-link">notame</a> and
+<a href="https://www.bioconductor.org/packages/release/bioc/html/POMA.html" class="external-link">POMA</a>.
+If interested in these functions the user must install such
+packages:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"POMA"</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"antonvsdata/notame"</span><span class="op">)</span></span></code></pre></div>
@@ -119,22 +156,34 @@
 <div class="section level2">
 <h2 id="input-data">Input data<a class="anchor" aria-label="anchor" href="#input-data"></a>
 </h2>
-<p>margheRita is intended to be used after having done a number of data acquisition steps through MS-Dial <span class="citation">(<a href="#ref-Tsugawa2015" role="doc-biblioref">Tsugawa et al. 2015</a>)</span>. It requires two text files in tab-delimited format:</p>
+<p>margheRita is intended to be used after having done a number of data
+acquisition steps through MS-Dial <span class="citation">(<a href="#ref-Tsugawa2015">Tsugawa et al. 2015</a>)</span>. It requires two
+text files in tab-delimited format:</p>
 <ul>
 <li>
-<strong>feature data file</strong>, which must include feature identifiers, m/z values, retention times, MS/MS spectra and feature abundances across samples; usually, this file is generated by MS-Dial;</li>
+<strong>feature data file</strong>, which must include feature
+identifiers, m/z values, retention times, MS/MS spectra and feature
+abundances across samples; usually, this file is generated by
+MS-Dial;</li>
 <li>
-<strong>sample annotation file</strong>, which must include the following mandatory columns: “id,” “injection_order,” “batch,” “class,” “biological_rep” and “technical_rep.”</li>
+<strong>sample annotation file</strong>, which must include the
+following mandatory columns: “id”, “injection_order”, “batch”, “class”,
+“biological_rep” and “technical_rep”.</li>
 </ul>
 <p>A couple of <strong>remarks</strong>:</p>
 <ul>
 <li><p>short sample ids yield better figures;</p></li>
-<li><p>the collapse of technical replicates (see below) takes place over all samples that share the same concatenation of “class” and “biological_rep” values.</p></li>
+<li><p>the collapse of technical replicates (see below) takes place over
+all samples that share the same concatenation of “class” and
+“biological_rep” values.</p></li>
 </ul>
-<p>The function <code><a href="../reference/read_input_file.html">read_input_file()</a></code> read the two files and creates the “mRList” object, which is used by most of the margheRita functions as main input/output:</p>
+<p>The function <code><a href="../reference/read_input_file.html">read_input_file()</a></code> read the two files and
+creates the “mRList” object, which is used by most of the margheRita
+functions as main input/output:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/read_input_file.html">read_input_file</a></span><span class="op">(</span>feature_file <span class="op">=</span> <span class="st">"MS-Dial_file.txt"</span>, sample_file <span class="op">=</span> <span class="st">"sample_info.txt"</span><span class="op">)</span></span></code></pre></div>
-<p>Please, also consider that, to properly split QC samples, you must indicate exactly “QC” as class of a sample in the sample_file.</p>
+<p>Please, also consider that, to properly split QC samples, you must
+indicate exactly “QC” as class of a sample in the sample_file.</p>
 <p>The initial mRList object contains the following elements:</p>
 <table class="table">
 <thead><tr class="header">
@@ -164,27 +213,27 @@
 </tr>
 </tbody>
 </table>
-<pre><code><span><span class="co">##      DD_mealC_t7_1 MM_mealB_t0_1 AA_mealA_t0_1</span></span>
-<span><span class="co">## F506      108.1681      141.9220      314.8479</span></span>
-<span><span class="co">## F507      462.1838      466.3308      810.1950</span></span>
-<span><span class="co">## F511    52674.7600    79656.2100    24772.5900</span></span>
-<span><span class="co">## F513     2300.2920     9686.2540      696.9471</span></span>
-<span><span class="co">## F515    52686.7100    79673.6700    24777.8200</span></span>
-<span><span class="co">## F576      685.8444     2175.1690     2713.2550</span></span></code></pre>
-<pre><code><span><span class="co">##      Feature_ID                                                MSDialName</span></span>
-<span><span class="co">## F506       F506                                                   Unknown</span></span>
-<span><span class="co">## F507       F507                                                   Unknown</span></span>
-<span><span class="co">## F511       F511 Trimethylamine N-oxide; CE30; UYPYRKYUKCHHIB-UHFFFAOYSA-N</span></span>
-<span><span class="co">## F513       F513                                                   Unknown</span></span>
-<span><span class="co">## F515       F515                                   Trimethylamine??N-oxide</span></span>
-<span><span class="co">## F576       F576                                                   Unknown</span></span>
-<span><span class="co">##      MSDialSMILES    rt       mz</span></span>
-<span><span class="co">## F506         null 1.260 76.03783</span></span>
-<span><span class="co">## F507         null 0.868 76.03820</span></span>
-<span><span class="co">## F511   CN(=O)(C)C 0.888 76.07437</span></span>
-<span><span class="co">## F513         null 1.148 76.07460</span></span>
-<span><span class="co">## F515   O=N(C)(C)C 0.855 76.07492</span></span>
-<span><span class="co">## F576         null 4.846 81.06902</span></span></code></pre>
+<pre><code><span><span class="co">##       DD_mealC_t7_1 MM_mealB_t0_1 AA_mealA_t0_1</span></span>
+<span><span class="co">## F507       462.1838      466.3308      810.1950</span></span>
+<span><span class="co">## F515     52686.7100    79673.6700    24777.8200</span></span>
+<span><span class="co">## F848       919.8575     1276.5430      480.5994</span></span>
+<span><span class="co">## F888      2098.4130     2152.0100     2329.6450</span></span>
+<span><span class="co">## F1016    12598.9400     3880.9030     4511.1170</span></span>
+<span><span class="co">## F1076      305.0213      116.4260      184.2786</span></span></code></pre>
+<pre><code><span><span class="co">##       Feature_ID                                                  MSDialName</span></span>
+<span><span class="co">## F507        F507                                                     Unknown</span></span>
+<span><span class="co">## F515        F515                                     Trimethylamine??N-oxide</span></span>
+<span><span class="co">## F848        F848                                                     Unknown</span></span>
+<span><span class="co">## F888        F888                                                     Unknown</span></span>
+<span><span class="co">## F1016      F1016 w/o MS2:3-Hydroxypyridine; CE0; GRFNBEZIAWKNCO-UHFFFAOYSA-N</span></span>
+<span><span class="co">## F1076      F1076                                                     Unknown</span></span>
+<span><span class="co">##       MSDialSMILES              Ontology    rt</span></span>
+<span><span class="co">## F507          null                  null 0.868</span></span>
+<span><span class="co">## F515    O=N(C)(C)C Trialkyl amine oxides 0.855</span></span>
+<span><span class="co">## F848          null                  null 1.630</span></span>
+<span><span class="co">## F888          null                  null 1.435</span></span>
+<span><span class="co">## F1016  c1cc(cnc1)O      Hydroxypyridines 1.324</span></span>
+<span><span class="co">## F1076         null                  null 1.384</span></span></code></pre>
 <pre><code><span><span class="co">##                          id injection_order batch class technical_rep</span></span>
 <span><span class="co">## DD_mealC_t7_1 DD_mealC_t7_1              14     1    DD             1</span></span>
 <span><span class="co">## MM_mealB_t0_1 MM_mealB_t0_1              15     1    MM             1</span></span>
@@ -199,28 +248,32 @@
 <span><span class="co">## AA_mealC_t1_1      mealC_t01   AA_mealC_t01 mealC  t01  AA_mealC</span></span>
 <span><span class="co">## DD_mealA_t6_1      mealA_t06   DD_mealA_t06 mealA  t06  DD_mealA</span></span>
 <span><span class="co">## MM_mealC_t8_1      mealC_t08   MM_mealC_t08 mealC  t08  MM_mealC</span></span></code></pre>
-<pre><code><span><span class="co">##            QC01       QC07       QC23</span></span>
-<span><span class="co">## F506   347.2336   162.1097   216.9347</span></span>
-<span><span class="co">## F507   857.4278   481.7928   968.1245</span></span>
-<span><span class="co">## F511 71377.8900 38373.6100 61439.0300</span></span>
-<span><span class="co">## F513  6684.7820  2336.0220  4889.8950</span></span>
-<span><span class="co">## F515 71396.5500 38378.4600 60577.0500</span></span>
-<span><span class="co">## F576  1095.8860   699.0059   994.5408</span></span></code></pre>
+<pre><code><span><span class="co">##             QC16       QC19        QC32</span></span>
+<span><span class="co">## F507    357.4786   812.2931   158.57320</span></span>
+<span><span class="co">## F515  28499.6900 63226.5000 25997.21000</span></span>
+<span><span class="co">## F848    429.7289   384.7868   197.77240</span></span>
+<span><span class="co">## F888   1403.3610  1588.5870   758.74820</span></span>
+<span><span class="co">## F1016  2369.6350  3496.3000  1908.29200</span></span>
+<span><span class="co">## F1076   101.8414   322.3278    21.41965</span></span></code></pre>
 <pre><code><span><span class="co">##        id injection_order batch class technical_rep biological_rep</span></span>
-<span><span class="co">## QC01 QC01               9     1    QC             1             QC</span></span>
-<span><span class="co">## QC07 QC07              25     1    QC             7             QC</span></span>
-<span><span class="co">## QC23 QC23             131     1    QC            23             QC</span></span>
-<span><span class="co">## QC26 QC26             144     1    QC            26             QC</span></span>
-<span><span class="co">## QC29 QC29             167     1    QC            29             QC</span></span>
-<span><span class="co">## QC30 QC30             168     1    QC            30             QC</span></span>
+<span><span class="co">## QC16 QC16              84     1    QC            16             QC</span></span>
+<span><span class="co">## QC19 QC19             107     1    QC            19             QC</span></span>
+<span><span class="co">## QC32 QC32             180     1    QC            32             QC</span></span>
+<span><span class="co">## QC34 QC34             192     1    QC            34             QC</span></span>
+<span><span class="co">## QC35 QC35             203     2    QC            35             QC</span></span>
+<span><span class="co">## QC37 QC37             214     2    QC            37             QC</span></span>
 <span><span class="co">##      subj_meal_time meal time subj_meal</span></span>
-<span><span class="co">## QC01          QC_QC   QC   QC     QC_QC</span></span>
-<span><span class="co">## QC07          QC_QC   QC   QC     QC_QC</span></span>
-<span><span class="co">## QC23          QC_QC   QC   QC     QC_QC</span></span>
-<span><span class="co">## QC26          QC_QC   QC   QC     QC_QC</span></span>
-<span><span class="co">## QC29          QC_QC   QC   QC     QC_QC</span></span>
-<span><span class="co">## QC30          QC_QC   QC   QC     QC_QC</span></span></code></pre>
-<p>The full version of the “Urine” dataset, which was used for margheRita assessment and to generate this documentation, is available at <a href="https://doi.org/10.5281/zenodo.11243781" class="external-link uri">https://doi.org/10.5281/zenodo.11243781</a>, files “Urine_RP_NEG_norm.txt” and “Urine_RP_POS_norm.txt.” The corresponding sample information files can be accessed as follows:</p>
+<span><span class="co">## QC16          QC_QC   QC   QC     QC_QC</span></span>
+<span><span class="co">## QC19          QC_QC   QC   QC     QC_QC</span></span>
+<span><span class="co">## QC32          QC_QC   QC   QC     QC_QC</span></span>
+<span><span class="co">## QC34          QC_QC   QC   QC     QC_QC</span></span>
+<span><span class="co">## QC35          QC_QC   QC   QC     QC_QC</span></span>
+<span><span class="co">## QC37          QC_QC   QC   QC     QC_QC</span></span></code></pre>
+<p>The full version of the “Urine” dataset, which was used for
+margheRita assessment and to generate this documentation, is available
+at <a href="https://doi.org/10.5281/zenodo.11243781" class="external-link uri">https://doi.org/10.5281/zenodo.11243781</a>, files
+“Urine_RP_NEG_norm.txt” and “Urine_RP_POS_norm.txt”. The corresponding
+sample information files can be accessed as follows:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample_file_NEG</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Urine_RP_NEG_norm_metadata.txt"</span>, package <span class="op">=</span> <span class="st">"margheRita"</span><span class="op">)</span></span>
 <span><span class="va">sample_file_POS</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"Urine_RP_POS_norm_metadata.txt"</span>, package <span class="op">=</span> <span class="st">"margheRita"</span><span class="op">)</span></span></code></pre></div>
@@ -228,76 +281,115 @@
 <div class="section level2">
 <h2 id="inter-operability">Inter-operability<a class="anchor" aria-label="anchor" href="#inter-operability"></a>
 </h2>
-<p>To support interoperability with other packages with a focus on metabolomics, the margheRitaList can be reorganized as a “MetaboSet” object, used by package “notame” <span class="citation">(<a href="#ref-Klavus2020" role="doc-biblioref">Klåvus et al. 2020</a>)</span> (see above the installation instruction to enable this opportunity):</p>
+<p>To support interoperability with other packages with a focus on
+metabolomics, the margheRitaList can be reorganized as a “MetaboSet”
+object, used by package “notame” <span class="citation">(<a href="#ref-Klavus2020">Klåvus et al. 2020</a>)</span> (see above the
+installation instruction to enable this opportunity):</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ms</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.metaboset.html">as.metaboset</a></span><span class="op">(</span><span class="va">mRList</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## MetaboSet object with 303 features and 253 samples.</span></span>
+<pre><code><span><span class="co">## MetaboSet object with 232 features and 253 samples.</span></span>
 <span><span class="co">## 10 QC samples included</span></span>
-<span><span class="co">## 303 non-flagged features, 0 flagged features.</span></span>
+<span><span class="co">## 232 non-flagged features, 0 flagged features.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## class:</span></span>
 <span><span class="co">##    DD: 81, MM: 81, AA: 81, QC: 10 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## The object has the following parts (splits):</span></span>
 <span><span class="co">##   FALSE:  features</span></span></code></pre>
-<p>or as “PomaSummarizedExperiment” object, used by package “POMA” <span class="citation">(<a href="#ref-Castellano2021" role="doc-biblioref">Castellano-Escuder et al. 2021</a>)</span>:</p>
+<p>or as “PomaSummarizedExperiment” object, used by package “POMA” <span class="citation">(<a href="#ref-Castellano2021">Castellano-Escuder et
+al. 2021</a>)</span>:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">se</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/as.PomaSummarizedExperiment.html">as.PomaSummarizedExperiment</a></span><span class="op">(</span><span class="va">mRList</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## class: SummarizedExperiment </span></span>
-<span><span class="co">## dim: 303 253 </span></span>
+<span><span class="co">## dim: 232 253 </span></span>
 <span><span class="co">## metadata(0):</span></span>
 <span><span class="co">## assays(1): ''</span></span>
-<span><span class="co">## rownames(303): F506 F513 ... F42170 F42216</span></span>
+<span><span class="co">## rownames(232): F1016 F1279 ... F42379 F42584</span></span>
 <span><span class="co">## rowData names(0):</span></span>
-<span><span class="co">## colnames(253): DD_mealC_t7_1 MM_mealB_t0_1 ... QC45 QC55</span></span>
+<span><span class="co">## colnames(253): DD_mealC_t7_1 MM_mealB_t0_1 ... QC47 QC51</span></span>
 <span><span class="co">## colData names(10): class biological_rep ... injection_order</span></span>
 <span><span class="co">##   technical_rep</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="filtering-and-normalization">Filtering and normalization<a class="anchor" aria-label="anchor" href="#filtering-and-normalization"></a>
 </h2>
-<p>The function <strong><code><a href="../reference/filtering.html">filtering()</a></code></strong> runs filters to exclude features/sample with many missing values, features with wrong m/z values and, lastly, performs imputation of missing values:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">filtering</span>(mL)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Samples with &gt;= 100 metabolites 243 / 243 </span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Features occurring in &gt;=  3 samples 604 / 604 </span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Features with appropriate m/z values: 548 </span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Features without appropriate m/z values: 56 </span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>No NAs<span class="sc">:</span> imputation not performed.</span></code></pre></div>
-<p>These three steps can be called independently through the function <code><a href="../reference/filter_NA.html">filter_NA()</a></code>, <code><a href="../reference/m_z_filtering.html">m_z_filtering()</a></code> and <code><a href="../reference/imputation.html">imputation()</a></code>, respectively. In particular, <code><a href="../reference/m_z_filtering.html">m_z_filtering()</a></code> remove features with m/z that have decimal value within [4, 8] (by default), while the imputation is performed replacing NA values with a random number, calculated between 10%-25% of the minimum value of the feature.</p>
+<p>The function <strong><code><a href="../reference/filtering.html">filtering()</a></code></strong> runs filters
+to exclude features/sample with many missing values, features with wrong
+m/z values and, lastly, performs imputation of missing values:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">filtering</span>(mL)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="co"># Samples with &gt;= 100 metabolites 243 / 243 </span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="co"># Features occurring in &gt;=  3 samples 604 / 604 </span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="co"># Features with appropriate m/z values: 548 </span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="co"># Features without appropriate m/z values: 56 </span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>No NAs<span class="sc">:</span> imputation not performed.</span></code></pre></div>
+<p>These three steps can be called independently through the function
+<code><a href="../reference/filter_NA.html">filter_NA()</a></code>, <code><a href="../reference/m_z_filtering.html">m_z_filtering()</a></code> and
+<code><a href="../reference/imputation.html">imputation()</a></code>, respectively. In particular,
+<code><a href="../reference/m_z_filtering.html">m_z_filtering()</a></code> remove features with m/z that have decimal
+value within [4, 8] (by default), while the imputation is performed
+replacing NA values with a random number, calculated between 10%-25% of
+the minimum value of the feature.</p>
 <p><img src="images/hist.mz.png" style="width:49.0%"><img src="images/hist.mz.filtered.png" style="width:49.0%"></p>
-<p>The function <code><a href="../reference/heatscatter_chromatography.html">heatscatter_chromatography()</a></code> creates a graphic overview of the mz and rt values in the dataset:</p>
+<p>The function <code><a href="../reference/heatscatter_chromatography.html">heatscatter_chromatography()</a></code> creates a
+graphic overview of the mz and rt values in the dataset:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/heatscatter_chromatography.html">heatscatter_chromatography</a></span><span class="op">(</span><span class="va">mL</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/hs.png" style="width:100.0%"></p>
-<p>margheRita provides three ways for <strong>normalizing</strong> metabolite profiles:</p>
+<p>margheRita provides three ways for <strong>normalizing</strong>
+metabolite profiles:</p>
 <ul>
-<li>“log,” the log2 of metabolite abundances;</li>
-<li>“reference,” every sample is divided by a reference value;</li>
-<li>“pqn,” probabilistic quotient normalization <span class="citation">(<a href="#ref-Dieterle2006" role="doc-biblioref">Dieterle et al. 2006</a>)</span>;</li>
+<li>“log”, the log2 of metabolite abundances;</li>
+<li>“reference”, every sample is divided by a reference value;</li>
+<li>“pqn”, probabilistic quotient normalization <span class="citation">(<a href="#ref-Dieterle2006">Dieterle et al.
+2006</a>)</span>;</li>
 </ul>
-<p>For “reference” and “pqn” methods, the column <code>reference</code> must be present in <code>mRList$metab_ann</code>. If missing, the function <code><a href="../reference/calc_reference.html">calc_reference()</a></code> sets up such column using average metabolite values and medians of QC samples. For example, here’s a call to <code><a href="../reference/normalize_profiles.html">normalize_profiles()</a></code> using pqn:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL, <span class="at">method =</span> <span class="st">"pqn"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>PQN normalization</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>No reference profile found, using <span class="fu">calc_reference</span>() function...</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>Using QC...</span></code></pre></div>
-<p>The comparison of the coefficient of variation of a metabolite in relation to QC samples provides a means to exclude low quality features. In particular, only features that have a CV ratio between no-QC samples and QC sample higher than a given threshold (by default 1) are kept:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">CV_ratio</span>(<span class="at">mRList =</span> mL_norm)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>Summary of CV <span class="fu">ratio</span> (samples <span class="sc">/</span> QC)<span class="sc">:</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a> <span class="fl">0.3593</span>  <span class="fl">0.8025</span>  <span class="fl">1.1032</span>  <span class="fl">1.4645</span>  <span class="fl">1.6516</span> <span class="fl">13.4896</span> </span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Metabolites with appropriate CV 303 / 539 </span></span></code></pre></div>
-<p>The distributions of metabolite relative log-abundances can be calculated and visualized by means of:</p>
+<p>For “reference” and “pqn” methods, the column <code>reference</code>
+must be present in <code>mRList$metab_ann</code>. If missing, the
+function <code><a href="../reference/calc_reference.html">calc_reference()</a></code> sets up such column using average
+metabolite values and medians of QC samples. For example, here’s a call
+to <code><a href="../reference/normalize_profiles.html">normalize_profiles()</a></code> using pqn:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL, <span class="at">method =</span> <span class="st">"pqn"</span>)</span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>PQN normalization</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>No reference profile found, using <span class="fu">calc_reference</span>() function...</span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>Using QC...</span></code></pre></div>
+<p>The comparison of the coefficient of variation of a metabolite in
+relation to QC samples provides a means to exclude low quality features.
+In particular, only features that have a CV ratio between no-QC samples
+and QC sample higher than a given threshold (by default 1) are kept:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>mL_norm <span class="ot">&lt;-</span> <span class="fu">CV_ratio</span>(<span class="at">mRList =</span> mL_norm)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>Summary of CV <span class="fu">ratio</span> (samples <span class="sc">/</span> QC)<span class="sc">:</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>   Min. <span class="dv">1</span>st Qu.  Median    Mean <span class="dv">3</span>rd Qu.    Max. </span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a> <span class="fl">0.3593</span>  <span class="fl">0.8025</span>  <span class="fl">1.1032</span>  <span class="fl">1.4645</span>  <span class="fl">1.6516</span> <span class="fl">13.4896</span> </span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co"># Metabolites with appropriate CV 303 / 539 </span></span></code></pre></div>
+<p>The distributions of metabolite relative log-abundances can be
+calculated and visualized by means of:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RLA.html">RLA</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL</span><span class="op">)</span></span></code></pre></div>
-<p>Typically, after normalization, the various samples should have similar distributions of relative log-<em>abundance</em>, a powerful tool to visualize unwanted variation in high-dimensional data <span class="citation">(<a href="#ref-Gandolfo2017" role="doc-biblioref">Gandolfo 2018</a>)</span>. <img src="images/rla.png" style="width:100.0%"></p>
+<p>Typically, after normalization, the various samples should have
+similar distributions of relative log-<em>abundance</em>, a powerful
+tool to visualize unwanted variation in high-dimensional data <span class="citation">(<a href="#ref-Gandolfo2017">Gandolfo 2018</a>)</span>.
+<img src="images/rla.png" style="width:100.0%"></p>
 </div>
 <div class="section level2">
 <h2 id="principal-component-analysis">Principal Component Analysis<a class="anchor" aria-label="anchor" href="#principal-component-analysis"></a>
 </h2>
-<p>margheRita performs Principal Component Analysis (PCA) using the function <code><a href="../reference/mR_pca.html">mR_pca()</a></code>, which relies on the package pca_methods <span class="citation">(<a href="#ref-Stacklies2007" role="doc-biblioref">Stacklies et al. 2007</a>)</span>. Besides choosing the scaling method (argument <code>scaling</code>) and number of PCs (<code>nPcS</code>), it allows to include/exclude quality control samples by means of argument <code>include_QC</code>:</p>
+<p>margheRita performs Principal Component Analysis (PCA) using the
+function <code><a href="../reference/mR_pca.html">mR_pca()</a></code>, which relies on the package pca_methods
+<span class="citation">(<a href="#ref-Stacklies2007">Stacklies et al.
+2007</a>)</span>. Besides choosing the scaling method (argument
+<code>scaling</code>) and number of PCs (<code>nPcS</code>), it allows
+to include/exclude quality control samples by means of argument
+<code>include_QC</code>:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mR_pca.html">mR_pca</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm</span>, nPcs<span class="op">=</span><span class="fl">5</span>, scaling<span class="op">=</span><span class="st">"uv"</span>, include_QC<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>The results are added to the mRList in the element <code>pca</code>. It also provides some plots, like the visualization of distribution of loadings for all-pairs of the top 5 PCs. The plots are directly saved in the current working directory (or in the sub directory created with the argument <code>dirout</code>). The results of PCA can be plotted using <code><a href="../reference/Plot2DPCA.html">Plot2DPCA()</a></code> function. The argument <code>col_by</code> enables the choice of the <code>mRList$sample_ann</code> column to be used to color samples:</p>
+<p>The results are added to the mRList in the element <code>pca</code>.
+It also provides some plots, like the visualization of distribution of
+loadings for all-pairs of the top 5 PCs. The plots are directly saved in
+the current working directory (or in the sub directory created with the
+argument <code>dirout</code>). The results of PCA can be plotted using
+<code><a href="../reference/Plot2DPCA.html">Plot2DPCA()</a></code> function. The argument <code>col_by</code>
+enables the choice of the <code>mRList$sample_ann</code> column to be
+used to color samples:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/Plot2DPCA.html">Plot2DPCA</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm</span>, pcx<span class="op">=</span><span class="fl">1</span>, pcy<span class="op">=</span><span class="fl">2</span>, col_by<span class="op">=</span><span class="st">"class"</span>, include_QC<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/scores.png" style="width:100.0%"></p>
@@ -305,24 +397,32 @@
 <div class="section level2">
 <h2 id="removing-samples">Removing samples<a class="anchor" aria-label="anchor" href="#removing-samples"></a>
 </h2>
-<p>It is common that the inspection of the similarity among samples (e.g. distribution over the top PCs, RLA) rises concerns about the quality of some sample. The function <code><a href="../reference/remove_samples.html">remove_samples()</a></code> allows the user to remove one or more samples from the <code>mRList</code>. Here, for example we remove all “Blank” samples:</p>
+<p>It is common that the inspection of the similarity among samples
+(e.g. distribution over the top PCs, RLA) rises concerns about the
+quality of some sample. The function <code><a href="../reference/remove_samples.html">remove_samples()</a></code>
+allows the user to remove one or more samples from the
+<code>mRList</code>. Here, for example we remove all “Blank”
+samples:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_samples.html">remove_samples</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL</span>, ids <span class="op">=</span> <span class="st">"Blank"</span>, column <span class="op">=</span> <span class="st">"class"</span><span class="op">)</span></span></code></pre></div>
-<p>In this case, the function removes all samples with value “Blank” in the column “class” of sample annotation.</p>
+<p>In this case, the function removes all samples with value “Blank” in
+the column “class” of sample annotation.</p>
 </div>
 <div class="section level2">
 <h2 id="collapsing-techinical-replicates">Collapsing techinical replicates<a class="anchor" aria-label="anchor" href="#collapsing-techinical-replicates"></a>
 </h2>
-<p>The definition of mean metabolite abundance for every biological replicate is performed by means of <code><a href="../reference/collapse_tech_rep.html">collapse_tech_rep()</a></code> function:</p>
+<p>The definition of mean metabolite abundance for every biological
+replicate is performed by means of <code><a href="../reference/collapse_tech_rep.html">collapse_tech_rep()</a></code>
+function:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm_bio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/collapse_tech_rep.html">collapse_tech_rep</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##       AA_mealA_t00 AA_mealA_t01 AA_mealA_t02 AA_mealA_t03 AA_mealA_t04</span></span>
-<span><span class="co">## F506      372.5212     314.9164     641.2731     328.3019     183.8177</span></span>
-<span><span class="co">## F513      686.5940     583.5344     575.2296     517.7881     438.2448</span></span>
-<span><span class="co">## F576     1859.9782    3005.7498    2431.0017    1601.8178    2010.3795</span></span>
-<span><span class="co">## F848      384.4542     407.5416     431.8409     297.6953     204.5562</span></span>
-<span><span class="co">## F958      806.3609     718.5354     677.2341     629.7116     648.8627</span></span>
-<span><span class="co">## F1016    3728.8124    3083.9761    4084.9936    2558.5845    2531.7107</span></span></code></pre>
+<span><span class="co">## F1016    3853.8803   3214.17931    4165.5549   2600.95623    2690.2612</span></span>
+<span><span class="co">## F1279     212.1867     83.91119     100.4874     80.67319     127.2016</span></span>
+<span><span class="co">## F1428     243.9314    473.38357     449.7928    256.22765     420.9511</span></span>
+<span><span class="co">## F1686    3185.0454   1903.93022    2353.6457   1303.02493    1248.5379</span></span>
+<span><span class="co">## F1768    4211.8944   7777.06654    4226.5099   3126.18720    4583.2071</span></span>
+<span><span class="co">## F1814    1001.8547    700.26362     686.1595    631.03315     819.4091</span></span></code></pre>
 <pre><code><span><span class="co">##              class_biorep class biological_rep</span></span>
 <span><span class="co">## AA_mealA_t00 AA_mealA_t00    AA      mealA_t00</span></span>
 <span><span class="co">## AA_mealA_t01 AA_mealA_t01    AA      mealA_t01</span></span>
@@ -334,61 +434,86 @@
 <div class="section level2">
 <h2 id="statistical-analysis">Statistical analysis<a class="anchor" aria-label="anchor" href="#statistical-analysis"></a>
 </h2>
-<p>MargheRita provides some functions to calculate mean and variability, fold changes and to test for metabolite variations.</p>
-<p>The function <code><a href="../reference/mean_median_stdev_samples.html">mean_median_stdev_samples()</a></code> calculates mean, median and standard deviation of metabolite abundance according to the sample classes specified in the column “class” of sample annotation:</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean_median_stdev_samples</span>(mL_norm_bio)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>Calculating means...</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>Calculating medians...</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>Calculating standard deviations...</span></code></pre></div>
-<p>The function <code><a href="../reference/univariate.html">univariate()</a></code> performs dataset-wide statistical tests (Student t-tests, Wilcoxon test, Anova and Kruskal-Wallis test) between levels of a particular factor defined in the sample annotation:</p>
+<p>MargheRita provides some functions to calculate mean and variability,
+fold changes and to test for metabolite variations.</p>
+<p>The function <code><a href="../reference/mean_median_stdev_samples.html">mean_median_stdev_samples()</a></code> calculates
+mean, median and standard deviation of metabolite abundance according to
+the sample classes specified in the column “class” of sample
+annotation:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">mean_median_stdev_samples</span>(mL_norm_bio)</span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span>
+<span id="cb26-3"><a href="#cb26-3" tabindex="-1"></a>Calculating means...</span>
+<span id="cb26-4"><a href="#cb26-4" tabindex="-1"></a>Calculating medians...</span>
+<span id="cb26-5"><a href="#cb26-5" tabindex="-1"></a>Calculating standard deviations...</span></code></pre></div>
+<p>The function <code><a href="../reference/univariate.html">univariate()</a></code> performs dataset-wide
+statistical tests (Student t-tests, Wilcoxon test, Anova and
+Kruskal-Wallis test) between levels of a particular factor defined in
+the sample annotation:</p>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm_bio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/univariate.html">univariate</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, exp.levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AA"</span>, <span class="st">"DD"</span>, <span class="st">"MM"</span><span class="op">)</span>, exp.factor <span class="op">=</span> <span class="st">"class"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##                F            p            q        DD-AA        MM-AA</span></span>
-<span><span class="co">## F506   56.603887 6.500895e-16 9.379863e-15 0.000000e+00 0.000000e+00</span></span>
-<span><span class="co">## F513   11.464627 4.315428e-05 1.379828e-04 6.623790e-02 2.340794e-05</span></span>
-<span><span class="co">## F576   27.699625 8.141555e-10 6.167228e-09 8.774088e-06 6.781009e-10</span></span>
-<span><span class="co">## F848    1.299677 2.784574e-01 3.486471e-01 3.061504e-01 9.812010e-01</span></span>
-<span><span class="co">## F958  144.803482 5.517268e-27 2.786220e-25 0.000000e+00 3.929312e-01</span></span>
-<span><span class="co">## F1016  17.463922 5.400686e-07 2.517551e-06 3.059389e-02 4.030582e-03</span></span>
-<span><span class="co">##              MM-DD</span></span>
-<span><span class="co">## F506  8.275582e-01</span></span>
-<span><span class="co">## F513  3.658063e-02</span></span>
-<span><span class="co">## F576  7.333725e-02</span></span>
-<span><span class="co">## F848  4.027080e-01</span></span>
-<span><span class="co">## F958  0.000000e+00</span></span>
-<span><span class="co">## F1016 2.703868e-07</span></span></code></pre>
-<p>The full results of the analysis are saved to the text file <test_method>.txt.</test_method></p>
-<p>We found useful providing a function to retrieve the list of significant features:</p>
+<pre><code><span><span class="co">##                F            p            q      DD-AA       MM-AA        MM-DD</span></span>
+<span><span class="co">## F1016 18.0246447 3.673489e-07 2.185255e-06 0.02663059 0.003553051 1.816046e-07</span></span>
+<span><span class="co">## F1279  6.6090342 2.231185e-03 5.626465e-03 0.08027259 0.333008384 1.552118e-03</span></span>
+<span><span class="co">## F1428  4.2468914 1.775329e-02 3.295010e-02 0.97584136 0.047340701 2.798801e-02</span></span>
+<span><span class="co">## F1686  8.9176173 3.252418e-04 9.673858e-04 0.56144925 0.009112942 3.361932e-04</span></span>
+<span><span class="co">## F1768  0.6264307 5.371634e-01 6.020382e-01 0.54934394 0.663716847 9.818341e-01</span></span>
+<span><span class="co">## F1814  1.1137054 3.335041e-01 4.093807e-01 0.98299417 0.360666302 4.595648e-01</span></span></code></pre>
+<p>The full results of the analysis are saved to the text file
+<test_method>.txt.</test_method></p>
+<p>We found it helpful to provide a function for retrieving the list of
+significant features:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "F3957"  "F18426" "F19199" "F10248" "F9507"  "F958"</span></span></code></pre>
+<code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">0.05</span>, feature_id <span class="op">=</span> <span class="st">"Feature_ID"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## [1] "F3957"  "F30141" "F9507"  "F2833"  "F35354" "F3081"</span></span></code></pre>
+<p>By default the function provides the Feature_ID. After having
+performed metabolite annotation, it is also possible to retrieve “Name”
+and “PubChemCID” (see below).</p>
 </div>
 <div class="section level2">
 <h2 id="metabolite-identification">Metabolite identification<a class="anchor" aria-label="anchor" href="#metabolite-identification"></a>
 </h2>
-<p>Metabolite identification in margheRita is performed by means of the function <code><a href="../reference/metabolite_identification.html">metabolite_identification()</a></code>, which requires an mRList object and a reference library with MS and MS/MS metabolite information. The identification is possible up to level-1, provided that the required information are available in the reference library. The identification is based on the quantification of the following quantities:</p>
+<p>Metabolite identification in margheRita is performed by means of the
+function <code><a href="../reference/metabolite_identification.html">metabolite_identification()</a></code>, which requires an
+mRList object and a reference library with MS and MS/MS metabolite
+information. The identification is possible up to level-1, provided that
+the required information are available in the reference library. The
+identification is based on the quantification of the following
+quantities:</p>
 <ul>
 <li>retention time (RT) error: <span class="math display">\[\epsilon_{rt}(i,j) = |t(i) - t(j)|\]</span>
 </li>
-<li>ppm error: <span class="math display">\[\epsilon_{m/z}(i,j) = \frac{|x(i) - x(j)|}{x(j)} \cdot 10^6\]</span>
+<li>ppm error: <span class="math display">\[\epsilon_{m/z}(i,j) =
+\frac{|x(i) - x(j)|}{x(j)} \cdot 10^6\]</span>
 </li>
-<li>percent relative intensity error: <span class="math display">\[\epsilon_{I}(i,j) = \frac{|I(i) - I(j)|}{I(j)} \cdot 100\]</span>
+<li>percent relative intensity error: <span class="math display">\[\epsilon_{I}(i,j) = \frac{|I(i) - I(j)|}{I(j)}
+\cdot 100\]</span>
 </li>
 </ul>
-<p>Such quantities are used to score the similarity among precursors of features and metabolites, as well as their MS/MS peaks.</p>
+<p>Such quantities are used to score the similarity among precursors of
+features and metabolites, as well as their MS/MS peaks.</p>
 <div class="section level3">
 <h3 id="spectral-library">Spectral library<a class="anchor" aria-label="anchor" href="#spectral-library"></a>
 </h3>
-<p>The function <code><a href="../reference/select_library.html">select_library()</a></code> provides a means to select any of two sources:</p>
+<p>The function <code><a href="../reference/select_library.html">select_library()</a></code> provides a means to select
+any of two sources:</p>
 <ul>
-<li><p><strong>margheRita</strong>, which contains MS and MS/MS information for about 800 metabolites spanning several biological functions; these libraries provideup to level 1 identifications in positive and negative modalities for “HILIC,” “LipC8,” “pZIC,” “RPLong” and “RPShort” chromatographic columns, that are acquired following the methods reported in the supplementary material of <span class="citation"><a href="#ref-Mosca2024" role="doc-biblioref">Mosca et al.</a> (<a href="#ref-Mosca2024" role="doc-biblioref">2024</a>)</span>.</p></li>
-<li><p><strong>MS-Dial</strong>, which covers a much larger set of metabolites (<span class="math inline">\(10^5\)</span>), but is limited to level 2 identifications in positive and negative modalities.</p></li>
+<li><p><strong>margheRita</strong>, which contains MS and MS/MS
+information for about 800 metabolites spanning several biological
+functions; these libraries provideup to level 1 identifications in
+positive and negative modalities for “HILIC”, “LipC8”, “pZIC”, “RPLong”
+and “RPShort” chromatographic columns, that are acquired following the
+methods reported in the supplementary material of <span class="citation">Mosca et al. (<a href="#ref-Mosca2024">2024</a>)</span>.</p></li>
+<li><p><strong>MS-Dial</strong>, which covers a much larger set of
+metabolites (<span class="math inline">\(10^5\)</span>), but is limited
+to level 2 identifications in positive and negative modalities.</p></li>
 </ul>
-<p>In this example, we load the margheRita library in positive modality with retention times of RPShort columns and we discard all peaks with relative intensity less than 10:</p>
+<p>In this example, we load the margheRita library in positive modality
+with retention times of RPShort columns and we discard all peaks with
+relative intensity less than 10:</p>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mR_library</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_library.html">select_library</a></span><span class="op">(</span>column <span class="op">=</span> <span class="st">"RPShort"</span>, mode <span class="op">=</span> <span class="st">"POS"</span>, accept_RI<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<p>The resulting <code>mR_library</code> is a list that contains metadata and MS information about precursors</p>
+<p>The resulting <code>mR_library</code> is a list that contains
+metadata and MS information about precursors</p>
 <pre><code><span><span class="co">##      ID      CAS                         Name   rt        mz PubChemCID</span></span>
 <span><span class="co">## L10 L10 485-80-3 S-(5'-Adenosyl)-L-methionine 0.80 399.14452      34756</span></span>
 <span><span class="co">## L14 L14  61-19-8      Adenosine monophosphate 1.40 348.07037       6083</span></span>
@@ -436,114 +561,139 @@
 <div class="section level3">
 <h3 id="identification">Identification<a class="anchor" aria-label="anchor" href="#identification"></a>
 </h3>
-<p>Once the library is selected, metabolite identification can be performed by the homonymous function, where the argument <code>features</code> specifies the features to be considered (all features if it is left <code>features=NULL</code>, as in the following example):</p>
+<p>Once the library is selected, metabolite identification can be
+performed by the homonymous function, where the argument
+<code>features</code> specifies the features to be considered (all
+features if it is left <code>features=NULL</code>, as in the following
+example):</p>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL_norm_bio</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/metabolite_identification.html">metabolite_identification</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, library_list <span class="op">=</span> <span class="va">mR_library</span><span class="op">)</span></span></code></pre></div>
-<p>The function <code><a href="../reference/metabolite_identification.html">metabolite_identification()</a></code> has a series of parameters that can be adjusted to optimize the identification process (see its documentation). When metabolite identification is applied on a large number of features (e.g., <span class="math inline">\(10^4\)</span>), it is common to obtain many-to-many associations between features and metabolite. By default, this redundancy is addressed following an algorithm that considers the classification (Level 1, Level 2, Level 3a and Level 3b), the errors (see above) and a series of quantitative and qualitative scores (see below and <span class="citation"><a href="#ref-Mosca2024" role="doc-biblioref">Mosca et al.</a> (<a href="#ref-Mosca2024" role="doc-biblioref">2024</a>)</span> for further details). This function adds/modifies the following items in the mRList and saves each of them to a sheet of the xlsx file “metabolite_identification.xlsx”:</p>
+<p>The function <code><a href="../reference/metabolite_identification.html">metabolite_identification()</a></code> has a series of
+parameters that can be adjusted to optimize the identification process
+(see its documentation). When metabolite identification is applied on a
+large number of features (e.g., <span class="math inline">\(10^4\)</span>), it is common to obtain
+many-to-many associations between features and metabolite. By default,
+this redundancy is addressed following an algorithm that considers the
+classification (Level 1, Level 2, Level 3a and Level 3b), the errors
+(see above) and a series of quantitative and qualitative scores (see
+below and <span class="citation">Mosca et al. (<a href="#ref-Mosca2024">2024</a>)</span> for further details). This
+function adds/modifies the following items in the mRList and saves each
+of them to a sheet of the xlsx file
+“metabolite_identification.xlsx”:</p>
 <ul>
 <li>
-<code>mL_norm_bio$metabolite_identification$associations</code>: all the resulting associations (sheet “associations”)</li>
+<code>mL_norm_bio$metabolite_identification$associations</code>: all
+the resulting associations (sheet “associations”)</li>
 </ul>
-<pre><code><span><span class="co">##     Feature_ID    rt       mz RT_err     RT_class RT_flag ppm_error mass_flag</span></span>
-<span><span class="co">## 684     F14798 2.931 282.1190  0.431        super    TRUE 2.3543199      TRUE</span></span>
-<span><span class="co">## 165     F16399 5.698 299.1265  1.362 unacceptable   FALSE 4.4438533      TRUE</span></span>
-<span><span class="co">## 731      F9130 1.708 218.1370  0.388        super    TRUE 7.6480152      TRUE</span></span>
-<span><span class="co">## 296     F10165 4.346 231.1129  0.776   acceptable    TRUE 0.1823525      TRUE</span></span>
-<span><span class="co">## 317     F17972 7.157 316.2458  0.293        super    TRUE 7.6487003      TRUE</span></span>
+<pre><code><span><span class="co">##     Feature_ID    rt       mz RT_err     RT_class RT_flag  ppm_error mass_flag</span></span>
+<span><span class="co">## 515     F14798 2.931 282.1190  0.069        super    TRUE  2.3543199      TRUE</span></span>
+<span><span class="co">## 506      F6378 1.217 182.0811  0.413        super    TRUE  0.4029412      TRUE</span></span>
+<span><span class="co">## 126     F16399 5.698 299.1265  1.272 unacceptable   FALSE  4.4438533      TRUE</span></span>
+<span><span class="co">## 550      F9130 1.708 218.1370  0.658   acceptable    TRUE  7.6480152      TRUE</span></span>
+<span><span class="co">## 398      F2355 3.736 123.0427  0.464        super    TRUE 10.9677786      TRUE</span></span>
 <span><span class="co">##     mass_status ID_peaks peaks_found_ppm_RI matched_peaks_ratio</span></span>
-<span><span class="co">## 684       super     M228                  1           1.0000000</span></span>
-<span><span class="co">## 165       super    M1110                  5           0.7142857</span></span>
-<span><span class="co">## 731  acceptable     M505                  2           0.6666667</span></span>
-<span><span class="co">## 296       super    M1028                  9           0.6000000</span></span>
-<span><span class="co">## 317  acceptable    M1988                  3           0.6000000</span></span>
-<span><span class="co">##     precursor_in_MSMS    ID                                        Name rt_lib</span></span>
-<span><span class="co">## 684             FALSE  L800                           1-Methyladenosine   2.50</span></span>
-<span><span class="co">## 165             FALSE L1351                               Enterolactone   7.06</span></span>
-<span><span class="co">## 731             FALSE  L905                       Propionyl-L-carnitine   1.32</span></span>
-<span><span class="co">## 296             FALSE L1659 1,2,3,4-Tetrahydroharmane-3-carboxylic acid   3.57</span></span>
-<span><span class="co">## 317             FALSE L1706                        Decanoyl-L-carnitine   7.45</span></span>
-<span><span class="co">##       mz_lib                                                 SMILES Level</span></span>
-<span><span class="co">## 684 282.1197 CN1C=NC2=C(N=CN2[C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)C1=N     1</span></span>
-<span><span class="co">## 165 299.1278          C1C(C(C(=O)O1)CC2=CC(=CC=C2)O)CC3=CC(=CC=C3)O     2</span></span>
-<span><span class="co">## 731 218.1387                      CCC(=O)OC(CC([O-])=O)C[N+](C)(C)C     1</span></span>
-<span><span class="co">## 296 231.1128                       CC1NC(CC2=C1NC1=CC=CC=C21)C(O)=O     1</span></span>
-<span><span class="co">## 317 316.2482               CCCCCCCCCC(=O)OC(CC([O-])=O)C[N+](C)(C)C     1</span></span>
-<span><span class="co">##     Level_note</span></span>
-<span><span class="co">## 684           </span></span>
-<span><span class="co">## 165           </span></span>
-<span><span class="co">## 731           </span></span>
-<span><span class="co">## 296           </span></span>
-<span><span class="co">## 317</span></span></code></pre>
+<span><span class="co">## 515       super     M228                  1           1.0000000</span></span>
+<span><span class="co">## 506       super    M1569                  6           0.8571429</span></span>
+<span><span class="co">## 126       super    M1110                  5           0.7142857</span></span>
+<span><span class="co">## 550  acceptable     M505                  2           0.6666667</span></span>
+<span><span class="co">## 398      suffer     M145                  2           0.6666667</span></span>
+<span><span class="co">##     precursor_in_MSMS    ID                  Name rt_lib   mz_lib PubChemCID</span></span>
+<span><span class="co">## 515             FALSE  L801     1-Methyladenosine   3.00 282.1197      27476</span></span>
+<span><span class="co">## 506             FALSE   L77            L-Tyrosine   1.63 182.0812       6057</span></span>
+<span><span class="co">## 126             FALSE L1352         Enterolactone   6.97 299.1278   10685477</span></span>
+<span><span class="co">## 550             FALSE  L906 Propionyl-L-carnitine   1.05 218.1387     107738</span></span>
+<span><span class="co">## 398             FALSE  L480 4-Hydroxybenzaldehyde   4.20 123.0441        126</span></span>
+<span><span class="co">##                                                     SMILES Level Level_note</span></span>
+<span><span class="co">## 515 CN1C=NC2=C(N=CN2[C@@H]2O[C@H](CO)[C@@H](O)[C@H]2O)C1=N     1           </span></span>
+<span><span class="co">## 506                         N[C@@H](CC1=CC=C(O)C=C1)C(O)=O     1           </span></span>
+<span><span class="co">## 126          C1C(C(C(=O)O1)CC2=CC(=CC=C2)O)CC3=CC(=CC=C3)O     2           </span></span>
+<span><span class="co">## 550                      CCC(=O)OC(CC([O-])=O)C[N+](C)(C)C     1           </span></span>
+<span><span class="co">## 398                                      OC1=CC=C(C=O)C=C1     1</span></span></code></pre>
 <ul>
 <li>
-<code>mL_norm_bio$metabolite_identification$associations_summary</code>: a summary of the associations (“summary”):</li>
+<code>mL_norm_bio$metabolite_identification$associations_summary</code>:
+a summary of the associations (“summary”):</li>
 </ul>
-<pre><code><span><span class="co">##     Feature_ID    ID                                        Name Level</span></span>
-<span><span class="co">## 684     F14798  L800                           1-Methyladenosine     1</span></span>
-<span><span class="co">## 165     F16399 L1351                               Enterolactone     2</span></span>
-<span><span class="co">## 731      F9130  L905                       Propionyl-L-carnitine     1</span></span>
-<span><span class="co">## 296     F10165 L1659 1,2,3,4-Tetrahydroharmane-3-carboxylic acid     1</span></span>
-<span><span class="co">## 317     F17972 L1706                        Decanoyl-L-carnitine     1</span></span>
-<span><span class="co">##     Level_note RT_err ppm_error peaks_found_ppm_RI matched_peaks_ratio</span></span>
-<span><span class="co">## 684             0.431 2.3543199                  1           1.0000000</span></span>
-<span><span class="co">## 165             1.362 4.4438533                  5           0.7142857</span></span>
-<span><span class="co">## 731             0.388 7.6480152                  2           0.6666667</span></span>
-<span><span class="co">## 296             0.776 0.1823525                  9           0.6000000</span></span>
-<span><span class="co">## 317             0.293 7.6487003                  3           0.6000000</span></span></code></pre>
+<pre><code><span><span class="co">##     Feature_ID    ID                  Name PubChemCID Level Level_note RT_err</span></span>
+<span><span class="co">## 515     F14798  L801     1-Methyladenosine      27476     1             0.069</span></span>
+<span><span class="co">## 506      F6378   L77            L-Tyrosine       6057     1             0.413</span></span>
+<span><span class="co">## 126     F16399 L1352         Enterolactone   10685477     2             1.272</span></span>
+<span><span class="co">## 550      F9130  L906 Propionyl-L-carnitine     107738     1             0.658</span></span>
+<span><span class="co">## 398      F2355  L480 4-Hydroxybenzaldehyde        126     1             0.464</span></span>
+<span><span class="co">##      ppm_error peaks_found_ppm_RI matched_peaks_ratio</span></span>
+<span><span class="co">## 515  2.3543199                  1           1.0000000</span></span>
+<span><span class="co">## 506  0.4029412                  6           0.8571429</span></span>
+<span><span class="co">## 126  4.4438533                  5           0.7142857</span></span>
+<span><span class="co">## 550  7.6480152                  2           0.6666667</span></span>
+<span><span class="co">## 398 10.9677786                  2           0.6666667</span></span></code></pre>
 <ul>
 <li>
-<code>mL_norm_bio$metab_ann</code>: columns are added with main annotation info for each feature (here below we omit MS/MS spectra column for clarity) (“metab_ann”):</li>
+<code>mL_norm_bio$metab_ann</code>: columns are added with main
+annotation info for each feature (here below we omit MS/MS spectra
+column for clarity) (“metab_ann”):</li>
 </ul>
-<pre><code><span><span class="co">##     Feature_ID            MSDialName</span></span>
-<span><span class="co">## 94       F9130               Unknown</span></span>
-<span><span class="co">## 101     F10165               Unknown</span></span>
-<span><span class="co">## 111     F14798               Unknown</span></span>
-<span><span class="co">## 118     F16399 w/o MS2:Enterolactone</span></span>
-<span><span class="co">## 123     F17972               Unknown</span></span>
-<span><span class="co">##                                           MSDialSMILES</span></span>
-<span><span class="co">## 94                                                null</span></span>
-<span><span class="co">## 101                                               null</span></span>
-<span><span class="co">## 111                                               null</span></span>
-<span><span class="co">## 118 OC1=CC=CC(C[C@@H]2COC(=O)[C@H]2CC2=CC(O)=CC=C2)=C1</span></span>
-<span><span class="co">## 123                                               null</span></span>
-<span><span class="co">##                          Ontology    rt       mz quality reference    ID</span></span>
-<span><span class="co">## 94                           null 1.708 218.1370 0.13702  158.9981  L905</span></span>
-<span><span class="co">## 101                          null 4.346 231.1129 0.11285 1751.5100 L1659</span></span>
-<span><span class="co">## 111                          null 2.931 282.1190 0.11902 1903.7580  L800</span></span>
-<span><span class="co">## 118 Dibenzylbutyrolactone lignans 5.698 299.1265 0.12646 5182.2360 L1351</span></span>
-<span><span class="co">## 123                          null 7.157 316.2458 0.24582 6871.8990 L1706</span></span>
-<span><span class="co">##                                            Name Level Level_note RT_err</span></span>
-<span><span class="co">## 94                        Propionyl-L-carnitine     1             0.388</span></span>
-<span><span class="co">## 101 1,2,3,4-Tetrahydroharmane-3-carboxylic acid     1             0.776</span></span>
-<span><span class="co">## 111                           1-Methyladenosine     1             0.431</span></span>
-<span><span class="co">## 118                               Enterolactone     2             1.362</span></span>
-<span><span class="co">## 123                        Decanoyl-L-carnitine     1             0.293</span></span>
-<span><span class="co">##             ppm_error peaks_found_ppm_RI matched_peaks_ratio</span></span>
-<span><span class="co">## 94   7.64801518144863                  2   0.666666666666667</span></span>
-<span><span class="co">## 101 0.182352507340912                  9                 0.6</span></span>
-<span><span class="co">## 111   2.3543199472254                  1                   1</span></span>
-<span><span class="co">## 118  4.44385325480016                  5   0.714285714285714</span></span>
-<span><span class="co">## 123  7.64870030115516                  3                 0.6</span></span></code></pre>
+<pre><code><span><span class="co">##   Feature_ID                                                  MSDialName</span></span>
+<span><span class="co">## 1      F1016 w/o MS2:3-Hydroxypyridine; CE0; GRFNBEZIAWKNCO-UHFFFAOYSA-N</span></span>
+<span><span class="co">## 2      F1279                   w/o MS2:1-AMINOCYCLOPROPANE-1-CARBOXYLATE</span></span>
+<span><span class="co">## 3      F1428                         w/o MS2:L-2,3-DIAMINOPROPIONIC ACID</span></span>
+<span><span class="co">## 4      F1686                                                     Unknown</span></span>
+<span><span class="co">## 5      F1768                                            w/o MS2:Cytosine</span></span>
+<span><span class="co">## 6      F1814                                w/o MS2:1,4-Cyclohexanedione</span></span>
+<span><span class="co">##      MSDialSMILES            Ontology    rt reference    ID</span></span>
+<span><span class="co">## 1     c1cc(cnc1)O    Hydroxypyridines 1.324 3622.2065  L804</span></span>
+<span><span class="co">## 2  NC1(CC1)C(O)=O   Alpha amino acids 0.756  125.6144  L659</span></span>
+<span><span class="co">## 3    NCC(N)C(O)=O L-alpha-amino acids 6.306  370.6428  L936</span></span>
+<span><span class="co">## 4            null                null 1.356 1876.1420  L741</span></span>
+<span><span class="co">## 5 N=C1C=CN=C(O)N1         Pyrimidones 3.032 3053.4090  L353</span></span>
+<span><span class="co">## 6  O=C1CCC(=O)CC1      Cyclic ketones 1.875 1620.0855 L1637</span></span>
+<span><span class="co">##                                 Name PubChemCID Level Level_note</span></span>
+<span><span class="co">## 1                  2-Hydroxypyridine       8871     1           </span></span>
+<span><span class="co">## 2 1-Aminocyclopropanecarboxylic acid        535     3     mz, rt</span></span>
+<span><span class="co">## 3          2,3-Diaminopropionic acid      97328     3         mz</span></span>
+<span><span class="co">## 4                      2-Aminophenol       5801     1           </span></span>
+<span><span class="co">## 5                           Cytosine        597     2           </span></span>
+<span><span class="co">## 6                            Sorbate     643460     2           </span></span>
+<span><span class="co">##               RT_err        ppm_error peaks_found_ppm_RI matched_peaks_ratio</span></span>
+<span><span class="co">## 1 0.0759999999999998 4.82951665798968                  1                0.25</span></span>
+<span><span class="co">## 2  0.133999985694885 1.18986869152031               &lt;NA&gt;                &lt;NA&gt;</span></span>
+<span><span class="co">## 3              5.556  9.5405303184299               &lt;NA&gt;                &lt;NA&gt;</span></span>
+<span><span class="co">## 4              0.276 15.9361012171393                  1                0.25</span></span>
+<span><span class="co">## 5   2.17199998569489 3.05098033713283                  3   0.333333333333333</span></span>
+<span><span class="co">## 6              3.465 4.68425048911522                  1                 0.5</span></span></code></pre>
 <ul>
 <li>
-<code>mL_norm_bio$data_ann</code> (“data_ann”): the column “Name” is added :</li>
+<code>mL_norm_bio$data_ann</code> (“data_ann”): the column “Name” is
+added :</li>
 </ul>
-<pre><code><span><span class="co">##   Feature_ID                Name AA_mealA_t00 AA_mealA_t01 AA_mealA_t02</span></span>
-<span><span class="co">## 1       F850 Sarcosine;L-Alanine     2742.611    4025.7484    5473.4923</span></span>
-<span><span class="co">## 2      F1013   2-Hydroxypyridine     1764.002    1591.1996     748.3421</span></span>
-<span><span class="co">## 3      F1433        Malonic acid      118.468     100.5956     101.8788</span></span>
-<span><span class="co">## 4      F1514        Benzaldehyde     5348.574    6054.4923    4316.2360</span></span>
-<span><span class="co">## 5      F1686       2-Aminophenol     3393.074    1973.3114    2113.1814</span></span></code></pre>
-<p>Importantly, <strong>the feature-metabolite association filtering can be disabled</strong> (e.g. for exploratory analysis) setting <code>filter=FALSE</code>.</p>
+<pre><code><span><span class="co">##   Feature_ID                               Name PubChemCID AA_mealA_t00</span></span>
+<span><span class="co">## 1      F1016                  2-Hydroxypyridine       8871    3853.8803</span></span>
+<span><span class="co">## 2      F1279 1-Aminocyclopropanecarboxylic acid        535     212.1867</span></span>
+<span><span class="co">## 3      F1428          2,3-Diaminopropionic acid      97328     243.9314</span></span>
+<span><span class="co">## 4      F1686                      2-Aminophenol       5801    3185.0454</span></span>
+<span><span class="co">## 5      F1768                           Cytosine        597    4211.8944</span></span>
+<span><span class="co">## 6      F1814                            Sorbate     643460    1001.8547</span></span>
+<span><span class="co">##   AA_mealA_t01</span></span>
+<span><span class="co">## 1   3214.17931</span></span>
+<span><span class="co">## 2     83.91119</span></span>
+<span><span class="co">## 3    473.38357</span></span>
+<span><span class="co">## 4   1903.93022</span></span>
+<span><span class="co">## 5   7777.06654</span></span>
+<span><span class="co">## 6    700.26362</span></span></code></pre>
+<p>Importantly, <strong>the feature-metabolite association filtering can
+be disabled</strong> (e.g. for exploratory analysis) setting
+<code>filter=FALSE</code>.</p>
 </div>
 <div class="section level3">
 <h3 id="visualization">Visualization<a class="anchor" aria-label="anchor" href="#visualization"></a>
 </h3>
-<p>The spectra from all the features that match a metabolite can be inspected creating the following plot:</p>
+<p>The spectra from all the features that match a metabolite can be
+inspected creating the following plot:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/visualize_associated_spectra.html">visualize_associated_spectra</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, mR_library <span class="op">=</span> <span class="va">mR_library</span>, metabolite_id <span class="op">=</span> <span class="st">"L1660"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/L253_F3277_M1102_mirrored.jpg" style="width:90.0%"></p>
-<p>The function <code><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison()</a></code> draws heatmaps to visually compare ppm errors and RI differences between feature and metabolite spectra:</p>
+<p>The function <code><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison()</a></code> draws heatmaps to
+visually compare ppm errors and RI differences between feature and
+metabolite spectra:</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, metab_id <span class="op">=</span> <span class="st">"L1660"</span>, feature_id <span class="op">=</span> <span class="st">"F10165"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/e_mz_L253_M1102_F3277.jpg" style="width:49.0%"><img src="images/e_I_L253_M1102_F3277.jpg" style="width:49.0%"></p>
@@ -552,13 +702,17 @@
 <div class="section level2">
 <h2 id="metabolite-abundance-visualization">Metabolite abundance visualization<a class="anchor" aria-label="anchor" href="#metabolite-abundance-visualization"></a>
 </h2>
-<p>The function <code><a href="../reference/metab_boxplot.html">metab_boxplot()</a></code> draws boxplots of feature abundances grouped by the levels of a given factor:</p>
+<p>The function <code><a href="../reference/metab_boxplot.html">metab_boxplot()</a></code> draws boxplots of feature
+abundances grouped by the levels of a given factor:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/metab_boxplot.html">metab_boxplot</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, col_by<span class="op">=</span><span class="st">"class"</span>, group<span class="op">=</span><span class="st">"class"</span>, features <span class="op">=</span> <span class="st">"F3957"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/boxplot.F3957.png" style="width:70.0%"></p>
-<p>The function <code><a href="../reference/h_map.html">h_map()</a></code> provides heatmaps based on package ComplexHeatmap <span class="citation">(<a href="#ref-Gu2016" role="doc-biblioref">Gu, Eils, and Schlesner 2016</a>)</span>. Here we show the abundance of the most significant metabolites according to ANOVA test:</p>
+<p>The function <code><a href="../reference/h_map.html">h_map()</a></code> provides heatmaps based on package
+ComplexHeatmap <span class="citation">(<a href="#ref-Gu2016">Gu, Eils,
+and Schlesner 2016</a>)</span>. Here we show the abundance of the most
+significant metabolites according to ANOVA test:</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">10e-10</span>, feature_id <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">1e-9</span>, feature_id <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/h_map.html">h_map</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, scale_features<span class="op">=</span><span class="cn">TRUE</span>, column_ann<span class="op">=</span><span class="st">"class"</span>, data.use <span class="op">=</span> <span class="st">"data_ann"</span>, col_ann<span class="op">=</span> <span class="fu">pals</span><span class="fu">::</span><span class="fu"><a href="https://kwstat.github.io/pals/reference/discrete.html" class="external-link">trubetskoy</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>, features <span class="op">=</span> <span class="va">significant_features</span>, top <span class="op">=</span> <span class="cn">Inf</span>, use_top_annoteted_metab <span class="op">=</span> <span class="cn">TRUE</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, show_column_names<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/hm.png" style="width:99.0%"></p>
@@ -566,123 +720,185 @@
 <div class="section level2">
 <h2 id="exporting-metabolite-annotation-and-stastical-analysis-results">Exporting metabolite annotation and stastical analysis results<a class="anchor" aria-label="anchor" href="#exporting-metabolite-annotation-and-stastical-analysis-results"></a>
 </h2>
-<p>The function <code><a href="../reference/merge_stats_w_features.html">merge_stats_w_features()</a></code> joins the results of metabolite annotation and statistical analysis:</p>
+<p>The function <code><a href="../reference/merge_stats_w_features.html">merge_stats_w_features()</a></code> joins the results
+of metabolite annotation and statistical analysis:</p>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metab_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_stats_w_features.html">merge_stats_w_features</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, test_method <span class="op">=</span> <span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
-<p>It produces a list of data frames and an xlsx file creating with the following itmes/sheets:</p>
+<p>It produces a list of data frames and an xlsx file creating with the
+following itmes/sheets:</p>
 <ul>
-<li><p><code>metab_stat</code>: full table with feature annotation and statistical analysis results;</p></li>
-<li><p><code>metab_stat_feat</code>: same as <code>metab_stat</code>, with the addition of feature intensities;</p></li>
-<li><p><code>metab_stat_feat_known</code>: same as <code>metab_stat_feat</code>, but restricted to features with an assigned compound;</p></li>
-<li><p><code>metab_stat_feat_sig</code>: same as <code>metab_stat_feat</code>, but only for statistically significant features;</p></li>
-<li><p><code>metab_stat_feat_known_sig</code>: same as <code>metab_stat_feat</code>, but only for statistically significant features with an assigned compound.</p></li>
+<li><p><code>metab_stat</code>: full table with feature annotation and
+statistical analysis results;</p></li>
+<li><p><code>metab_stat_feat</code>: same as <code>metab_stat</code>,
+with the addition of feature intensities;</p></li>
+<li><p><code>metab_stat_feat_known</code>: same as
+<code>metab_stat_feat</code>, but restricted to features with an
+assigned compound;</p></li>
+<li><p><code>metab_stat_feat_sig</code>: same as
+<code>metab_stat_feat</code>, but only for statistically significant
+features;</p></li>
+<li><p><code>metab_stat_feat_known_sig</code>: same as
+<code>metab_stat_feat</code>, but only for statistically significant
+features with an assigned compound.</p></li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="pathway-analysis">Pathway analysis<a class="anchor" aria-label="anchor" href="#pathway-analysis"></a>
 </h2>
-<p>margheRita implements both Over Representation Analysis (ORA) and Metabolite Set Enrichment Analysis (MSEA), based on clusterProfiler <span class="citation">(<a href="#ref-Wu2021" role="doc-biblioref">Wu et al. 2021</a>)</span> over BioCyc, KEGG and Reactome pathway databases. These analyses can be run by means of function <code><a href="../reference/pathway_analysis.html">pathway_analysis()</a></code>. In case of ORA the minimum requirements are the vector of PubChemCID to be tested and the reference universe of all PubChemCIDs in the dataset. In the following example we extract the PubChemCID of the most significat features according to anova and consider all the PubChemCID found in the dataset as reference universe:</p>
+<p>margheRita implements both Over Representation Analysis (ORA) and
+Metabolite Set Enrichment Analysis (MSEA), based on clusterProfiler
+<span class="citation">(<a href="#ref-Wu2021">Wu et al. 2021</a>)</span>
+over BioCyc, KEGG and Reactome pathway databases. These analyses can be
+run by means of function <code><a href="../reference/pathway_analysis.html">pathway_analysis()</a></code>.</p>
+<p>In case of ORA the minimum requirements are the vector of PubChemCID
+to be tested and the reference universe of all PubChemCIDs in the
+dataset. In the following example we extract the PubChemCID of the most
+significant features according to anova and consider all the PubChemCID
+found in the dataset as reference universe:</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">significant_CIDs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">metab_stat_w_features_known_only_sign</span><span class="op">$</span><span class="va">PubChemCID</span><span class="op">)</span></span>
-<span><span class="va">significant_CIDs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">";.*"</span>, <span class="st">""</span>, <span class="va">significant_CIDs</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">1e-9</span>, feature_id <span class="op">=</span> <span class="st">"PubChemCID"</span>, split_by_semicolon <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
+<span><span class="va">universe</span> <span class="op">&lt;-</span>  <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, feature_id <span class="op">=</span> <span class="st">"PubChemCID"</span>, split_by_semicolon <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">all_PubChemCID</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">metab_stat_w_features</span><span class="op">$</span><span class="va">PubChemCID</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">metab_stat_w_features</span><span class="op">$</span><span class="va">PubChemCID</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="va">all_PubChemCID</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">";.*"</span>, <span class="st">""</span>, <span class="va">all_PubChemCID</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">pa_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pathway_analysis.html">pathway_analysis</a></span><span class="op">(</span>in_list <span class="op">=</span> <span class="va">significant_CIDs</span>, universe <span class="op">=</span> <span class="va">all_PubChemCID</span>, type <span class="op">=</span> <span class="st">"ora"</span><span class="op">)</span></span></code></pre></div>
-<p>In case of MSEA, a named ranked vector of scores for all PubChemCIDs in the dataset, in decreasing order of importance:</p>
+<span><span class="va">pa_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pathway_analysis.html">pathway_analysis</a></span><span class="op">(</span>in_list <span class="op">=</span> <span class="va">significant_features</span>, universe <span class="op">=</span> <span class="va">universe</span>, type <span class="op">=</span> <span class="st">"ora"</span><span class="op">)</span></span></code></pre></div>
+<p>Note that we set the argument <code>split_by_semicolon=TRUE</code>
+because the statistical analysis was conducted at feature level and we
+can have a <span class="math inline">\((1,n)\)</span> mapping between
+features and metaboltes, which yields multiple semicolon-separated
+PubChemCIDs for the same feature.</p>
+<p>In case of MSEA, we obtain a ranked vector of scores
+(<code>values = TRUE</code>) for all PubChemCIDs in the dataset, in
+decreasing order of importance:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ranked_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="cn">Inf</span>, feature_id <span class="op">=</span> <span class="st">"Feature_ID"</span>, values <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ranked_vector</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">vapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ranked_vector</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="va">metab_stat_w_features</span><span class="op">$</span><span class="va">PubChemCID</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">metab_stat_w_features</span><span class="op">$</span><span class="va">Feature_ID</span><span class="op">==</span><span class="va">x</span><span class="op">)</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ranked_vector</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">";.*"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">ranked_vector</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
+<code class="sourceCode R"><span><span class="va">ranked_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL_norm_bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="cn">Inf</span>, feature_id <span class="op">=</span> <span class="st">"PubChemCID"</span>, values <span class="op">=</span> <span class="cn">TRUE</span>, split_by_semicolon <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="va">ranked_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="va">ranked_vector</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">msea_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pathway_analysis.html">pathway_analysis</a></span><span class="op">(</span>in_list <span class="op">=</span> <span class="va">ranked_vector</span>, type <span class="op">=</span> <span class="st">"msea"</span><span class="op">)</span></span></code></pre></div>
-<p>The result is a list that contains:</p>
+<p>In both cases (ORA and MSEA), the result is a list that contains:</p>
 <ul>
 <li>a table with pathway descriptions;</li>
-<li>an object of class “enrichResult,” which can be used to obtain various visualizations through clusterProfiler functions.</li>
+<li>an object of class “enrichResult”, which can be used to obtain
+various visualizations through clusterProfiler functions.</li>
 </ul>
 <p>Here’s an example of resulting tables for ORA:</p>
 <pre><code><span><span class="co">##              ID                               Description GeneRatio BgRatio</span></span>
-<span><span class="co">## 83035     83035                          ABC transporters      6/16   11/88</span></span>
-<span><span class="co">## 1270158 1270158 Metabolism of amino acids and derivatives      7/16   19/88</span></span>
-<span><span class="co">## 790012   790012               Biosynthesis of amino acids      5/16   11/88</span></span>
-<span><span class="co">## 1270189 1270189                     Biological oxidations      4/16   11/88</span></span>
-<span><span class="co">## 1269956 1269956                                Metabolism     11/16   47/88</span></span>
-<span><span class="co">##              pvalue   p.adjust     qvalue</span></span>
-<span><span class="co">## 83035   0.003893364 0.05061373 0.04098278</span></span>
-<span><span class="co">## 1270158 0.024860995 0.10926921 0.08847709</span></span>
-<span><span class="co">## 790012  0.025215971 0.10926921 0.08847709</span></span>
-<span><span class="co">## 1270189 0.108983357 0.35419591 0.28679831</span></span>
-<span><span class="co">## 1269956 0.139224418 0.36198349 0.29310404</span></span>
-<span><span class="co">##                                                               geneID Count</span></span>
-<span><span class="co">## 83035                                    750/6287/247/1123/6262/5962     6</span></span>
-<span><span class="co">## 1270158                        247/1123/439227/586/6262/439258/60961     7</span></span>
-<span><span class="co">## 790012                                     750/6287/6262/5962/439258     5</span></span>
-<span><span class="co">## 1270189                                        2519/79034/60961/5753     4</span></span>
-<span><span class="co">## 1269956 247/1123/439227/586/6262/439216/2519/79034/439258/60961/5753    11</span></span></code></pre>
-<p>and MSEA:</p>
-<pre><code><span><span class="co">##              ID                               Description setSize</span></span>
-<span><span class="co">## 1270158 1270158 Metabolism of amino acids and derivatives      22</span></span>
-<span><span class="co">## 790012   790012               Biosynthesis of amino acids      13</span></span>
-<span><span class="co">## 83035     83035                          ABC transporters      12</span></span>
-<span><span class="co">## 132956   132956                        Metabolic pathways      73</span></span>
-<span><span class="co">## 172847   172847          Protein digestion and absorption      11</span></span>
-<span><span class="co">##         enrichmentScore      NES      pvalue    p.adjust     qvalues rank</span></span>
-<span><span class="co">## 1270158       0.7412484 1.473106 0.000999001 0.007568113 0.004779861   36</span></span>
-<span><span class="co">## 790012        0.8204099 1.571580 0.001009082 0.007568113 0.004779861   22</span></span>
-<span><span class="co">## 83035         0.7754533 1.471869 0.011122346 0.055611729 0.035123197   22</span></span>
-<span><span class="co">## 132956        0.6058509 1.276509 0.015984016 0.057750760 0.036474164   43</span></span>
-<span><span class="co">## 172847        0.7679051 1.443829 0.019250253 0.057750760 0.036474164   20</span></span>
+<span><span class="co">## 1270158 1270158 Metabolism of amino acids and derivatives      7/14   17/65</span></span>
+<span><span class="co">## 132956   132956                        Metabolic pathways     13/14   46/65</span></span>
+<span><span class="co">## 1269956 1269956                                Metabolism     11/14   39/65</span></span>
+<span><span class="co">## 1270189 1270189                     Biological oxidations      4/14   10/65</span></span>
+<span><span class="co">## 1269907 1269907      SLC-mediated transmembrane transport      4/14   11/65</span></span>
+<span><span class="co">##             pvalue  p.adjust    qvalue</span></span>
+<span><span class="co">## 1270158 0.02911650 0.1425378 0.1125298</span></span>
+<span><span class="co">## 132956  0.03563444 0.1425378 0.1125298</span></span>
+<span><span class="co">## 1269956 0.09599568 0.2559885 0.2020962</span></span>
+<span><span class="co">## 1270189 0.13158841 0.2631768 0.2077712</span></span>
+<span><span class="co">## 1269907 0.17867096 0.2858735 0.2256896</span></span>
+<span><span class="co">##                                                                        geneID</span></span>
+<span><span class="co">## 1270158                                 247/1123/439227/586/6262/439258/60961</span></span>
+<span><span class="co">## 132956  247/1123/439227/586/6267/6262/5962/6844/2519/439258/60961/5753/123727</span></span>
+<span><span class="co">## 1269956          247/1123/439227/586/6262/2519/79034/439258/60961/5753/123727</span></span>
+<span><span class="co">## 1270189                                                 2519/79034/60961/5753</span></span>
+<span><span class="co">## 1269907                                                   247/1123/6262/60961</span></span>
+<span><span class="co">##         Count</span></span>
+<span><span class="co">## 1270158     7</span></span>
+<span><span class="co">## 132956     13</span></span>
+<span><span class="co">## 1269956    11</span></span>
+<span><span class="co">## 1270189     4</span></span>
+<span><span class="co">## 1269907     4</span></span></code></pre>
+<p>Note that the column header mention “Genes” because it is inherited
+from clusterProfiler, which was developed for transcriptomics. At the
+moment, we did not change such terminology because that could affect the
+interoperability of the results.</p>
+<p>Here’s the output in case of MSEA:</p>
+<pre><code><span><span class="co">##              ID                                Description setSize</span></span>
+<span><span class="co">## 132956   132956                         Metabolic pathways      46</span></span>
+<span><span class="co">## 1270158 1270158  Metabolism of amino acids and derivatives      17</span></span>
+<span><span class="co">## 1269956 1269956                                 Metabolism      39</span></span>
+<span><span class="co">## 1269907 1269907       SLC-mediated transmembrane transport      11</span></span>
+<span><span class="co">## 1269903 1269903 Transmembrane transport of small molecules      12</span></span>
+<span><span class="co">##         enrichmentScore      NES     pvalue   p.adjust    qvalues rank</span></span>
+<span><span class="co">## 132956        0.6501457 1.319464 0.01498501 0.09264854 0.07314358   30</span></span>
+<span><span class="co">## 1270158       0.7190881 1.378084 0.02316213 0.09264854 0.07314358   28</span></span>
+<span><span class="co">## 1269956       0.6127369 1.235491 0.06493506 0.17316017 0.13670540   28</span></span>
+<span><span class="co">## 1269907       0.6923795 1.281174 0.09276249 0.18552497 0.14646709   28</span></span>
+<span><span class="co">## 1269903       0.6643662 1.240177 0.13543788 0.21670061 0.17107943   28</span></span>
 <span><span class="co">##                           leading_edge</span></span>
-<span><span class="co">## 1270158 tags=45%, list=20%, signal=42%</span></span>
-<span><span class="co">## 790012  tags=46%, list=12%, signal=44%</span></span>
-<span><span class="co">## 83035   tags=50%, list=12%, signal=47%</span></span>
-<span><span class="co">## 132956  tags=33%, list=23%, signal=42%</span></span>
-<span><span class="co">## 172847  tags=36%, list=11%, signal=34%</span></span>
-<span><span class="co">##                                                                                                                   core_enrichment</span></span>
-<span><span class="co">## 1270158                                                                         439258/439227/247/586/1123/6262/60961/86/5816/936</span></span>
-<span><span class="co">## 790012                                                                                             5962/439258/6287/750/6267/6262</span></span>
-<span><span class="co">## 83035                                                                                                 5962/247/6287/1123/750/6262</span></span>
-<span><span class="co">## 132956  5962/439258/439227/247/6287/586/1123/750/6844/111/6267/6262/5753/60961/439216/2519/444539/86/5816/936/6037/4687/126/33032</span></span>
-<span><span class="co">## 172847                                                                                                         5962/6287/750/6267</span></span></code></pre>
-<p>A plot for the pathways analysis generated with ORA can be generated using the following function:</p>
+<span><span class="co">## 132956  tags=39%, list=25%, signal=48%</span></span>
+<span><span class="co">## 1270158 tags=53%, list=24%, signal=47%</span></span>
+<span><span class="co">## 1269956 tags=36%, list=24%, signal=41%</span></span>
+<span><span class="co">## 1269907 tags=45%, list=24%, signal=38%</span></span>
+<span><span class="co">## 1269903 tags=42%, list=24%, signal=35%</span></span>
+<span><span class="co">##                                                                                        core_enrichment</span></span>
+<span><span class="co">## 132956  5962/439258/439227/247/586/6844/6267/1123/6262/5753/123727/60961/2519/444539/936/6037/5816/126</span></span>
+<span><span class="co">## 1270158                                                 439258/439227/247/586/1123/6262/60961/936/5816</span></span>
+<span><span class="co">## 1269956                     439258/439227/247/586/79034/1123/6262/5753/123727/60961/2519/936/6037/5816</span></span>
+<span><span class="co">## 1269907                                                                       247/1123/6262/60961/5816</span></span>
+<span><span class="co">## 1269903                                                                       247/1123/6262/60961/5816</span></span></code></pre>
+<p>A plot for the results of ORA can be generated using the following
+function:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">barplot_ora</span><span class="op">(</span><span class="va">pa_res</span>, p <span class="op">=</span> <span class="st">"p.adjust"</span>, filename <span class="op">=</span> <span class="st">"pathway_analysis_ora"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/ora_barplot.png" style="width:80.0%"></p>
-<p>See the <a href="https://bioconductor.org/packages/release/bioc/vignettes/clusterProfiler/inst/doc/clusterProfiler.html" class="external-link">documentation</a> of clusterProfiler for further information.</p>
+<p>See the <a href="https://bioconductor.org/packages/release/bioc/vignettes/clusterProfiler/inst/doc/clusterProfiler.html" class="external-link">documentation</a>
+of clusterProfiler for further information.</p>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-Castellano2021" class="csl-entry">
-Castellano-Escuder, Pol, Raúl González-Domı́nguez, Francesc Carmona-Pontaque, Cristina Andrés-Lacueva, and Alex Sánchez-Pla. 2021. <span>“POMAShiny: A User-Friendly Web-Based Workflow for Metabolomics and Proteomics Data Analysis.”</span> <em>PLOS Computational Biology</em> 17 (7): e1009148.
+Castellano-Escuder, Pol, Raúl González-Domı́nguez, Francesc
+Carmona-Pontaque, Cristina Andrés-Lacueva, and Alex Sánchez-Pla. 2021.
+<span>“POMAShiny: A User-Friendly Web-Based Workflow for Metabolomics
+and Proteomics Data Analysis.”</span> <em>PLOS Computational
+Biology</em> 17 (7): e1009148.
 </div>
 <div id="ref-Dieterle2006" class="csl-entry">
-Dieterle, Frank, Alfred Ross, Götz Schlotterbeck, and Hans Senn. 2006. <span>“Probabilistic Quotient Normalization as Robust Method to Account for Dilution of Complex Biological Mixtures. Application in 1h NMR Metabonomics.”</span> <em>Analytical Chemistry</em> 78 (13): 4281–90. <a href="https://doi.org/10.1021/ac051632c" class="external-link">https://doi.org/10.1021/ac051632c</a>.
+Dieterle, Frank, Alfred Ross, Götz Schlotterbeck, and Hans Senn. 2006.
+<span>“Probabilistic Quotient Normalization as Robust Method to Account
+for Dilution of Complex Biological Mixtures. Application in 1H NMR
+Metabonomics.”</span> <em>Analytical Chemistry</em> 78 (13): 4281–90. <a href="https://doi.org/10.1021/ac051632c" class="external-link">https://doi.org/10.1021/ac051632c</a>.
 </div>
 <div id="ref-Gandolfo2017" class="csl-entry">
-Gandolfo, Terence P., Luke C. AND Speed. 2018. <span>“RLE Plots: Visualizing Unwanted Variation in High Dimensional Data.”</span> <em>PLOS ONE</em> 13 (2): 1–9. <a href="https://doi.org/10.1371/journal.pone.0191629" class="external-link">https://doi.org/10.1371/journal.pone.0191629</a>.
+Gandolfo, Terence P., Luke C. AND Speed. 2018. <span>“RLE Plots:
+Visualizing Unwanted Variation in High Dimensional Data.”</span>
+<em>PLOS ONE</em> 13 (2): 1–9. <a href="https://doi.org/10.1371/journal.pone.0191629" class="external-link">https://doi.org/10.1371/journal.pone.0191629</a>.
 </div>
 <div id="ref-Gu2016" class="csl-entry">
-Gu, Zuguang, Roland Eils, and Matthias Schlesner. 2016. <span>“Complex Heatmaps Reveal Patterns and Correlations in Multidimensional Genomic Data.”</span> <em>Bioinformatics</em>.
+Gu, Zuguang, Roland Eils, and Matthias Schlesner. 2016. <span>“Complex
+Heatmaps Reveal Patterns and Correlations in Multidimensional Genomic
+Data.”</span> <em>Bioinformatics</em>.
 </div>
 <div id="ref-Klavus2020" class="csl-entry">
-Klåvus, Anton, Marietta Kokla, Stefania Noerman, Ville M. Koistinen, Marjo Tuomainen, Iman Zarei, Topi Meuronen, et al. 2020. <span>“<span>‘Notame’</span>: Workflow for Non-Targeted LC–MS Metabolic Profiling.”</span> <em>Metabolites</em> 10 (4). <a href="https://doi.org/10.3390/metabo10040135" class="external-link">https://doi.org/10.3390/metabo10040135</a>.
+Klåvus, Anton, Marietta Kokla, Stefania Noerman, Ville M. Koistinen,
+Marjo Tuomainen, Iman Zarei, Topi Meuronen, et al. 2020.
+<span>“<span>‘Notame’</span>: Workflow for Non-Targeted LC–MS Metabolic
+Profiling.”</span> <em>Metabolites</em> 10 (4). <a href="https://doi.org/10.3390/metabo10040135" class="external-link">https://doi.org/10.3390/metabo10040135</a>.
 </div>
 <div id="ref-Mosca2024" class="csl-entry">
-Mosca, Ettore, Marynka Ulaszewska, Zahrasadat Alavikakhki, Edoardo Niccolò Bellini, Valeria Mannella, Gianfranco Frigerio, Denise Drago, and Annapaola Andolfo. 2024. <span>“MargheRita: An r Package for LC-MS/MS SWATH Metabolomics Data Analysis and Confident Metabolite Identification Based on a Spectral Library of Reference Standards.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/2024.06.20.599545" class="external-link">https://doi.org/10.1101/2024.06.20.599545</a>.
+Mosca, Ettore, Marynka Ulaszewska, Zahrasadat Alavikakhki, Edoardo
+Niccolò Bellini, Valeria Mannella, Gianfranco Frigerio, Denise Drago,
+and Annapaola Andolfo. 2024. <span>“MargheRita: An r Package for
+LC-MS/MS SWATH Metabolomics Data Analysis and Confident Metabolite
+Identification Based on a Spectral Library of Reference
+Standards.”</span> <em>bioRxiv</em>. <a href="https://doi.org/10.1101/2024.06.20.599545" class="external-link">https://doi.org/10.1101/2024.06.20.599545</a>.
 </div>
 <div id="ref-Stacklies2007" class="csl-entry">
-Stacklies, Wolfram, Henning Redestig, Matthias Scholz, Dirk Walther, and Joachim Selbig. 2007. <span>“pcaMethods – a Bioconductor Package Providing PCA Methods for Incomplete Data.”</span> <em>Bioinformatics</em> 23: 1164–67.
+Stacklies, Wolfram, Henning Redestig, Matthias Scholz, Dirk Walther, and
+Joachim Selbig. 2007. <span>“pcaMethods – a Bioconductor Package
+Providing PCA Methods for Incomplete Data.”</span>
+<em>Bioinformatics</em> 23: 1164–67.
 </div>
 <div id="ref-Tsugawa2015" class="csl-entry">
-Tsugawa, Hiroshi, Tomas Cajka, Tobias Kind, Yan Ma, Brendan Higgins, Kazutaka Ikeda, Mitsuhiro Kanazawa, Jean VanderGheynst, Oliver Fiehn, and Masanori Arita. 2015. <span>“MS-DIAL: Data-Independent MS/MS Deconvolution for Comprehensive Metabolome Analysis.”</span> <em>Nature Methods</em> 12 (June): 523–26. <a href="https://doi.org/10.1038/nmeth.3393" class="external-link">https://doi.org/10.1038/nmeth.3393</a>.
+Tsugawa, Hiroshi, Tomas Cajka, Tobias Kind, Yan Ma, Brendan Higgins,
+Kazutaka Ikeda, Mitsuhiro Kanazawa, Jean VanderGheynst, Oliver Fiehn,
+and Masanori Arita. 2015. <span>“MS-DIAL: Data-Independent MS/MS
+Deconvolution for Comprehensive Metabolome Analysis.”</span> <em>Nature
+Methods</em> 12 (June): 523–26. <a href="https://doi.org/10.1038/nmeth.3393" class="external-link">https://doi.org/10.1038/nmeth.3393</a>.
 </div>
 <div id="ref-Wu2021" class="csl-entry">
-Wu, Tianzhi, Erqiang Hu, Shuangbin Xu, Meijun Chen, Pingfan Guo, Zehan Dai, Tingze Feng, et al. 2021. <span>“clusterProfiler 4.0: A Universal Enrichment Tool for Interpreting Omics Data.”</span> <em>The Innovation</em> 2 (3): 100141. <a href="https://doi.org/10.1016/j.xinn.2021.100141" class="external-link">https://doi.org/10.1016/j.xinn.2021.100141</a>.
+Wu, Tianzhi, Erqiang Hu, Shuangbin Xu, Meijun Chen, Pingfan Guo, Zehan
+Dai, Tingze Feng, et al. 2021. <span>“clusterProfiler 4.0: A Universal
+Enrichment Tool for Interpreting Omics Data.”</span> <em>The
+Innovation</em> 2 (3): 100141. <a href="https://doi.org/10.1016/j.xinn.2021.100141" class="external-link">https://doi.org/10.1016/j.xinn.2021.100141</a>.
 </div>
 </div>
 </div>

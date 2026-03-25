@@ -1,7 +1,7 @@
 Package: margheRita
 Title: LC-MS/MS metabolomics data analysis and confident metabolite identification
-Version: 0.5.2
-Date: 2025-11-11
+Version: 0.6
+Date: 2026-03-24
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
   person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zara.alaviii@gmail.com"),
@@ -18,4 +18,4 @@ Depends: R (>= 3.5.0)
 Imports: Biobase, ComplexHeatmap, LSD, car, circlize, clusterProfiler, devtools, grDevices, graphics, openxlsx, pals, pcaMethods, stats, stringr, utils
 Suggests: rmarkdown, knitr, POMA, notame
 VignetteBuilder: knitr
-RoxygenNote: 7.3.3
+RoxygenNote: 7.3.2

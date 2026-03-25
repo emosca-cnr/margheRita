@@ -36,7 +36,7 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
   if(data.use == "data_ann"){
     
     rownames(data) <- data$Name
-    data <- data[, ! colnames(data) %in% c("Feature_ID", "Name")]
+    data <- data[, ! colnames(data) %in% c("Feature_ID", "Name", "PubChemCID")]
     
   }
   
