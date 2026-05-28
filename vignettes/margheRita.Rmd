@@ -443,7 +443,7 @@ mL_demo$msea
 A plot for the results of ORA can be generated using the following function:
 
 ```{r, eval=FALSE}
-barplot_ora(pa_res, p = "p.adjust", filename = "pathway_analysis_ora")
+barplot(pa_res, p = "p.adjust", filename = "pathway_analysis_ora")
 ```
 
 ![](images/ora_barplot.png){width=80%}
