@@ -61,7 +61,7 @@ if (!require("BiocManager", quietly = TRUE)){
 }
 BiocManager::install(c("Biobase", "ComplexHeatmap", "clusterProfiler", "pcaMethods"))
 
-devtools::install_github("emosca-cnr/margheRita", dependencies = T)
+devtools::install_github("emosca-cnr/margheRita")
 ```
 
 ## Optional packages
