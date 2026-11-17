@@ -2,7 +2,8 @@
 % Please edit documentation in R/read_input_file.R
 \name{read_input_file}
 \alias{read_input_file}
-\title{Create an mRList from feature data and sample information}
+\title{Create an mRList from feature data and sample information
+Import data and metadata as excel or .csv or .txt format}
 \usage{
 read_input_file(
   feature_file = NULL,
@@ -39,5 +40,6 @@ read_input_file(
 mRList object
 }
 \description{
+Create an mRList from feature data and sample information
 Import data and metadata as excel or .csv or .txt format
 }

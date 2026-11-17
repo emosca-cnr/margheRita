@@ -1,6 +1,6 @@
 #' Keep the feature with the highest average across samples
 #' @param X features-by-samples data matrix
-#' @export
+#' @returns features-by-samples data matrix
 #' 
 keep_strongest_representative <- function(X=NULL){
   

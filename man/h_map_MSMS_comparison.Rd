@@ -2,13 +2,12 @@
 % Please edit documentation in R/h_map_MSMS_comparison.R
 \name{h_map_MSMS_comparison}
 \alias{h_map_MSMS_comparison}
-\title{h_map_MSMS_comparison}
+\title{Heatmaps of errors between all-prais of peaks in feature and metabolite MS/MS spectra}
 \usage{
 h_map_MSMS_comparison(
   mRList = NULL,
   metab_id = NULL,
   feature_id = NULL,
-  dirout = NULL,
   col = NULL,
   na_col = "black",
   ppm_error = 20,
@@ -22,8 +21,6 @@ h_map_MSMS_comparison(
 
 \item{feature_id}{feature ID}
 
-\item{dirout}{output directory}
-
 \item{col}{color palette}
 
 \item{na_col}{color for NA values}
@@ -32,6 +29,9 @@ h_map_MSMS_comparison(
 
 \item{RI_difference}{RI_difference above this threshold are not shown}
 }
+\value{
+List of ComplexHeatmap objects
+}
 \description{
-h_map_MSMS_comparison
+Heatmaps of errors between all-prais of peaks in feature and metabolite MS/MS spectra
 }

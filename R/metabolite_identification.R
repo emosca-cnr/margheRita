@@ -16,11 +16,10 @@
 #' @param filter_ann whether to filter metabolite-feature associations or not.
 # #' @param lib_ann_fields columns of library_list$lib_precursor that will be added to metabolite annotations
 #' @param dirout output directory
-#' @export
 #' @importFrom stats setNames
 #' @importFrom utils stack
 #' @importFrom openxlsx createWorkbook addWorksheet writeDataTable saveWorkbook
-#' @returns data.frames mRList$metabolite_identification$associations and mRList$metabolite_identification$associations_summary; it also adds information to mRList$metab_ann and mRList$data_ann. Collectively, such data.frames contain the following colums:
+#' @returns data.frames mRList$metabolite_identification$associations and mRList$metabolite_identification$associations_summary; it also adds information to mRList$metab_ann and mRList$data_ann. Collectively, such data.frames contain the following columns:
 #' - Name: metabolite name;
 #' - Level: annotation level;
 #' - Level_note: annotation level note;
@@ -28,6 +27,7 @@
 #' - ppm_error: ppm error;
 #' - peaks_found_ppm_RI: number of MS/MS peaks that match;
 #' - matched_peaks_ratio: ratio between the number of MS/MS peaks that match and the number of peaks in the reference MS/MS spectra
+#' @export
 
 
 metabolite_identification <- function(mRList = NULL, features = NULL, library_list = NULL, rt_err=1, rt_best_thr=0.5, unaccept_flag=20, accept_flag=5, suffer_flag=10, min_RI = 10, ppm_err = 20, RI_err=20, RI_err_type="rel", filter_ann=TRUE, dirout=NULL){
@@ -74,8 +74,12 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   mass_ok <- merge(library_list$lib_precursor, mass_ok, by.x="ID", by.y="ind", all.y=T)
   colnames(mass_ok) <- replace(colnames(mass_ok), list = colnames(mass_ok)=="values", "Feauture_ID")
   
-  out_levels <- merge(out_levels, data.frame(ID=rep(names(mass), unlist(lapply(mass, nrow))), do.call(rbind, lapply(mass, function(x) x[, colnames(x) != "mz"])), stringsAsFactors = F), by="Feature_ID", all=T)
-  out_levels <- merge(library_list$lib_precursor, out_levels, by="ID", all = T, suffixes = c("_lib", ""))
+  #there are NA if some precursor does not appear in the, the solution is to use all.y=TRUE and keep only features with matched mass
+  #out_levels <- merge(out_levels, data.frame(ID=rep(names(mass), unlist(lapply(mass, nrow))), do.call(rbind, lapply(mass, function(x) x[, colnames(x) != "mz"])), stringsAsFactors = F), by="Feature_ID", all=T)
+  out_levels <- merge(out_levels, data.frame(ID=rep(names(mass), unlist(lapply(mass, nrow))), do.call(rbind, lapply(mass, function(x) x[, colnames(x) != "mz"])), stringsAsFactors = F), by="Feature_ID", all.y=T)
+  
+  #out_levels <- merge(library_list$lib_precursor, out_levels, by="ID", all = T, suffixes = c("_lib", ""))  out_levels
+  out_levels <- merge(library_list$lib_precursor, out_levels, by="ID", all.y = T, suffixes = c("_lib", "")) #solution
   
   ### features with appropriate mass and RT
   if(length(library_list$lib_precursor$rt)>0){
@@ -124,6 +128,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
                                              peaks_found_ppm_RI = numeric(),
                                              matched_peaks_ratio = numeric(),
                                              precursor_in_MSMS = logical(),
+                                             #cs=numeric(), 
                                              CAS = character(),
                                              Name = character(),
                                              rt = numeric(),
@@ -136,6 +141,7 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   intense_peak_unq <- merge(library_list$lib_precursor, intense_peak_unq, by="ID", all.y=T)
   
   
+  #out_levels <- merge(out_levels, intense_peak$matched_peaks[, c("ID", "Feature_ID", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "cs")], by=c("ID", "Feature_ID"), all=T)
   out_levels <- merge(out_levels, intense_peak$matched_peaks[, c("ID", "Feature_ID", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS")], by=c("ID", "Feature_ID"), all=T)
   
   out_levels$Level <- ""
@@ -165,8 +171,10 @@ metabolite_identification <- function(mRList = NULL, features = NULL, library_li
   ### summary
   out_levels <- out_levels[out_levels$Level != "", ]
   
-  #out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_class", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "SMILES", "Level", "Level_note")]
-  out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_class", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "PubChemCID", "SMILES", "Level", "Level_note")] #PubChemCID
+  #out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_class", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "PubChemCID", "SMILES", "Level", "Level_note", "cs")]
+  
+  out_levels <- out_levels[, c("Feature_ID", "rt", "mz", "RT_err", "RT_class", "RT_flag", "ppm_error", "mass_flag", "mass_status", "ID_peaks", "peaks_found_ppm_RI", "matched_peaks_ratio", "precursor_in_MSMS", "ID", "Name", "rt_lib", "mz_lib", "PubChemCID", "SMILES", "Level", "Level_note")]
+
   
   #add the results to mRList
   mRList$metabolite_identification <- list(associations=out_levels, RI_sample=RI_sample, MS_MS_info=intense_peak$matrices)

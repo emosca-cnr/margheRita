@@ -14,14 +14,14 @@
 #' @param truncate_row_labels FALSE or a integer that specifies the number of characters to keep
 #' @param rm_outliers remove outliers when setting colours
 #' @param ... further arguments for ComplexHeatmap::Heatmap
-#' @export
 #' @importFrom ComplexHeatmap Heatmap HeatmapAnnotation
-#' @importFrom grDevices dev.off png boxplot.stats
-#' @importFrom graphics plot
-#' @importFrom stats var setNames
+#' @importFrom stats var setNames 
 #' @importFrom pals brewer.rdylbu brewer.purples polychrome
 #' @importFrom stringr str_trunc
 #' @importFrom circlize colorRamp2
+#' @importFrom grDevices boxplot.stats
+#' @returns ComplexHeatmap object
+#' @export
 
 
 h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_ann"), col_ann=NULL, col=NULL, scale_features=TRUE, features=NULL, samples=NULL, top=200, use_top_annotated_metab = FALSE, test_method="anova", test_value = "q", truncate_row_labels=FALSE, rm_outliers=FALSE, ...){
@@ -109,7 +109,9 @@ h_map <- function(mRList=NULL, column_ann="class", data.use = c("data", "data_an
   }else{
     row_labels <- rownames(data)
   }
-  print(Heatmap(as.matrix(data), top_annotation = column_ha, col=col, name = hm_name, row_labels=row_labels, ...))
+  hm <- Heatmap(as.matrix(data), top_annotation = column_ha, col=col, name = hm_name, row_labels=row_labels, ...)
+  
+  return(hm)
   
 }
 

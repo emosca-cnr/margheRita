@@ -17,13 +17,14 @@
 #' @param msea_by msea type
 #' @param seed set the seed
 #' @param exponent exponent in the msea approach
-#' @export
 #' @importFrom  clusterProfiler GSEA enricher
 #' @importFrom utils data
 #' @return A list with two elements
-#'   - res: gseaResult object or an enrichResult instance 
+#'   - res: enrichResult or gseaResult object 
 #'   - term_annotation: data.frame with pathway annotation
 #' 
+#' @export
+
 pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "msea"), tax_id=9606, include_general_pathways=FALSE, pvalueCutoff = 1, pAdjustMethod = "BH", minGSSize = 10, maxGSSize = 500, qvalueCutoff = 1, TERM2METAB=NULL, TERM2NAME = NULL, nPerm=1000, verbose=TRUE, msea_by="fgsea", seed=FALSE, exponent=1){
 
   #bsid2cid <- bsid2info <- NULL #to please the check
@@ -54,8 +55,14 @@ pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "msea"),
 
     #only required columns
     TERM2METAB <- TERM2METAB[, c("bs_id", "CID")]
+    TERM2METAB$bs_id <- as.character(TERM2METAB$bs_id)
+    TERM2METAB$CID <- as.character(TERM2METAB$CID)
+    TERM2NAME$bs_id <- as.character(TERM2NAME$bs_id)
+
     TERM2NAME_ <- TERM2NAME #full annotation
     TERM2NAME <- TERM2NAME[, c("bs_id", "name")]
+    
+    
 
   }
 
@@ -71,7 +78,7 @@ pathway_analysis <- function(in_list=NULL, universe=NULL, type=c("ora", "msea"),
     TERM2NAME_ <- TERM2NAME_[TERM2NAME_$bs_id %in% TERM2METAB$bs_id, ]
   }
 
-
+ 
   if(type=="ora"){
 
     cat("ORA...\n")

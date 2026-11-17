@@ -2,33 +2,30 @@
 % Please edit documentation in R/metab_boxplot.R
 \name{metab_boxplot}
 \alias{metab_boxplot}
-\title{Boxplot of metabolites}
+\title{Boxplot of feature abundance}
 \usage{
 metab_boxplot(
   mRList = NULL,
-  dirout = NULL,
-  features = NULL,
+  feature = NULL,
   col_by = "class",
-  group = "class",
   col_pal = NULL,
-  ...
+  show_stat = FALSE
 )
 }
 \arguments{
 \item{mRList}{mRList object}
 
-\item{dirout}{output directory}
+\item{feature}{feature id}
 
-\item{features}{vector with a list of metabolites to graph}
-
-\item{col_by}{define how to color the boxplot, default=class}
-
-\item{group}{define what you want to compare}
+\item{col_by}{define how to color the boxplot, default is class}
 
 \item{col_pal}{optional palette. It must match the number of levels of the factor indicated by col_by}
 
-\item{...}{further arguments to boxplot()}
+\item{show_stat}{whether to show the p-values from t test, adjusted by FDR}
+}
+\value{
+ggplot object
 }
 \description{
-Plot boxplot of metabolites, and save them as .png.
+Boxplot of feature abundance
 }

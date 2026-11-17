@@ -13,19 +13,19 @@ check_RT(
 )
 }
 \arguments{
-\item{reference}{A list of library contain retention time with specific ID.}
+\item{reference}{data frame with retention times (rt) of reference metabolites.}
 
-\item{feature_data}{A list of sample data contain retention time with specific ID.}
+\item{feature_data}{data frame with observed rt.}
 
-\item{rt_err_thr}{A number that specify the desired absolute difference of retention time between sample and library metabolite.}
+\item{rt_err_thr}{threshold for acceptable rt.}
 
-\item{rt_best_thr}{Features with RT error < rt_best_thr  will be labelled as "super", those with rt_best_thr < RT error <= rt_err_thr as "acceptable", the remaining as "unacceptable".}
+\item{rt_best_thr}{threshold for super rt.}
 
 \item{filter}{whether to consider only features with RT error <= rt_err_thr}
 }
 \value{
-A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
+A list of where each element is named with a reference library ID and contains a data frame of features
 }
 \description{
-\code{check_RT} it is making a list of all library metabolites and assigning proper sample ID to each based on desired retention time error.
+Check the retention time
 }

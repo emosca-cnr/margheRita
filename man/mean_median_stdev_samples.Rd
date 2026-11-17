@@ -2,7 +2,8 @@
 % Please edit documentation in R/mean_median_stdev_samples.R
 \name{mean_median_stdev_samples}
 \alias{mean_median_stdev_samples}
-\title{Calculate mean, median and standard deviation for each biological group.}
+\title{Calculate mean, median and standard deviation
+Calculate mean, median and standard deviation for each level of class. It provides the results in text files in dirout directory.}
 \usage{
 mean_median_stdev_samples(mRList = NULL, dirout = NULL)
 }
@@ -12,5 +13,6 @@ mean_median_stdev_samples(mRList = NULL, dirout = NULL)
 \item{dirout}{output directory}
 }
 \description{
-Calculate mean, median and standard deviation for each biological group under study. This function works after collapse_tech_rep.
+Calculate mean, median and standard deviation
+Calculate mean, median and standard deviation for each level of class. It provides the results in text files in dirout directory.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_NA.R
 \name{filter_NA}
 \alias{filter_NA}
-\title{filter NA}
+\title{Filter NA}
 \usage{
 filter_NA(
   mRList = NULL,
@@ -21,8 +21,8 @@ filter_NA(
 \item{na_value}{value that indicate missing values}
 }
 \value{
-filtered mRList object
+mRList object
 }
 \description{
-filter NA
+Filter NA
 }

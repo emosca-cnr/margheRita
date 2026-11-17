@@ -2,7 +2,7 @@
 % Please edit documentation in R/check_RT_mass.R
 \name{check_RT_mass}
 \alias{check_RT_mass}
-\title{Merge candidates with appropriate retention time and PPM error}
+\title{Merge the results of check_mass and check RT}
 \usage{
 check_RT_mass(RT = NULL, mass = NULL)
 }
@@ -15,5 +15,5 @@ check_RT_mass(RT = NULL, mass = NULL)
 data.frame with candidates
 }
 \description{
-Merge candidates with appropriate retention time and PPM error
+Merge the results of check_mass and check RT
 }

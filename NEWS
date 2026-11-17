@@ -1,3 +1,11 @@
+November, 23, 2026, v0.7
+-- improved the read input
+-- added read_MSDial() to extract sample annotation from MSDial files
+-- plots based on ggplot2
+-- update of documentation
+-- formal definition of mRList class
+-- improved interoperability: mRList class can be reorganized as a "SummarizedExperiment" object; msp library can be imported using library_from_msp().
+
 March, 25, 2026, v0.6
 -- updated various functions realted to metabolite annotation to keep the PubChemCID in the output
 -- fixed a bug in select_sign_feature()

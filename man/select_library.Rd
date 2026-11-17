@@ -18,7 +18,7 @@ select_library(
 
 \item{mode}{mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.}
 
-\item{accept_RI}{numeric parameter. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, it is filtering the library by deleting the relative intensity lower then accept_RI.}
+\item{accept_RI}{minimum relative intensity of a peak to be kept in the library, default to 10}
 }
 \value{
 A list with:

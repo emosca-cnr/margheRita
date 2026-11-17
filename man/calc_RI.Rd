@@ -7,12 +7,12 @@
 calc_RI(feature_spectra = NULL, accept_RI = 10)
 }
 \arguments{
-\item{feature_spectra}{it is a list of sample ID which each contains list of its m/z and Intensity.}
+\item{feature_spectra}{list of spectra; each spectrum is a matrix with two columns in the mandatory order: m/z, intensity.}
 
-\item{accept_RI}{numeric. the default value is 10. it is a maximum relative intensity that is kept in sample. since low intense peaks could be noise, it is filtering sample dataset by deleting the relative intensity lower then accept_RI.}
+\item{accept_RI}{numeric, default to 10. The minimum value of relative intensity that will be kept; the peaks with R less than accept_RI are removed.}
 }
 \value{
-list of spectra with RI
+list of spectra where intensity is replaced by RI
 }
 \description{
 Convert sample intensity to relative intensity and filter

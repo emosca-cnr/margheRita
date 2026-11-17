@@ -2,8 +2,8 @@
 #' @param mRList object
 #' @param ids rownames of $sample_ann to be removed. Otherwise, if "column" is given, all samples corresponding to the values appearing in the specfied column of $sample_ann will be removed.
 #' @param column a column of $sample_ann to be used for selecting samples to be removed.
-#' @export
 #' @return mRList object
+#' @export
 #' 
 remove_samples <- function(mRList=NULL, ids=NULL, column=NULL){
 	

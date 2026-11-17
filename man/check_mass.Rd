@@ -2,7 +2,8 @@
 % Please edit documentation in R/check_mass.R
 \name{check_mass}
 \alias{check_mass}
-\title{Calculate the PPM error of precursors}
+\title{Calculate the PPM error of precursors
+Calculate the PPM error of precursors and assign a flag according to its value.}
 \usage{
 check_mass(
   reference = NULL,
@@ -14,9 +15,9 @@ check_mass(
 )
 }
 \arguments{
-\item{reference}{A list of library contain mz(mass-to-charge ratio) with specific ID.}
+\item{reference}{data frame of reference m/z values}
 
-\item{feature_data}{A list of sample data contain mz(mass-to-charge ratio) with specific ID.}
+\item{feature_data}{data frame of m/z values observed in the samples}
 
 \item{unaccept_flag}{A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.}
 
@@ -27,11 +28,9 @@ check_mass(
 \item{filter}{whether to remove unacceptable associations}
 }
 \value{
-A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
+A list of where each element is named with a reference library ID and contains a data frame of matched features
 }
 \description{
-it is making a list of all library metabolites and assigning proper sample ID to each based on desired PPM error.
-}
-\details{
+Calculate the PPM error of precursors
 Calculate the PPM error of precursors and assign a flag according to its value.
 }

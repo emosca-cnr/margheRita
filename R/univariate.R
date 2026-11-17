@@ -7,9 +7,9 @@
 #' @param dirout output directory
 #' @importFrom utils write.csv
 #' @importFrom stats t.test p.adjust wilcox.test anova aov kruskal.test TukeyHSD
-#' @export
 #' @return mRList object with mRList$"testchosen" with univariate analysis
 #' @details In case of "anova", the results of stats::aov() will be analysed by stats::TukeyHSD()
+#' @export
 #'  
 univariate <- function(mRList=NULL, dirout=NULL, test_method=c("ttest", "ttest_paired", "Utest", "anova", "kruskal"), exp.levels=NULL, exp.factor="class"){
 

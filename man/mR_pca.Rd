@@ -2,7 +2,7 @@
 % Please edit documentation in R/mR_pca.R
 \name{mR_pca}
 \alias{mR_pca}
-\title{PCA}
+\title{Principal Component Analysis}
 \usage{
 mR_pca(
   mRList = NULL,
@@ -20,9 +20,9 @@ mR_pca(
 \arguments{
 \item{mRList}{mRList object}
 
-\item{dirout}{output directory}
+\item{dirout}{output directory, if not null in this directory will be saved csv files with scores, loadings and R2.}
 
-\item{col_by}{(default class)}
+\item{col_by}{level of column class to use for assigning colors}
 
 \item{method}{see pcaMethods::pca()}
 
@@ -39,8 +39,8 @@ mR_pca(
 \item{...}{further argments to \code{pcaMethods::pca()}}
 }
 \value{
-mRList object with "pca" element. Images of screeplot and pairs, table of score,loading and variance can be saved if write_output=TRUE.
+mRList object with "pca" element.
 }
 \description{
-This function allows to perform PCA.
+Principal Component Analysis
 }

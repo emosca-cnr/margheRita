@@ -10,7 +10,7 @@ filter_metabolite_associations(mRList = NULL)
 \item{mRList}{mRList object}
 }
 \value{
-filtered mRList object
+mRList object
 }
 \description{
 Filter metabolite-feature pairs

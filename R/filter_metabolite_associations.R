@@ -1,8 +1,7 @@
 #' Filter metabolite-feature pairs
 #' @param  mRList mRList object
+#' @return mRList object
 #' @export
-#' @return filtered mRList object
-
 
 filter_metabolite_associations <- function(mRList=NULL){
   

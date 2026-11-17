@@ -25,5 +25,4 @@ mRList object with mRList$reference
 }
 \description{
 The reference profile is calculated using the samples annotated as "sample_class" in the sample annotation column "sample_col".
-Launch function before normalize_profiles function
 }

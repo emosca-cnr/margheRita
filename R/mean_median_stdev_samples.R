@@ -1,14 +1,13 @@
-#' Calculate mean, median and standard deviation for each biological group.
-#'
-#' @description Calculate mean, median and standard deviation for each biological group under study. This function works after collapse_tech_rep.
-#'
+#' Calculate mean, median and standard deviation
+#' Calculate mean, median and standard deviation for each level of class. It provides the results in text files in dirout directory.
 #' @param mRList mRList object
+#' @param dirout output directory
 #' @importFrom stats aggregate median sd
 #' @importFrom utils write.csv
+#' @returns NULL
 #' @export
-#' @param dirout output directory
 
-mean_median_stdev_samples<-function(mRList=NULL, dirout=NULL){
+mean_median_stdev_samples <- function(mRList=NULL, dirout=NULL){
 
   if (!is.null(dirout)) {
     dir.create(dirout, showWarnings = F)

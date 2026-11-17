@@ -2,7 +2,8 @@
 % Please edit documentation in R/CV_ratio.R
 \name{CV_ratio}
 \alias{CV_ratio}
-\title{Coefficient of variation filter}
+\title{Coefficient of variation filter
+Calculate the ratio between CVs (coefficient of variation) of samples and QCs to assess the reliability of the experiment. Only features with ratio >= ratioCV are kept. It produces a text file with in dirout.}
 \usage{
 CV_ratio(mRList = NULL, dirout = NULL, ratioCV = 1)
 }
@@ -14,12 +15,9 @@ CV_ratio(mRList = NULL, dirout = NULL, ratioCV = 1)
 \item{ratioCV}{only metabolites with CV ratio (sample/QC) higher than ratioCV will be kept}
 }
 \value{
-filtered mRList object
+mRList object
 }
 \description{
-Calculate the coefficient of variance (CV) for samples and QC (quality control) to assess the reliability of the experiment, as:
-CV = (SD - mean) * 100.
-CV samples and CV QC are compared, calculating the ratio between CV samples and CV QC.
-The threshold of the ratio has to be decided by the user in ratioCV.
-Only metabolites with ratio >= ratioCV are used for the analysis.
+Coefficient of variation filter
+Calculate the ratio between CVs (coefficient of variation) of samples and QCs to assess the reliability of the experiment. Only features with ratio >= ratioCV are kept. It produces a text file with in dirout.
 }

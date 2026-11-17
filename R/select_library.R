@@ -3,14 +3,13 @@
 #' @param column column type, only if source=="margheRita". Possible values are: HILIC, LipC8, pZIC, RPLong, RPShort. Based on the type of the column, the retention time of same metabolite could be different.
 #' @param source "margheRita" or "MS-DIAL"
 #' @param mode mode could be set in positive or negative state. positive mode select positive collision energy and mz in positive mode.
-#' @param accept_RI numeric parameter. the default value is 10. it is a maximum relative intensity that we keep in library. since low intense peaks could be noise, it is filtering the library by deleting the relative intensity lower then accept_RI.
-#'
-#' @export
-#' @return A list with:
+#' @param accept_RI minimum relative intensity of a peak to be kept in the library, default to 10
+#' @returns A list with:
 #'   - precursors library: it is a list of metabolites which each contains information of retention time and mz with their specific IDs, CAS numbers and names.
 #'   - lib_peaks_data:it is a list of metabolites which each contains information of collision energy with their specific IDs, CAS numbers and names.
 #'   - lib_peaks: it is a list of metabolites with same IDs as lib_peaks_data which each contains a list of a peaks with mz and relative intensity.
 #'   - key_field: the key field of the library
+#' @export
 
 select_library <- function(source=c("margheRita", "MS-DIAL"), column=NULL, mode=c("POS", "NEG"), accept_RI=10){
   

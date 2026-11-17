@@ -9,6 +9,9 @@ keep_strongest_representative(X = NULL)
 \arguments{
 \item{X}{features-by-samples data matrix}
 }
+\value{
+features-by-samples data matrix
+}
 \description{
 Keep the feature with the highest average across samples
 }

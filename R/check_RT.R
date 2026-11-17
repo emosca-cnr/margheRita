@@ -1,15 +1,12 @@
 #' Check the retention time
 #'
-#' @description `check_RT` it is making a list of all library metabolites and assigning proper sample ID to each based on desired retention time error.
-#'
-#' @param reference A list of library contain retention time with specific ID.
-#' @param feature_data A list of sample data contain retention time with specific ID.
-#' @param rt_err_thr A number that specify the desired absolute difference of retention time between sample and library metabolite.
-#' @param rt_best_thr Features with RT error < rt_best_thr  will be labelled as "super", those with rt_best_thr < RT error <= rt_err_thr as "acceptable", the remaining as "unacceptable".
+#' @param reference data frame with retention times (rt) of reference metabolites.
+#' @param feature_data data frame with observed rt.
+#' @param rt_err_thr threshold for acceptable rt.
+#' @param rt_best_thr threshold for super rt.
 #' @param filter whether to consider only features with RT error <= rt_err_thr
 #'
-#' @return A list of library ID each contain a data frame of sample ID with retention time in range of rt_err_thr
-#' @export
+#' @return A list of where each element is named with a reference library ID and contains a data frame of features
 #'
 
 

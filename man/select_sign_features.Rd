@@ -2,7 +2,8 @@
 % Please edit documentation in R/select_sign_features.R
 \name{select_sign_features}
 \alias{select_sign_features}
-\title{select significant features}
+\title{Select significant features
+The output of this function can be passed in the features argument of the h_map function}
 \usage{
 select_sign_features(
   mRList = NULL,
@@ -33,5 +34,6 @@ select_sign_features(
 a character vector with features names
 }
 \description{
+Select significant features
 The output of this function can be passed in the features argument of the h_map function
 }

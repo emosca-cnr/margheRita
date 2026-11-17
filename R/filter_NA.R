@@ -1,10 +1,10 @@
-#' filter NA
+#' Filter NA
 #' @param mRList mRList object
 #' @param min_metab_in_sample min number of metabolites in a sample
 #' @param min_sample_with_metab min number of samples in which a metabolite must appear
 #' @param na_value value that indicate missing values
 #' @export
-#' @return filtered mRList object
+#' @return mRList object
 
 
 filter_NA <- function(mRList=NULL, min_metab_in_sample=100, min_sample_with_metab=3, na_value="NA"){

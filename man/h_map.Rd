@@ -53,6 +53,9 @@ h_map(
 
 \item{...}{further arguments for ComplexHeatmap::Heatmap}
 }
+\value{
+ComplexHeatmap object
+}
 \description{
 Draw an heatmap
 }

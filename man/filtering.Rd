@@ -2,7 +2,7 @@
 % Please edit documentation in R/filtering.R
 \name{filtering}
 \alias{filtering}
-\title{Filtering of features}
+\title{Filtering of features and imputation of missing values}
 \usage{
 filtering(
   mRList = NULL,
@@ -13,8 +13,7 @@ filtering(
   upper_quality_mass_acc = 0.8,
   min_metab_in_sample = 100,
   min_sample_with_metab = 3,
-  na_value = "NA",
-  dirout = NULL
+  na_value = "NA"
 )
 }
 \arguments{
@@ -35,8 +34,6 @@ filtering(
 \item{min_sample_with_metab}{min number of samples in which a metabolite must appear}
 
 \item{na_value}{value that indicate missing values}
-
-\item{dirout}{output directory}
 }
 \value{
 filtered mRList object

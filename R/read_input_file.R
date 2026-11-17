@@ -1,17 +1,17 @@
 #' Create an mRList from feature data and sample information
-#' @description Import data and metadata as excel or .csv or .txt format
+#' Import data and metadata as excel or .csv or .txt format
 #' @param split_QC (default=TRUE) split input and metadata in two one for QC and the other for data
 #' @param MSDial (default=TRUE) the input file is MS-Dial native format
 #' @param mz_col column that contains m/z value
 #' @param rt_col column that contains rt value
 #' @param data_start_col column from which data starts
 #' @importFrom utils read.delim
-#' @export
 #' @param MS_MS_column column that contains the MS/MS spectrum
 #' @param ... further arguments to read.delim
 #' @param feature_file tab-delimited text files with feature abundances, mz, rt and MS/MS spectra
 #' @param sample_file sample information file
 #' @return mRList object
+#' @export
 
 read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, split_QC=TRUE, mz_col=NULL, rt_col=NULL, data_start_col=NULL, MS_MS_column=NULL, ...){
 
@@ -21,9 +21,15 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
     cat("Reading MS-Dial input file...\n")
     feat_data <- read.delim(feature_file, stringsAsFactors = F, quote="", comment.char="", header=F)
 
-    stopifnot(any(feat_data[2, ] == "File type"), any(feat_data[4, ] == "Average"))
-    data_start_col <- which(feat_data[2, ] == "File type")+1
-    data_end_col <- which(feat_data[4, ] == "Average")[1]-1
+    header_col <- which(feat_data[2, ] == "File type")
+    #stopifnot(any(feat_data[2, ] == "File type"), any(feat_data[4, ] == "Average"))
+    stopifnot(any(feat_data[2, ] == "File type"))
+    #data_start_col <- which(feat_data[2, ] == "File type")+1
+    #data_end_col <- which(feat_data[4, ] == "Average")[1]-1
+    sample_col <- which(!is.na(feat_data[2, ]))[-c(1:(header_col))] #indices of columns that contain samples
+    data_start_col <- sample_col[1]
+    data_end_col <- sample_col[length(sample_col)]
+    
     if(is.na(data_end_col)){
       data_end_col <- ncol(feat_data)
     }
@@ -129,6 +135,8 @@ read_input_file <- function(feature_file=NULL, sample_file=NULL, MSDial=TRUE, sp
   print(table(mRList$sample_ann$class, mRList$sample_ann$biological_rep))
 
 
+  class(mRList) <- "mRList"
+  
   return(mRList)
 }
 

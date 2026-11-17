@@ -2,15 +2,12 @@
 % Please edit documentation in R/m_z_filtering.R
 \name{m_z_filtering}
 \alias{m_z_filtering}
-\title{Filter m/z of metabolites}
+\title{Filter features by the m/z decimal part}
 \usage{
 m_z_filtering(
   mRList = NULL,
   lower_quality_mass_acc = 0.4,
-  upper_quality_mass_acc = 0.8,
-  color = "black",
-  dirout = NULL,
-  ...
+  upper_quality_mass_acc = 0.8
 )
 }
 \arguments{
@@ -19,16 +16,10 @@ m_z_filtering(
 \item{lower_quality_mass_acc}{lower quality value}
 
 \item{upper_quality_mass_acc}{upper quality value}
-
-\item{color}{point color}
-
-\item{dirout}{output directory}
-
-\item{...}{further arguments to function \code{plot()}}
 }
 \value{
-filteredd mRList object
+mRList object
 }
 \description{
-Function filters metabolites with 0.4>m/z<0.8 as it is not accurate.
+Filter features by the m/z decimal part
 }

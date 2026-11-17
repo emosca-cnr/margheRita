@@ -3,13 +3,12 @@
 \name{visualize_associated_spectra}
 \alias{visualize_associated_spectra}
 \title{MS/MS Spectra Visualization
-Visualize the MS/MS spectra of the features associated with a metabolite.}
+Visualize the spectrum of a metabolite and each of the features associted with it.}
 \usage{
 visualize_associated_spectra(
   mRList = NULL,
   mR_library = NULL,
   metabolite_id = NULL,
-  dirout = NULL,
   type = c("mirrored", "overlapped"),
   peak_number = FALSE
 )
@@ -21,13 +20,14 @@ visualize_associated_spectra(
 
 \item{metabolite_id}{ID of the metabolite to be visualized}
 
-\item{dirout}{output directory}
-
 \item{type}{mirrored or overlapped visualization}
 
 \item{peak_number}{if TRUE write the peak number}
 }
+\value{
+list of ggplot objects
+}
 \description{
 MS/MS Spectra Visualization
-Visualize the MS/MS spectra of the features associated with a metabolite.
+Visualize the spectrum of a metabolite and each of the features associted with it.
 }

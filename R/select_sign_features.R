@@ -1,5 +1,4 @@
-#' select significant features
-#' 
+#' Select significant features
 #' The output of this function can be passed in the features argument of the h_map function
 #' 
 #' @param mRList mRList object
@@ -10,7 +9,7 @@
 #' @param values if TRUE a named vector with test_value values will be given in output; the beast value will be considered in case of 1-to-n mappings
 #' @param split_by_semicolon if TRUE, the names will be split by semicolons.
 #' @importFrom stats setNames
-#' @return a character vector with features names
+#' @returns a character vector with features names
 #' 
 #' @export
 

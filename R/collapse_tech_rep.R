@@ -1,12 +1,10 @@
 #' Collapse technical replicates
-#'
-#' @description Collapse technical replicates of each biological replicate calculating the mean.
-#' The resulting dataframe and metadata contain only biological replicates.
+#' Average values are calcualted over samples with the same level of biological_rep within the same level of class.
 #'
 #' @param mRList mRList object
 #' @param remove.QC whether to remove QC samples
-#' @export
 #' @return mRList object with only biological replicates
+#' @export
 
 collapse_tech_rep <-function(mRList=NULL, remove.QC=TRUE){
 

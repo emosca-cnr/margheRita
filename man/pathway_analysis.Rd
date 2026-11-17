@@ -63,7 +63,7 @@ pathway_analysis(
 \value{
 A list with two elements
 \itemize{
-\item res: gseaResult object or an enrichResult instance
+\item res: enrichResult or gseaResult object
 \item term_annotation: data.frame with pathway annotation
 }
 }

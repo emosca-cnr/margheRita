@@ -3,11 +3,10 @@
 #' @param xref reference profile
 #' @param robust TRUE/FALSE
 #' @importFrom stats median
-#' @export
-
 #' @return list of:
 #'    - se = size effects;
 #'    - avg = average size effect.
+#' @export
 
 size_effect <- function(x=NULL, xref=NULL, robust=T){
 

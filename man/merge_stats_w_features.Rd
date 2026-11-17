@@ -2,7 +2,8 @@
 % Please edit documentation in R/merge_stats_w_features.R
 \name{merge_stats_w_features}
 \alias{merge_stats_w_features}
-\title{Merge feature files with statistics}
+\title{Merge the results of statistical analysis and annotation
+Merge the results of statistical analysis and annotation. When dirout is set, the function saves an xlsx workbook with multiple sheets}
 \usage{
 merge_stats_w_features(
   mRList = NULL,
@@ -24,8 +25,16 @@ merge_stats_w_features(
 \item{dirout}{output directory}
 }
 \value{
-the data.frame metab_stat, metab_stat_w_features, metab_stat_w_features_known, metab_stat_w_features_only_sign, metab_stat_w_features_known_only_sign will be both saved in the global environemtn and exported as txt tab delimited files.
+a list of data.frames:
+\itemize{
+\item metab_stat;
+\item metab_stat_w_features;
+\item metab_stat_w_features_known;
+\item metab_stat_w_features_only_sign;
+\item metab_stat_w_features_known_only_sign.
+}
 }
 \description{
-Merge feature files with results of the statistics, and export the results
+Merge the results of statistical analysis and annotation
+Merge the results of statistical analysis and annotation. When dirout is set, the function saves an xlsx workbook with multiple sheets
 }

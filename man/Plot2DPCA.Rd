@@ -2,18 +2,16 @@
 % Please edit documentation in R/Plot2DPCA.R
 \name{Plot2DPCA}
 \alias{Plot2DPCA}
-\title{Plot score and loading plot}
+\title{Plot scores and loadings}
 \usage{
 Plot2DPCA(
   mRList = NULL,
   pcx = 1,
   pcy = 2,
-  dirout = NULL,
   col_pal = NULL,
   col_by = "class",
   include_QC = FALSE,
-  name_samples = FALSE,
-  name_samples_cex = 0.8
+  name_samples = FALSE
 )
 }
 \arguments{
@@ -23,18 +21,17 @@ Plot2DPCA(
 
 \item{pcy}{Specify the principal component on the y-axis}
 
-\item{dirout}{output directory}
-
 \item{col_pal}{optional palette. It must match the number of levels of the factor indicated by col_by}
 
 \item{col_by}{(default class)}
 
-\item{include_QC}{(default TRUE)}
+\item{include_QC}{(default FALSE)}
 
 \item{name_samples}{whether the names of samples should be added to each point}
-
-\item{name_samples_cex}{if name_samples is TRUE, specify here the size of the sample names}
+}
+\value{
+List of two ggplot objects
 }
 \description{
-Plot 2D PCA score and loading plots choosing the principal components.
+Plot 2D PCA scores and loadings choosing which pairs of PCs.
 }

@@ -1,30 +1,23 @@
-#' Plot score and loading plot
-#' @description Plot 2D PCA score and loading plots choosing the principal components.
+#' Plot scores and loadings
+#' @description Plot 2D PCA scores and loadings choosing which pairs of PCs.
 #' @param mRList mRList object
 #' @param pcx Specify the principal component on the x-axis
 #' @param pcy Specify the principal component on the y-axis
-#' @param dirout output directory
 #' @param col_by (default class)
-#' @param include_QC (default TRUE)
+#' @param include_QC (default FALSE)
 #' @param name_samples whether the names of samples should be added to each point
-#' @param name_samples_cex if name_samples is TRUE, specify here the size of the sample names 
 #' @param col_pal optional palette. It must match the number of levels of the factor indicated by col_by
-#' 
-#' @export
+#' @importFrom ggplot2 geom_point scale_color_manual theme ylab xlab
+#' @importFrom ggrepel geom_text_repel
 #' @importFrom pcaMethods scores
-#' @importFrom grDevices png dev.off
-#' @importFrom graphics layout plot.new text
 #' @importFrom pals alphabet
-#' @importFrom car pointLabel
+#' @importFrom rlang .data
+#' @returns List of two ggplot objects
+#' @export
 
-Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, col_by="class", include_QC=FALSE, name_samples = FALSE, name_samples_cex = 0.8){
+Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, col_pal=NULL, col_by="class", include_QC=FALSE, name_samples = FALSE){
 
-  if (!is.null(dirout)) {
-    dir.create(dirout, showWarnings = F)
-  }else{
-    dirout <- getwd()
-  }
-
+  id <- NULL
   xlabel = paste("PC", pcx, "(",round(mRList$pca@R2[pcx]*100,3), "%)")
   ylabel = paste("PC", pcy, "(",round(mRList$pca@R2[pcy]*100,3), "%)")
   xy <- scores(mRList$pca)
@@ -38,59 +31,42 @@ Plot2DPCA <- function(mRList=NULL, pcx=1, pcy=2, dirout = NULL, col_pal=NULL, co
   }
 
   #ensure the same order between annotation and data
-  X_ann <- X_ann[match(rownames(xy), X_ann[, 1]), ]
+  X_ann <- X_ann[match(rownames(xy), X_ann[, "id"]), ]
 
   col_factor <- as.factor(X_ann[, col_by])
   col_factor_lev <- levels(col_factor)
   if(is.null(col_pal) | length(col_pal) < length(col_factor_lev)){
     cat("Using default palette\n")
-    col_pal <- alphabet(length(col_factor_lev))
+    col_pal <- as.character(alphabet(length(col_factor_lev)))
   }
-
-  png(file.path(dirout, "scores.png"), width = 200, height = 160, units = "mm", res = 300)
-
-  layout(matrix(c(1:2), nrow = 1), widths = c(.85, .15))
-  
-  par(mar=c(3, 3, .5, .5))
-  par(mgp=c(1.6, .5, 0))
-  
-  plot(
-    xy[, 1], xy[, 2],
-    xlab=xlabel, ylab=ylabel,
-    main = "",
-    col = col_pal[as.numeric(col_factor)],
-    pch = 19
-  )
-  if (name_samples) {
-    pointLabel(x = xy[, 1], y = xy[, 2], labels = rownames(xy), cex = name_samples_cex, xpd=T)
-  }
-  
-  
-  par(mar=c(.1, .1, .1, .1))
-  plot.new()
-  legend("center", legend = levels(col_factor), col = col_pal, pch=16, cex=.6)
-
-  dev.off()
 
   xlabeL = paste("Loading", pcx)
   ylabeL = paste("Loading", pcy)
   xyL <- as.data.frame(mRList$pca@loadings)
   xyL <- xyL[, c(pcx, pcy)]
 
-  png(file.path(dirout, "loadings.png"), width = 200, height = 200, units = "mm", res = 300)
-
-  plot(
-    xyL[, 1], xyL[, 2],
-    xlab=xlabeL, ylab=ylabeL,
-    main = "Loading plot",
-    pch = 19
-  )
+  
+  set_theme(theme_science())
+  
+  plot_data <- cbind(xy, X_ann)
+  
+  p_list <- setNames(list("vector", length=2), c("scores", "loadings"))
+  
+  p_list[[1]] <- ggplot(plot_data, aes(x=plot_data[, 1], y=plot_data[, 2], col=.data[[col_by]], label=id)) +
+    geom_point() +
+    scale_color_manual(values=as.character(col_pal)) + 
+    xlab(xlabel) +
+    ylab(ylabel)
   
   if (name_samples) {
-    idx_out <- unique(c(order(-abs(xyL[, 1]))[1:10], order(-abs(xyL[, 2]))[1:10]))
-    pointLabel(xyL[idx_out, 1], xyL[idx_out, 2], labels=rownames(xyL)[idx_out], cex=name_samples_cex, xpd=T)
+    p_list[[1]] <- p_list[[1]] + geom_text_repel()
   }
   
+  p_list[[2]] <- ggplot(xyL, aes(x=xyL[, 1], y=xyL[, 2])) +
+    geom_point() +
+    xlab(xlabeL) +
+    ylab(ylabeL)
+  
+  return(p_list)
 
-  dev.off()
 }

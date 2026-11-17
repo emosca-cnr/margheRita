@@ -1,19 +1,14 @@
 #' Calculate the PPM error of precursors
-#' 
 #' Calculate the PPM error of precursors and assign a flag according to its value.
-#' 
-#' @description it is making a list of all library metabolites and assigning proper sample ID to each based on desired PPM error.
 #'
-#' @export
-#'
-#' @param reference A list of library contain mz(mass-to-charge ratio) with specific ID.
-#' @param feature_data A list of sample data contain mz(mass-to-charge ratio) with specific ID.
+#' @param reference data frame of reference m/z values
+#' @param feature_data data frame of m/z values observed in the samples 
 #' @param accept_flag A number with default value of 5. PPM errors < accept_flag will be tagged as "super", while those > accept_flag and < suffer_flag will be tagged as "acceptable"
 #' @param suffer_flag A number with default value of 10. PM errors above this value and < unaccept_flag will be tagged as "suffer"
 #' @param unaccept_flag A number with default value of 15. The maximum PPM error must be less than this value. and those above this number will be eliminated.
 #' @param filter whether to remove unacceptable associations
 
-#' @return A list of library ID each contain a data frame of sample ID with a range of PPM error less than unacceptable flag
+#' @return A list of where each element is named with a reference library ID and contains a data frame of matched features
 
 
 check_mass <- function(reference=NULL, feature_data=NULL, unaccept_flag=20, accept_flag=5, suffer_flag=10, filter=TRUE){

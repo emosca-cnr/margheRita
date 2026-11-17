@@ -1,18 +1,13 @@
 #' Coefficient of variation filter
-#'
-#' @description Calculate the coefficient of variance (CV) for samples and QC (quality control) to assess the reliability of the experiment, as:
-#' CV = (SD - mean) * 100.
-#' CV samples and CV QC are compared, calculating the ratio between CV samples and CV QC.
-#' The threshold of the ratio has to be decided by the user in ratioCV.
-#' Only metabolites with ratio >= ratioCV are used for the analysis.
+#' Calculate the ratio between CVs (coefficient of variation) of samples and QCs to assess the reliability of the experiment. Only features with ratio >= ratioCV are kept. It produces a text file with in dirout.
 #'
 #' @param mRList mRList object
 #' @param ratioCV only metabolites with CV ratio (sample/QC) higher than ratioCV will be kept
 #' @param dirout output directory
 #' @importFrom utils write.csv
 #' @importFrom stats sd
+#' @return mRList object
 #' @export
-#' @return filtered mRList object
 
 CV_ratio <- function(mRList=NULL, dirout=NULL, ratioCV=1) {
 
@@ -30,7 +25,12 @@ CV_ratio <- function(mRList=NULL, dirout=NULL, ratioCV=1) {
   mean_QC <- apply(mRList$QC, MARGIN=1, mean)
   sd_QC <- apply(mRList$QC, MARGIN = 1, sd)
   CV_QC <- (sd_QC / mean_QC)
-
+  
+  #if some feature is equal in all WC samnples  CV_QC is null: it is set to the min value of the dataset
+  if(any(CV_QC==0)){
+    CV_QC[CV_QC==0] <- min(CV_QC[CV_QC!=0])
+  }
+  
   mean_Samples <- apply(mRList$data, MARGIN=1, mean)
   sd_Samples <- apply(mRList$data, MARGIN = 1, sd)
   CV_Samples <- (sd_Samples / mean_Samples)
@@ -44,7 +44,7 @@ CV_ratio <- function(mRList=NULL, dirout=NULL, ratioCV=1) {
   print(summary(ratio))
 
   idx_keep <- ratio > ratioCV
-  cat("# Metabolites with appropriate CV", sum(idx_keep), "/", nrow(CV_all), "\n")
+  cat("# Features with appropriate CV", sum(idx_keep), "/", nrow(CV_all), "\n")
 
   mRList$data <- mRList$data[idx_keep, ] #mRList$data cleaned
   mRList$metab_ann <- mRList$metab_ann[idx_keep, ] #mRList$data cleaned

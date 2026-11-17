@@ -1,7 +1,4 @@
-#' Merge candidates with appropriate retention time and PPM error
-#'
-#'
-#' @export
+#' Merge the results of check_mass and check RT
 #'
 #' @param RT A list of library ID each contain a data frame of sample ID with ideal retention time. it is obtained from previous function.
 #' @param mass A list of library ID each contain a data frame of sample ID with ideal PPM error. it is obtained from previous function.

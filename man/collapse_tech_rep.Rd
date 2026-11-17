@@ -2,7 +2,8 @@
 % Please edit documentation in R/collapse_tech_rep.R
 \name{collapse_tech_rep}
 \alias{collapse_tech_rep}
-\title{Collapse technical replicates}
+\title{Collapse technical replicates
+Average values are calcualted over samples with the same level of biological_rep within the same level of class.}
 \usage{
 collapse_tech_rep(mRList = NULL, remove.QC = TRUE)
 }
@@ -15,6 +16,6 @@ collapse_tech_rep(mRList = NULL, remove.QC = TRUE)
 mRList object with only biological replicates
 }
 \description{
-Collapse technical replicates of each biological replicate calculating the mean.
-The resulting dataframe and metadata contain only biological replicates.
+Collapse technical replicates
+Average values are calcualted over samples with the same level of biological_rep within the same level of class.
 }
