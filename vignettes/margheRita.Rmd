@@ -1,5 +1,5 @@
 ---
-title: "MargheRita: an R package for LC-MS/MS metabolomics data analysis and confident metabolite identification based on a spectral library of reference standards"
+title: "MargheRita: streamlining MS-DIAL output analysis and metabolite identification in R"
 package: margheRita
 output:
   rmarkdown::html_document:

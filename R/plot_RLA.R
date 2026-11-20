@@ -37,10 +37,13 @@ plot_RLA <- function(mRList=NULL, col_by="class", col_pal=NULL, include_QC=FALSE
   
   plot_data <- melt(mRList$RLA)
   plot_data <- merge(plot_data, sample_ann, by.x="Var2", by.y=0)
+  if(col_by == "fill"){
+    plot_data$fill <- ""
+  }
   
   set_theme(theme_science())
   
-  p <- ggplot(plot_data, aes(x=Var2, y=value, fill=.data[[col_by]])) +
+  p <- ggplot(plot_data, aes(x=Var2, y=value, fill=.data[[col_by]], group=id)) +
     geom_boxplot(outliers = F, lwd=.2) +
     stat_boxplot(geom='errorbar', linetype=1, width=0.5, lwd=.2) +
     scale_fill_manual(values = col_pal) +

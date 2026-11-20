@@ -1,4 +1,9 @@
-November, 23, 2026, v0.7
+November, 18, 2026, v0.71
+-- corrected a bug in plot_RLA() which appeared when col_by = NULL
+-- added the possibility to support NA in RLA()
+-- updated the logo
+
+November, 17, 2026, v0.7
 -- improved the read input
 -- added read_MSDial() to extract sample annotation from MSDial files
 -- plots based on ggplot2

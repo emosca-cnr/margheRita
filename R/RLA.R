@@ -23,9 +23,9 @@ RLA <- function(mRList=NULL, include_QC=FALSE, logged=TRUE, robust=TRUE){
   }
 
   if(robust){
-    X_data <- t(apply(X_data, 1, function(y) y - median(y)))
+    X_data <- t(apply(X_data, 1, function(y) y - median(y, na.rm=T)))
   }else{
-    X_data <- t(apply(X_data, 1, function(y) y - mean(y)))
+    X_data <- t(apply(X_data, 1, function(y) y - mean(y, na.rm=T)))
   }
 
   mRList$RLA <- X_data
