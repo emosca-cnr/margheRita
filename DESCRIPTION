@@ -1,7 +1,7 @@
 Package: margheRita
 Title: streamlining MS-DIAL output analysis and metabolite identification in R
-Version: 0.71
-Date: 2026-11-20
+Version: 0.72
+Date: 2026-11-23
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
   person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zara.alaviii@gmail.com"),

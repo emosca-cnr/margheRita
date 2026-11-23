@@ -1,6 +1,10 @@
-November, 18, 2026, v0.71
+November, 23, 2026, v0.72
+-- added the possibility to support NA in calc_reference()
+
+ùNovember, 18, 2026, v0.71
 -- corrected a bug in plot_RLA() which appeared when col_by = NULL
 -- added the possibility to support NA in RLA()
+-- added the possibility to support NA in calc_reference()
 -- updated the logo
 
 November, 17, 2026, v0.7
