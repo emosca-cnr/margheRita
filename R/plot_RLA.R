@@ -12,7 +12,7 @@
 
 plot_RLA <- function(mRList=NULL, col_by="class", col_pal=NULL, include_QC=FALSE, xlabels=FALSE){
   
-  Var2 <- value <- NULL
+  Var2 <- value <- id <- NULL
   
   if(include_QC){
     sample_ann <- rbind(mRList$sample_ann, mRList$QC_ann)

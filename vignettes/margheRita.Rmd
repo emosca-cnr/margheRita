@@ -2,19 +2,26 @@
 title: "MargheRita: streamlining MS-DIAL output analysis and metabolite identification in R"
 package: margheRita
 output:
-  rmarkdown::html_document:
+  rmarkdown::html_vignette:
     toc: true
     number_sections: true
     anchor_sections: true
 toc-title: "Contents"
 vignette: >
-  %\VignetteIndexEntry{margheRita}
+  %\VignetteIndexEntry{MargheRita: streamlining MS-DIAL output analysis and metabolite identification in R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 bibliography: references.bib
 link-citations: TRUE
 ---
 
+```{css, echo=FALSE}
+pre, code {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  overflow-x: visible !important;
+}
+```
 
 ![](images/logo.png){width=30%}
 
@@ -110,7 +117,9 @@ which are:
 
 - QC_ann: annotation of QC samples.
 
-# Filtering
+# Filtering, imputation, normalization, QC
+
+## Filtering and imputation
 
 The function **`filtering()`** runs filters to exclude features/sample with many missing values, features with wrong m/z values and, lastly, performs imputation of missing values. These three steps can be called independently through the function `filter_NA()`, `m_z_filtering()` and `imputation()`, respectively. In particular, `m_z_filtering()` remove features with m/z that have decimal value within [4, 8] (by default), while the imputation is performed replacing NA values with a random number, calculated between 10%-25% of the minimum value of the feature. 
 
@@ -138,13 +147,13 @@ No NAs: imputation not performed.
 It is useful to look at the distributions of m/z decimals and m/z vs rt after filtering.
 
 ```{r, eval=FALSE}
-plot_mz_decs(mL.id)
+plot_mz_decs(mL)
 heatscatter_chromatography(mL)
 ```
 
 ![](images/hist.mz.filtered.png){width=49%} ![](images/hs.filtered.png){width=49%}
 
-# Removing samples
+## Removing samples
 
 The function `remove_samples()` allows the user to remove one or more samples from the `mRList`. Here, we remove samples that have values "Blank", "meal A", "meal B", "meal C" in the column "class":
 
@@ -156,7 +165,7 @@ AA DD MM
 81 81 81 
 ```
 
-# Normalizaiton
+## Normalization
 
 margheRita provides three ways for **normalizing** metabolite profiles: 
 
@@ -172,6 +181,8 @@ No reference profile found, using calc_reference() function...
 Using QC...
 ```
 
+## QC: Coefficient of variation and relative log abundances
+
 The comparison of the coefficient of variation of a metabolite in relation to QC samples provides a means to exclude low quality features. In particular, only features that have a CV ratio between no-QC samples and QC sample higher than a given threshold (by default 1) are kept:
 
 ```{r, eval=FALSE}
@@ -185,28 +196,35 @@ Summary of CV ratio (samples / QC):
 Typically, after normalization, the various samples should have similar distributions of relative log-*abundance*, a powerful tool to visualize unwanted variation in high-dimensional data [@Gandolfo2017]. 
 
 ```{r, eval=FALSE}
-mL.id <- RLA(mL.id, logged = F)
-p <- plot_RLA(mL.id)
+mL.norm <- RLA(mL.norm, logged = F)
+p <- plot_RLA(mL.norm)
 ```
 
 ![](images/rla.png){width=100%}
 
+## From linear to log space
+
+The PQN leaves the data in linear space. They can be mapped in log space using again  `normalize_profiles()`:
+```{r, eval=FALSE}
+> mL.norm <- normalize_profiles(mL.norm, method = "log")
+log normalization
+```
 
 # Principal Component Analysis 
 
 margheRita performs Principal Component Analysis (PCA) using the function `mR_pca()`, which relies on the package pcaMethods [@Stacklies2007]. Besides choosing the scaling method (argument `scaling`) and number of PCs (`nPcS`), it allows to include/exclude quality control samples by means of argument `include_QC`:
 
 ```{r , eval=F}
-mL_norm <- mR_pca(mRList = mL_norm, nPcs=5, scaling="uv", include_QC=FALSE)
+mL.norm <- mR_pca(mRList = mL.norm, nPcs=5, scaling="uv", include_QC=FALSE)
 ```
 The results are added to the mRList in the element `pca`. The function `plot_PCA_res()` produces a list of two ggplot2 objects, namely `pairs` and `scree`, which contain scatter plots among all-pairs of PCs and the variance explained by the PCs; similarly,  the function `Plot2DPCA()` generate the scatter plots for the scores and loadings (not shown below). The column `col_by` indicates which column of sample annotation is used to color the samples.
 
 ```{r , eval=F}
-p <- plot_PCA_res(mRList = mL.id, col_by="subj_meal")
+p <- plot_PCA_res(mRList = mL.norm, col_by="subj_meal")
 Using default palette
 names(p)
 [1] "scree" "pairs"
-Plot2DPCA(mRList = mL.id, pcx=1, pcy=2, col_by="subj_meal")
+p <- Plot2DPCA(mRList = mL.norm, pcx=1, pcy=2, col_by="subj_meal")
 Using default palette
 > names(p)
 [1] "scores"   "loadings"
@@ -216,8 +234,9 @@ Using default palette
 ![](images/pca.scores.png){width=49%}
 
 
+# Statistical analysis and interpretation
 
-# Collapsing techinical replicates
+## Collapsing techinical replicates
 
 The definition of mean metabolite abundance for every biological replicate is performed by means of `collapse_tech_rep()` function:
 
@@ -226,7 +245,7 @@ mL.norm.bio <- collapse_tech_rep(mL.norm)
 According to dataset size, this might take a few minutes.
 ```
 
-# Statistical analysis
+## Summary statistics and univariate analysis
 
 MargheRita provides some functions to calculate mean and variability, fold changes and to test for metabolite variations.
 
@@ -256,13 +275,13 @@ selected samples:
 81 MM_mealC_t08    MM
 Performing ANOVA between AA DD MM 
 head(mL.norm.bio$anova)
-              F            p            q      DD-AA        MM-AA       MM-DD
-F6    0.8784645 4.194894e-01 4.986295e-01 0.40015792 9.074457e-01 0.655270262
-F7   78.0339455 2.439819e-19 1.990054e-17 0.26024644 0.000000e+00 0.000000000
-F38   2.1888987 1.188756e-01 1.739468e-01 0.10414045 3.829524e-01 0.744258367
-F60   0.5589524 5.740810e-01 6.422382e-01 0.96640783 5.700494e-01 0.725243155
-F64   9.1681931 2.653785e-04 9.536909e-04 0.02069160 1.914172e-04 0.304841472
-F128 15.7198757 1.835949e-06 1.149525e-05 0.09927893 1.127459e-06 0.002473063
+              F            p            q        DD-AA        MM-AA       MM-DD
+F6    1.1288923 3.286170e-01 4.057294e-01 0.3195251040 9.188130e-01 0.541574732
+F7   69.4605499 4.741540e-18 1.387516e-16 0.0008007329 2.104816e-11 0.000000000
+F38   0.9773231 3.808772e-01 4.592744e-01 0.4812988027 9.947058e-01 0.423776274
+F60   1.0992287 3.382322e-01 4.155800e-01 0.8435520698 3.116240e-01 0.634314902
+F64   8.7106954 3.850398e-04 9.672138e-04 0.0759644302 2.278999e-04 0.128348827
+F128 25.9628569 2.278139e-09 1.634782e-08 0.0015726589 8.919273e-10 0.001594945
 ```
 
 The full results of the analysis are saved to the text file <test_method>.txt.
@@ -395,13 +414,13 @@ done
 ```
 The function `metabolite_identification()` has a series of parameters that can be adjusted to optimize the identification process (see its documentation). When metabolite identification is applied on a large number of features (e.g., $10^4$), it is common to obtain many-to-many associations between features and metabolite. By default, this redundancy is addressed following an algorithm that considers the classification (Level 1, Level 2, Level 3a and Level 3b), the errors (see above) and a series of quantitative and qualitative scores (see below and @Mosca2024 for further details). This function adds/modifies the following items in the mRList and saves each of them to a sheet of the xlsx file "metabolite_identification.xlsx":
 
-- `mL_norm_bio$metabolite_identification$associations`: annotated features (sheet "associations")
+- `mL.norm.bio$metabolite_identification$associations`: annotated features (sheet "associations")
 
-- `mL_norm_bio$metabolite_identification$associations_summary`: annotated features, less details on annotation ("summary"):
+- `mL.norm.bio$metabolite_identification$associations_summary`: annotated features, less details on annotation ("summary"):
 
-- `mL_norm_bio$metab_ann`: all features ("metab_ann"):
+- `mL.norm.bio$metab_ann`: all features ("metab_ann"):
 
-- `mL_norm_bio$data_ann`: abundance data for all features and annotation column "Name" ("data_ann"):
+- `mL.norm.bio$data_ann`: abundance data for all features and annotation column "Name" ("data_ann"):
 
 Importantly, **the feature-metabolite association filtering can be disabled** (e.g. for exploratory analysis) setting `filter=FALSE`.
 
@@ -418,7 +437,7 @@ visualize_associated_spectra(mL.norm.bio, mR_library = mR_library, metabolite_id
 The function `h_map_MSMS_comparison()` draws heatmaps to visually compare ppm errors and RI differences between feature and metabolite spectra:
 
 ```{r, eval=FALSE}
-h_map_MSMS_comparison(mL_norm_bio, metab_id = "L1660", feature_id = "F10165")
+h_map_MSMS_comparison(mL.norm.bio, metab_id = "L1660", feature_id = "F10165")
 ```
 
 ![](images/e_mz_L1660_M1028_F10165.png){width=49%} ![](images/e_RI_L1660_M1028_F10165.png){width=49%}
@@ -481,7 +500,7 @@ Note that we set the argument `split_by_semicolon=TRUE` because the statistical 
 In case of MSEA, we obtain a ranked vector of scores (`values = TRUE`) for all PubChemCIDs in the dataset, in decreasing order of importance:
 
 ```{r, eval=FALSE}
-ranked_vector <- select_sign_features(mL_norm_bio, test_method="anova", test_value = "q", cutoff_value = Inf, feature_id = "PubChemCID", values = TRUE, split_by_semicolon = T)
+ranked_vector <- select_sign_features(mL.norm.bio, test_method="anova", test_value = "q", cutoff_value = Inf, feature_id = "PubChemCID", values = TRUE, split_by_semicolon = T)
 ranked_vector <- sort(-log10(ranked_vector), decreasing = T)
 msea_res <- pathway_analysis(in_list = ranked_vector, type = "msea")
 ```
@@ -528,7 +547,7 @@ enrichplot::dotplot(msea_res$res, showCategory = 10, split = ".sign")
 ![](images/msea_dotplot.png){width=99%}
 
 
-# SummarizedExperiment
+# From mRList to SummarizedExperiment
 
 To support interoperability with other packages the mRList can be reorganized as a "SummarizedExperiment" object, which is used by "notame" [@Klavus2020] and package "POMA" [@Castellano2021]. 
 

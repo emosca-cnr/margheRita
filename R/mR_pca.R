@@ -12,11 +12,12 @@
 #' @param top only the top most varying features will be used
 #' @param dirout output directory, if not null in this directory will be saved csv files with scores, loadings and R2.
 #' @param nPcs number of principal components
+#' @param features vector of Feature_ID to consider
 #' @param ... further argments to `pcaMethods::pca()`
 #' @return  mRList object with "pca" element. 
 #' @export
 
-mR_pca <- function(mRList=NULL, dirout=NULL, col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=2, ...) {
+mR_pca <- function(mRList=NULL, dirout=NULL, col_by="class", method="svd", scaling=c("none", "pareto", "vector", "uv"), center=TRUE, include_QC=TRUE, top=Inf, nPcs=2, features=NULL, ...) {
 
 
   scaling <- match.arg(scaling)
@@ -43,6 +44,12 @@ mR_pca <- function(mRList=NULL, dirout=NULL, col_by="class", method="svd", scali
     X <- X[idx, ]
   }
 
+  if(!is.null(features)){
+    cat("using the given features\n")
+    X <- X[rownames(X) %in% features, ]
+  }
+  
+  
 
   #it is the same as PCA for euclidean distance
 

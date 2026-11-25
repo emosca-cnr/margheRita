@@ -1,12 +1,12 @@
 Package: margheRita
 Title: streamlining MS-DIAL output analysis and metabolite identification in R
-Version: 0.72
-Date: 2026-11-23
+Version: 0.73
+Date: 2026-11-24
 Authors@R: 
   c(person(given = "Ettore", family = "Mosca", role = c("aut", "cre"), email = "ettore.mosca@itb.cnr.it", comment = c(ORCID = "0000-0002-3102-5150")),
-  person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zara.alaviii@gmail.com"),
-  person(given = "Edoardo", family = "Bellini", role = "aut", email="Bellini.Edoardo@hsr.it"),
-  person(given = "Valeria", family = "Mannella", role = "aut", email="mannella.valeria@hsr.it"),
+  person(given = "Zahrasadat", family = "Aalavikakhki", role = "aut", email = "zara.alaviii@gmail.com", comment = c(ORCID = "0009-0007-9595-3056")),
+  person(given = "Edoardo", family = "Bellini", role = "aut", email="Bellini.Edoardo@hsr.it", comment = c(ORCID = "0000-0001-9766-7685")),
+  person(given = "Valeria", family = "Mannella", role = "aut", email="mannella.valeria@hsr.it", comment = c(ORCID = "0000-0002-2569-6919")),
   person(given = "Gianfranco", family = "Frigerio", role = "aut", email = "frigerio.gianfranco@hsr.it", comment = c(ORCID = "0000-0002-3538-1443")))
 Description: Developed to work seamlessly with MS-DIAL output, margheRita provides a comprehensive pipeline for liquid chromatography-tandem mass spectrometry (LC-MS/MS) data. This tool is particularly effective for Data-Independent Acquisition (DIA) experiments, where the high-resolution acquisition of all MS/MS spectra demands rigorous and integrated processing capabilities.
 License: GPL-3

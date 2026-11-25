@@ -1,3 +1,7 @@
+November, 24, 2026, v0.73
+-- added the possibility to support custom set of features in mR_pca()
+-- updates in the vignettes
+
 November, 23, 2026, v0.72
 -- added the possibility to support NA in calc_reference()
 

@@ -14,6 +14,7 @@ mR_pca(
   include_QC = TRUE,
   top = Inf,
   nPcs = 2,
+  features = NULL,
   ...
 )
 }
@@ -35,6 +36,8 @@ mR_pca(
 \item{top}{only the top most varying features will be used}
 
 \item{nPcs}{number of principal components}
+
+\item{features}{vector of Feature_ID to consider}
 
 \item{...}{further argments to \code{pcaMethods::pca()}}
 }
