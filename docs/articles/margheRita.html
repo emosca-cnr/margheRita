@@ -128,19 +128,15 @@ Mosca</a>, Bioinformatics Lab, CNR-ITB</li>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The package has the following dependencies,which are available in <a href="https://cran.r-project.org/" class="external-link">CRAN</a>, <a href="https://www.bioconductor.org/" class="external-link">Bioconductor</a> or <a href="https://github.com/" class="external-link">github</a>, namely:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ComplexHeatmap, circlize, clusterProfiler, GGally, ggrepel, ggplot2, ggpubr, LSD, MsBackendMsp, openxlsx, pals, pcaMethods, reshape2, rlang, Spectra, stats, stringr, SummarizedExperiment, utils</span></code></pre></div>
-<p>In most of the cases, the following instructions guarantee that all
-such dependencies are installed:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://bioconductor.github.io/BiocManager/" class="external-link">"BiocManager"</a></span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span></span>
+<p>MargheRita and its dependencies can be installed using the pak
+package, which handles CRAN, Bioconductor, and GitHub packages in a
+single step:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"pak"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"pak"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://bioconductor.github.io/BiocManager/reference/install.html" class="external-link">install</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Biobase"</span>, <span class="st">"ComplexHeatmap"</span>, <span class="st">"clusterProfiler"</span>, <span class="st">"pcaMethods"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/install-deprecated.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"emosca-cnr/margheRita"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"emosca-cnr/margheRita"</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">margheRita</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="input-data">Input data<a class="anchor" aria-label="anchor" href="#input-data"></a>
@@ -173,21 +169,21 @@ available in <a href="https://doi.org/10.5281/zenodo.11243780" class="external-l
 <p>The function <code><a href="../reference/read_input_file.html">read_input_file()</a></code> reads the two files and
 creates the object of class “mRList”, which is used by most of
 margheRita functions as main input/output.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">read_input_file</span>(<span class="at">feature_file =</span> <span class="st">"Urine_RP_POS_norm.txt"</span>, <span class="at">sample_file =</span> <span class="st">"Urine_RP_POS_sample_annotation.txt"</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>Reading MS<span class="sc">-</span>Dial input file...</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">33554</span>   <span class="dv">316</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>Reading sample annotation</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="co"># Samples: 316 </span></span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="co"># QC Samples: 61</span></span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="fu">class</span>(mL)</span>
-<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"mRList"</span></span>
-<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a><span class="fu">table</span>(mL<span class="sc">$</span>sample_ann<span class="sc">$</span>class)</span>
-<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>    AA  Blank     DD     MM meal A meal B meal C </span>
-<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    <span class="dv">81</span>      <span class="dv">3</span>     <span class="dv">81</span>     <span class="dv">81</span>      <span class="dv">3</span>      <span class="dv">3</span>      <span class="dv">3</span> </span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">read_input_file</span>(<span class="at">feature_file =</span> <span class="st">"Urine_RP_POS_norm.txt"</span>, <span class="at">sample_file =</span> <span class="st">"Urine_RP_POS_sample_annotation.txt"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>Reading MS<span class="sc">-</span>Dial input file...</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">33554</span>   <span class="dv">316</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>Reading sample annotation</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="co"># Samples: 316 </span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># QC Samples: 61</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">class</span>(mL)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"mRList"</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="fu">table</span>(mL<span class="sc">$</span>sample_ann<span class="sc">$</span>class)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    AA  Blank     DD     MM meal A meal B meal C </span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    <span class="dv">81</span>      <span class="dv">3</span>     <span class="dv">81</span>     <span class="dv">81</span>      <span class="dv">3</span>      <span class="dv">3</span>      <span class="dv">3</span> </span></code></pre></div>
 <p>The initial object contains the following elements</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">names</span>(mL)</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"data"</span>       <span class="st">"metab_ann"</span>  <span class="st">"sample_ann"</span> <span class="st">"QC"</span>         <span class="st">"QC_ann"</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">names</span>(mL)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"data"</span>       <span class="st">"metab_ann"</span>  <span class="st">"sample_ann"</span> <span class="st">"QC"</span>         <span class="st">"QC_ann"</span></span></code></pre></div>
 <p>which are:</p>
 <ul>
 <li><p>data: features-by-samples matrix containing metabolite
@@ -217,19 +213,19 @@ replacing NA values with a random number, calculated between 10%-25% of
 the minimum value of the feature.</p>
 <p>Before filtering we can take a loog at the distributions of m/z
 decimal values and m/z vs rt using:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_mz_decs.html">plot_mz_decs</a></span><span class="op">(</span><span class="va">mL</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/heatscatter_chromatography.html">heatscatter_chromatography</a></span><span class="op">(</span><span class="va">mL</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/hist.mz.png" style="width:49.0%"><img src="images/hs.png" style="width:49.0%"></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">filtering</span>(mL)</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co"># Samples with &gt;= 100 metabolites 255 / 255 </span></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co"># Features occurring in &gt;=  3 samples 33554 / 33554 </span></span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># Features with appropriate m/z values: 25786 </span></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># Features without appropriate m/z values: 7768 </span></span>
-<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>No NAs<span class="sc">:</span> imputation not performed.</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">filtering</span>(mL)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="co"># Samples with &gt;= 100 metabolites 255 / 255 </span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Features occurring in &gt;=  3 samples 33554 / 33554 </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Features with appropriate m/z values: 25786 </span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a><span class="co"># Features without appropriate m/z values: 7768 </span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>No NAs<span class="sc">:</span> imputation not performed.</span></code></pre></div>
 <p>It is useful to look at the distributions of m/z decimals and m/z vs
 rt after filtering.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_mz_decs.html">plot_mz_decs</a></span><span class="op">(</span><span class="va">mL</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/heatscatter_chromatography.html">heatscatter_chromatography</a></span><span class="op">(</span><span class="va">mL</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/hist.mz.filtered.png" style="width:49.0%"><img src="images/hs.filtered.png" style="width:49.0%"></p>
@@ -241,11 +237,11 @@ rt after filtering.</p>
 one or more samples from the <code>mRList</code>. Here, we remove
 samples that have values “Blank”, “meal A”, “meal B”, “meal C” in the
 column “class”:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">remove_samples</span>(<span class="at">mRList =</span> mL, <span class="at">ids =</span> <span class="fu">c</span>(<span class="st">"Blank"</span>, <span class="st">"meal A"</span>, <span class="st">"meal B"</span>, <span class="st">"meal C"</span>), <span class="at">column =</span> <span class="st">"class"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>removing x001_Blank_1_norm_RP_short_SWATH_pos x002_Blank_1_norm_RP_short_SWATH_pos x003_Blank_1_norm_RP_short_SWATH_pos x306_BananaShake_norm_rtech1_RP_short_SWATH_pos x307_PapayaShake_norm_rtech1_RP_short_SWATH_pos x308_KefirShake_norm_rtech1_RP_short_SWATH_pos x310_KefirShake_norm_rtech2_RP_short_SWATH_pos x311_PapayaShake_norm_rtech2_RP_short_SWATH_pos x312_BananaShake_norm_rtech2_RP_short_SWATH_pos x314_PapayaShake_norm_rtech3_RP_short_SWATH_pos x315_BananaShake_norm_rtech3_RP_short_SWATH_pos x316_KefirShake_norm_rtech3_RP_short_SWATH_pos</span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="fu">table</span>(mL<span class="sc">$</span>sample_ann<span class="sc">$</span>class)</span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>AA DD MM </span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="dv">81</span> <span class="dv">81</span> <span class="dv">81</span> </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>mL <span class="ot">&lt;-</span> <span class="fu">remove_samples</span>(<span class="at">mRList =</span> mL, <span class="at">ids =</span> <span class="fu">c</span>(<span class="st">"Blank"</span>, <span class="st">"meal A"</span>, <span class="st">"meal B"</span>, <span class="st">"meal C"</span>), <span class="at">column =</span> <span class="st">"class"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>removing x001_Blank_1_norm_RP_short_SWATH_pos x002_Blank_1_norm_RP_short_SWATH_pos x003_Blank_1_norm_RP_short_SWATH_pos x306_BananaShake_norm_rtech1_RP_short_SWATH_pos x307_PapayaShake_norm_rtech1_RP_short_SWATH_pos x308_KefirShake_norm_rtech1_RP_short_SWATH_pos x310_KefirShake_norm_rtech2_RP_short_SWATH_pos x311_PapayaShake_norm_rtech2_RP_short_SWATH_pos x312_BananaShake_norm_rtech2_RP_short_SWATH_pos x314_PapayaShake_norm_rtech3_RP_short_SWATH_pos x315_BananaShake_norm_rtech3_RP_short_SWATH_pos x316_KefirShake_norm_rtech3_RP_short_SWATH_pos</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">table</span>(mL<span class="sc">$</span>sample_ann<span class="sc">$</span>class)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>AA DD MM </span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="dv">81</span> <span class="dv">81</span> <span class="dv">81</span> </span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="normalization">Normalization<a class="anchor" aria-label="anchor" href="#normalization"></a>
@@ -263,10 +259,10 @@ must be present in <code>mRList$metab_ann</code>. If missing, the
 function <code><a href="../reference/calc_reference.html">calc_reference()</a></code> sets up such column using average
 metabolite values and medians of QC samples. For example, here’s a call
 to <code><a href="../reference/normalize_profiles.html">normalize_profiles()</a></code> using pqn:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>mL.norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL, <span class="at">method =</span> <span class="st">"pqn"</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>PQN normalization</span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>No reference profile found, using <span class="fu">calc_reference</span>() function...</span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>Using QC...</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>mL.norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL, <span class="at">method =</span> <span class="st">"pqn"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>PQN normalization</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>No reference profile found, using <span class="fu">calc_reference</span>() function...</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>Using QC...</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="qc-coefficient-of-variation-and-relative-log-abundances">QC: Coefficient of variation and relative log abundances<a class="anchor" aria-label="anchor" href="#qc-coefficient-of-variation-and-relative-log-abundances"></a>
@@ -275,16 +271,16 @@ to <code><a href="../reference/normalize_profiles.html">normalize_profiles()</a>
 relation to QC samples provides a means to exclude low quality features.
 In particular, only features that have a CV ratio between no-QC samples
 and QC sample higher than a given threshold (by default 1) are kept:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="fu">CV_ratio</span>(<span class="at">mRList =</span> mL.norm, <span class="at">dirout =</span> dir_out)</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>Summary of CV <span class="fu">ratio</span> (samples <span class="sc">/</span> QC)<span class="sc">:</span></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>   Min. <span class="dv">1</span>st Qu.  Median    Mean <span class="dv">3</span>rd Qu.    Max. </span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a> <span class="fl">0.1633</span>  <span class="fl">1.3511</span>  <span class="fl">2.0665</span>  <span class="fl">2.9914</span>  <span class="fl">3.7041</span> <span class="fl">36.8086</span> </span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># Features with appropriate CV 23313 / 25786 </span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">CV_ratio</span>(<span class="at">mRList =</span> mL.norm, <span class="at">dirout =</span> dir_out)</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>Summary of CV <span class="fu">ratio</span> (samples <span class="sc">/</span> QC)<span class="sc">:</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>   Min. <span class="dv">1</span>st Qu.  Median    Mean <span class="dv">3</span>rd Qu.    Max. </span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a> <span class="fl">0.1633</span>  <span class="fl">1.3511</span>  <span class="fl">2.0665</span>  <span class="fl">2.9914</span>  <span class="fl">3.7041</span> <span class="fl">36.8086</span> </span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="co"># Features with appropriate CV 23313 / 25786 </span></span></code></pre></div>
 <p>Typically, after normalization, the various samples should have
 similar distributions of relative log-<em>abundance</em>, a powerful
 tool to visualize unwanted variation in high-dimensional data <span class="citation">(<a href="#ref-Gandolfo2017">Gandolfo
 2018</a>)</span>.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL.norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/RLA.html">RLA</a></span><span class="op">(</span><span class="va">mL.norm</span>, logged <span class="op">=</span> <span class="cn">F</span><span class="op">)</span></span>
 <span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_RLA.html">plot_RLA</a></span><span class="op">(</span><span class="va">mL.norm</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/rla.png" style="width:100.0%"></p>
@@ -294,8 +290,8 @@ tool to visualize unwanted variation in high-dimensional data <span class="citat
 </h3>
 <p>The PQN leaves the data in linear space. They can be mapped in log
 space using again <code><a href="../reference/normalize_profiles.html">normalize_profiles()</a></code>:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="sc">&gt;</span> mL.norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL.norm, <span class="at">method =</span> <span class="st">"log"</span>)</span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>log normalization</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="sc">&gt;</span> mL.norm <span class="ot">&lt;-</span> <span class="fu">normalize_profiles</span>(mL.norm, <span class="at">method =</span> <span class="st">"log"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>log normalization</span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -308,7 +304,7 @@ function <code><a href="../reference/mR_pca.html">mR_pca()</a></code>, which rel
 <code>scaling</code>) and number of PCs (<code>nPcS</code>), it allows
 to include/exclude quality control samples by means of argument
 <code>include_QC</code>:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mL.norm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/mR_pca.html">mR_pca</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL.norm</span>, nPcs<span class="op">=</span><span class="fl">5</span>, scaling<span class="op">=</span><span class="st">"uv"</span>, include_QC<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>The results are added to the mRList in the element <code>pca</code>.
 The function <code><a href="../reference/plot_PCA_res.html">plot_PCA_res()</a></code> produces a list of two ggplot2
@@ -318,14 +314,14 @@ PCs; similarly, the function <code><a href="../reference/Plot2DPCA.html">Plot2DP
 scatter plots for the scores and loadings (not shown below). The column
 <code>col_by</code> indicates which column of sample annotation is used
 to color the samples.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_PCA_res</span>(<span class="at">mRList =</span> mL.norm, <span class="at">col_by=</span><span class="st">"subj_meal"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>Using default palette</span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="fu">names</span>(p)</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"scree"</span> <span class="st">"pairs"</span></span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Plot2DPCA</span>(<span class="at">mRList =</span> mL.norm, <span class="at">pcx=</span><span class="dv">1</span>, <span class="at">pcy=</span><span class="dv">2</span>, <span class="at">col_by=</span><span class="st">"subj_meal"</span>)</span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>Using default palette</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">names</span>(p)</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"scores"</span>   <span class="st">"loadings"</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">plot_PCA_res</span>(<span class="at">mRList =</span> mL.norm, <span class="at">col_by=</span><span class="st">"subj_meal"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>Using default palette</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="fu">names</span>(p)</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"scree"</span> <span class="st">"pairs"</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">Plot2DPCA</span>(<span class="at">mRList =</span> mL.norm, <span class="at">pcx=</span><span class="dv">1</span>, <span class="at">pcy=</span><span class="dv">2</span>, <span class="at">col_by=</span><span class="st">"subj_meal"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>Using default palette</span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">names</span>(p)</span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"scores"</span>   <span class="st">"loadings"</span></span></code></pre></div>
 <p><img src="images/pca.pairs.png" style="width:100.0%"><img src="images/pca.scree.png" style="width:49.0%"><img src="images/pca.scores.png" style="width:49.0%"></p>
 </div>
 <div class="section level2">
@@ -337,8 +333,8 @@ to color the samples.</p>
 <p>The definition of mean metabolite abundance for every biological
 replicate is performed by means of <code><a href="../reference/collapse_tech_rep.html">collapse_tech_rep()</a></code>
 function:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>mL.norm.bio <span class="ot">&lt;-</span> <span class="fu">collapse_tech_rep</span>(mL.norm)</span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>mL.norm.bio <span class="ot">&lt;-</span> <span class="fu">collapse_tech_rep</span>(mL.norm)</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="summary-statistics-and-univariate-analysis">Summary statistics and univariate analysis<a class="anchor" aria-label="anchor" href="#summary-statistics-and-univariate-analysis"></a>
@@ -349,40 +345,40 @@ fold changes and to test for metabolite variations.</p>
 mean, median and standard deviation of metabolite abundance according to
 the sample classes specified in the column “class” of sample
 annotation:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="fu">mean_median_stdev_samples</span>(mL.norm.bio)</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>Calculating means...</span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>Calculating medians...</span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>Calculating standard deviations...</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">mean_median_stdev_samples</span>(mL.norm.bio)</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>According to dataset size, this might take a few minutes.</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>Calculating means...</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>Calculating medians...</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>Calculating standard deviations...</span></code></pre></div>
 <p>The function <code><a href="../reference/univariate.html">univariate()</a></code> performs dataset-wide
 statistical tests (Student t-tests, Wilcoxon test, Anova and
 Kruskal-Wallis test) between levels of a particular factor defined in
 the sample annotation:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>mL.norm.bio <span class="ot">&lt;-</span> <span class="fu">univariate</span>(mL.norm.bio, <span class="at">test_method=</span><span class="st">"anova"</span>, <span class="at">exp.levels =</span> <span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"DD"</span>, <span class="st">"MM"</span>), <span class="at">exp.factor =</span> <span class="st">"class"</span>)</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>exp.levels<span class="sc">:</span>  AA DD MM </span>
-<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>exp.factor<span class="sc">:</span>  class </span>
-<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>selected samples<span class="sc">:</span></span>
-<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>             id level</span>
-<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a><span class="dv">1</span>  AA_mealA_t00    AA</span>
-<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a><span class="dv">2</span>  AA_mealA_t01    AA</span>
-<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a><span class="dv">3</span>  AA_mealA_t02    AA</span>
-<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a><span class="dv">4</span>  AA_mealA_t03    AA</span>
-<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>...</span>
-<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a><span class="dv">81</span> MM_mealC_t08    MM</span>
-<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>Performing ANOVA between AA DD MM </span>
-<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a><span class="fu">head</span>(mL.norm.bio<span class="sc">$</span>anova)</span>
-<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>              F            p            q        DD<span class="sc">-</span>AA        MM<span class="sc">-</span>AA       MM<span class="sc">-</span>DD</span>
-<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>F6    <span class="fl">1.1288923</span> <span class="fl">3.286170e-01</span> <span class="fl">4.057294e-01</span> <span class="fl">0.3195251040</span> <span class="fl">9.188130e-01</span> <span class="fl">0.541574732</span></span>
-<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>F7   <span class="fl">69.4605499</span> <span class="fl">4.741540e-18</span> <span class="fl">1.387516e-16</span> <span class="fl">0.0008007329</span> <span class="fl">2.104816e-11</span> <span class="fl">0.000000000</span></span>
-<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a>F38   <span class="fl">0.9773231</span> <span class="fl">3.808772e-01</span> <span class="fl">4.592744e-01</span> <span class="fl">0.4812988027</span> <span class="fl">9.947058e-01</span> <span class="fl">0.423776274</span></span>
-<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a>F60   <span class="fl">1.0992287</span> <span class="fl">3.382322e-01</span> <span class="fl">4.155800e-01</span> <span class="fl">0.8435520698</span> <span class="fl">3.116240e-01</span> <span class="fl">0.634314902</span></span>
-<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a>F64   <span class="fl">8.7106954</span> <span class="fl">3.850398e-04</span> <span class="fl">9.672138e-04</span> <span class="fl">0.0759644302</span> <span class="fl">2.278999e-04</span> <span class="fl">0.128348827</span></span>
-<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a>F128 <span class="fl">25.9628569</span> <span class="fl">2.278139e-09</span> <span class="fl">1.634782e-08</span> <span class="fl">0.0015726589</span> <span class="fl">8.919273e-10</span> <span class="fl">0.001594945</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>mL.norm.bio <span class="ot">&lt;-</span> <span class="fu">univariate</span>(mL.norm.bio, <span class="at">test_method=</span><span class="st">"anova"</span>, <span class="at">exp.levels =</span> <span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"DD"</span>, <span class="st">"MM"</span>), <span class="at">exp.factor =</span> <span class="st">"class"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>exp.levels<span class="sc">:</span>  AA DD MM </span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>exp.factor<span class="sc">:</span>  class </span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>selected samples<span class="sc">:</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>             id level</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="dv">1</span>  AA_mealA_t00    AA</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="dv">2</span>  AA_mealA_t01    AA</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="dv">3</span>  AA_mealA_t02    AA</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="dv">4</span>  AA_mealA_t03    AA</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>...</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="dv">81</span> MM_mealC_t08    MM</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>Performing ANOVA between AA DD MM </span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="fu">head</span>(mL.norm.bio<span class="sc">$</span>anova)</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>              F            p            q        DD<span class="sc">-</span>AA        MM<span class="sc">-</span>AA       MM<span class="sc">-</span>DD</span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a>F6    <span class="fl">1.1288923</span> <span class="fl">3.286170e-01</span> <span class="fl">4.057294e-01</span> <span class="fl">0.3195251040</span> <span class="fl">9.188130e-01</span> <span class="fl">0.541574732</span></span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>F7   <span class="fl">69.4605499</span> <span class="fl">4.741540e-18</span> <span class="fl">1.387516e-16</span> <span class="fl">0.0008007329</span> <span class="fl">2.104816e-11</span> <span class="fl">0.000000000</span></span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>F38   <span class="fl">0.9773231</span> <span class="fl">3.808772e-01</span> <span class="fl">4.592744e-01</span> <span class="fl">0.4812988027</span> <span class="fl">9.947058e-01</span> <span class="fl">0.423776274</span></span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>F60   <span class="fl">1.0992287</span> <span class="fl">3.382322e-01</span> <span class="fl">4.155800e-01</span> <span class="fl">0.8435520698</span> <span class="fl">3.116240e-01</span> <span class="fl">0.634314902</span></span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>F64   <span class="fl">8.7106954</span> <span class="fl">3.850398e-04</span> <span class="fl">9.672138e-04</span> <span class="fl">0.0759644302</span> <span class="fl">2.278999e-04</span> <span class="fl">0.128348827</span></span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a>F128 <span class="fl">25.9628569</span> <span class="fl">2.278139e-09</span> <span class="fl">1.634782e-08</span> <span class="fl">0.0015726589</span> <span class="fl">8.919273e-10</span> <span class="fl">0.001594945</span></span></code></pre></div>
 <p>The full results of the analysis are saved to the text file
 <test_method>.txt.</test_method></p>
 <p>We found it helpful to provide a function for retrieving the list of
 significant features:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL.norm.bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">0.05</span>, feature_id <span class="op">=</span> <span class="st">"Feature_ID"</span><span class="op">)</span></span></code></pre></div>
 <p>By default the function provides the Feature_ID. After having
 performed metabolite annotation, it is also possible to retrieve “Name”
@@ -434,57 +430,57 @@ modalities.</p></li>
 positive modality with retention times of RPShort columns (using only
 peaks with relative intensity of at least 10 percent of the most intense
 peak, argument <code>accept_RI=10</code>).</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>mR_library <span class="ot">&lt;-</span> <span class="fu">select_library</span>(<span class="at">column =</span> <span class="st">"RPShort"</span>, <span class="at">mode =</span> <span class="st">"POS"</span>, <span class="at">accept_RI=</span><span class="dv">10</span>)</span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>Library source<span class="sc">:</span> margheRita </span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>Column<span class="sc">:</span> RPShort </span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>mode<span class="sc">:</span>  POS </span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>minimum RI<span class="sc">:</span>  <span class="dv">10</span> </span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a><span class="co"># metabolites:  465</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>mR_library <span class="ot">&lt;-</span> <span class="fu">select_library</span>(<span class="at">column =</span> <span class="st">"RPShort"</span>, <span class="at">mode =</span> <span class="st">"POS"</span>, <span class="at">accept_RI=</span><span class="dv">10</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>Library source<span class="sc">:</span> margheRita </span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>Column<span class="sc">:</span> RPShort </span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>mode<span class="sc">:</span>  POS </span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>minimum RI<span class="sc">:</span>  <span class="dv">10</span> </span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co"># metabolites:  465</span></span></code></pre></div>
 <p>The resulting <code>mR_library</code> is a list that contains 4
 elements.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">names</span>(mR_library)</span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"lib_precursor"</span>  <span class="st">"lib_peaks"</span>      <span class="st">"lib_peaks_data"</span> <span class="st">"key_field"</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">names</span>(mR_library)</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"lib_precursor"</span>  <span class="st">"lib_peaks"</span>      <span class="st">"lib_peaks_data"</span> <span class="st">"key_field"</span></span></code></pre></div>
 <p>The first, <code>lib_precursor</code> is a data.frame that provides
 information at metabolite level (we do not show here the 7th column,
 <code>SMILES</code>, to simplify the output)</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">head</span>(mR_library<span class="sc">$</span>lib_precursor[, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>])</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>     ID      CAS                         Name   rt        mz PubChemCID</span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>L10 L10 <span class="dv">485-80-3</span> S<span class="sc">-</span>(<span class="dv">5</span><span class="st">'-Adenosyl)-L-methionine 0.80 399.14452      34756</span></span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="st">L14 L14  61-19-8      Adenosine monophosphate 1.40 348.07037       6083</span></span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="st">L17 L17 979-92-0       S-Adenosylhomocysteine 1.28 385.12887     439155</span></span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="st">L20 L20  56-86-0              L-Glutamic acid 0.90 148.06044      33032</span></span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="st">L30 L30  56-40-6                      Glycine 0.85  76.03931        750</span></span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="st">L33 L33  56-41-7                    L-Alanine 0.88  90.05496       5950</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="fu">head</span>(mR_library<span class="sc">$</span>lib_precursor[, <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>])</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>     ID      CAS                         Name   rt        mz PubChemCID</span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>L10 L10 <span class="dv">485-80-3</span> S<span class="sc">-</span>(<span class="dv">5</span><span class="st">'-Adenosyl)-L-methionine 0.80 399.14452      34756</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="st">L14 L14  61-19-8      Adenosine monophosphate 1.40 348.07037       6083</span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="st">L17 L17 979-92-0       S-Adenosylhomocysteine 1.28 385.12887     439155</span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="st">L20 L20  56-86-0              L-Glutamic acid 0.90 148.06044      33032</span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="st">L30 L30  56-40-6                      Glycine 0.85  76.03931        750</span></span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a><span class="st">L33 L33  56-41-7                    L-Alanine 0.88  90.05496       5950</span></span></code></pre></div>
 <p>The element <code>lib_peaks_data</code> is a data.frame that list
 information for the MS/MS spectra</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">head</span>(mR_library<span class="sc">$</span>lib_peaks_data)</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>    ID        CAS Polarity                                      Name</span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="dv">1</span>   M1   <span class="dv">951-78-0</span>      POS                           <span class="dv">2</span><span class="st">'-Deoxyuridine</span></span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="st">2   M2 25518-54-1      POS                       Lauroyl-L-carnitine</span></span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="st">3   M3   542-32-5      POS                        2-Aminoadipic acid</span></span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="st">6   M6 33818-15-4      POS Cytidine 5'</span><span class="sc">-</span><span class="fu">diphosphocholine</span> (Citicoline)</span>
-<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="dv">7</span>   M7  <span class="dv">3604-79-3</span>      POS                           <span class="dv">3</span><span class="sc">-</span>Nitrotyrosine</span>
-<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a><span class="dv">12</span> M12   <span class="dv">110-15-6</span>      POS                             Succinic acid</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="fu">head</span>(mR_library<span class="sc">$</span>lib_peaks_data)</span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>    ID        CAS Polarity                                      Name</span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a><span class="dv">1</span>   M1   <span class="dv">951-78-0</span>      POS                           <span class="dv">2</span><span class="st">'-Deoxyuridine</span></span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a><span class="st">2   M2 25518-54-1      POS                       Lauroyl-L-carnitine</span></span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a><span class="st">3   M3   542-32-5      POS                        2-Aminoadipic acid</span></span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a><span class="st">6   M6 33818-15-4      POS Cytidine 5'</span><span class="sc">-</span><span class="fu">diphosphocholine</span> (Citicoline)</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a><span class="dv">7</span>   M7  <span class="dv">3604-79-3</span>      POS                           <span class="dv">3</span><span class="sc">-</span>Nitrotyrosine</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="dv">12</span> M12   <span class="dv">110-15-6</span>      POS                             Succinic acid</span></code></pre></div>
 <p>The element <code>lib_peaks</code> is a named list with of spectra,
 where the first column is m/z while the second is the relative
 intensity; here we show the first element, M1:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">head</span>(mR_library<span class="sc">$</span>lib_peaks<span class="sc">$</span>M1)</span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>          [,<span class="dv">1</span>]      [,<span class="dv">2</span>]</span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>[<span class="dv">1</span>,]  <span class="fl">45.03236</span>  <span class="fl">10.34602</span></span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>[<span class="dv">2</span>,]  <span class="fl">70.02762</span>  <span class="fl">12.46120</span></span>
-<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>[<span class="dv">3</span>,]  <span class="fl">96.00721</span>  <span class="fl">13.50730</span></span>
-<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>[<span class="dv">4</span>,]  <span class="fl">99.04249</span>  <span class="fl">17.68019</span></span>
-<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a>[<span class="dv">5</span>,] <span class="fl">113.03337</span> <span class="fl">100.00000</span></span>
-<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a>[<span class="dv">6</span>,] <span class="fl">117.05313</span>  <span class="fl">20.43913</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="fu">head</span>(mR_library<span class="sc">$</span>lib_peaks<span class="sc">$</span>M1)</span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>          [,<span class="dv">1</span>]      [,<span class="dv">2</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>[<span class="dv">1</span>,]  <span class="fl">45.03236</span>  <span class="fl">10.34602</span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>[<span class="dv">2</span>,]  <span class="fl">70.02762</span>  <span class="fl">12.46120</span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>[<span class="dv">3</span>,]  <span class="fl">96.00721</span>  <span class="fl">13.50730</span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>[<span class="dv">4</span>,]  <span class="fl">99.04249</span>  <span class="fl">17.68019</span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a>[<span class="dv">5</span>,] <span class="fl">113.03337</span> <span class="fl">100.00000</span></span>
+<span id="cb22-8"><a href="#cb22-8" tabindex="-1"></a>[<span class="dv">6</span>,] <span class="fl">117.05313</span>  <span class="fl">20.43913</span></span></code></pre></div>
 <div class="section level4">
 <h4 id="are-other-libraries-supported">Are other libraries supported?<a class="anchor" aria-label="anchor" href="#are-other-libraries-supported"></a>
 </h4>
 <p>The function <code><a href="../reference/library_from_msp.html">library_from_msp()</a></code> provides a means to
 import library encoded as msp files in margheRita, generating the same
 data structure generated by <code><a href="../reference/select_library.html">select_library()</a></code>:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>mR_library_external <span class="ot">&lt;-</span> <span class="fu">library_from_msp</span>(<span class="st">"MSMS-Public-Neg-VS15.msp"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="fu">names</span>(mR_library_external)</span>
-<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"lib_precursor"</span>  <span class="st">"lib_peaks_data"</span> <span class="st">"lib_peaks"</span>      <span class="st">"key_field"</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>mR_library_external <span class="ot">&lt;-</span> <span class="fu">library_from_msp</span>(<span class="st">"MSMS-Public-Neg-VS15.msp"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a><span class="fu">names</span>(mR_library_external)</span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"lib_precursor"</span>  <span class="st">"lib_peaks_data"</span> <span class="st">"lib_peaks"</span>      <span class="st">"key_field"</span></span></code></pre></div>
 <p>Otherwise you must encode you library in the same data structure
 generated by <code><a href="../reference/select_library.html">select_library()</a></code>.</p>
 </div>
@@ -497,37 +493,37 @@ performed by the homonymous function, where the argument
 <code>features</code> specifies the features to be considered (all
 features if it is left <code>features=NULL</code>, as in the following
 example):</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>mL.norm.bio <span class="ot">&lt;-</span> <span class="fu">metabolite_identification</span>(mL.norm.bio, <span class="at">library_list =</span> mR_library)</span>
-<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a><span class="co"># Features considered:  18026 </span></span>
-<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>Checking RT... done</span>
-<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>Checking precursor mz... done</span>
-<span id="cb25-5"><a href="#cb25-5" tabindex="-1"></a>Integrating RT and mz results... done</span>
-<span id="cb25-6"><a href="#cb25-6" tabindex="-1"></a>Assembling output <span class="cf">for</span> precursors...done</span>
-<span id="cb25-7"><a href="#cb25-7" tabindex="-1"></a>MS<span class="sc">/</span>MS analysis...</span>
-<span id="cb25-8"><a href="#cb25-8" tabindex="-1"></a>    <span class="co"># library metabolites to consider:  337 </span></span>
-<span id="cb25-9"><a href="#cb25-9" tabindex="-1"></a>     <span class="dv">100</span> <span class="sc">/</span> <span class="dv">337</span> </span>
-<span id="cb25-10"><a href="#cb25-10" tabindex="-1"></a>     <span class="dv">200</span> <span class="sc">/</span> <span class="dv">337</span> </span>
-<span id="cb25-11"><a href="#cb25-11" tabindex="-1"></a>     <span class="dv">300</span> <span class="sc">/</span> <span class="dv">337</span> </span>
-<span id="cb25-12"><a href="#cb25-12" tabindex="-1"></a>done</span>
-<span id="cb25-13"><a href="#cb25-13" tabindex="-1"></a>Assembling final output... Initial associations<span class="sc">:</span> <span class="dv">1245</span> </span>
-<span id="cb25-14"><a href="#cb25-14" tabindex="-1"></a><span class="dv">1</span><span class="er">)</span> Filtering redundant MS<span class="sc">/</span>MS spectra <span class="cf">for</span> the same metabolite<span class="sc">-</span>feature...</span>
-<span id="cb25-15"><a href="#cb25-15" tabindex="-1"></a>    by highest number of peaks</span>
-<span id="cb25-16"><a href="#cb25-16" tabindex="-1"></a>    by highest peaks ratio...<span class="dv">1011</span> </span>
-<span id="cb25-17"><a href="#cb25-17" tabindex="-1"></a><span class="dv">2</span><span class="er">)</span> <span class="dv">1</span><span class="sc">:</span>n associations between metabolites and features...</span>
-<span id="cb25-18"><a href="#cb25-18" tabindex="-1"></a>    by highest peaks ratio</span>
-<span id="cb25-19"><a href="#cb25-19" tabindex="-1"></a>    by best annotaiton level</span>
-<span id="cb25-20"><a href="#cb25-20" tabindex="-1"></a>    by lowest ppm error...<span class="dv">913</span> </span>
-<span id="cb25-21"><a href="#cb25-21" tabindex="-1"></a><span class="dv">3</span><span class="er">)</span> <span class="dv">1</span><span class="sc">:</span>n associations between metabolites and features, not supported by MS<span class="sc">/</span>MS...</span>
-<span id="cb25-22"><a href="#cb25-22" tabindex="-1"></a>    by level... <span class="dv">479</span> </span>
-<span id="cb25-23"><a href="#cb25-23" tabindex="-1"></a>    by <span class="fu">mass</span> (category)... <span class="dv">380</span> </span>
-<span id="cb25-24"><a href="#cb25-24" tabindex="-1"></a>    by <span class="fu">RT</span> (category)...     by RT... <span class="dv">372</span> </span>
-<span id="cb25-25"><a href="#cb25-25" tabindex="-1"></a>    by ppm... <span class="dv">368</span> </span>
-<span id="cb25-26"><a href="#cb25-26" tabindex="-1"></a>    by ppm... <span class="dv">366</span></span>
-<span id="cb25-27"><a href="#cb25-27" tabindex="-1"></a>    ...</span>
-<span id="cb25-28"><a href="#cb25-28" tabindex="-1"></a>Adding annotations to metab_ann...</span>
-<span id="cb25-29"><a href="#cb25-29" tabindex="-1"></a>Adding annotations to data_ann...</span>
-<span id="cb25-30"><a href="#cb25-30" tabindex="-1"></a>Saving excel file metabolite_identification.xlsx...</span>
-<span id="cb25-31"><a href="#cb25-31" tabindex="-1"></a>done</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>mL.norm.bio <span class="ot">&lt;-</span> <span class="fu">metabolite_identification</span>(mL.norm.bio, <span class="at">library_list =</span> mR_library)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a><span class="co"># Features considered:  18026 </span></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>Checking RT... done</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>Checking precursor mz... done</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>Integrating RT and mz results... done</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>Assembling output <span class="cf">for</span> precursors...done</span>
+<span id="cb24-7"><a href="#cb24-7" tabindex="-1"></a>MS<span class="sc">/</span>MS analysis...</span>
+<span id="cb24-8"><a href="#cb24-8" tabindex="-1"></a>    <span class="co"># library metabolites to consider:  337 </span></span>
+<span id="cb24-9"><a href="#cb24-9" tabindex="-1"></a>     <span class="dv">100</span> <span class="sc">/</span> <span class="dv">337</span> </span>
+<span id="cb24-10"><a href="#cb24-10" tabindex="-1"></a>     <span class="dv">200</span> <span class="sc">/</span> <span class="dv">337</span> </span>
+<span id="cb24-11"><a href="#cb24-11" tabindex="-1"></a>     <span class="dv">300</span> <span class="sc">/</span> <span class="dv">337</span> </span>
+<span id="cb24-12"><a href="#cb24-12" tabindex="-1"></a>done</span>
+<span id="cb24-13"><a href="#cb24-13" tabindex="-1"></a>Assembling final output... Initial associations<span class="sc">:</span> <span class="dv">1245</span> </span>
+<span id="cb24-14"><a href="#cb24-14" tabindex="-1"></a><span class="dv">1</span><span class="er">)</span> Filtering redundant MS<span class="sc">/</span>MS spectra <span class="cf">for</span> the same metabolite<span class="sc">-</span>feature...</span>
+<span id="cb24-15"><a href="#cb24-15" tabindex="-1"></a>    by highest number of peaks</span>
+<span id="cb24-16"><a href="#cb24-16" tabindex="-1"></a>    by highest peaks ratio...<span class="dv">1011</span> </span>
+<span id="cb24-17"><a href="#cb24-17" tabindex="-1"></a><span class="dv">2</span><span class="er">)</span> <span class="dv">1</span><span class="sc">:</span>n associations between metabolites and features...</span>
+<span id="cb24-18"><a href="#cb24-18" tabindex="-1"></a>    by highest peaks ratio</span>
+<span id="cb24-19"><a href="#cb24-19" tabindex="-1"></a>    by best annotaiton level</span>
+<span id="cb24-20"><a href="#cb24-20" tabindex="-1"></a>    by lowest ppm error...<span class="dv">913</span> </span>
+<span id="cb24-21"><a href="#cb24-21" tabindex="-1"></a><span class="dv">3</span><span class="er">)</span> <span class="dv">1</span><span class="sc">:</span>n associations between metabolites and features, not supported by MS<span class="sc">/</span>MS...</span>
+<span id="cb24-22"><a href="#cb24-22" tabindex="-1"></a>    by level... <span class="dv">479</span> </span>
+<span id="cb24-23"><a href="#cb24-23" tabindex="-1"></a>    by <span class="fu">mass</span> (category)... <span class="dv">380</span> </span>
+<span id="cb24-24"><a href="#cb24-24" tabindex="-1"></a>    by <span class="fu">RT</span> (category)...     by RT... <span class="dv">372</span> </span>
+<span id="cb24-25"><a href="#cb24-25" tabindex="-1"></a>    by ppm... <span class="dv">368</span> </span>
+<span id="cb24-26"><a href="#cb24-26" tabindex="-1"></a>    by ppm... <span class="dv">366</span></span>
+<span id="cb24-27"><a href="#cb24-27" tabindex="-1"></a>    ...</span>
+<span id="cb24-28"><a href="#cb24-28" tabindex="-1"></a>Adding annotations to metab_ann...</span>
+<span id="cb24-29"><a href="#cb24-29" tabindex="-1"></a>Adding annotations to data_ann...</span>
+<span id="cb24-30"><a href="#cb24-30" tabindex="-1"></a>Saving excel file metabolite_identification.xlsx...</span>
+<span id="cb24-31"><a href="#cb24-31" tabindex="-1"></a>done</span></code></pre></div>
 <p>The function <code><a href="../reference/metabolite_identification.html">metabolite_identification()</a></code> has a series of
 parameters that can be adjusted to optimize the identification process
 (see its documentation). When metabolite identification is applied on a
@@ -561,13 +557,13 @@ be disabled</strong> (e.g. for exploratory analysis) setting
 </h3>
 <p>The spectra from all the features that match a metabolite can be
 inspected creating the following plot.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/visualize_associated_spectra.html">visualize_associated_spectra</a></span><span class="op">(</span><span class="va">mL.norm.bio</span>, mR_library <span class="op">=</span> <span class="va">mR_library</span>, metabolite_id <span class="op">=</span> <span class="st">"L1660"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/L1660_F10165_M1028_mirrored.png" style="width:100.0%"></p>
 <p>The function <code><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison()</a></code> draws heatmaps to
 visually compare ppm errors and RI differences between feature and
 metabolite spectra:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/h_map_MSMS_comparison.html">h_map_MSMS_comparison</a></span><span class="op">(</span><span class="va">mL.norm.bio</span>, metab_id <span class="op">=</span> <span class="st">"L1660"</span>, feature_id <span class="op">=</span> <span class="st">"F10165"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/e_mz_L1660_M1028_F10165.png" style="width:49.0%"><img src="images/e_RI_L1660_M1028_F10165.png" style="width:49.0%"></p>
 </div>
@@ -577,7 +573,7 @@ metabolite spectra:</p>
 </h2>
 <p>The function <code><a href="../reference/metab_boxplot.html">metab_boxplot()</a></code> draws boxplots of feature
 abundances grouped by the levels of a given factor:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="fu"><a href="../reference/metab_boxplot.html">metab_boxplot</a></span><span class="op">(</span><span class="va">mL.norm.bio</span>, feature <span class="op">=</span> <span class="st">"F3957"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/boxplot.F3957.png" style="width:70.0%"></p>
 <p>The function <code><a href="../reference/h_map.html">h_map()</a></code> provides heatmaps based on package
@@ -587,7 +583,7 @@ metabolites according to ANOVA test. Note that we set
 <code>feature_id = "Name"</code> which indicates to consider only those
 features that have a <code>Name</code> column in the annotation, that
 is, have been assigned to a metabolite:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">significant_features</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL.norm.bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">10e-10</span>, feature_id <span class="op">=</span> <span class="st">"Name"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/h_map.html">h_map</a></span><span class="op">(</span><span class="va">mL.norm.bio</span>, scale_features<span class="op">=</span><span class="cn">TRUE</span>, features <span class="op">=</span> <span class="va">significant_features</span>, show_column_names<span class="op">=</span><span class="cn">F</span>, data.use <span class="op">=</span> <span class="st">"data_ann"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/hm.2.png" style="width:99.0%"></p>
@@ -614,7 +610,7 @@ features;</p></li>
 <code>metab_stat_feat</code>, but only for statistically significant
 features with an assigned compound.</p></li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metab_stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/merge_stats_w_features.html">merge_stats_w_features</a></span><span class="op">(</span>mRList <span class="op">=</span> <span class="va">mL.norm.bio</span>, test_method <span class="op">=</span> <span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="fl">0.05</span>, dirout <span class="op">=</span> <span class="va">dir_out</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -630,14 +626,14 @@ to be tested and the reference universe of all PubChemCIDs in the
 dataset. In the following example we extract the PubChemCID of the most
 significant features according to anova and consider all the PubChemCID
 found in the dataset as reference universe:</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>significant_features <span class="ot">&lt;-</span> <span class="fu">select_sign_features</span>(mL.norm.bio, <span class="at">test_method=</span><span class="st">"anova"</span>, <span class="at">test_value =</span> <span class="st">"q"</span>, <span class="at">cutoff_value =</span> <span class="fl">10e-10</span>, <span class="at">feature_id =</span> <span class="st">"PubChemCID"</span>, <span class="at">split_by_semicolon =</span> T)</span>
-<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>universe <span class="ot">&lt;-</span>  <span class="fu">select_sign_features</span>(mL.norm.bio, <span class="at">test_method=</span><span class="st">"anova"</span>, <span class="at">test_value =</span> <span class="st">"q"</span>, <span class="at">feature_id =</span> <span class="st">"PubChemCID"</span>, <span class="at">split_by_semicolon =</span> T)</span>
-<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>pa_res <span class="ot">&lt;-</span> <span class="fu">pathway_analysis</span>(significant_features, <span class="at">type =</span> <span class="st">"ora"</span>, <span class="at">universe =</span> universe)</span>
-<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>loading pathway data...</span>
-<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>preprocessing pathway data...</span>
-<span id="cb31-7"><a href="#cb31-7" tabindex="-1"></a>reducing pathway data to the given universe...</span>
-<span id="cb31-8"><a href="#cb31-8" tabindex="-1"></a>ORA...</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>significant_features <span class="ot">&lt;-</span> <span class="fu">select_sign_features</span>(mL.norm.bio, <span class="at">test_method=</span><span class="st">"anova"</span>, <span class="at">test_value =</span> <span class="st">"q"</span>, <span class="at">cutoff_value =</span> <span class="fl">10e-10</span>, <span class="at">feature_id =</span> <span class="st">"PubChemCID"</span>, <span class="at">split_by_semicolon =</span> T)</span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>universe <span class="ot">&lt;-</span>  <span class="fu">select_sign_features</span>(mL.norm.bio, <span class="at">test_method=</span><span class="st">"anova"</span>, <span class="at">test_value =</span> <span class="st">"q"</span>, <span class="at">feature_id =</span> <span class="st">"PubChemCID"</span>, <span class="at">split_by_semicolon =</span> T)</span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>pa_res <span class="ot">&lt;-</span> <span class="fu">pathway_analysis</span>(significant_features, <span class="at">type =</span> <span class="st">"ora"</span>, <span class="at">universe =</span> universe)</span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>loading pathway data...</span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>preprocessing pathway data...</span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>reducing pathway data to the given universe...</span>
+<span id="cb30-8"><a href="#cb30-8" tabindex="-1"></a>ORA...</span></code></pre></div>
 <p>Note that we set the argument <code>split_by_semicolon=TRUE</code>
 because the statistical analysis was conducted at feature level and we
 can have a
@@ -647,7 +643,7 @@ semicolon-separated PubChemCIDs for the same feature.</p>
 <p>In case of MSEA, we obtain a ranked vector of scores
 (<code>values = TRUE</code>) for all PubChemCIDs in the dataset, in
 decreasing order of importance:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ranked_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/select_sign_features.html">select_sign_features</a></span><span class="op">(</span><span class="va">mL.norm.bio</span>, test_method<span class="op">=</span><span class="st">"anova"</span>, test_value <span class="op">=</span> <span class="st">"q"</span>, cutoff_value <span class="op">=</span> <span class="cn">Inf</span>, feature_id <span class="op">=</span> <span class="st">"PubChemCID"</span>, values <span class="op">=</span> <span class="cn">TRUE</span>, split_by_semicolon <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">ranked_vector</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log10</a></span><span class="op">(</span><span class="va">ranked_vector</span><span class="op">)</span>, decreasing <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span>
 <span><span class="va">msea_res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pathway_analysis.html">pathway_analysis</a></span><span class="op">(</span>in_list <span class="op">=</span> <span class="va">ranked_vector</span>, type <span class="op">=</span> <span class="st">"msea"</span><span class="op">)</span></span></code></pre></div>
@@ -657,28 +653,28 @@ decreasing order of importance:</p>
 <code>term_annotation</code>: a table with pathway
 descriptions;</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="fu">head</span>(pa_res<span class="sc">$</span>term_annotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>])</span>
-<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>      bs_id source source_acc                              name    type                   tax_id_bs tax_id</span>
-<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="dv">66389</span> <span class="dv">82928</span>   KEGG   hsa00030         Pentose phosphate pathway pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
-<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a><span class="dv">66392</span> <span class="dv">82931</span>   KEGG   hsa00052              Galactose metabolism pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
-<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="dv">66393</span> <span class="dv">82932</span>   KEGG   hsa00053 Ascorbate and aldarate metabolism pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
-<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a><span class="dv">66394</span> <span class="dv">82933</span>   KEGG   hsa00061           Fatty acid biosynthesis pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
-<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="dv">66396</span> <span class="dv">82935</span>   KEGG   hsa00071            Fatty acid degradation pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
-<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a><span class="dv">66398</span> <span class="dv">82937</span>   KEGG   hsa00100              Steroid biosynthesis pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="fu">head</span>(pa_res<span class="sc">$</span>term_annotation[, <span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>])</span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>      bs_id source source_acc                              name    type                   tax_id_bs tax_id</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="dv">66389</span> <span class="dv">82928</span>   KEGG   hsa00030         Pentose phosphate pathway pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
+<span id="cb32-4"><a href="#cb32-4" tabindex="-1"></a><span class="dv">66392</span> <span class="dv">82931</span>   KEGG   hsa00052              Galactose metabolism pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
+<span id="cb32-5"><a href="#cb32-5" tabindex="-1"></a><span class="dv">66393</span> <span class="dv">82932</span>   KEGG   hsa00053 Ascorbate and aldarate metabolism pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
+<span id="cb32-6"><a href="#cb32-6" tabindex="-1"></a><span class="dv">66394</span> <span class="dv">82933</span>   KEGG   hsa00061           Fatty acid biosynthesis pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
+<span id="cb32-7"><a href="#cb32-7" tabindex="-1"></a><span class="dv">66396</span> <span class="dv">82935</span>   KEGG   hsa00071            Fatty acid degradation pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span>
+<span id="cb32-8"><a href="#cb32-8" tabindex="-1"></a><span class="dv">66398</span> <span class="dv">82937</span>   KEGG   hsa00100              Steroid biosynthesis pathway organism<span class="sc">-</span>specific biosystem   <span class="dv">9606</span></span></code></pre></div>
 <ul>
 <li>
 <code>res</code>: an object of class “enrichResult” (ORA) or
 “gseaResult” (MSEA), which can be used to obtain various visualizations
 through clusterProfiler functions.</li>
 </ul>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu">class</span>(pa_res<span class="sc">$</span>res)</span>
-<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"enrichResult"</span></span>
-<span id="cb34-3"><a href="#cb34-3" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"package"</span>)</span>
-<span id="cb34-4"><a href="#cb34-4" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"enrichit"</span></span>
-<span id="cb34-5"><a href="#cb34-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">class</span>(msea_res<span class="sc">$</span>res)</span>
-<span id="cb34-6"><a href="#cb34-6" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"gseaResult"</span></span>
-<span id="cb34-7"><a href="#cb34-7" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"package"</span>)</span>
-<span id="cb34-8"><a href="#cb34-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"enrichit"</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="fu">class</span>(pa_res<span class="sc">$</span>res)</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"enrichResult"</span></span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"package"</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"enrichit"</span></span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fu">class</span>(msea_res<span class="sc">$</span>res)</span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"gseaResult"</span></span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a><span class="fu">attr</span>(,<span class="st">"package"</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a>[<span class="dv">1</span>] <span class="st">"enrichit"</span></span></code></pre></div>
 <p>The packages <a href="https://bioconductor.org/packages/release/bioc/html/clusterProfiler.html" class="external-link">clusterProfiler</a>
 <span class="citation">(<a href="#ref-Yu2012">Yu et al. 2012</a>)</span>
 and <a href="https://bioconductor.org/packages/release/bioc/html/enrichplot.html" class="external-link">enrichplot</a>
@@ -688,10 +684,10 @@ results (note that, since such packages are focused on functional
 genomics, their terminology mentions genes and gene sets). For example,
 here we use <code><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot()</a></code> for ORA results and
 <code><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html" class="external-link">enrichplot::dotplot()</a></code> for MSEA results.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html" class="external-link">barplot</a></span><span class="op">(</span><span class="va">pa_res</span><span class="op">$</span><span class="va">res</span>, showCategory<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/ora_barplot.png" style="width:99.0%"></p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">enrichplot</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/enrichplot/man/dotplot.html" class="external-link">dotplot</a></span><span class="op">(</span><span class="va">msea_res</span><span class="op">$</span><span class="va">res</span>, showCategory <span class="op">=</span> <span class="fl">10</span>, split <span class="op">=</span> <span class="st">".sign"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="images/msea_dotplot.png" style="width:99.0%"></p>
 </div>
@@ -703,17 +699,17 @@ reorganized as a “SummarizedExperiment” object, which is used by
 “notame” <span class="citation">(<a href="#ref-Klavus2020">Klåvus et al.
 2020</a>)</span> and package “POMA” <span class="citation">(<a href="#ref-Castellano2021">Castellano-Escuder et al.
 2021</a>)</span>.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">as.SummarizedExperiment</span>(mL)</span>
-<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>se</span>
-<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>class<span class="sc">:</span> SummarizedExperiment </span>
-<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a>dim<span class="sc">:</span> <span class="dv">33554</span> <span class="dv">316</span> </span>
-<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a><span class="fu">metadata</span>(<span class="dv">0</span>)<span class="sc">:</span></span>
-<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a><span class="fu">assays</span>(<span class="dv">1</span>)<span class="sc">:</span> <span class="st">''</span></span>
-<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a><span class="fu">rownames</span>(<span class="dv">33554</span>)<span class="sc">:</span> F1 F3 ... F42636 F42638</span>
-<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a>rowData <span class="fu">names</span>(<span class="dv">8</span>)<span class="sc">:</span> Feature_ID MSDialName ... MS_MS_spectrum Split</span>
-<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a><span class="fu">colnames</span>(<span class="dv">316</span>)<span class="sc">:</span> x001_Blank_1_norm_RP_short_SWATH_pos x002_Blank_1_norm_RP_short_SWATH_pos ... x309_QC_norm_55_RP_short_SWATH_pos</span>
-<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a>  x313_QC_norm_56_RP_short_SWATH_pos</span>
-<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a>colData <span class="fu">names</span>(<span class="dv">7</span>)<span class="sc">:</span> Sample_ID Injection_order ... biological_rep QC</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a>se <span class="ot">&lt;-</span> <span class="fu">as.SummarizedExperiment</span>(mL)</span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a>se</span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>class<span class="sc">:</span> SummarizedExperiment </span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a>dim<span class="sc">:</span> <span class="dv">33554</span> <span class="dv">316</span> </span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a><span class="fu">metadata</span>(<span class="dv">0</span>)<span class="sc">:</span></span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a><span class="fu">assays</span>(<span class="dv">1</span>)<span class="sc">:</span> <span class="st">''</span></span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a><span class="fu">rownames</span>(<span class="dv">33554</span>)<span class="sc">:</span> F1 F3 ... F42636 F42638</span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a>rowData <span class="fu">names</span>(<span class="dv">8</span>)<span class="sc">:</span> Feature_ID MSDialName ... MS_MS_spectrum Split</span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="fu">colnames</span>(<span class="dv">316</span>)<span class="sc">:</span> x001_Blank_1_norm_RP_short_SWATH_pos x002_Blank_1_norm_RP_short_SWATH_pos ... x309_QC_norm_55_RP_short_SWATH_pos</span>
+<span id="cb36-10"><a href="#cb36-10" tabindex="-1"></a>  x313_QC_norm_56_RP_short_SWATH_pos</span>
+<span id="cb36-11"><a href="#cb36-11" tabindex="-1"></a>colData <span class="fu">names</span>(<span class="dv">7</span>)<span class="sc">:</span> Sample_ID Injection_order ... biological_rep QC</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

@@ -49,23 +49,14 @@ Contacts:
 
 # Installation
 
-The package has the following dependencies,which are available in [CRAN](https://cran.r-project.org/), [Bioconductor](https://www.bioconductor.org/) or [github](https://github.com/), namely:
+MargheRita and its dependencies can be installed using the pak package, which handles CRAN, Bioconductor, and GitHub packages in a single step:
 
 ```{r, eval=FALSE}
-ComplexHeatmap, circlize, clusterProfiler, GGally, ggrepel, ggplot2, ggpubr, LSD, MsBackendMsp, openxlsx, pals, pcaMethods, reshape2, rlang, Spectra, stats, stringr, SummarizedExperiment, utils
-```
-
-In most of the cases, the following instructions guarantee that all such dependencies are installed:
-
-```{r, eval=FALSE}
-install.packages("devtools")
-
-if (!require("BiocManager", quietly = TRUE)){
-  install.packages("BiocManager")
+if (!requireNamespace("pak", quietly = TRUE)) {
+  install.packages("pak")
 }
-BiocManager::install(c("Biobase", "ComplexHeatmap", "clusterProfiler", "pcaMethods"))
-
-devtools::install_github("emosca-cnr/margheRita")
+pak::pkg_install("emosca-cnr/margheRita")
+library(margheRita)
 ```
 
 # Input data
